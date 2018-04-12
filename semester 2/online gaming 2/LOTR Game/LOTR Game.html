@@ -1,0 +1,380 @@
+<!Doctype html>
+<html>
+	<title>Frodo</title>
+
+	<link rel="stylesheet" type="text/css" href="CSS/Electroshockist.css">
+
+	<div id="overlay" onclick="overlayoff()" style="display: none;">
+		<div id="overlay_text" style="margin-top: 5%;"></div>
+	</div>
+
+  <div class="overlay">
+		<canvas width="500" height="500"></canvas>
+
+  	<p id="test" class="centered"></p>
+		<p id="instructions" class="centered" style="font-family: arial black; font-size: 18px;" onclick="instructions()">Click To See Instructions</p>
+		<p id="credits" class="centered" style="font-family: arial black; font-size: 18px;" onclick="credits()">Click To See Credits</p>
+
+  </div>
+
+	<script type="text/javascript" src="Javascript/Electroshockist.js"></script>
+
+	<script>
+
+		var canvas = document.querySelector("canvas");
+
+		var drawingSurface = canvas.getContext("2d");
+
+		var currentPlayer = "Frodo";
+
+		var Environment = [
+			[],[],[]
+		];
+
+		var Orc = [
+			[],[],[]
+		];
+
+		var environmentImage = [
+			[],[],[]
+		];
+
+		var OrcImage = [
+			[],[],[]
+		];
+
+		var canFight = true;
+
+		var fighting = false;
+
+		var turns = 12;
+
+		//amount of enviornments and orcs in scene
+		var amount = 5;
+
+		function genRandom(maxvalue){
+			return Math.floor(Math.random() * maxvalue);
+		}
+
+		//Frodo object
+		var Frodo = {
+			//image location
+			IMAGE: "Assets/Textures/frodo standing.png",
+			//xpos
+			X:0,
+			//ypos
+			Y:9,
+			//current frame
+			currentFrame: 0,
+			//updates animation
+      updateAnimation:function(){
+				//sets image for walk animation
+				this.IMAGE = "Assets/Textures/frodo walk " + this.currentFrame % 4 + ".png";
+				console.log(this.IMAGE);
+
+				this.currentFrame++
+			},
+			OnMove:function(dir){
+				turns--;
+				this.dir;
+				//Update the animations
+				this.updateAnimation();
+				Nazgul.Move();
+			}
+		};
+
+		var Nazgul = {
+			//image location
+			IMAGE: "Assets/Textures/nazgul.png",
+			//xpos
+			X:genRandom(9),
+			//ypos
+			Y:genRandom(9),
+
+			Move:function() {
+				var nazgulMove = genRandom(4);
+				switch (nazgulMove) {
+					case 0:
+						//if(Move.Up(Nazgul) == false) this.Move();
+						//else
+						Move.Up(Nazgul);
+						break;
+					case 1:
+						//find out why this doesn't work
+						//if(Move.Left(Nazgul) == false) this.Move();
+						//else
+						Move.Left(Nazgul);
+						break;
+					case 2:
+						//if(Move.Down(Nazgul) == false) this.Move();
+						//else
+						Move.Down(Nazgul);
+						break;
+					case 3:
+						//if(Move.Right(Nazgul) == false) this.Move();
+						//else
+						Move.Right(Nazgul);
+						break;
+					default:
+				}
+			},
+			OnMove:function(dir) {
+				//move down
+				dir;
+			}
+		};
+
+		var Shire = {
+			//image location
+			IMAGE: "Assets/Textures/shire.png",
+			//xpos
+			X:0,
+			//ypos
+			Y:9
+		};
+
+		var Rivendell = {
+			//image location
+			IMAGE: "Assets/Textures/rivendell.png",
+			//xpos
+			X:9,
+			//ypos
+			Y:0
+		};
+
+		for (var i = 0; i < amount; i++){
+
+			Environment[i] = {
+				//image location
+				IMAGE: "Assets/Textures/environment " + genRandom(2) + ".png",
+				//xpos
+				X:genRandom(9),
+				//ypos
+				Y:genRandom(9)
+			};
+
+			Orc[i] = {
+				//image location
+				IMAGE: "Assets/Textures/orc.png",
+				//xpos
+				X:genRandom(9),
+				//ypos
+				Y:genRandom(9)
+			};
+		}
+
+		//keydown listener
+		window.addEventListener("keydown", keydownHandler, false);
+		//keyup listener
+		window.addEventListener("keyup", keyupHandler, false);
+
+		function keydownHandler(event) {
+			//checks if you've lost or won
+			if (!reloadOnClick){
+				//doesn't run unless w a s or d are pressed
+				if( event.keyCode == 87 ||
+					  event.keyCode == 65 ||
+				 	  event.keyCode == 83 ||
+			 	 	  event.keyCode == 68 ||
+						event.keyCode == 70 ){
+
+						switch (event.keyCode) {
+
+							//detects "w"
+							case 87:
+								Move.Up(Frodo);
+								break;
+
+							//detects "a"
+							case 65:
+								Move.Left(Frodo);
+								break;
+							//detects "s"
+							case 83:
+								Move.Down(Frodo);
+								break;
+
+							//detects "d"
+							case 68:
+								Move.Right(Frodo);
+								break;
+
+							//detects "f"
+							case 70:
+								if (canFight) {
+									fighting = true;
+									canFight = false;
+								}
+								break;
+
+							default:
+								alert("Something went wrong getting your key.")
+					}
+					//checks if you've either lost or won
+					tileCheck();
+				}
+			}
+		}
+
+		function keyupHandler(event) {
+			if (event.keyCode == 70){
+				fighting = false;
+				canFight = true;
+			}
+		}
+
+		//runs when you enter a tile that does something
+		function tileCheck() {
+			//checks wins
+			if(Frodo.X == Rivendell.X && Frodo.Y == Rivendell.Y) {
+				reloadOnClick = true;
+				overlayon("You win! </br> You made it to Rivendell");
+			}
+			else if (turns <= 0) {
+					reloadOnClick = true;
+					overlayon("You lose! </br> You ran out of turns.");
+			}
+			if(Frodo.X == Nazgul.X && Frodo.Y == Nazgul.Y){
+					reloadOnClick = true;
+					overlayon("You lose! </br> The Nazgul killed you.");
+			}
+
+			//checks if frodo is on an enviornment or an orc
+			for (var i = 0; i < amount; i++){
+				if(Frodo.X == Environment[i].X && Frodo.Y == Environment[i].Y) turns++;
+				if(Frodo.X == Orc[i].X && Frodo.Y == Orc[i].Y && fighting){
+					 turns += 3;
+					 //destroy orc
+					 Orc[i].X = "undefined";
+					 Orc[i].Y = "undefined";
+					 Orc[i].IMAGE = "undefined";
+				 }
+			}
+		}
+
+		//occurs when an entity wants to move
+		var Move = {
+			Up: function (entity){
+					if(entity.Y != 0){
+						this.OnMove();
+						//move up
+						entity.OnMove(entity.Y--);
+					}
+					else return false;
+			},
+			Left: function (entity){
+				if(entity.X != 0){
+					this.OnMove();
+					//move left
+					entity.OnMove(entity.X--);
+				}
+				else return false;
+			},
+			Down: function (entity){
+				if(entity.Y != 9){
+					this.OnMove();
+					//move down
+					entity.OnMove(entity.Y++);
+				}
+				else return false;
+			},
+			Right: function (entity){
+				if(entity.X != 9){
+					this.OnMove();
+					//move right
+					entity.OnMove(entity.X++);
+				}
+			},
+			OnMove: function() {
+				//updates animation everytime a key is pressed
+				updateAnimation();
+				fighting = false;
+			}
+		}
+
+		//frodo image
+		var frodoImage = new Image();
+		frodoImage.addEventListener("load",render, false);
+		frodoImage.src = Frodo.IMAGE;
+
+		//rivendell image
+		var rivendellImage = new Image();
+		rivendellImage.addEventListener("load",render, false);
+		rivendellImage.src = Rivendell.IMAGE;
+
+		//shire image
+		var shireImage = new Image();
+		shireImage.addEventListener("load",render, false);
+		shireImage.src = Shire.IMAGE;
+
+		//shire image
+		var nazgulImage = new Image();
+		nazgulImage.addEventListener("load",render, false);
+		nazgulImage.src = Nazgul.IMAGE;
+
+		for (var i = 0; i < amount; i++){
+			//environment image
+			environmentImage[i] = new Image();
+			environmentImage[i].addEventListener("load",render, false);
+			environmentImage[i].src = Environment[i].IMAGE;
+			//orc1 image
+			OrcImage[i] = new Image();
+			OrcImage[i].addEventListener("load",render, false);
+			OrcImage[i].src = Orc[i].IMAGE;
+		}
+
+		//map image
+		var mapImage = new Image();
+		mapImage.addEventListener("load",render, false);
+		mapImage.src = "Assets/Textures/map.png";
+
+		//updates animation on a consistent basis
+		function updateAnimation() {
+		  //Render the animation
+		 	render();
+			if(currentPlayer == "Nazgul"){
+				currentPlayer = "Frodo";
+			}
+			else currentPlayer = "Nazgul";
+		}
+
+		//renders image
+  	function render() {
+			//displays stats
+			document.getElementById("test").innerHTML = "Turns Remaining: " + turns;
+			//sets frodo image to new frodo image
+		  frodoImage.src = Frodo.IMAGE;
+  	  //Clear the canvas of any previous frames
+  	  drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
+  	  //Draw the map
+  	  drawingSurface.drawImage(mapImage, 0, 0, 1280, 1280, 0, 0, 500, 500);
+  	  //Draw Shire
+  	  drawingSurface.drawImage(shireImage, 0, 0, 1280, 1280, 50*Shire.X, 50*Shire.Y, 500, 500);
+
+		  for(var i = 0; i < amount; i++){
+	  	  //Draw environments
+	  	  drawingSurface.drawImage(environmentImage[i], 0, 0, 1280, 1280, 50*Environment[i].X, 50*Environment[i].Y, 500, 500);
+				//Draw orcs
+	  	  drawingSurface.drawImage(OrcImage[i], 0, 0, 1280, 1280, 50*Orc[i].X, 50*Orc[i].Y, 500, 500);
+			}
+
+  	  //Draw Rivendell
+  	  drawingSurface.drawImage(rivendellImage, 0, 0, 1280, 1280, 50*Rivendell.X, 50*Rivendell.Y, 500, 500);
+
+			//Draws Frodo
+  	  drawingSurface.drawImage(nazgulImage, 0, 0, 1280, 1280, 50*Nazgul.X, 50*Nazgul.Y, 500, 500);
+
+			//Draws Frodo
+  	  drawingSurface.drawImage(frodoImage, 0, 0, 1280, 1280, 50*Frodo.X, 50*Frodo.Y, 500, 500);
+  	}
+
+		//displays controls
+		function instructions(){
+			overlayon("WASD to move. <br> The Nazgul will move around and try to kill you, but he only moves when you move, so be careful. </br> Trees and mountains are sanctuaries and grant you a free turn, but beware, the Nazgul can still get you. </br> Press F on an orc to kill it and gain 3 turns. <br> Your goal is to make it from the Shire(bottom left) to Rivendell(top right) before you run out of turns","30px")
+		}
+		//displays credits
+		function credits() {
+			overlayon("Eric Balas</br>Marco Colonna</br>Ethan Butler</br>Jory Finewax</br>Jamil Beadle-Samuel");
+		}
+	</script>
+</html>

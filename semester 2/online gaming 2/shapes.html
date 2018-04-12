@@ -1,0 +1,118 @@
+<!Doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="CSS/shapes.css">
+    <script>
+      //checks if button was pressed
+      var triggered = false;
+
+      var canvasSize = 500;
+      //saves current circle's metadata (xpos, ypos, radius)
+      var X = [[],[],[],[],[],[],[],[],[],[]];
+      var Y = [[],[],[],[],[],[],[],[],[],[]];
+      var Radius = [[],[],[],[],[],[],[],[],[],[]];
+      var RandX = [[],[],[],[],[],[],[],[],[],[]];
+      var RandY = [[],[],[],[],[],[],[],[],[],[]];
+
+      var genCircle = function(){
+          //generates rgb values
+          this.r = Math.floor((Math.random() * 255) + 1);
+          this.g = Math.floor((Math.random() * 255) + 1);
+          this.b = Math.floor((Math.random() * 255) + 1);
+
+          //sets random radius between 100 and 1
+          this.radius = Math.floor((Math.random() * 50) + 1);
+
+          //sets x and y between 500(canvas size) + their diameter and
+          this.x = Math.floor((Math.random() * (canvasSize - this.radius*2)) + this.radius);
+          this.y = Math.floor((Math.random() * (canvasSize - this.radius*2)) + this.radius);
+      }
+
+      $(document).ready(function(){
+          //swaps button
+          $("#start").click(
+            function(){
+              if (triggered == false){
+                document.getElementById("start").innerHTML="Stop!";
+                main();
+                triggered = true;
+              }
+              else{
+                location.reload();
+              }
+            }
+          )
+        //function used to draw circles
+        function drawCircle(r,g,b,x,y,radius){
+            //initializes 2D canvas
+            var canvas = $("#myCanvas");
+            var context = canvas.get(0).getContext("2d");
+
+            //code used to draw circles
+            context.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            context.beginPath();
+            context.arc(x, y, radius, 0, Math.PI*2, true);
+            context.closePath();
+            context.fill();
+        }
+        function main() {
+
+          //counts to 10
+          for (var i = 0; i <= 9; i++){
+              //creates a variable that holds all the variables for
+              circle = new genCircle;
+
+              //for testing numbers only
+              //alert(circle.x + "\n" + circle.y + "\n" + circle.radius + "\n" + circle.r + "\n" + circle.g + "\n" + circle.b)
+
+              //initializes circles if the button hasn't been trigered
+              if(triggered == false){
+
+                //generates either 1 or -1
+                var randsymbX = Math.random() < 0.5 ? -1 : 1;
+                var randsymbY = Math.random() < 0.5 ? -1 : 1;
+
+                //changes stored metadata and current position
+                X[i] = circle.x;
+                Y[i] = circle.y;
+                Radius[i] = circle.radius;
+
+                //sets
+                RandX[i] = Math.floor((Math.random() * 10 * randsymbX));
+                RandY[i] = Math.floor((Math.random() * 10 * randsymbY));
+              }
+              else{
+                //draws moving circles
+                drawCircle(circle.r, circle.g, circle.b, X[i], Y[i], Radius[i]);
+
+                //if x + radius + x direction > canvas size or x - radius + (negative)x direction
+                if(X[i] + Radius[i] + RandX[i] > canvasSize || X[i] - Radius[i] + RandX[i] < 0){
+                  RandX[i] = -RandX[i];
+                }
+                //if y + radius + y direction > canvas size or y - radius + (negative)y direction
+                if(Y[i] + Radius[i] + RandY[i] > canvasSize || Y[i] - Radius[i] + RandY[i] < 0){
+                  RandY[i] = -RandY[i];
+                }
+                //adds directions to variables
+                X[i] += RandX[i];
+                Y[i] += RandY[i];
+              }
+            }
+            //for testing
+            //document.getElementById("test").innerHTML="X: " + X[0] + "\nY: " + Y[0] + "\nRadius: " + Radius[0] + "\nRandX: " + RandX[0] + "\nRandY: " + RandY[0];
+            setTimeout(main,100);
+          }
+        }
+      );
+    </script>
+  </head>
+  <body>
+    <div class="overlay">
+      <div><canvas width="500" height="500" id="myCanvas"></canvas></div>
+      <div id="test"></div>
+        <button id="start">Start!</button>
+      </div>
+    </div>
+  </body>
+</html>

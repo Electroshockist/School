@@ -1,0 +1,266 @@
+<title>Collision</title>
+
+<link rel="stylesheet" type="text/css" href="CSS/Electroshockist.css">
+
+<div id="overlay" onclick="overlayoff()" style="display: none;">
+  <div id="overlay_text" style="margin-top: 5%;"></div>
+</div>
+
+<div class="overlay">
+  <canvas width="500" height="500"></canvas>
+
+  <p id="instructions" class="centered" style="font-family: arial black; font-size: 18px;" onclick="instructions()">Use W, A, S and D to move.</p>
+
+</div>
+
+<script type="text/javascript" src="Javascript/Electroshockist.js"></script>
+
+<script>
+  //get the canvas object and store it
+  var canvas = document.querySelector("canvas");
+  //get the 2D rendering library
+  var context = canvas.getContext("2d");
+
+  //disables antialiasing
+  context.imageSmoothingEnabled = false;
+
+  //for smooth movement
+  var up, down, left, right;
+
+  //for bounds
+  var canMoveUp = true;
+  var canMoveDown = true;
+  var canMoveLeft = true;
+  var canMoveRight = true;
+
+  //scale of images
+  var scale = 3;
+
+  //amount of boxes
+  var boxes = 4;
+
+  //entity constructor
+  function Entity(X,Y,IMAGE) {
+    if (!isNaN(X)) this.X = X;
+    else this.X = 0;
+
+    if (!isNaN(Y)) this.Y = Y;
+    else this.Y = 0;
+
+    this.VX = 0;
+    this.VY = 0;
+
+    this.W = 0;
+    this.H = 0;
+    if (IMAGE != undefined) this.IMAGE = IMAGE;
+    else this.IMAGE = "Assets/Box.png";
+    //Getters to define the left, right, top and bottom sides, these functions are use to get the parameter of our shape in order to determine whether our mouse falls within
+    this.left = function() { return this.X; };
+    this.right = function() { return (this.X + this.W*scale); };
+    this.top = function() { return this.Y; };
+    this.bottom = function() { return (this.Y + this.H*scale); };
+  }
+
+  //initialize objects
+  var Box = new Array(boxes);
+  var BoxImage = new Array(boxes);
+
+  //player stuff
+  var Player = new Entity(300,150,"Assets/Player.png");
+
+  var PlayerImage = new Image();
+  PlayerImage.src = Player.IMAGE;
+
+  //create boxes
+  for(var i = 0; i < boxes; i++){
+    Box[i] = new Entity();
+    BoxImage[i] = new Image();
+    BoxImage[i].src = Box[i].IMAGE;
+
+    Box[i].W = BoxImage[i].width;
+    Box[i].H = BoxImage[i].height;
+  }
+
+  //set box postitions
+  Box[0].X = 30;
+  Box[0].Y = 170;
+
+  Box[1].X = 200;
+  Box[1].Y = 270;
+
+  Box[2].X = 130;
+  Box[2].Y = 20;
+
+  Box[3].X = 330;
+  Box[3].Y = 320;
+
+  BoxImage[0].addEventListener("load",update);
+
+  //keydown listener
+  window.addEventListener("keydown", function (event) {
+    //doesn't run unless w a s or d are pressed
+    if( event.keyCode == 87 ||
+        event.keyCode == 65 ||
+        event.keyCode == 83 ||
+        event.keyCode == 68 ||
+        event.keyCode == 70 ) {
+
+          switch (event.keyCode) {
+
+            //detects "w"
+            case 87:
+              up = true;
+            break;
+
+            //detects "a"
+            case 65:
+              left = true;
+            break;
+
+            //detects "s"
+            case 83:
+              down = true;
+            break;
+
+            //detects "d"
+            case 68:
+              right = true;
+            break;
+
+            default:
+            alert("Something went wrong getting your key.")
+          }
+    }
+    else overlayon("That is not a valid key. Please use W, A, S or D.");
+  }, false);
+
+  //keyup listener
+  window.addEventListener("keyup",function(event) {
+    switch (event.keyCode) {
+
+      //detects "w"
+      case 87:
+          up = false;
+        break;
+
+        //detects "a"
+        case 65:
+          left = false;
+        break;
+
+        //detects "s"
+        case 83:
+          down = false;
+        break;
+
+        //detects "d"
+        case 68:
+          right = false;
+        break;
+      }
+  }, false);
+
+
+  function render() {
+
+    Player.W = PlayerImage.width;
+    Player.H = PlayerImage.height;
+
+    for(var i = 0; i < Box.length; i++){
+      Box[i].W = BoxImage[i].width;
+      Box[i].H = BoxImage[i].height;
+    }
+
+    context.fillRect (0, 0, 500, 500);
+    //Clear the previous animation frame
+    context.clearRect(1, 1, 498, 498);
+
+    //Loop through all the box sprites and use their properties to display them
+    for(var i = 0; i < Box.length; i++) context.drawImage(BoxImage[i], 0, 0, Box[i].W, Box[i].H, Box[i].X, Box[i].Y, Box[i].W*scale, Box[i].H*scale);
+
+    //draws player
+    context.drawImage(PlayerImage, 0, 0, Player.W, Player.H, Player.X, Player.Y, Player.W*scale, Player.H*scale);
+  }
+
+  function update(){
+    requestAnimationFrame(update,canvas);
+    console.log(Player.X + ", " + Player.Y)
+
+
+    //boudary checkers
+    if (Player.top() <= 0) {
+       canMoveUp = false;
+       up = false;
+     }
+    else canMoveUp = true;
+
+    if (Player.left() <= 0) {
+      canMoveLeft = false;
+      left = false;
+    }
+    else canMoveLeft = true;
+
+    if(Player.bottom() >= 500) {
+      canMoveDown = false;
+      down = false;
+    }
+    else canMoveDown = true;
+
+    if(Player.right() >= 500) {
+      canMoveRight = false;
+      right = false;
+    }
+    else canMoveRight= true;
+
+    //// TODO: add collision boxes
+    // //check boxes
+    // for(var i = 0; i < Box.length; i++){
+    //   //boudary checkers
+    //   if (Player.top() <= Box[i].bottom()) {
+    //      canMoveUp = false;
+    //      up = false;
+    //    }
+    //   else canMoveUp = true;
+    //
+    //   if (Player.left() <= Box[i].right()) {
+    //     canMoveLeft = false;
+    //     left = false;
+    //   }
+    //   else canMoveLeft = true;
+    //
+    //   if(Player.bottom() >= Box[i].top()) {
+    //     canMoveDown = false;
+    //     down = false;
+    //   }
+    //   else canMoveDown = true;
+    //
+    //   if(Player.right() >= Box[i].left()) {
+    //     canMoveRight = false;
+    //     right = false;
+    //   }
+    //   else canMoveRight= true;
+    // }
+
+    //Up
+    if(up && canMoveUp) Player.VY = -5;
+    //Left
+    if(left && canMoveLeft) Player.VX = -5;
+    //Down
+    if(down && canMoveDown)Player.VY = 5;
+    //Right
+    if(right && canMoveRight)Player.VX = 5;
+
+    //Set the player's velocity to zero if none of the keys are being pressed
+    if(!up && !down) Player.VY = 0;
+    if(!left && !right) Player.VX = 0;
+
+    //Move the cat
+    Player.X += Player.VX;
+    Player.Y += Player.VY;
+
+    canvasPos = canvas.getBoundingClientRect();
+
+    //Render the sprite object
+    render();
+  }
+</script>

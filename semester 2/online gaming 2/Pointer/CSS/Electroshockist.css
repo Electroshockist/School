@@ -1,0 +1,78 @@
+      /*@font-face {
+        font-family: Electroshockist;
+        src: url("../Fonts/Electroshockist.ttf") format("truetype");
+      }*/
+
+    /*changes body*/
+    body{
+      /*font-family: Electroshockist;*/
+      image-rendering: pixelated;
+      background-color: lightgray;
+    }
+
+    /*this one and the next one make sure there are no spaces between the images in the table*/
+    .image  {
+      padding: 0px;
+      margin: 0px;
+      border: none;
+    }
+    .table {
+      border-collapse: collapse;
+    }
+
+    /*class that centers objects*/
+    .centered{
+      font-weight: bold;
+      margin: auto;
+      margin-top: none;
+      font-size: 32px;
+      text-align: center;
+    }
+
+    .start{
+     width: 200px;
+     height: 50px;
+     font-family: arial black;
+     font-size: 30px;
+    }
+
+    .overlay {text-align: center;}
+
+	  #start{
+		width: 200px;
+		height: 50px;
+		font-family: arial black;
+		font-size: 30px;
+	  }
+
+    /*formatting for overlay background(much of the formatting and comments courtesy of W3Schools)*/
+    #overlay {
+      position: fixed; /* Sit on top of the page content */
+      width: 100%; /* Full width (cover the whole page) */
+      height: 100%; /* Full height (cover the whole page) */
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.75); /* Black background with opacity */
+      z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    }
+
+    /*formatting for overlay text*/
+    #overlay_text{
+      margin-top: 15%;
+      text-align: center;
+      font-size: 48px;
+      color: white;
+      font-weight: bold;
+      font-family: Electroshockist;
+    }
+    #test{
+      font-family: arial black;
+      font-size: 30px;
+      font-weight: bold;
+      margin: auto;
+      margin-top: none;
+      font-size: 32px;
+      text-align: center;
+    }

@@ -1,0 +1,107 @@
+<title>Square</title>
+
+<link rel="stylesheet" type="text/css" href="CSS/Electroshockist.css">
+
+<div id="overlay" onclick="overlayoff()" style="display: none;">
+  <div id="overlay_text" style="margin-top: 5%;"></div>
+</div>
+
+<div class="overlay">
+  <canvas width="500" height="500"></canvas>
+
+  <p id="Collision" class="centered" style="font-family: arial black; font-size: 18px;">Not Collided</p>
+
+</div>
+
+<script type="text/javascript" src="Javascript/Electroshockist.js"></script>
+
+<script>
+  //get the canvas object and store it
+  var canvas = document.querySelector("canvas");
+  //get the 2D rendering library
+  var context = canvas.getContext("2d");
+
+  var canvasPos = canvas.getBoundingClientRect();
+
+  context.fillStyle = "rgb(255,255,255)";
+
+  var prevpos = canvasPos;
+
+  var alignedX;
+  var alignedY;
+
+  var mouseX = 0;
+  var mouseY = 0;
+
+  var message;
+
+  window.onload = function() {
+    render();
+  }
+
+  var spriteObject = {
+    X:100,
+    Y:100,
+    W:300,
+    H:300,
+
+    //Getters to define the left, right, top and bottom sides, these functions are use to get the parameter of our shape in order to determine whether our mouse falls within
+    left: function() { return this.X; },
+    right: function() { return (this.X + this.W); },
+    top: function() { return this.Y; },
+    bottom: function() { return (this.Y + this.H); }
+  }
+
+  function render() {
+      //Clear the previous animation frame
+      context.clearRect(0, 0, 500, 500);
+      //Loop through all the sprites and use their properties to display them
+      context.fillRect (
+        spriteObject.X, spriteObject.Y,
+        spriteObject.W, spriteObject.H
+      );
+  }
+
+  function update(){
+
+    canvasPos = canvas.getBoundingClientRect();
+    /*if (canvasPos.top != prevpos.top && canvasPos.right != prevpos.right && canvasPos.bottom != prevpos.bottom && canvasPos.left != prevpos.left) {
+      console.log(canvasPos.top, canvasPos.right, canvasPos.bottom, canvasPos.left);
+      console.log(prevpos.top, prevpos.right, prevpos.bottom, prevpos.left);
+    }*/
+    prevpos = canvasPos;
+    alignedX = canvasPos.left;
+    alignedY = canvasPos.top;
+    //The animation loop
+    if(mouseX > spriteObject.left()
+      && mouseX < spriteObject.right()
+      && mouseY > spriteObject.top()
+      && mouseY < spriteObject.bottom()) {
+      message = "Collided";
+      context.fillStyle = "rgb(0,0,0)";
+    }
+
+    else {
+      message = "Not Collided";
+      context.fillStyle = "rgb(255,255,255)";
+    }
+
+    console.log(message);
+    document.getElementById("Collision").innerHTML = message;
+    //Render the sprite object
+    render();
+  }
+
+  //Add a mousemove event listener
+  canvas.addEventListener("mousemove", function(event) {
+    //Find the mouse's X and Y positions of our mouse movement
+    mouseX = event.pageX - alignedX;
+    mouseY = event.pageY - alignedY;
+
+    console.log(mouseX + " " + mouseY);
+
+    //keep calling the update function and update canvas object on each movement
+    requestAnimationFrame(update, canvas);
+  },
+  false);
+</script>

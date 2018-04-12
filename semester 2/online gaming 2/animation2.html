@@ -1,0 +1,192 @@
+<!Doctype html>
+<html>
+	<title>Ryu</title>
+
+	<link rel="stylesheet" type="text/css" href="CSS/shapes.css">
+
+  <div class="overlay">
+	<canvas width="500" height="450"></canvas>
+
+  	<p id="test" class="centered"></p>
+
+  </div>
+	<script>
+		var keyPressed;
+		var scale = 3;
+
+		//ryu object
+		var Ryu = {
+			//image location
+			IMAGE: "Assets/Textures/Ryu.png",
+
+			//determines wheter or not the animation is currently being reversed
+			REVERSE: false,
+			//determines wheter or not the animation needs to be reversed
+			REVERSABLE: false,
+			//time between frames
+			FRAMETIME: 150,
+			//image x size
+			SIZEX: 200,
+			//image y size
+			SIZEY: 150,
+
+			idle: {
+				//animation frames
+				frames: 5,
+
+				//offsets are calculated in multiples of image size
+				offsetX: 0,
+				offsetY: 0,
+			},
+			jump: {
+					//animation frames
+					frames: 7,
+
+					//offsets are calculated in multiples of image size
+					offsetX: 0,
+					offsetY: 1,
+			},
+			punch: {
+					//animation frames
+					frames: 6,
+
+					//offsets are calculated in multiples of image size
+					offsetX: 0,
+					offsetY: 2,
+			},
+			kick: {
+					//animation frames
+					frames: 5,
+
+					//offsets are calculated in multiples of image size
+					offsetX: 0,
+					offsetY: 3,
+			},
+			crouch: {
+					//animation frames
+					frames: 4,
+
+					//offsets are calculated in multiples of image size
+					offsetX: 0,
+					offsetY: 4,
+			},
+			powerup: {
+					//animation frames
+					frames: 5,
+
+					//offsets are calculated in multiples of image size
+					offsetX: 0,
+					offsetY: 5,
+			},
+			currentFrame: 0,
+			offsetX: 0,
+			offsetY: 0,
+
+			//updates animation
+      updateAnimation:function(animation){
+				//offsetX = image width * current frame + animation type's x offset(unused) * image size
+				this.offsetX = this.SIZEX * this.currentFrame + animType.offsetX * this.SIZEX;
+				//offsetY = image height * animation type's Y offset
+				this.offsetY = this.SIZEY * animType.offsetY;
+
+				//display's stats
+				document.getElementById("test").innerHTML = "Current frame number: " + this.currentFrame + "</br> Total frames: " + animation.frames + "</br> Animation x offset: " + animType.offsetX + "</br> Animation y offset: " + animType.offsetY;
+				//unused
+				/*if (this.REVERSABLE){
+					if (!this.REVERSE) {
+						this.currentFrame++;
+					}
+					if (this.currentFrame >= animation.frames) {
+						this.REVERSE = true;
+						this.currentFrame--;
+					}
+					if (this.REVERSE){
+						this.currentFrame--;
+					}
+					if (this.currentFrame <= 0){
+						this.REVERSE = false;
+					}
+				}*/
+				//else{
+					this.currentFrame++;
+					if(this.currentFrame >= animation.frames){
+						this.currentFrame = 0;
+						if (!keyPressed){
+							animType = this.idle;
+						}
+					}
+				//}
+			}
+		};
+
+		var animType = Ryu.idle;
+
+		var canvas = document.querySelector("canvas");
+		var drawingSurface = canvas.getContext("2d");
+		var image = new Image();
+
+		drawingSurface.imageSmoothingEnabled = false;
+		image.addEventListener("load",updateAnimation, false);
+	  image.src = Ryu.IMAGE;
+
+		window.addEventListener("keydown", keydownHandler, false);
+		window.addEventListener("keyup", keyupHandler, false);
+
+		function keydownHandler(event) {
+			if (!keyPressed){
+				Ryu.currentFrame = 0;
+				keyPressed = true;
+			}
+			//detects "n"
+			if(event.keyCode == 78) {
+				 animType = Ryu.idle;
+				 //Ryu.REVERSABLE = true;
+			}
+			//detects "j"
+			else if(event.keyCode == 74) {
+				 animType = Ryu.jump;
+				 //Ryu.REVERSABLE = false;
+			}
+			//detects "p"
+			else if(event.keyCode == 80) {
+				 animType = Ryu.punch;
+				 //Ryu.REVERSABLE = false;
+			}
+			//detects "k"
+			else if(event.keyCode == 75) {
+				 animType = Ryu.kick;
+				 //Ryu.REVERSABLE = false;
+			}
+			//detects "c"
+			else if(event.keyCode == 67) {
+				 animType = Ryu.crouch;
+				 //Ryu.REVERSABLE = false;
+			}
+			//detects "e"
+			else if(event.keyCode == 69) {
+				 animType = Ryu.powerup;
+				// Ryu.REVERSABLE = false;
+			}
+		}
+		function keyupHandler(event) {
+			keyPressed = false;
+		}
+		//updates animation on a consistent basis
+		function updateAnimation() {
+			//Update the monster's animation frames
+		  Ryu.updateAnimation(animType);
+		  //Render the animation
+		 	render();
+			//reruns this function with the animation's delay between frames
+			setTimeout(updateAnimation, Ryu.FRAMETIME);
+ 		}
+
+		//renders image
+  	function render() {
+  	   //Clear the canvas of any previous frames
+  	   drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
+  	   //Draw the monster's current animation frame
+  	   drawingSurface.drawImage(image, Ryu.offsetX, Ryu.offsetY, Ryu.SIZEX, Ryu.SIZEY, 0, 0, Ryu.SIZEX*scale, Ryu.SIZEY*scale);
+  	}
+	</script>
+</html>

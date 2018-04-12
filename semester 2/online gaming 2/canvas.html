@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #button1{
+        width: 200px;
+        height: 50px;
+        font-family: arial black;
+        font-size: 30px;
+      }
+      .overlay {
+        margin-top: 15%;
+        text-align: center;
+        font-family: arial;
+        font-size: 30px;
+        color: white;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+      function clicked (){
+        var context = document.getElementById("canvas1").getContext("2d");
+
+        context.clearRect(0,0,2000,2000);
+
+        var text = Math.random() * 20;
+
+        var r = Math.floor((Math.random() * 255) + 1);
+        var g = Math.floor((Math.random() * 255) + 1);
+        var b = Math.floor((Math.random() * 255) + 1);
+
+        context.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+        context.beginPath();
+        context.arc(100, 100, Math.floor((Math.random() * 50) + 10), 0, 2*Math.PI);
+        //context.quadraticCurveTo(125, 25, 75, 125);
+        //context.bezierCurveTo(24, 52, 28, 30, 100, 150);
+        context.closePath();
+        context.fill();
+
+        if (text > 19){
+          document.getElementById("button1").innerHTML = "Eat me!"
+        }
+        else if (text > 18){
+          document.getElementById("button1").innerHTML = "Drink me!"
+        }
+        else {
+          document.getElementById("button1").innerHTML = "Click me!"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="overlay">
+      <div><canvas class="centered" width="200" height="200" id="canvas1"></canvas></div>
+      <div><button id="button1" onclick="clicked()">Click me!</button></div>
+    </div>
+  </body>
+</html>

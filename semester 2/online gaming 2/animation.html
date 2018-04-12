@@ -1,0 +1,69 @@
+<!Doctype html>
+<html>
+	<title>Mario</title>
+	<style>
+    #test{
+      font-family: arial black;
+      font-size: 30px;
+      font-weight: bold;
+      margin: auto;
+      margin-top: none;
+      font-size: 32px;
+      text-align: center;
+    }
+  </style>
+
+	<link rel="stylesheet" type="text/css" href="CSS/Electroshockist.css">
+
+	<div class="overlay">
+  	<canvas width="100" height="150"></canvas>
+
+  	<p id="test"></p>
+  </div>
+	<script>
+		var scale = 5;
+
+		var Mario = {
+			IMAGE: "Assets/Textures/Mario.png",
+			SIZE: 17,
+
+			frameorder: [0,1,0,1,2,1],
+			currentFrame: 0,
+
+			offsetX: 0,
+			offsetY: 0,
+
+			updateAnimation:function(){
+				this.offsetX = this.SIZE * this.frameorder[this.currentFrame];
+
+				document.getElementById("test").innerHTML = "Current frame number: " + this.currentFrame + "</br> Current frame image: " + this.frameorder[this.currentFrame] + "</br> Total frames: " + this.frameorder.length;
+				this.currentFrame++;
+
+				if (this.currentFrame >= this.frameorder.length) {
+					this.currentFrame = 0;
+				}
+			}
+		};
+
+		var canvas = document.querySelector("canvas");
+		var drawingSurface = canvas.getContext("2d");
+		drawingSurface.imageSmoothingEnabled = false;
+		var image = new Image();
+		image.addEventListener("load",updateAnimation, false);
+		image.src = Mario.IMAGE;
+
+		function updateAnimation() {
+			//Update the monster's animation frames
+		  Mario.updateAnimation();
+		  //Render the animation
+		 	render();
+			setTimeout(updateAnimation,100);
+ 		}
+	 function render() {
+	   //Clear the canvas of any previous frames
+	   drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
+	   //Draw the monster's current animation frame
+	   drawingSurface.drawImage(image, Mario.offsetX, Mario.offsetY, Mario.SIZE, 28, 0, 0, Mario.SIZE*scale, 28*scale);
+	 }
+	</script>
+</html>
