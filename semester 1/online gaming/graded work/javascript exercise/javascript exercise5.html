@@ -1,0 +1,28 @@
+<!Doctype html>
+<html>
+  <head>
+    <script>
+    window.onload = function(){
+      for(var i = 1; i <= 100; i++){
+        if(i % 3 == 0 && i % 5 == 0){
+          document.getElementById("text").innerHTML+="HumBer</br>"
+        }
+        else if (i % 3 == 0) {
+          document.getElementById("text").innerHTML+="Hum</br>"
+        }
+        else if (i % 5 == 0) {
+          document.getElementById("text").innerHTML+="Ber</br>"
+        }
+        else{
+          document.getElementById("text").innerHTML+=i + "</br>"
+        }
+      }
+    }
+    </script>
+    <p id="text"></p>
+    <button onclick="location.href = 'javascript exercise1.html';" >Question 1</button>
+    <button onclick="location.href = 'javascript exercise2.html';" >Question 2</button>
+    <button onclick="location.href = 'javascript exercise3.html';" >Question 3</button>
+    <button onclick="location.href = 'javascript exercise4.html';" >Question 4</button>
+  </head>
+</html>

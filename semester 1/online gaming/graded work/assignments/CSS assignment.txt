@@ -1,0 +1,12 @@
+Using you guessing number game
+•Using External CSS
+•Apply CSS to the layout of the game
+•Labels, Buttons, heading
+•When you are outputting the results to div
+•Create 2 divs, hide them initially
+•One when they win
+•One when they loose
+•Apply css to each individually
+•Win, show the background of the DIV as Green
+•Loose, show the background of the DIV as Red
+•Make sure to select an appropriate color for the text so it is displayed properly

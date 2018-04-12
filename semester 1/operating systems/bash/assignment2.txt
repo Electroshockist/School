@@ -1,0 +1,71 @@
+
+A symbolic link is basically a shortcut in bash itself. The symbolic link is only remembered by the console. You can create a symbolic directory to any file you want in your current directory.
+First navigate to the folder you want the symbolic link to be in, then use the command: ln -s source-directory symlink-name
+Where source-directory is the name of the file or folder you wish to link and symlink-name is what you want to call your symbolic link.
+
+A hard link is an actual file that points to another file that isn't in another partition or drive and dosen't cross filesystem boundaries.
+Hard links cannot link to folders. Bash does not differentiate between a hard link and its parent file.
+To create a hard link, do the same as above except without the -s (and link to a file, not a folder).
+
+
+root@DESKTOP-FMB8T5U:~# info ln
+root@DESKTOP-FMB8T5U:~# ln -s /mnt/c/Users/erico/Desktop/ desktop
+root@DESKTOP-FMB8T5U:~# ls
+desktop
+root@DESKTOP-FMB8T5U:~# cd desktop
+root@DESKTOP-FMB8T5U:~/desktop# pwd
+/root/desktop
+root@DESKTOP-FMB8T5U:~/desktop# ls
+ assignment1.txt   desktop.ini  'Eclipse Java Oxygen.lnk'   'GitHub Desktop.lnk'   html        'Skills and Talents.ods'
+ Atom.lnk          Discord.lnk  'FL Studio 12 (64bit).lnk'  'Google Drive.lnk'     music        Spotify.lnk
+ C#                Dropbox.lnk  'FL Studio 12.lnk'           Homework.txt         'new 1.txt'
+root@DESKTOP-FMB8T5U:~/desktop#
+
+
+root@DESKTOP-FMB8T5U:~# cd /mnt/c/Users/erico/
+root@DESKTOP-FMB8T5U:/mnt/c/Users/erico# ls
+ AppData
+ Contacts
+ Desktop
+ Documents
+ Downloads
+ Dropbox
+ eclipse
+ eclipse-workspace
+ Favorites
+'Google Drive'
+ Links
+ mercurial.ini
+ Music
+ OneDrive
+ Pictures
+'Saved Games'
+ Searches
+ source
+ Videos
+root@DESKTOP-FMB8T5U:/mnt/c/Users/erico# ln ./Desktop/assignment1.txt  homework
+root@DESKTOP-FMB8T5U:/mnt/c/Users/erico# ls
+ AppData
+ Contacts
+ Desktop
+ Documents
+ Downloads
+ Dropbox
+ eclipse
+ eclipse-workspace
+ Favorites
+'Google Drive'
+ homework
+ Links
+ mercurial.ini
+ Music
+ OneDrive
+ Pictures
+'Saved Games'
+ Searches
+ source
+ Videos
+root@DESKTOP-FMB8T5U:/mnt/c/Users/erico# pwd
+/mnt/c/Users/erico
+root@DESKTOP-FMB8T5U:/mnt/c/Users/erico# nano homework
+root@DESKTOP-FMB8T5U:/mnt/c/Users/erico#

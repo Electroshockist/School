@@ -1,0 +1,11 @@
+JavaScript Game: Using DOM
+===========================
+
+Tic Tac Toe
+
+1. Show two pic: X or O, to allow the user to select which symbol they want to use
+2. Display a Create a 3x3 table 
+3. Allow the user to begin and mark the table using the selected symbol
+4. Generate a logic to allow the computer to generate a selection and place a symbol on the table, remember can only be on the empty block
+5. Upon win or lose, disable the table and only show the winning row 
+6. Allow the user to replay the game, if they do, show a tally at the bottom of the table with the number of wins and loses

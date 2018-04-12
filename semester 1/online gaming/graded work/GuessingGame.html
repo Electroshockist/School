@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body{
+        background-color: lightgray;
+      }
+      .centered{
+        margin-top: 15%;
+        margin: auto;
+        width: 20%;
+      }
+      .stack{
+        width: 120%;
+        margin: auto;
+        font-family: arial;
+        font-size: 30px;
+        color: black;
+        font-weight: bold;
+      }
+      #overlay {
+        position: fixed; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.75); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+      }
+    #overlay_text{
+      margin-top: 15%;
+      text-align: center;
+      font-family: arial;
+      font-size: 30px;
+      color: white;
+      font-weight: bold;
+    }
+    </style>
+    <script>
+    var end = false;
+    var trynum = 0;
+    var displaynum;
+    var guess = [0,0,0];
+    //generate random number
+    var getrandom = Math.floor((Math.random()*50)+1);
+
+    function overlayon(text,type) {
+      switch (type) {
+        case "normal":
+            document.getElementById("overlay").style.backgroundColor= "rgba(0,0,0,0.75)";
+          break;
+        case "win":
+            document.getElementById("overlay").style.backgroundColor= "rgba(0,50,0,0.75)";
+          break;
+        case "loss":
+            document.getElementById("overlay").style.backgroundColor= "rgba(50,0,0,0.75)";
+          break;
+        default:
+          alert("Something went wrong!")
+
+      }
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("overlay_text").innerHTML = text;
+    }
+
+    function overlayoff() {
+      document.getElementById("overlay").style.display = "none";
+      if (end){
+        location.reload();
+      }
+    }
+
+    //activated if you fail your third try
+    function thirdtryloss(){
+
+      overlayon("You lost!</br>The number was " + getrandom + ". " + "</br>You guessed " + guess[1] + ", " + guess[2] + " and " + guess[3] + "." + "</br> The page will now refresh.","loss");
+      end = true;
+    }
+
+    //function run when button is pressed
+    function myval(){
+      //variable that gets the inputed text value
+      var getnum = document.getElementById("mynum").value;
+      //checks if the value is a number and is betweeen 1 and 50
+      if (isNaN(getnum) == false && getnum <= 50 && getnum >= 1 ){
+        //adds one to the current try
+        trynum++;
+        //sets to proper number to display
+        displaynum = trynum + 1;
+        guess[trynum]=getnum;
+        document.getElementById("try").value="Try " + displaynum;
+        var convertnum = parseInt(getnum);
+        //tests if you guessed correctly
+        if(convertnum == getrandom){
+          overlayon("You win!" + "</br> You guessed " + guess[1] + ", " + guess[2] + " and " + guess[3] + ". </br> The page will now refresh.", "win");
+          end = true;
+        }
+        //tests if you guessed too low
+        else if (convertnum > getrandom) {
+          //tests if it's your third attempt
+          if (trynum == 3){
+            thirdtryloss();
+          }
+          else
+          {
+            document.getElementById("hint").innerHTML ="Hint: " + convertnum + " is too high!";
+          }
+        }
+        else if (convertnum < getrandom) {
+          if (trynum == 3){
+            thirdtryloss();
+          }
+          else
+          {
+          document.getElementById("hint").innerHTML ="Hint: " + convertnum + " is too low!";
+          }
+        }
+      }
+      //displays if text is invalid
+      else {
+        overlayon("Please input a vaid number!","normal");
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div class="centered">
+      <h1 class="stack" style="font-weight: 900;">Enter a number between 1 and 50</br><h1>
+      <input class="stack" type="text" id="mynum"/></br>
+      <!--placeholder text for hints-->
+      <p class="stack" id=hint style="text-align: left;">Hint:</p>
+      <!--runs function-->
+      <input class="stack" type="submit" value="Try 1" id="try" onclick="myval();"></br>
+      <input class="stack" type="submit" value="reset" id="reset" onclick="location.reload();"></br>
+    </div>
+    <div id="overlay" onclick="overlayoff()">
+      <div id="overlay_text"></div>
+    </div>
+  </body>
+</html>

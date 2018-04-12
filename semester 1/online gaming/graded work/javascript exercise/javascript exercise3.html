@@ -1,0 +1,39 @@
+<!Doctype html>
+<html>
+  <head>
+    <script>
+    window.onload = function(){
+      var grades = [
+        ["Don",84],
+        ["William",77],
+        ["Jason",88],
+        ["Justin",95],
+        ["Tom",68]
+      ];
+
+      for (var i = 0; i < grades.length; i++){
+        if(grades[i][1] < 60){
+          document.getElementById("text").innerHTML+=grades[i][0] + ", " + grades[i][1] + ", F" + "</br>";
+        }
+        else if (grades[i][1] < 70) {
+          document.getElementById("text").innerHTML+=grades[i][0] + ", " + grades[i][1] + ", D" + "</br>";
+        }
+        else if (grades[i][1] < 80) {
+          document.getElementById("text").innerHTML+=grades[i][0] + ", " + grades[i][1] + ", C" + "</br>";
+        }
+        else if (grades[i][1] < 90) {
+          document.getElementById("text").innerHTML+=grades[i][0] + ", " + grades[i][1] + ", B" + "</br>";
+        }
+        else if (grades[i][1] < 100) {
+          document.getElementById("text").innerHTML+=grades[i][0] + ", " + grades[i][1] + ", A" + "</br>";
+        }
+      }
+    }
+    </script>
+    <p id="text"></p>
+    <button onclick="location.href = 'javascript exercise1.html';" >Question 1</button>
+    <button onclick="location.href = 'javascript exercise2.html';" >Question 2</button>
+    <button onclick="location.href = 'javascript exercise4.html';" >Question 4</button>
+    <button onclick="location.href = 'javascript exercise5.html';" >Question 5</button>
+  </head>
+</html>

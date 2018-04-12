@@ -1,0 +1,11 @@
+I made a separate webpage to ask if you wanted to play using submit buttons and forms, redirecting you to different pages depending on your answer.
+If you pressed "yes", it redirects you to the main page.
+Everything is in a form
+Each choice is a button that activates a function with values form 1 to 3 depending on which button you press.
+A random computer choice form 1 to 3 is generated
+A switch statement gets appropriate if statements for your choice
+Another function gets a number from 1 to 3 and converts it to a string; rock paper or scissors, in that order
+A variable stores the current array index to write to and every time the player plays, one is added to the variable
+An array stores both guesses as a single string for every play
+Once the player decides to quit, they click the quit button and it displays who won and what each player picked for every round with a for loop that gets the length of the array
+Then it redirects you back to the main page, asking you if you want to play again

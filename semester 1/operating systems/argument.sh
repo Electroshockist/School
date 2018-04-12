@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "Execising arguments"
+echo "There are - $# -arguents to the script $@"
+echo "First argument: $1"
+echo "Second argument: $2"
+echo "Third argument: $3"
+echo "Fourth argument: $4"
+echo "Fifth argument: $5"
+echo "Sixth argument: $6"
+echo ""
+echo "Ordered: $6 $1 $3 $2 $4 $6 $5"

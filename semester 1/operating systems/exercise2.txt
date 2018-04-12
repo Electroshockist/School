@@ -1,0 +1,8 @@
+1.Press "i", write phrase
+2.Press escape, save(:w)
+3.Delete "S" in "sad" and replace with "H"
+4.escape, save
+5.add appostrophe and delete extra "ever"
+6.escape, save
+7.Delete line
+8.escape, save and quit(:wq)

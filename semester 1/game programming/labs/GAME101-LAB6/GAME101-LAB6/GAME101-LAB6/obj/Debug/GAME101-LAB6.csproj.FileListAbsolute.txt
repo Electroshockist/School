@@ -1,0 +1,7 @@
+C:\Users\erico\Dropbox\Electroshockist\school work\game programming\labs\GAME101-LAB6\GAME101-LAB6\GAME101-LAB6\obj\Debug\GAME101-LAB6.csproj.CoreCompileInputs.cache
+C:\Users\erico\Dropbox\Electroshockist\school work\game programming\labs\GAME101-LAB6\GAME101-LAB6\GAME101-LAB6\bin\Debug\GAME101-LAB6.exe.config
+C:\Users\erico\Dropbox\Electroshockist\school work\game programming\labs\GAME101-LAB6\GAME101-LAB6\GAME101-LAB6\bin\Debug\GAME101-LAB6.exe
+C:\Users\erico\Dropbox\Electroshockist\school work\game programming\labs\GAME101-LAB6\GAME101-LAB6\GAME101-LAB6\bin\Debug\GAME101-LAB6.pdb
+C:\Users\erico\Dropbox\Electroshockist\school work\game programming\labs\GAME101-LAB6\GAME101-LAB6\GAME101-LAB6\obj\Debug\GAME101-LAB6.csprojResolveAssemblyReference.cache
+C:\Users\erico\Dropbox\Electroshockist\school work\game programming\labs\GAME101-LAB6\GAME101-LAB6\GAME101-LAB6\obj\Debug\GAME101-LAB6.exe
+C:\Users\erico\Dropbox\Electroshockist\school work\game programming\labs\GAME101-LAB6\GAME101-LAB6\GAME101-LAB6\obj\Debug\GAME101-LAB6.pdb

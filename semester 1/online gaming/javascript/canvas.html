@@ -1,0 +1,31 @@
+<!Doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+      $(document).ready(
+        function() {
+        var canvas = $("#myCanvas");
+        var context = canvas.get(0).getContext("2d");
+
+        context.fillStyle = "rgb(201,30,40)"
+        context.fillRect(0,0,100,100);
+        context.beginPath();
+        context.moveTo(100,100)
+        context.lineTo(300,0);
+        context.closePath();
+        context.stroke();
+
+        context.fillStyle = "rgb(0,30,250)"
+        context.beginPath();
+    		context.arc(300, 30, 20, 0, Math.PI,true);
+    		context.closePath();
+    		context.fill();
+        }
+      )
+    </script>
+  </head>
+  <body>
+    <canvas width="500" height="500" id="myCanvas"></canvas>
+  </body>
+</html>

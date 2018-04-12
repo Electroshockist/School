@@ -1,0 +1,60 @@
+<!Doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <style>
+      .overlay {
+        text-align: center;
+        font-family: arial;
+        font-size: 10px;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+			//keeps metadata for each circle
+			var specs = [
+			  [[],[],[],[],[],[],[],[],[],[]],
+			  [[],[],[],[],[],[],[],[],[],[]],
+			  [[],[],[],[],[],[],[],[],[],[]]
+			];
+			//generates circle the first time the button is clicked
+			function genCircles() {
+			  var canvas = $("#myCanvas");
+			  var context = canvas.get(0).getContext("2d");
+
+			  for (var i = 0; i <= 10; i++){
+				var col1 = Math.floor((Math.random() * 255) + 1);
+				var col2 = Math.floor((Math.random() * 255) + 1);
+				var col3 = Math.floor((Math.random() * 255) + 1);
+
+				  
+				  var radius = Math.floor((Math.random() * 100) + 1);
+
+				  //sets x and y
+				  var x = Math.floor((Math.random() * (500 - radius*2)) + radius);
+				  var y = Math.floor((Math.random() * (500 - radius*2)) + radius);
+
+				  //draws circles
+				  context.fillStyle = "rgb(" + col1 + "," + col2 + "," + col3 + ")";
+				  context.beginPath();
+				  context.arc(x, y, radius, 0, Math.PI*2, true);
+				  context.closePath();
+				  context.fill();
+			  }
+			}
+			//swaps button
+			function clicked(){
+				document.getElementById("start").innerHTML="Stop!";
+				genCircles();
+			}
+    </script>
+  </head>
+  <body>
+    <div class="overlay">
+      <div><canvas class="centered" width="500" height="500" id="myCanvas"></canvas></div>
+      <div>
+        <button id="start" onclick="clicked()">Start!</button>
+      </div>
+    </div>
+  </body>
+</html>

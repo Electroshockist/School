@@ -1,0 +1,9 @@
+The quick brown fox jumps over the lazy dog.
+
+1.Press "i"
+2.Write the phrase
+3.Press escape, then save(:w)
+4.Press "i",press back key to the correct location, add "brown"
+5.escape and save
+6."i", then add "lazy"
+7.escape and save and quit(:wq)"

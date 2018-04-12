@@ -1,0 +1,8 @@
+1. 	cd (with nothing after it): takes you to your home directory
+	cd.: you are taken to thecurrent directory
+	cd ..: takes you back one directory, but you went as far back as you could, sothe second cd .. doesn't take you anywhere
+	ls -al: lists all(-a) files in your current directory, including hidden ones, in list format(-l)
+	pwd: prints your working directory(your current directory)
+	cd /etc: moves you to the /etc directory within your working directory(if it exists)
+	ls - al | more: same as before, except prints in "more" format which does not have colour coding
+	

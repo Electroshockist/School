@@ -1,0 +1,19 @@
+<!Doctype javascript>
+<head>
+  <script type="text/javascript">
+    function getvalue() {
+      var myvalue = document.getElementsByName("Username")[0].value;
+      if (myvalue == ""){
+        alert("Please type your username in the text field.");
+      }
+      else{
+        alert("Hello '" + myvalue + "'!");
+      }
+
+    }
+  </script>
+  <form>
+    <label>Username: <input type="text" name="Username" value=""></label><br />
+    <input type="submit" name="submit" value="Ok" onclick="getvalue()"/>
+  </form>
+</head>

@@ -1,0 +1,72 @@
+1.Describe the differences between the command “less” and the command “more”.
+	They are both read-only text viewers. The difference is that "more" prints the entire text document in the console, whereas the "less" command temporarily replaces the console with the file untill you manually exit "less" with q or control z.
+	
+2.What are the options available for the “less” command?
+	I will copy the first 3, but there are toot many to list here without it becoming monotonous.
+	
+In the following descriptions, ^X means control-X.  ESC stands for the ESCAPE key; for example ESC-v means the two character sequence "ESCAPE", then "v".
+
+       h or H Help: display a summary of these commands.  If you forget all the other commands, remember this one.
+
+       SPACE or ^V or f or ^F
+              Scroll  forward N lines, default one window (see option -z below).  If N is more than the screen size, only the final screenful is displayed.  Warn‐
+              ing: some systems use ^V as a special literalization character.
+
+       z      Like SPACE, but if N is specified, it becomes the new window size.
+
+       ESC-SPACE
+              Like SPACE, but scrolls a full screenful, even if it reaches end-of-file in the process.
+
+       ENTER or RETURN or ^N or e or ^E or j or ^J
+              Scroll forward N lines, default 1.  The entire N lines are displayed, even if N is more than the screen size.	 	  
+
+3.What command did you use to find these options?
+	I used the info less command
+	
+4.Will this command(cd bin/usr) work? Why? Why not? What is the result?
+	No, because cd works with absolute paths unless you use a period. You would have to type out the entire directory.
+	
+5.What are the folders /bin, /boot, /dev, /dev/null used for? Where did you find this information?
+	Bin is binaries, as you explained in class
+	Boot is used to start up linux
+	Dev is device files
+	Dev/Null is functionally similar to permanently deleting an item; you can put as much as you want in, but you can never retrieve anything from it.
+	Source:http://linux-training.be/funhtml/ch11.html#idp53196416
+
+6.How would you show the calendar for July 1st , 1867?
+	I'm not sure what you mean by "show the calendar for July 1s t , 1867".
+	Is this what you're looking for: date -d '1867-07-01' ?
+	It displays the day of at 12:00am, beause I did not specify a time.
+	This is the output: Mon Jul  1 00:00:00 UTC 1867
+	
+7.What is the difference between an absolute and a relative path?
+	A relative path (using .) originates at relative to the directory you are in, whereas absolute paths must be typed out in full
+
+8.What is the command to show the files in a folder? How would you change the sequence or format of the result?
+	You can see the files in a folder with the ls command. There are alot of differnt to sort the output, I will paste in the first 3.
+	‘-c’
+	‘--time=ctime’
+	‘--time=status’
+		 If the long listing format (e.g., ‘-l’, ‘-o’) is being used, print
+		 the status change timestamp (the ctime) instead of the mtime.  When
+		 explicitly sorting by time (‘--sort=time’ or ‘-t’) or when not
+		 using a long listing format, sort according to the ctime.  *Note
+		 File timestamps::.
+
+	‘-f’
+		 Primarily, like ‘-U’—do not sort; list the files in whatever order
+		 they are stored in the directory.  But also enable ‘-a’ (list all
+		 files) and disable ‘-l’, ‘--color’, and ‘-s’ (if they were
+		 specified before the ‘-f’).
+
+	‘-r’
+	‘--reverse’
+		 Reverse whatever the sorting method is—e.g., list files in reverse
+		 alphabetical order, youngest first, smallest first, or whatever.
+		 
+9.Is Linux case sensitive – explain?
+	Yes, both the operating system and the console see capital letters differently than lower case ones.
+	As opposed to in Windows, where it does not differentiate between capital letters and lower case ones; a file named bin and a file named BIN cannot be in the same location.
+	
+10.What am I (since we started talking about puzzles): The person who made me doesn’t need me. The person who uses me does not know me. The person who paid for me does not want me?
+	So I came up with "health insurance" on my own, then I googled the answer; "a coffin". Neither make much sense. I mean, people do want coffins, if they didn't they'd just lower dead people into their graves without a coffin.

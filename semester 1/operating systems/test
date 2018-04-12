@@ -1,0 +1,12 @@
+#! /bin/bash
+#
+#
+# Script to print user information who currently login, current date & time
+#
+clear ;
+echo "Hello $USER" ;
+echo -n "Today is "; date
+echo -n "Number of user login: "; who | wc -l
+echo "Calendar"
+cal
+exit 0;

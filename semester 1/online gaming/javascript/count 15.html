@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+      function cleartext(){
+        document.getElementById("test").value = "";
+      }
+
+      function parsenumber() {
+        //input gets the user input from the text field with the id test
+        var input = document.getElementById("test").value;
+        input=input.trim()
+
+        if (input == ""){
+          document.getElementById("setnumber").innerHTML = "Please input a number."
+        }
+        else if(isNaN(input) == false){
+          document.getElementById("setnumber").innerHTML = "<br />" + "for loop";
+          document.getElementById("setnumber").innerHTML += "<br />Counting from " + input + ".";
+          //counts to 5
+          for (var i = 0; i < 5; i++) {
+            input++;
+            document.getElementById("setnumber").innerHTML += "<br />" + input;
+          }
+          document.getElementById("setnumber").innerHTML += "<br />" + "while loop";
+          //counts to 10 using i from the for loop(wich is now 5)
+          while(i < 10){
+            document.getElementById("setnumber").innerHTML += "<br />" + input;
+            input++;
+            i++;
+          }
+          document.getElementById("setnumber").innerHTML += "<br />" + "do loop";
+          do {
+            document.getElementById("setnumber").innerHTML += "<br />" + input;
+            input++;
+            i++;
+            //runs code above if i is less than or equal to 15 (it is now 10)
+          } while (i <= 15);
+        }
+        else {
+          document.getElementById("setnumber").innerHTML =":| That isnt a number..."
+          document.getElementById("test").placeholder = "Type a NUMBER here...";
+        }
+      }
+
+    </script>
+  </head>
+  <body>
+    <input id="test" type="text" placeholder="Enter a number...">
+    <button id="test2" type="button" name="submit" onclick="parsenumber(); cleartext();">Submit</button>
+    <div id="setnumber"></div>
+  </body>
+</html>

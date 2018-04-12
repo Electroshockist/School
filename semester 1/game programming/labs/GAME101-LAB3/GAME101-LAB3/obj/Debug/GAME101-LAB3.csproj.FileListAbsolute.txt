@@ -1,0 +1,7 @@
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB3\GAME101-LAB3\GAME101-LAB3\bin\Debug\GAME101-LAB3.exe.config
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB3\GAME101-LAB3\GAME101-LAB3\bin\Debug\GAME101-LAB3.exe
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB3\GAME101-LAB3\GAME101-LAB3\bin\Debug\GAME101-LAB3.pdb
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB3\GAME101-LAB3\GAME101-LAB3\obj\Debug\GAME101-LAB3.csprojResolveAssemblyReference.cache
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB3\GAME101-LAB3\GAME101-LAB3\obj\Debug\GAME101-LAB3.csproj.CoreCompileInputs.cache
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB3\GAME101-LAB3\GAME101-LAB3\obj\Debug\GAME101-LAB3.exe
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB3\GAME101-LAB3\GAME101-LAB3\obj\Debug\GAME101-LAB3.pdb

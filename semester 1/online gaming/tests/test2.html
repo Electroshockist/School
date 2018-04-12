@@ -1,0 +1,16 @@
+<!Doctype html>
+<head>
+  <script>
+  function writeData(){
+    var getdiv = document.getElementById("getdata");
+    for (var i = 1; i <= 10; i++) {
+      getdiv.innerHTML += i + "<br />"
+    }
+  }
+  </script>
+</head>
+<body>
+  <input type="submit" value="submit" onclick="writeData();"/>
+  <br />
+  <div id="getdata">
+</body>

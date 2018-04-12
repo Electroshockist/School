@@ -1,0 +1,46 @@
+Open notepad
+
+•       Create a proper directory structure
+
+•       Using the example above
+
+•       Create a html page with the following:
+
+•       Specify Doctype
+
+•       Html tag
+
+•       Head tag
+
+•       Title tag – display your first and last name
+
+•       Body – explain about yourself
+
+•       Heading – create a heading, my biography
+
+•       Use inline as well as block elements
+
+•       Insert an image
+
+•       Add comments, explain what you are doing
+
+•       Remember when saving, save it with extension .html
+
+EXAMPLE:
+
+           <HEADING: PERSONAL INFORMATION>
+
+           ADDRESS AND ETC, USE ABBR FOR CANADA
+
+ 
+
+          <HEADING: HOBBIES >
+
+        
+
+          <HEADING: FUTURE PLAN>
+
+ 
+
+          <HEADING: INTEREST IN WHICH GAME TO DEVELOP>
+

@@ -1,0 +1,7 @@
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignments\Assignments\bin\Debug\Assignment 2.exe.config
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignments\Assignments\bin\Debug\Assignment 2.exe
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignments\Assignments\bin\Debug\Assignment 2.pdb
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignments\Assignments\obj\Debug\Assignments.csproj.CoreCompileInputs.cache
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignments\Assignments\obj\Debug\Assignment 2.exe
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignments\Assignments\obj\Debug\Assignment 2.pdb
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignments\Assignments\obj\Debug\Assignments.csprojResolveAssemblyReference.cache

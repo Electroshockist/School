@@ -1,0 +1,98 @@
+<!Doctype html>
+<head>
+  <h1 align="center">Company Name</h1>
+  <script>
+    var promote;
+    var selectcity = "Toronto, Ontario, Canada";
+    function getcity(city){
+       selectcity= city.options[city.selectedIndex].text;
+    }
+    function isvalid() {
+        promote = document.getElementById('id')
+            alert("Name: " + document.getElementsByName("firstname")[0].value + " " + document.getElementsByName("lastname")[0].value + "\n Username: " + document.getElementsByName("username")[0].value + "\n Email address: " + document.getElementsByName("email")[0].value + "\n City: " + selectcity + "\n Promotions: " + document.getElementById("promote").value);
+    }
+  </script>
+</head>
+<body>
+  <form class="myform" onsubmit="return isvalid();">
+    <table border="1px" width=80% align="center">
+
+      <th colspan="5">
+        <h2>Register for game account</h2>
+      </th>
+
+      <tr>
+        <td>First Name</td>
+        <td><input name="firstname" type="text" required="required"/></td>
+      </tr>
+
+      <tr>
+        <td>Last Name</td>
+        <td><input name="lastname" type="text" required=“required”/></td>
+      </tr>
+
+      <tr>
+        <td>Preferred Username</td>
+        <td><input name="username" type="text" required=“required”/></td>
+      </tr>
+
+      <tr>
+        <td>Profile Picture</td>
+        <td><input name="icon" type="file" accept="image/*"/></td>
+      </tr>
+
+      <tr>
+        <td>Email Address</td>
+        <td><input name="email" type="email" required=“required”/></td>
+      </tr>
+
+      <tr>
+        <td>Account password</td>
+        <td><input name="newpassword" type="password" required=“required”/></td>
+      </tr>
+
+      <!--rtpassword stands for "retype password" although i did not make the javascript to compare the two-->
+      <tr>
+        <td>Retype password</td>
+        <td><input name="rtpassword" type="password" required=“required”/></td>
+      </tr>
+
+      <tr>
+        <td>Country</td>
+        <td>
+          <select name="city" onChange="getcity(this);" required=“required”>
+            <option value="TO">Toronto, Ontario, Canada</option>
+            <option value="NY">New York, New York, United States of America</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td><br />I agree to the terms of service and the privacy policy</td>
+        <td><input id="TOS" name="TOS" type="checkbox" required=“required”/></td>
+      </tr>
+
+      <tr>
+        <td>I would like to recieve pormotional emals and/or <br />information about events about [game here]</td>
+        <td>
+          <input id="promote" name="promote" type="radio" value="Both"/>Both
+          <br />
+          <input id="promote" name="promote" type="radio" value="Sales"/>Sales only
+          <br />
+          <input id="promote" name="promote" type="radio" value="Events"/>Events only
+          <br />
+          <input id="promote" name="promote" type="radio" value="Neither"/>Neither
+        </td>
+      </tr>
+
+      <tr>
+        <td>(Optional) Type a short comment as to how you<br /> found out about this game</td>
+        <td><textarea name=“comments” cols=“3” row=“8”>Enter your comments…</textarea></td>
+      </tr>
+
+      <th colspan = "2">
+        <input type="submit" value="Submit" name="submitquery"/>
+      </th>
+    </table>
+  </form>
+</body>

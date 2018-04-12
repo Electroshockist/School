@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <form>
+        <script>
+        var rand = Math.floor((Math.random()*3)+1);
+        function rps_string(choice){
+          switch(choice) {
+            case 1:
+              return("rock");
+            break;
+            case 2:
+              return("paper");
+            break;
+            case 3:
+              return("scissors");
+            break;
+            default:
+              alert("Something went wrong while getting your choice as a string!")
+          }
+        }
+        function rps(choice){
+          /*document.getElementById("player").innerHTML="You chose " + rps_string(choice) + ".";
+          document.getElementById("computer").innerHTML="I chose " + rps_string(rand) + ".";*/
+          if (rand == choice){
+            alert("It's a tie. We both chose "+ rps_string(choice) + ".")
+          }
+          else{
+
+          switch(choice) {
+            case 1:
+              if (rand == 3){
+                alert("You win! I chose " + rps_string(rand) + "!" )
+              }
+              else if (rand == 2) {
+                alert("I win! I chose " + rps_string(rand) + "!")
+              }
+              else{alert("something went wrong!")}
+            break;
+            case 2:
+              if (rand == 1){
+                alert("You win! I chose " + rps_string(rand) + "!" )
+              }
+              else if (rand == 3) {
+                alert("I win! I chose " + rps_string(rand) + "!")
+              }
+              else{alert("something went wrong!")}
+            break;
+            case 3:
+              if (rand == 2){
+                alert("You win! I chose " + rps_string(rand) + "!" )
+              }
+              else if (rand == 1) {
+                alert("I win! I chose " + rps_string(rand) + "!")
+              }
+              else{alert("something went wrong!")}
+            break;
+            default:
+              alert("Something went wrong in deciding who won!")
+            }
+          }
+          window.location.replace("RPS_main.html");
+        }
+        </script>
+          <h3>Rock, Paper, Scissors</h3>
+          <input type="button" value="Rock" name="rock" onclick="rps(1);"/>
+          <input type="button" value="Paper" name="paper" onclick="rps(2);"/>
+          <input type="button" value="Scissors" name="scissors" onclick="rps(3);"/>
+    </form>
+      <!--<div id="player"></div>
+      <div id="computer"></div>-->
+  </head>
+</html>

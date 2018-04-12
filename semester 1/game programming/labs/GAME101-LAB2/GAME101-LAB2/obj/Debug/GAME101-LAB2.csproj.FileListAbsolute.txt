@@ -1,0 +1,14 @@
+C:\Users\erico\Downloads\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\obj\Debug\GAME101-LAB2.csprojResolveAssemblyReference.cache
+C:\Users\erico\Downloads\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\obj\Debug\GAME101-LAB2.csproj.CoreCompileInputs.cache
+C:\Users\erico\Downloads\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\bin\Debug\GAME101-LAB2.exe.config
+C:\Users\erico\Downloads\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\bin\Debug\GAME101-LAB2.exe
+C:\Users\erico\Downloads\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\bin\Debug\GAME101-LAB2.pdb
+C:\Users\erico\Downloads\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\obj\Debug\GAME101-LAB2.exe
+C:\Users\erico\Downloads\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\obj\Debug\GAME101-LAB2.pdb
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\bin\Debug\GAME101-LAB2.exe.config
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\bin\Debug\GAME101-LAB2.exe
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\bin\Debug\GAME101-LAB2.pdb
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\obj\Debug\GAME101-LAB2.csprojResolveAssemblyReference.cache
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\obj\Debug\GAME101-LAB2.csproj.CoreCompileInputs.cache
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\obj\Debug\GAME101-LAB2.exe
+C:\Users\erico\Desktop\C#\labs\GAME101-LAB2\GAME101-LAB2\GAME101-LAB2\obj\Debug\GAME101-LAB2.pdb

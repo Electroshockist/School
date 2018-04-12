@@ -1,0 +1,28 @@
+<HTML title="note1">
+	<head>
+		<script>
+			function insertItem(){
+				var myElement = document.getElementById("mylist");
+
+				var newElement = document.createElement("li");
+				myElement.appendChild(newElement);
+
+				var myText = document.createTextNode("JAVA");
+				newElement.appendChild(myText);
+			}
+		</script>
+	</head>
+
+	<body>
+		<ul id="mylist">
+			<li>PHP</li>
+			<li>C#</li>
+			<li>XML</li>
+		</ul>
+
+		<input type="submit" value="Submit" onclick="insertItem();" />
+
+	</body>
+
+
+</HTML>

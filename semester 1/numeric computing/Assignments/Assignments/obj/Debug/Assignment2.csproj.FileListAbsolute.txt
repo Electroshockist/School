@@ -1,0 +1,14 @@
+C:\Users\erico\Desktop\Assignment2\Assignment2\obj\Debug\Assignment2.csprojResolveAssemblyReference.cache
+C:\Users\erico\Desktop\Assignment2\Assignment2\obj\Debug\Assignment2.csproj.CoreCompileInputs.cache
+C:\Users\erico\Desktop\Assignment2\Assignment2\bin\Debug\Assignment2.exe.config
+C:\Users\erico\Desktop\Assignment2\Assignment2\bin\Debug\Assignment2.exe
+C:\Users\erico\Desktop\Assignment2\Assignment2\bin\Debug\Assignment2.pdb
+C:\Users\erico\Desktop\Assignment2\Assignment2\obj\Debug\Assignment2.exe
+C:\Users\erico\Desktop\Assignment2\Assignment2\obj\Debug\Assignment2.pdb
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignment2\Assignment2\bin\Debug\Assignment2.exe.config
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignment2\Assignment2\bin\Debug\Assignment2.exe
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignment2\Assignment2\bin\Debug\Assignment2.pdb
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignment2\Assignment2\obj\Debug\Assignment2.csprojResolveAssemblyReference.cache
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignment2\Assignment2\obj\Debug\Assignment2.csproj.CoreCompileInputs.cache
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignment2\Assignment2\obj\Debug\Assignment2.exe
+C:\Users\erico\Dropbox\Electroshockist\school work\numeric computing\Assignment2\Assignment2\obj\Debug\Assignment2.pdb

@@ -1,0 +1,316 @@
+<!Doctype html>
+<html>
+  <head>
+    <style>
+      /*adds my custom font to the list of referencable fonts*/
+      @font-face {
+        font-family: Electroshockist;
+        src: url("fonts/Electroshockist.ttf") format("truetype");
+      }
+
+      /*changes body*/
+      body{
+        font-family: Electroshockist;
+        image-rendering: pixelated;
+        background-color: lightgray;
+      }
+
+      /*this one and the next one make sure there are no spaces between the images in the table*/
+      td, tr, img  {
+        padding: 0px;
+        margin: 0px;
+        border: none;
+      }
+      table {
+        border-collapse: collapse;
+      }
+
+      /*class that centers objects*/
+      .centered{
+        font-weight: bold;
+        margin: auto;
+        margin-top: none;
+        font-size: 32px;
+        text-align: center;
+      }
+
+      /*changes the cursor to an X*/
+      .X{
+        cursor: url("images/X/X_mouse.png")55 60, pointer;
+      }
+
+      /*changes the cursor to an O*/
+      .O{
+        cursor: url("images/O/O_mouse.png") 55 60, pointer;
+      }
+
+      /*formatting for overlay background(much of the formatting and comments courtesy of W3Schools)*/
+      #overlay {
+        position: fixed; /* Sit on top of the page content */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.75); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+      }
+      /*formatting for overlay text*/
+      #overlay_text{
+        margin-top: 15%;
+        text-align: center;
+        font-size: 48px;
+        color: white;
+        font-weight: bold;
+        font-family: Electroshockist;
+      }
+    </style>
+    <script>
+      var imgpath;
+      var getrandom;
+      var symbol_player = "empty";
+      var symbol_ai = "empty";
+      //allows the player to go first
+      var playerturn = true;
+      var end = false
+      //set an array of 9 to "none"(tracks selected quadrants)
+      var picked = ["none","none","none","none","none","none","none","none","none"];
+      var toarray;
+      var win = false;
+      var failsafe = false;
+
+      //turns overlay on
+      function overlayon(text) {
+        document.getElementById("overlay_text").innerHTML = text;
+        document.getElementById("overlay").style.display = "block";
+      }
+
+      //turns overlay off, reloads page if someone won
+      function overlayoff(){
+        if(win==true){
+          location.reload();
+        }
+        document.getElementById("overlay").style.display = "none";
+      }
+
+      //starts game
+      function start(type) {
+        //formats each quadrant of the table and sets related variables
+        for(var i = 0; i < document.getElementsByClassName("image").length; i++){
+          document.getElementsByClassName("image")[i].width="150";
+          document.getElementsByClassName("image")[i].style="display:block;";
+          //gets the symbol that the player picked and sets values accordingly
+          switch (type) {
+            case "X":
+                //changing the className allows me to dynamically set the cursor to the player's symbol
+                document.getElementById(i).className = "X";
+                document.getElementById(i).title = "Place X";
+                symbol_player = "X";
+                symbol_ai = "O";
+              break;
+            case "O":
+                //changing the className allows me to dynamically set the cursor to the player's symbol
+                document.getElementById(i).className = "O";
+                document.getElementById(i).title = "Place O";
+                symbol_player = "O";
+                symbol_ai = "X";
+              break;
+            default:
+              overlayon("Something went wrong!");
+          }
+        }
+        //turns on tic tac toe board
+        document.getElementById("table").style.display = "block";
+        //turns off selection query
+        document.getElementById("overlay").style.display = "none";
+      }
+      //runs every time either the player clicks on a quadrant or the cpu plays
+      function play(player, num, type){
+        if (player == "p1" && picked[num] != "none" && !end){
+          overlayon("This slot has already been chosen, please choose another.")
+          // this maskes it so that turns aren't still counting
+          failsafe = true;
+        }
+        else if(!end){
+          //gets the player playing and swaps the symbol accordingly
+          switch (player) {
+            case "p1":
+                var symbol = symbol_player;
+              break;
+            case "cpu":
+                var symbol = symbol_ai;
+              break;
+            default:
+              overlayon("The player " + player + " is not a valid player.");
+          }
+          //gets image path
+          switch (type) {
+            case "normal":
+              imgpath = "images/" + symbol + "/" + symbol + "_full.png";
+              document.getElementById("img" + num).src=imgpath;
+              break;
+            case "ml":
+              imgpath = "images/" + symbol + "/" + symbol + "_full_ml.png";
+              document.getElementById("img" + num).src=imgpath;
+              break;
+            case "bm":
+              imgpath = "images/" + symbol + "/" + symbol + "_full_bm.png";
+              document.getElementById("img" + num).src=imgpath;
+              break;
+            case "bl":
+              imgpath = "images/" + symbol + "/" + symbol + "_full_bl.png";
+              document.getElementById("img" + num).src=imgpath;
+              break;
+            default:
+              alert("The path " + imgpath + " is not a valid image.");
+          }
+          //sets the selected tile value to the symbols value
+          picked[num] = symbol;
+          //converts "picked" to array
+          toarray = [
+           [picked[0],picked[1],picked[2]],
+           [picked[3],picked[4],picked[5]],
+           [picked[6],picked[7],picked[8]],
+          ];
+          //runs if noone's won yet
+          if(win == false){
+            //checks win conditions
+            for(var i = 0; i < toarray.length; i++){
+              if(toarray[i][0] == symbol && toarray[i][1] == symbol && toarray[i][2] == symbol){
+                won(symbol,symbol_player);
+              }
+              else if(toarray[0][i] == symbol && toarray[1][i] == symbol && toarray[2][i] == symbol){
+                won(symbol,symbol_player);
+              }
+              else if(toarray[0][0] == symbol && toarray[1][1] == symbol && toarray[2][2] == symbol){
+                won(symbol,symbol_player);
+              }
+              else if(toarray[2][0] == symbol && toarray[1][1] == symbol && toarray[0][2] == symbol){
+                won(symbol,symbol_player);
+              }
+            }
+            //toggles who's turn it is if the player has not clicked on an invalid tile
+            if(failsafe == false){
+              playerturn = !playerturn;
+            }
+            //if not the player's turn, the ai plays
+            if(!playerturn){
+              //try is here to catch overflow errors and throw a tie when there are no more tiles for the ai to play
+              try{
+              aiplay();
+              }
+              catch(x){
+                tie();
+              }
+            }
+          }
+        }
+        //turns the failsafe back off if trigered allowing the ai to play again
+        failsafe = false;
+      }
+      //this is activated when it's the ai's turn
+      function aiplay() {
+        getrandom = Math.floor(Math.random()*9)
+        //checks if the selected tile is full
+        if (picked[getrandom] != "none"){
+          aiplay();
+          return;
+        }
+        else {
+          //tells the "play" function wich tile the ai wants to play (with the texture value)
+          switch (getrandom) {
+            case 5:
+                play("cpu",getrandom,"ml")
+              break;
+            case 7:
+                play("cpu",getrandom,"bm")
+              break;
+            case 8:
+                play("cpu",getrandom,"bl")
+              break;
+            default:
+              play("cpu",getrandom,"normal")
+          }
+        }
+      }
+      //activated if all tiles are selected and neither player wins
+      function tie(){
+        if (win == false && picked.every(checknone)){
+          overlayon("It's a tie!")
+        }
+        win = true;
+      }
+      //activated if either player wins
+      function won(symbol,symbol_player){
+        win = true;
+        if(symbol == symbol_player){
+          overlayon("You win!");
+        }
+        else{
+            overlayon("You lose!");
+        }
+      }
+      //checks if there are any empty tiles left
+      function checknone(){
+        for(var i = 1; i < this.length; i++)
+        {
+          if(this[i] == this[0]){
+            return false;
+          }
+        }
+          return true;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="overlay" onclick="overlayoff()">
+      <div id="overlay_text">
+        Which symbol would you like to play as?</br>
+        <img src="images/X/X.png" alt="X" width="200" title="X" onclick="start('X')" style="margin-right: 5%;"/>
+        <img src="images/O/O.png" alt="O" width="200" title="O" onclick="start('O')" style="margin-left: 5%;"/>
+      </div>
+    </div>
+    <div id="table" style="display: none;">
+      <table class="centered">
+          <th colspan="3">
+            <p id="table_text">Time to play some </br><a style="color:#801B1B">Tic </a><a style="color:white">Tac </a><a style="color:#1A226A">Toe!</a></p>
+          </th>
+          <tr>
+            <!--each image in this table is a tile on the grid that, when clicked, executes the "play" function whith the player type "p1" to denote a human player, the quadrant id and a texture variant-->
+            <td id="0">
+              <img id="img0" class="image" src="images/empty/empty.png" onclick="play('p1',0,'normal')"/>
+            </td>
+            <td id="1">
+              <img id="img1" class="image" src="images/empty/empty.png" onclick="play('p1',1,'normal')"/>
+            </td>
+            <td id="2">
+              <img id="img2" class="image" src="images/empty/empty.png" onclick="play('p1',2,'normal')"/>
+            </td>
+          </tr>
+          <tr>
+            <td id="3">
+              <img id="img3" class="image" src="images/empty/empty.png" onclick="play('p1',3,'normal')"/>
+            </td>
+            <td id="4">
+              <img id="img4" class="image" src="images/empty/empty.png" onclick="play('p1',4,'normal')"/>
+            </td>
+            <td id="5">
+              <img id="img5" class="image" src="images/empty/empty_ml.png" onclick="play('p1',5,'ml')"/>
+            </td>
+          </tr>
+          <tr>
+            <td id="6">
+              <img id="img6" class="image" src="images/empty/empty.png" onclick="play('p1',6,'normal')"/>
+            </td>
+            <td id="7">
+              <img id="img7" class="image" src="images/empty/empty_bm.png" onclick="play('p1',7,'bm')"/>
+            </td>
+            <td id="8">
+              <img id="img8" class="image" src="images/empty/empty_bl.png" onclick="play('p1',8,'bl')"/>
+            </td>
+          </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+
+      function hideelement(x) {
+        document.getElementById(x).style.display="none";
+      }
+      function showelement(x) {
+        document.getElementById(x).style.display="block";
+      }
+      function helloworld(){
+        alert("hello");
+        document.getElementById("info").innerHTML = "hi";
+        showelement("info");
+        showelement("hide");
+        hideelement("show");
+      }
+      function hide(){
+        hideelement("info");
+        showelement("show");
+        hideelement("hide");
+      }
+      function show() {
+        showelement("info");
+        hideelement("show");
+        showelement("hide");
+      }
+    </script>
+  </head>
+  <body>
+    <div id="info"></div>
+    <input type="submit" name="Submit" text="Submit" onclick="helloworld()"/>
+    <button type="submit1" onclick="hide()" id="hide" style="display: none;">Hide<br /></button>
+    <button type="submit2" onclick="show()" id="show" style="display: none;">Show</button>
+  </body>
+</html>

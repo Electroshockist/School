@@ -1,0 +1,96 @@
+<!Doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <style>
+      .overlay {
+        text-align: center;
+        font-family: arial;
+        font-size: 10px;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+      var triggered = false;
+      var specs = [
+        [[],[],[],[],[],[],[],[],[],[]],
+        [[],[],[],[],[],[],[],[],[],[]],
+        [[],[],[],[],[],[],[],[],[],[]]
+      ];
+      var random = [
+        [[],[],[],[],[],[],[],[],[],[]],
+        [[],[],[],[],[],[],[],[],[],[]]
+      ];
+      function clicky() {
+        var canvas = $("#myCanvas");
+        var context = canvas.get(0).getContext("2d");
+
+        for (var i = 0; i <= 10; i++){
+          var col1 = Math.floor((Math.random() * 255) + 1);
+          var col2 = Math.floor((Math.random() * 255) + 1);
+          var col3 = Math.floor((Math.random() * 255) + 1);
+
+            if(triggered == false){
+            var radius = Math.floor((Math.random() * 100) + 1);
+
+            var x = Math.floor((Math.random() * (500 - radius*2)) + radius);
+            var y = Math.floor((Math.random() * (500 - radius*2)) + radius);
+
+            var randsymbX = Math.random() < 0.5 ? -1 : 1;
+            var randsymbY = Math.random() < 0.5 ? -1 : 1;
+
+            context.fillStyle = "rgb(" + col1 + "," + col2 + "," + col3 + ")";
+            context.beginPath();
+            context.arc(x, y, radius, 0, Math.PI*2, true);
+            context.closePath();
+            context.fill();
+
+            specs[0][i] = x;
+            specs[1][i] = y;
+            specs[2][i] = radius;
+            random[0][i] = Math.floor((Math.random() * 10 * randsymbX));
+            random[1][i] = Math.floor((Math.random() * 10 * randsymbY));
+          }
+          else{
+            context.fillStyle = "rgb(" + col1 + "," + col2 + "," + col3 + ")";
+            context.beginPath();
+            context.arc(specs[0][i], specs[1][i], specs[2][i], 0, Math.PI*2, true);
+            context.closePath();
+            context.fill();
+            //doesn't seem to work
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            if(specs[0][i] + specs[2][i] >= 500 || specs[0][i] - specs[2][i] <= 0){
+              random[0][i] = -random[0][i];
+            }
+            if(specs[1][i] + specs[2][i] >= 500 || specs[1][i] - specs[2][i] <= 0){
+              random[1][i] = -random[1][i];
+            }
+            specs[0][i] += random[0][i];
+            specs[1][i] += random[1][i];
+          }
+        }
+        setTimeout(clicky,100);
+        triggered = true;
+      }
+      //swaps button
+      function clicked(){
+        if (triggered == false){
+          document.getElementById("start").innerHTML="Stop!";
+          clicky();
+        }
+        else{
+          location.reload();
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="overlay">
+      <div><canvas class="centered" width="500" height="500" id="myCanvas"></canvas></div>
+      <div>
+        <button id="start" onclick="clicked()">Start!</button>
+      </div>
+    </div>
+  </body>
+</html>
