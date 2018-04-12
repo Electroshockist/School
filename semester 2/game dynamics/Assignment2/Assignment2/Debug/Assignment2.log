@@ -1,0 +1,9 @@
+﻿  Body.cpp
+c:\users\erico\dropbox\electroshockist\school work\semester 2\game dynamics\assignment2\assignment2\body.cpp : fatal error C1041: cannot open program database 'C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game dynamics\Assignment2\Assignment2\Debug\vc141.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  Main.cpp
+c:\users\erico\dropbox\electroshockist\school work\semester 2\game dynamics\assignment2\assignment2\main.cpp : fatal error C1041: cannot open program database 'C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game dynamics\Assignment2\Assignment2\Debug\vc141.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  Vector2D.cpp
+c:\users\erico\dropbox\electroshockist\school work\semester 2\game dynamics\assignment2\assignment2\vector2d.cpp : fatal error C1041: cannot open program database 'C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game dynamics\Assignment2\Assignment2\Debug\vc141.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  World.cpp
+c:\users\erico\dropbox\electroshockist\school work\semester 2\game dynamics\assignment2\assignment2\world.cpp : fatal error C1041: cannot open program database 'C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game dynamics\Assignment2\Assignment2\Debug\vc141.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  Generating Code...
