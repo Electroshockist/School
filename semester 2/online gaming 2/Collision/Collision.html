@@ -33,6 +33,8 @@
   var canMoveLeft = true;
   var canMoveRight = true;
 
+  var canDisableUp, canDisableDown, canDisableLeft, canDisableRight;
+
   //scale of images
   var scale = 3;
 
@@ -54,11 +56,14 @@
     this.H = 0;
     if (IMAGE != undefined) this.IMAGE = IMAGE;
     else this.IMAGE = "Assets/Box.png";
-    //Getters to define the left, right, top and bottom sides, these functions are use to get the parameter of our shape in order to determine whether our mouse falls within
+    //Getters to define the left, right, top and bottom sides
     this.left = function() { return this.X; };
     this.right = function() { return (this.X + this.W*scale); };
     this.top = function() { return this.Y; };
     this.bottom = function() { return (this.Y + this.H*scale); };
+
+    this.midX = function() { return this.X + this.W/2; };
+    this.midY = function() { return this.Y +this.H/2; };
   }
 
   //initialize objects
@@ -160,6 +165,56 @@
       }
   }, false);
 
+  function collisionDetection(){
+    //boudary checkers
+    if (Player.top() <= 0) {
+       canMoveUp = false;
+       up = false;
+     }
+    else canMoveUp = true;
+
+    if (Player.left() <= 0) {
+      canMoveLeft = false;
+      left = false;
+    }
+    else canMoveLeft = true;
+
+    if(Player.bottom() >= 500) {
+      canMoveDown = false;
+      down = false;
+    }
+    else canMoveDown = true;
+
+    if(Player.right() >= 500) {
+      canMoveRight = false;
+      right = false;
+    }
+    else canMoveRight = true;
+
+    //Up
+    if(up && canMoveUp) Player.VY = -5;
+    //Left
+    if(left && canMoveLeft) Player.VX = -5;
+    //Down
+    if(down && canMoveDown)Player.VY = 5;
+    //Right
+    if(right && canMoveRight)Player.VX = 5;
+
+    //Set the player's velocity to zero if none of the keys are being pressed
+    if(!up && !down) Player.VY = 0;
+    if(!left && !right) Player.VX = 0;
+
+    //box detection
+    if(!canMoveUp) canDisableDown = false;
+    if(!canMoveDown) canDisableUp = false;
+    if(!canMoveLeft) canDisableRight = false;
+    if(!canMoveRight) canDisableLeft = false;
+
+    for(var i = 0; i < Box.width; i++) {
+      if(Player. Player.midX() - Box[i].midX())
+      console.log("Collided with Box " + i);
+    }
+  }
 
   function render() {
 
@@ -184,75 +239,9 @@
 
   function update(){
     requestAnimationFrame(update,canvas);
-    console.log(Player.X + ", " + Player.Y)
+    //console.log(Player.X + ", " + Player.Y);
 
-
-    //boudary checkers
-    if (Player.top() <= 0) {
-       canMoveUp = false;
-       up = false;
-     }
-    else canMoveUp = true;
-
-    if (Player.left() <= 0) {
-      canMoveLeft = false;
-      left = false;
-    }
-    else canMoveLeft = true;
-
-    if(Player.bottom() >= 500) {
-      canMoveDown = false;
-      down = false;
-    }
-    else canMoveDown = true;
-
-    if(Player.right() >= 500) {
-      canMoveRight = false;
-      right = false;
-    }
-    else canMoveRight= true;
-
-    //// TODO: add collision boxes
-    // //check boxes
-    // for(var i = 0; i < Box.length; i++){
-    //   //boudary checkers
-    //   if (Player.top() <= Box[i].bottom()) {
-    //      canMoveUp = false;
-    //      up = false;
-    //    }
-    //   else canMoveUp = true;
-    //
-    //   if (Player.left() <= Box[i].right()) {
-    //     canMoveLeft = false;
-    //     left = false;
-    //   }
-    //   else canMoveLeft = true;
-    //
-    //   if(Player.bottom() >= Box[i].top()) {
-    //     canMoveDown = false;
-    //     down = false;
-    //   }
-    //   else canMoveDown = true;
-    //
-    //   if(Player.right() >= Box[i].left()) {
-    //     canMoveRight = false;
-    //     right = false;
-    //   }
-    //   else canMoveRight= true;
-    // }
-
-    //Up
-    if(up && canMoveUp) Player.VY = -5;
-    //Left
-    if(left && canMoveLeft) Player.VX = -5;
-    //Down
-    if(down && canMoveDown)Player.VY = 5;
-    //Right
-    if(right && canMoveRight)Player.VX = 5;
-
-    //Set the player's velocity to zero if none of the keys are being pressed
-    if(!up && !down) Player.VY = 0;
-    if(!left && !right) Player.VX = 0;
+    collisionDetection();
 
     //Move the cat
     Player.X += Player.VX;
