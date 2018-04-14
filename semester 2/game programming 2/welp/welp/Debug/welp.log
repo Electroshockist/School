@@ -1,0 +1,4 @@
+﻿  yup.cpp
+c:\users\erico\dropbox\electroshockist\school work\semester 2\game programming 2\welp\welp\yup.cpp(10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'int *'
+  welp.vcxproj -> C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\welp\Debug\welp.exe
+  welp.vcxproj -> C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\welp\Debug\welp.pdb (Partial PDB)

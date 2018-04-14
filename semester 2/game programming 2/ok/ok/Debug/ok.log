@@ -1,0 +1,4 @@
+﻿  Main.cpp
+c:\users\erico\dropbox\electroshockist\school work\semester 2\game programming 2\ok\ok\main.cpp(6): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'float *'
+  ok.vcxproj -> C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\ok\Debug\ok.exe
+  ok.vcxproj -> C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\ok\Debug\ok.pdb (Partial PDB)
