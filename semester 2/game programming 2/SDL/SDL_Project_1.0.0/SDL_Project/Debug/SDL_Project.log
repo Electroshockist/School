@@ -1,0 +1,12 @@
+﻿  Window.cpp
+  VMath.cpp
+  Timer.cpp
+  Scene0.cpp
+c:\users\erico\dropbox\electroshockist\school work\semester 2\game programming 2\sdl_project_1.0.0\sdl_project\scene0.cpp(36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\erico\dropbox\electroshockist\school work\semester 2\game programming 2\sdl_project_1.0.0\sdl_project\scene0.cpp(37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Main.cpp
+  MMath.cpp
+  GameManager.cpp
+  Generating Code...
+     Creating library C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\SDL_Project_1.0.0\Debug\SDL_Project.lib and object C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\SDL_Project_1.0.0\Debug\SDL_Project.exp
+  SDL_Project.vcxproj -> C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\SDL_Project_1.0.0\Debug\SDL_Project.exe
