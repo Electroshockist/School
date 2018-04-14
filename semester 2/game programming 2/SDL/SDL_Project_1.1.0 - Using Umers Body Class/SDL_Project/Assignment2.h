@@ -26,12 +26,12 @@ private:
 	float elapsedTime;
 	unsigned long totalFrameCount;
 	unsigned long frameCount;
+	Vec3 ToPhysicsCoords();
 public:
 	Assignment2(SDL_Window* sdlWindow);
 	~Assignment2();
 	bool OnCreate();
 	void OnDestroy();
-	void Test(const float time);
 	void Update(const float time);
 	void Render();
 	void HandleEvents(SDL_Event& event);

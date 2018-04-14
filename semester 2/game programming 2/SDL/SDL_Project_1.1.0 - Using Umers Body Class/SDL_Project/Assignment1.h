@@ -25,7 +25,6 @@ public:
 	~Assignment1();
 	bool OnCreate();
 	void OnDestroy();
-	void Test(const float time);
 	void Update(const float time);
 	void Render();
 	void HandleEvents(SDL_Event& event);

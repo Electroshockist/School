@@ -49,11 +49,7 @@ void Assignment1::OnDestroy() {
 		}
 	}
 }
-void Assignment1::Test(const float time){
 
-	printf("%f\t%f\n", bodies[0]->pos.y, bodies[1]->pos.y);
-	totalFrameCount++;
-}
 void Assignment1::Update(const float time) {
 
 	elapsedTime += time;

@@ -48,13 +48,15 @@ void Assignment2::OnDestroy() {
 		}
 	}
 }
-
-void Assignment2::Test(const float time) {
-	//printf("%f\t%f\n", bodies[0]->pos.y, bodies[1]->pos.y);
+Vec3 Assignment2::ToPhysicsCoords() {
+	Matrix4 temp = MMath::inverse(projectionMatrix);
+	return temp * bodies[0]->getImage;
 }
+
 void Assignment2::Update(const float time) {
 
 	elapsedTime += time;
+	ToPhysicsCoords();
 
 	if (elapsedTime < 0.1f) {
 		//apply force ASAP
