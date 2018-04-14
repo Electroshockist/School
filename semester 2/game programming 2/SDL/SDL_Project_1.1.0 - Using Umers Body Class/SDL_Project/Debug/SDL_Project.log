@@ -1,0 +1,10 @@
+﻿  Assignment2.cpp
+c:\users\erico\google drive\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.h(19): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
+  c:\users\erico\google drive\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
+c:\users\erico\google drive\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.h(20): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
+  c:\users\erico\google drive\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
+c:\users\erico\google drive\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\erico\google drive\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\erico\google drive\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(114): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\erico\google drive\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(115): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  SDL_Project.vcxproj -> C:\Users\erico\Google Drive\school\semester 2\game programming 2\SDL\SDL_Project_1.1.0 - Using Umers Body Class\Debug\SDL_Project.exe
