@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Assignment1.cpp" />
     <ClCompile Include="Assignment2.cpp" />
+    <ClCompile Include="Assignment3.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -24,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="Assignment1.h" />
     <ClInclude Include="Assignment2.h" />
+    <ClInclude Include="Assignment3.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Matrix.h" />

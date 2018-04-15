@@ -3,6 +3,7 @@
 #include "Timer.h"
 #include "Assignment1.h"
 #include "Assignment2.h"
+#include "Assignment3.h"
 #include "SDL.h"
 
 #include <iostream>
@@ -76,6 +77,12 @@ void GameManager::Run() {
 					currentScene->OnDestroy();
 					delete currentScene;
 					currentScene = new Assignment2(ptr->GetSDL_Window());
+					currentScene->OnCreate();
+				}
+				if (event.key.keysym.sym == SDLK_F2) {
+					currentScene->OnDestroy();
+					delete currentScene;
+					currentScene = new Assignment3(ptr->GetSDL_Window());
 					currentScene->OnCreate();
 				}
 				if (event.key.keysym.sym == SDLK_SPACE) {

@@ -1,11 +1,13 @@
-﻿  Assignment2.cpp
-c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.h(20): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
-  c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
-c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.h(21): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
-  c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
-c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(57): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'MATH::Matrix4'
-c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(87): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(121): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment2.cpp(122): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  SDL_Project.vcxproj -> C:\Users\erico\Documents\Code\School\semester 2\game programming 2\SDL\SDL_Project_1.1.0 - Using Umers Body Class\Debug\SDL_Project.exe
+﻿  Assignment3.cpp
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.h(19): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
+  c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.h(20): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
+  c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(53): error C3867: 'MATH::Matrix4::loadIdentity': non-standard syntax; use '&' to create a pointer to member
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(53): error C2296: '*': illegal, left operand has type 'SDL_Surface *'
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(53): error C2297: '*': illegal, right operand has type 'void (__thiscall MATH::Matrix4::* )(void)'
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(81): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(82): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(59): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'double'
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(116): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\erico\files\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(117): warning C4244: '=': conversion from 'float' to 'int', possible loss of data

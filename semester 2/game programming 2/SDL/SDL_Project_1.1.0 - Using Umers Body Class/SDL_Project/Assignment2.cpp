@@ -48,10 +48,10 @@ void Assignment2::OnDestroy() {
 		}
 	}
 }
-Vec3 Assignment2::ToPhysicsCoords() {
-	Matrix4 temp = MMath::inverse(projectionMatrix);
-	return temp * bodies[0]->getImage;
-}
+//Vec3 Assignment2::ToPhysicsCoords() {
+//	Matrix4 temp = MMath::inverse(projectionMatrix);
+//	return temp * bodies[0]->getImage;
+//}
 
 void Assignment2::Update(const float time) {
 
