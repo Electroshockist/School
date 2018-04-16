@@ -79,7 +79,7 @@ void GameManager::Run() {
 					currentScene = new Assignment2(ptr->GetSDL_Window());
 					currentScene->OnCreate();
 				}
-				if (event.key.keysym.sym == SDLK_F2) {
+				if (event.key.keysym.sym == SDLK_F3) {
 					currentScene->OnDestroy();
 					delete currentScene;
 					currentScene = new Assignment3(ptr->GetSDL_Window());
@@ -95,10 +95,13 @@ void GameManager::Run() {
         }
 
         if (start) {
-            timer->UpdateFrameTicks();
-            currentScene->Update(timer->GetDeltaTime());
-            currentScene->Render();
+
+			currentScene->Update(timer->GetDeltaTime());
+			currentScene->Render();
         }
+
+		timer->UpdateFrameTicks();
+
         /// Keeep the event loop running at a proper rate
         SDL_Delay(timer->GetSleepTime(60)); ///60 frames per sec
 

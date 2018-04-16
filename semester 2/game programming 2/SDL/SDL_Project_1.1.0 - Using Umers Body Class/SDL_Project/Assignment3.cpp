@@ -1,10 +1,12 @@
 #include "Assignment3.h"
 #include "Body.h"
 #include "MMath.h"
+#include "Matrix.h"
 #include <math.h>
 #include <SDL.h>
 
 using namespace std;
+using namespace MATH;
 
 
 Assignment3::Assignment3(SDL_Window* sdlWindow_) {
@@ -49,14 +51,19 @@ void Assignment3::OnDestroy() {
 	}
 }
 Vec3 Assignment3::ToPhysicsCoords(int i) {
-	Matrix4 temp = MMath::inverse(projectionMatrix);
-	return bodies[i]->getImage() * temp.loadIdentity;
+	Matrix4 tempMat = MMath::inverse(projectionMatrix);
+	Vec3 tempVec(bodies[i]->getImage()->w, bodies[i]->getImage()->h, 0.0f);
+	tempVec = tempMat * tempVec;
+	return  tempVec;
 }
 
 void Assignment3::Update(const float time) {
 
+	float BodyX = ToPhysicsCoords(0).x;
+	float BodyY = ToPhysicsCoords(0).y;
+
 	elapsedTime += time;
-	printf("%d", ToPhysicsCoords(0).x);
+	printf("%f, %f \n", BodyX, BodyY);
 
 	if (elapsedTime < 0.1f) {
 		//apply force ASAP
@@ -81,21 +88,14 @@ void Assignment3::Update(const float time) {
 		Force[i].x = cos(theta) * normalForce;
 		Force[i].y = sin(theta) * normalForce;
 
-		printf("Relative star position: [%f, %f] Force: [%f,%f]\n", tempPos.x, tempPos.y, Force[1].x, Force[1].y);
+		//printf("Relative star position: [%f, %f] Force: [%f,%f]\n", tempPos.x, tempPos.y, Force[1].x, Force[1].y);
 	}
 	//adds the forces from star 1 and star 2
 	Force[0] = Force[1] + Force[2];
 
 	//applies the forces to the planet
 	bodies[0]->ApplyForce(Force[0]);
-
-	//TODO
-	/*if (!crashed) {
-	}
-	else {
-	}*/
-	//frameCount++;
-
+	
 	//updates bodies
 	for (int i = 0; i < NUM_BODIES; i++) {
 		if (bodies[i]) bodies[i]->Update(time, bodies[i]->gravity);
@@ -121,6 +121,6 @@ void Assignment3::Render() {
 }
 void Assignment3::HandleEvents(SDL_Event& event) {
 	if (event.type == SDL_KEYDOWN) {
-		printf("key down\n");
+		//printf("key down\n");
 	}
 }

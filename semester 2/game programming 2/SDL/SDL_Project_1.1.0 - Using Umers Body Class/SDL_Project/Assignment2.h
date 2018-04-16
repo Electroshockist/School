@@ -26,7 +26,6 @@ private:
 	float elapsedTime;
 	unsigned long totalFrameCount;
 	unsigned long frameCount;
-	Vec3 ToPhysicsCoords();
 public:
 	Assignment2(SDL_Window* sdlWindow);
 	~Assignment2();
