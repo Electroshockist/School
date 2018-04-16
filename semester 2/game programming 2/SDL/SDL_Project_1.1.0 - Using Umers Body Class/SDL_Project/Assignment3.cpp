@@ -2,6 +2,7 @@
 #include "Body.h"
 #include "MMath.h"
 #include "Matrix.h"
+#include "Physics.h"
 #include <math.h>
 #include <SDL.h>
 
@@ -23,16 +24,19 @@ Assignment3::~Assignment3() {
 }
 
 bool Assignment3::OnCreate() {
-	crashed = false;
 	int w, h;
 	SDL_GetWindowSize(window, &w, &h);
 
-	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(0.0f, 30.0f, 0.0f, 15.0f, 0.0f, 1.0f);
+	crashed = false;
+
+	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(0.0f, 30.0f, 0.0f, 30.0f, 0.0f, 1.0f);
+	
+	Physics physics(NUM_BODIES, bodies[NUM_BODIES], Force[NUM_BODIES]);
 
 	//create 3 bodies
 	bodies[0] = new Body("planet.bmp", 1.0f, Vec3(7.0f, 2.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false);
 	bodies[1] = new Body("brown dwarf.bmp", 100.0f, Vec3(10.0f, 10.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false);
-	bodies[2] = new Body("star.bmp", 150.0f, Vec3(18.0f, 5.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false);
+	bodies[2] = new Body("star.bmp", 150.0f, Vec3(15.0f, 15.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false);
 
 	for (int i = 0; i < NUM_BODIES; i++) {
 		if (bodies[i] == nullptr) {
@@ -62,39 +66,14 @@ void Assignment3::Update(const float time) {
 	float BodyX = ToPhysicsCoords(0).x;
 	float BodyY = ToPhysicsCoords(0).y;
 
+
 	elapsedTime += time;
-	printf("%f, %f \n", BodyX, BodyY);
+	printf("Physics coords: [%f, %f] Screen coords: [%d, %d]\n", BodyX, BodyY, bodies[0]->getImage()->w, bodies[0]->getImage()->h);
 
 	if (elapsedTime < 0.1f) {
 		//apply force ASAP
-		bodies[0]->ApplyForce(Vec3(100.0f, -5.0f, 0.0f));
+		bodies[0]->ApplyForce(Vec3(40.0f, 20.0f, 0.0f));
 	}
-
-	for (int i = 1; i < NUM_BODIES; i++) {
-		//temporarily holds the current star's position relative to the planet 
-		tempPos.x = bodies[i]->pos.x - bodies[0]->pos.x;
-		tempPos.y = bodies[i]->pos.y - bodies[0]->pos.y;
-
-		//gets the square of the hypotenuse
-		csquared = pow(tempPos.x, 2) + pow(tempPos.y, 2);
-
-		//gets the angle opposite the planet
-		theta = atan2(tempPos.y, tempPos.x);
-
-		//finds the direct force of gravity acting on the planet
-		normalForce = (bodies[i]->mass * bodies[0]->mass) / csquared;
-
-		//seperates the direct force into their x and y components
-		Force[i].x = cos(theta) * normalForce;
-		Force[i].y = sin(theta) * normalForce;
-
-		//printf("Relative star position: [%f, %f] Force: [%f,%f]\n", tempPos.x, tempPos.y, Force[1].x, Force[1].y);
-	}
-	//adds the forces from star 1 and star 2
-	Force[0] = Force[1] + Force[2];
-
-	//applies the forces to the planet
-	bodies[0]->ApplyForce(Force[0]);
 	
 	//updates bodies
 	for (int i = 0; i < NUM_BODIES; i++) {

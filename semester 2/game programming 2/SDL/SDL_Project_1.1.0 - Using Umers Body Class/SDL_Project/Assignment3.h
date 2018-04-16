@@ -16,12 +16,8 @@ private:
 	SDL_Window * window;
 	Matrix4 projectionMatrix;
 	class Body* bodies[NUM_BODIES];
-	class Vec3 tempPos;
-	class Vec3 Force[NUM_BODIES];
-	double csquared;
-	double theta;
-	double normalForce;
-	int sign;
+	class Vec3* Force[NUM_BODIES];
+
 	bool crashed;
 	float elapsedTime;
 	unsigned long totalFrameCount;

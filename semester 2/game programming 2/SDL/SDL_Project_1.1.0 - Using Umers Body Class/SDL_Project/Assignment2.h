@@ -21,7 +21,6 @@ private:
 	double csquared;
 	double theta;
 	double normalForce;
-	int sign;
 	bool crashed;
 	float elapsedTime;
 	unsigned long totalFrameCount;

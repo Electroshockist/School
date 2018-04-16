@@ -5,6 +5,14 @@ c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_proje
   c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
 c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.h(19): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
   c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
-c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.h(20): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
+  Assignment3.cpp
+c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.h(19): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
   c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
+c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\physics.h(8): warning C4099: 'MATH::Vec3': type name first seen using 'struct' now seen using 'class'
+  c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\vector.h(28): note: see declaration of 'MATH::Vec3'
+c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(95): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\erico\documents\code\school\semester 2\game programming 2\sdl\sdl_project_1.1.0 - using umers body class\sdl_project\assignment3.cpp(96): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+     Creating library C:\Users\erico\Documents\Code\School\semester 2\game programming 2\SDL\SDL_Project_1.1.0 - Using Umers Body Class\Debug\SDL_Project.lib and object C:\Users\erico\Documents\Code\School\semester 2\game programming 2\SDL\SDL_Project_1.1.0 - Using Umers Body Class\Debug\SDL_Project.exp
   SDL_Project.vcxproj -> C:\Users\erico\Documents\Code\School\semester 2\game programming 2\SDL\SDL_Project_1.1.0 - Using Umers Body Class\Debug\SDL_Project.exe
