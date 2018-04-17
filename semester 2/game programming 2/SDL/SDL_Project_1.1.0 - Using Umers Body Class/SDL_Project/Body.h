@@ -9,14 +9,14 @@ public:
 	Vec3 pos;
 	Vec3 vel;
 	float gravity;
-	bool ground;
+	bool ground, isStatic;
 	float mass;
 private:
 	Vec3 accel;
 	SDL_Surface *bodyImage;
 	
 public:
-	Body(char* imageName ,float mass_, Vec3 pos_, Vec3 vel_, Vec3 accel_, float gravity_, bool ground_);
+	Body(char* imageName ,float mass_, Vec3 pos_, Vec3 vel_, Vec3 accel_, float gravity_, bool ground_, bool isStatic_);
 	~Body();
 	void Update(const float deltaTime, const float gravity);
 	void ApplyForce(Vec3 force);

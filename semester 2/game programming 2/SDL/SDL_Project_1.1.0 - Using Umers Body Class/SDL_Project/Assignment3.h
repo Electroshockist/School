@@ -13,7 +13,6 @@ using namespace std;
 
 class Assignment3 : public Scene {
 private:
-	int numBodies = NUM_BODIES;
 	SDL_Window * window;
 	Matrix4 projectionMatrix;
 	class Body* bodies[NUM_BODIES];

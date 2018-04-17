@@ -29,9 +29,9 @@ bool Assignment1::OnCreate() {
 	
 	projectionMatrix = MMath::viewportNDC(w,h) * MMath::orthographic(0.0f, 30.0f, 0.0f, 15.0f, 0.0f, 1.0f) ;
 	
-	bodies[0] = new Body("jetskired.bmp", 2.0f, Vec3(5.0f, 1.5f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f),-9.8f,true);
-	bodies[1] = new Body("jetskigreen.bmp", 4.0f, Vec3(25.0f, 10.5f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), -9.8f, true);
-	bodies[2] = new Body("explosion.bmp", 0.0f, Vec3(-15.0f, -1000.5f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, true);
+	bodies[0] = new Body("jetskired.bmp", 2.0f, Vec3(5.0f, 1.5f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f),-9.8f,true, true);
+	bodies[1] = new Body("jetskigreen.bmp", 4.0f, Vec3(25.0f, 10.5f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), -9.8f, true, true);
+	bodies[2] = new Body("explosion.bmp", 0.0f, Vec3(-15.0f, -1000.5f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, true, true);
 
 	for (int i = 0; i < NUM_BODIES; i++) {
 		if (bodies[i] == nullptr) {

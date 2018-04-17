@@ -1,7 +1,7 @@
 #include "Body.h" 
 
 
-Body::Body(char* imageName, float mass_, Vec3 pos_, Vec3 vel_, Vec3 accel_, float gravity_, bool ground_) {
+Body::Body(char* imageName, float mass_, Vec3 pos_, Vec3 vel_, Vec3 accel_, float gravity_, bool ground_, bool isStatic_) {
 	mass = mass_;
 	pos.x = pos_.x;
 	pos.y = pos_.y;
@@ -18,6 +18,8 @@ Body::Body(char* imageName, float mass_, Vec3 pos_, Vec3 vel_, Vec3 accel_, floa
 	gravity = gravity_;
 
 	ground = ground_;
+
+	isStatic = isStatic_;
 
 	bodyImage = SDL_LoadBMP(imageName);
 	if (bodyImage == nullptr) {

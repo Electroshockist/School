@@ -8,9 +8,7 @@
 class Scene {
 private:
 	Vec3 tempPos;
-	double csquared;
-	double theta;
-	double normalForce;
+	double csquared, theta, normalForce;
 
 public:
 	virtual bool OnCreate() = 0;
