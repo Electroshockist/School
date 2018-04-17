@@ -20,6 +20,7 @@ private:
 	unsigned long totalFrameCount;
 	unsigned long frameCount;
 	bool crashed;
+
 public:
 	Assignment1(SDL_Window* sdlWindow);
 	~Assignment1();

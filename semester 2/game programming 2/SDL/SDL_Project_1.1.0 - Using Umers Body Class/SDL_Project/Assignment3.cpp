@@ -2,7 +2,6 @@
 #include "Body.h"
 #include "MMath.h"
 #include "Matrix.h"
-#include "Physics.h"
 #include <math.h>
 #include <SDL.h>
 
@@ -30,8 +29,6 @@ bool Assignment3::OnCreate() {
 	crashed = false;
 
 	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(0.0f, 30.0f, 0.0f, 30.0f, 0.0f, 1.0f);
-	
-	Physics physics(NUM_BODIES, bodies[NUM_BODIES], Force[NUM_BODIES]);
 
 	//create 3 bodies
 	bodies[0] = new Body("planet.bmp", 1.0f, Vec3(7.0f, 2.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false);
@@ -65,7 +62,8 @@ void Assignment3::Update(const float time) {
 
 	float BodyX = ToPhysicsCoords(0).x;
 	float BodyY = ToPhysicsCoords(0).y;
-
+	
+	Physics(bodies);
 
 	elapsedTime += time;
 	printf("Physics coords: [%f, %f] Screen coords: [%d, %d]\n", BodyX, BodyY, bodies[0]->getImage()->w, bodies[0]->getImage()->h);
