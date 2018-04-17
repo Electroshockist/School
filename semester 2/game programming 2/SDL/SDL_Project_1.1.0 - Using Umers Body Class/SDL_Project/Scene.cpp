@@ -32,6 +32,5 @@ void Scene::Physics(Body** bodies) {
 				bodies[j]->ApplyForce(Force[0]);
 			}
 		}
-		printf("%d\n", j);
 	}
 }

@@ -60,14 +60,12 @@ Vec3 Assignment3::ToPhysicsCoords(int i) {
 
 void Assignment3::Update(const float time) {
 
-	float BodyX = ToPhysicsCoords(0).x;
-	float BodyY = ToPhysicsCoords(0).y;
+	Vec3 physicsBody = ToPhysicsCoords(0);
 	
 	Physics(bodies);
 
 	elapsedTime += time;
-	//printf("Physics coords: [%f, %f] Screen coords: [%d, %d]\n", BodyX, BodyY, bodies[0]->getImage()->w, bodies[0]->getImage()->h);
-	printf("Body 0 pos: [%f, %f]\n", bodies[0]->pos.x, bodies[0]->pos.y);
+	printf("Physics coords: [%f, %f] Screen coords: [%d, %d]\n", physicsBody.x, physicsBody.y, bodies[0]->getImage()->w, bodies[0]->getImage()->h);
 
 	if (elapsedTime < 0.1f) {
 		//apply force ASAP
