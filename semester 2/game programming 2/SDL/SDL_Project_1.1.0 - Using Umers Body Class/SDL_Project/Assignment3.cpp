@@ -31,9 +31,9 @@ bool Assignment3::OnCreate() {
 	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(0.0f, 30.0f, 0.0f, 30.0f, 0.0f, 1.0f);
 
 	//create 3 bodies
-	bodies[0] = new Body("planet.bmp", 1.0f, Vec3(7.0f, 2.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
-	bodies[1] = new Body("brown dwarf.bmp", 100.0f, Vec3(10.0f, 10.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
-	bodies[2] = new Body("star.bmp", 150.0f, Vec3(15.0f, 15.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, true);
+	bodies[0] = new Body("planet.bmp", 1.0f, Vec3(7.0f, 15.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
+	bodies[1] = new Body("brown dwarf.bmp", 1.0f, Vec3(20.0f, 10.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
+	bodies[2] = new Body("star.bmp", 1000.0f, Vec3(15.0f, 15.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, true);
 
 	for (int i = 0; i < NUM_BODIES; i++) {
 		if (bodies[i] == nullptr) {
@@ -65,11 +65,13 @@ void Assignment3::Update(const float time) {
 	Physics(bodies);
 
 	elapsedTime += time;
+
 	printf("Physics coords: [%f, %f] Screen coords: [%d, %d]\n", physicsBody.x, physicsBody.y, bodies[0]->getImage()->w, bodies[0]->getImage()->h);
 
 	if (elapsedTime < 0.1f) {
 		//apply force ASAP
-		bodies[0]->ApplyForce(Vec3(40.0f, 20.0f, 0.0f));
+		bodies[0]->ApplyForce(Vec3(-3.0f, 130.0f, 0.0f));
+		bodies[1]->ApplyForce(Vec3(0.0f, 150.0, 0.0f));
 	}
 	
 	//updates bodies
