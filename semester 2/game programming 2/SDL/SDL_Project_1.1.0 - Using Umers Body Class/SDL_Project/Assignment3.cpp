@@ -24,16 +24,43 @@ Assignment3::~Assignment3() {
 
 bool Assignment3::OnCreate() {
 	int w, h;
+	
 	SDL_GetWindowSize(window, &w, &h);
 
+	float aspectRatio = (float)h / (float)w;
+
+	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(-30.0f, 30.0f, -30.0f * aspectRatio, 30.0f * aspectRatio, 0.0f, 1.0f);
+	
+	invMat = MMath::inverse(projectionMatrix);
+
+	invMat.print();
+
+	//moves origin to center of screen
+	Vec3 origin(0.0f, 0.0f, 0.0f);
+	origin = invMat * origin;
+	
+	//create bodies
+	bodies[0] = new Body("planet.bmp", 1.0f, Vec3(-9.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
+	bodies[1] = new Body("brown dwarf.bmp", 1.0f, Vec3(10.0f, -5.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
+	bodies[2] = new Body("star.bmp", 1000.0f, Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, true);
+
+	for (int i = 0; i < NUM_BODIES; i++) { bodies[i]->radius = 2.0f; }
+
+	Vec3 tempVec[NUM_BODIES];
+
+	for (int i = 0; i < NUM_BODIES; i++) {
+
+		tempVec[i] = (bodies[i]->getImage()->w, bodies[i]->getImage()->h, 1.0f);
+		printf("tempVec[i]: %d %d\n", bodies[i]->getImage()->w, bodies[i]->getImage()->h);
+
+		tempVec[i] = invMat * tempVec[i];
+		printf("tempVec[i] = invMat * tempVec[i]: %f %f\n", tempVec->x, tempVec->y);
+
+		float width = (tempVec[i].x - origin.x) / 2.0f;
+		float height = (origin.y - tempVec[i].y) / 2.0f;
+	}
+
 	crashed = false;
-
-	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(0.0f, 30.0f, 0.0f, 30.0f, 0.0f, 1.0f);
-
-	//create 3 bodies
-	bodies[0] = new Body("planet.bmp", 1.0f, Vec3(7.0f, 15.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
-	bodies[1] = new Body("brown dwarf.bmp", 1.0f, Vec3(20.0f, 10.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
-	bodies[2] = new Body("star.bmp", 1000.0f, Vec3(15.0f, 15.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, true);
 
 	for (int i = 0; i < NUM_BODIES; i++) {
 		if (bodies[i] == nullptr) {
@@ -51,27 +78,19 @@ void Assignment3::OnDestroy() {
 		}
 	}
 }
-Vec3 Assignment3::ToPhysicsCoords(int i) {
-	Matrix4 tempMat = MMath::inverse(projectionMatrix);
-	Vec3 tempVec(bodies[i]->getImage()->w, bodies[i]->getImage()->h, 0.0f);
-	tempVec = tempMat * tempVec;
-	return  tempVec;
-}
 
 void Assignment3::Update(const float time) {
 
-	Vec3 physicsBody = ToPhysicsCoords(0);
+	printf("%s\n", collider.Collided(bodies[1], bodies[2]) ? "true" : "false");
 	
-	Physics(bodies);
+	Physics(bodies, NUM_BODIES);
 
 	elapsedTime += time;
-
-	printf("Physics coords: [%f, %f] Screen coords: [%d, %d]\n", physicsBody.x, physicsBody.y, bodies[0]->getImage()->w, bodies[0]->getImage()->h);
 
 	if (elapsedTime < 0.1f) {
 		//apply force ASAP
 		bodies[0]->ApplyForce(Vec3(-3.0f, 130.0f, 0.0f));
-		bodies[1]->ApplyForce(Vec3(0.0f, 150.0, 0.0f));
+		bodies[1]->ApplyForce(Vec3(0.0f, -100.0, 0.0f));
 	}
 	
 	//updates bodies
@@ -98,7 +117,14 @@ void Assignment3::Render() {
 	SDL_UpdateWindowSurface(window);
 }
 void Assignment3::HandleEvents(SDL_Event& event) {
-	if (event.type == SDL_KEYDOWN) {
-		//printf("key down\n");
+	switch (event.type) {
+		case SDL_MOUSEBUTTONDOWN:
+			if (event.button.button) {
+				Vec3 v((float)event.motion.x, (float)event.motion.y, 0.0f);
+				Vec3 v2 = invMat * v;
+				v2.print();
+			}
+		default:
+			break;
 	}
 }

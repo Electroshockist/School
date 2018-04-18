@@ -1,11 +1,11 @@
 #include "Scene.h"
 
-void Scene::Physics(Body** bodies) {
+void Scene::Physics(Body** bodies, int w) {
 	//figure out how to dynamically set this
-	for (int j = 0; j < 3; j++) {
-		Vec3 Force[3];
+	for (int j = 0; j < w; j++) {
+		Vec3* Force = new Vec3[w];
 		if (!bodies[j]->isStatic){
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < w; i++) {
 				if (j != i) {
 					//temporarily holds the current star's position relative to the planet 
 					tempPos.x = bodies[i]->pos.x - bodies[j]->pos.x;
@@ -23,7 +23,6 @@ void Scene::Physics(Body** bodies) {
 					//seperates the direct force into their x and y components
 					Force[i].x = cos(theta) * normalForce;
 					Force[i].y = sin(theta) * normalForce;
-
 
 					//adds the forces
 					Force[0] += Force[i];

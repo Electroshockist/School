@@ -11,6 +11,8 @@ public:
 	float gravity;
 	bool ground, isStatic;
 	float mass;
+	float radius;
+
 private:
 	Vec3 accel;
 	SDL_Surface *bodyImage;

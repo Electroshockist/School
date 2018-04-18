@@ -17,7 +17,7 @@ public:
 	virtual void Render() = 0;
 	virtual void HandleEvents(SDL_Event& event) = 0;
 
-	void Physics(Body** bodies);
+	void Physics(Body** bodies, int w);
 };
 
 #endif

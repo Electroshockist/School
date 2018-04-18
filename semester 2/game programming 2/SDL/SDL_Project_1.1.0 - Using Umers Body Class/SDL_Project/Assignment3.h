@@ -3,6 +3,7 @@
 
 #include "MMath.h"
 #include "Scene.h"
+#include "Collider.h"
 
 #include <SDL.h>
 #include <fstream>
@@ -15,14 +16,14 @@ class Assignment3 : public Scene {
 private:
 	SDL_Window * window;
 	Matrix4 projectionMatrix;
+	Matrix4 invMat;
 	class Body* bodies[NUM_BODIES];
-	class Vec3* Force[NUM_BODIES];
+	Collider collider;
 
 	bool crashed;
 	float elapsedTime;
 	unsigned long totalFrameCount;
 	unsigned long frameCount;
-	Vec3 ToPhysicsCoords(int i);
 public:
 	Assignment3(SDL_Window* sdlWindow);
 	~Assignment3();

@@ -4,10 +4,11 @@
 
 using namespace MATH;
 
-//find radius
-bool Collided(const Body& b1, const Body& b2) {
-	float d = VMath::distance(b1.pos, b2.pos);
-	return true;
+//ask scott how to convert Body* array to Body
+bool Collider::Collided(const Body* b1, const Body* b2) {
+	float d = VMath::distance(b1->pos, b2->pos);
+	if (d < b1->radius + b2->radius) return true;
+	else return false;
 }
 
 void Collider::HandleCollision(Body& b1, Body& b2) {
