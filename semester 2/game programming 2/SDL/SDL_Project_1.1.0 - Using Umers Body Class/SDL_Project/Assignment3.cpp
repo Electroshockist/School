@@ -24,10 +24,12 @@ Assignment3::~Assignment3() {
 
 bool Assignment3::OnCreate() {
 	int w, h;
-	
-	SDL_GetWindowSize(window, &w, &h);
 
+	SDL_GetWindowSize(window, &w, &h);
+	
 	float aspectRatio = (float)h / (float)w;
+
+	printf("%f\n", aspectRatio);
 
 	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(-30.0f, 30.0f, -30.0f * aspectRatio, 30.0f * aspectRatio, 0.0f, 1.0f);
 	
@@ -44,23 +46,15 @@ bool Assignment3::OnCreate() {
 	bodies[1] = new Body("brown dwarf.bmp", 1.0f, Vec3(10.0f, -5.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
 	bodies[2] = new Body("star.bmp", 1000.0f, Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, true);
 
-	for (int i = 0; i < NUM_BODIES; i++) { bodies[i]->radius = 2.0f; }
-
-	Vec3 tempVec[NUM_BODIES];
-
 	for (int i = 0; i < NUM_BODIES; i++) {
+		Vec3 lowerRight(bodies[i]->getImage()->w, bodies[i]->getImage()->h, 0.0f);
 
-		tempVec[i] = (bodies[i]->getImage()->w, bodies[i]->getImage()->h, 1.0f);
-		printf("tempVec[i]: %d %d\n", bodies[i]->getImage()->w, bodies[i]->getImage()->h);
+		lowerRight = invMat * lowerRight;
 
-		tempVec[i] = invMat * tempVec[i];
-		printf("tempVec[i] = invMat * tempVec[i]: %f %f\n", tempVec->x, tempVec->y);
+		float radius = (lowerRight.x - origin.x) / 2.0f;
 
-		float width = (tempVec[i].x - origin.x) / 2.0f;
-		float height = (origin.y - tempVec[i].y) / 2.0f;
+		bodies[i]->radius = radius;
 	}
-
-	crashed = false;
 
 	for (int i = 0; i < NUM_BODIES; i++) {
 		if (bodies[i] == nullptr) {
@@ -81,7 +75,15 @@ void Assignment3::OnDestroy() {
 
 void Assignment3::Update(const float time) {
 
-	printf("%s\n", collider.Collided(bodies[1], bodies[2]) ? "true" : "false");
+	for (int j = 0; j < NUM_BODIES; j++) {
+			for (int i = j; i < NUM_BODIES; i++) {
+
+				if (j != i && collider.Collided(*bodies[i], *bodies[j])) {
+					printf("Collided: %s\n", collider.Collided(*bodies[i], *bodies[j]) ? "true" : "false");
+					collider.HandleCollision(*bodies[i], *bodies[j]);
+				}
+			}
+		}
 	
 	Physics(bodies, NUM_BODIES);
 
@@ -90,7 +92,7 @@ void Assignment3::Update(const float time) {
 	if (elapsedTime < 0.1f) {
 		//apply force ASAP
 		bodies[0]->ApplyForce(Vec3(-3.0f, 130.0f, 0.0f));
-		bodies[1]->ApplyForce(Vec3(0.0f, -100.0, 0.0f));
+		bodies[1]->ApplyForce(Vec3(0.0f, 0.0f, 0.0f));
 	}
 	
 	//updates bodies
