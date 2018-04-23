@@ -54,8 +54,11 @@
 
     this.W = 0;
     this.H = 0;
+
+    //Set image
     if (IMAGE != undefined) this.IMAGE = IMAGE;
     else this.IMAGE = "Assets/Box.png";
+
     //Getters to define the left, right, top and bottom sides
     this.left = function() { return this.X; };
     this.right = function() { return (this.X + this.W*scale); };
@@ -167,25 +170,25 @@
 
   function collisionDetection(){
     //boudary checkers
-    if (Player.top() <= 0) {
+    if (Player.top() <= 1) {
        canMoveUp = false;
        up = false;
      }
     else canMoveUp = true;
 
-    if (Player.left() <= 0) {
+    if (Player.left() <= 1) {
       canMoveLeft = false;
       left = false;
     }
     else canMoveLeft = true;
 
-    if(Player.bottom() >= 500) {
+    if(Player.bottom() >= 498) {
       canMoveDown = false;
       down = false;
     }
     else canMoveDown = true;
 
-    if(Player.right() >= 500) {
+    if(Player.right() >= 498) {
       canMoveRight = false;
       right = false;
     }
@@ -210,7 +213,7 @@
     if(!canMoveLeft) canDisableRight = false;
     if(!canMoveRight) canDisableLeft = false;
 
-    for(var i = 0; i < Box.width; i++) {
+    for(var i = 0; i < Box.length; i++) {
       if(Player. Player.midX() - Box[i].midX())
       console.log("Collided with Box " + i);
     }
@@ -243,7 +246,7 @@
 
     collisionDetection();
 
-    //Move the cat
+    //Move the player
     Player.X += Player.VX;
     Player.Y += Player.VY;
 
