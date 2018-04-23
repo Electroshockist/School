@@ -33,7 +33,8 @@
   var canMoveLeft = true;
   var canMoveRight = true;
 
-  var canDisableUp, canDisableDown, canDisableLeft, canDisableRight;
+  //A variable to tell us which side the collision is occurring on
+  var collisionSide = "";
 
   //scale of images
   var scale = 3;
@@ -168,15 +169,88 @@
       }
   }, false);
 
-  function collisionDetection(){
+  function EntityCollision(){
+    for(var i = 0; i < Box.length; i++){
+      Box[i].W = BoxImage[i].width;
+      Box[i].H = BoxImage[i].height;
+
+      //Calculate the distance vector
+      var vx = (Player.X + Player.W/2*scale) - (Box[i].X + Box[i].W/2*scale);
+      var vy = (Player.Y + Player.H/2*scale) - (Box[i].Y + Box[i].H/2*scale);
+
+      //Figure out the combined half-widths and half-heights
+      var combinedHalfWidths = Player.W/2*scale + Box[i].W/2*scale;
+      var combinedHalfHeights = Player.H/2*scale + Box[i].H/2*scale;
+
+      //Check whether vx is less than the combined half-widths
+      if(Math.abs(vx) < combinedHalfWidths) {
+        //A collision might be occurring!
+        //Check whether vy is less than the combined half-heights
+        if(Math.abs(vy) < combinedHalfHeights) {
+          //A collision has occurred! This is good!
+          //Find out the size of the overlap on both the X and Y axes
+          var overlapX = combinedHalfWidths - Math.abs(vx);
+          var overlapY = combinedHalfHeights - Math.abs(vy);
+
+          //The collision has occurred on the axis with the
+          //*smallest* amount of overlap. Let's figure out which
+          //axis that is
+
+          if(overlapX >= overlapY) {
+            //The collision is happening on the X axis
+            //But on which side? vy can tell us
+            if(vy > 0) {
+              collisionSide = "top";
+
+              //Move the rectangle out of the collision
+              Player.Y = Player.Y + overlapY;
+            }
+            else {
+              collisionSide = "bottom";
+
+              //Move the rectangle out of the collision
+              Player.Y = Player.Y - overlapY;
+            }
+          }
+          else {
+            //The collision is happening on the Y axis
+            //But on which side? vx can tell us
+            if(vx > 0) {
+              collisionSide = "left";
+
+              //Move the rectangle out of the collision
+              Player.X = Player.X + overlapX;
+            }
+            else {
+              collisionSide = "right";
+
+              //Move the rectangle out of the collision
+              Player.X = Player.X - overlapX;
+            }
+          }
+        }
+        else {
+          //No collision
+          collisionSide = "none";
+        }
+      }
+      else {
+        //No collision
+        collisionSide = "none";
+      }
+    }
+    console.log(collisionSide);
+  }
+
+  function WallCollision(){
     //boudary checkers
-    if (Player.top() <= 1) {
+    if (Player.top() <= 2) {
        canMoveUp = false;
        up = false;
      }
     else canMoveUp = true;
 
-    if (Player.left() <= 1) {
+    if (Player.left() <= 2) {
       canMoveLeft = false;
       left = false;
     }
@@ -206,35 +280,23 @@
     //Set the player's velocity to zero if none of the keys are being pressed
     if(!up && !down) Player.VY = 0;
     if(!left && !right) Player.VX = 0;
-
-    //box detection
-    if(!canMoveUp) canDisableDown = false;
-    if(!canMoveDown) canDisableUp = false;
-    if(!canMoveLeft) canDisableRight = false;
-    if(!canMoveRight) canDisableLeft = false;
-
-    for(var i = 0; i < Box.length; i++) {
-      if(Player. Player.midX() - Box[i].midX())
-      console.log("Collided with Box " + i);
-    }
   }
 
   function render() {
-
     Player.W = PlayerImage.width;
     Player.H = PlayerImage.height;
 
-    for(var i = 0; i < Box.length; i++){
-      Box[i].W = BoxImage[i].width;
-      Box[i].H = BoxImage[i].height;
-    }
 
     context.fillRect (0, 0, 500, 500);
     //Clear the previous animation frame
     context.clearRect(1, 1, 498, 498);
 
     //Loop through all the box sprites and use their properties to display them
-    for(var i = 0; i < Box.length; i++) context.drawImage(BoxImage[i], 0, 0, Box[i].W, Box[i].H, Box[i].X, Box[i].Y, Box[i].W*scale, Box[i].H*scale);
+    for(var i = 0; i < Box.length; i++){
+      Box[i].W = BoxImage[i].width;
+      Box[i].H = BoxImage[i].height;
+      context.drawImage(BoxImage[i], 0, 0, Box[i].W, Box[i].H, Box[i].X, Box[i].Y, Box[i].W*scale, Box[i].H*scale);
+    }
 
     //draws player
     context.drawImage(PlayerImage, 0, 0, Player.W, Player.H, Player.X, Player.Y, Player.W*scale, Player.H*scale);
@@ -243,8 +305,8 @@
   function update(){
     requestAnimationFrame(update,canvas);
     //console.log(Player.X + ", " + Player.Y);
-
-    collisionDetection();
+    EntityCollision();
+    WallCollision();
 
     //Move the player
     Player.X += Player.VX;
