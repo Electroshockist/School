@@ -10,7 +10,7 @@
 
 using namespace MATH;
 using namespace std;
-#define NUM_BODIES 3
+#define NUM_BODIES 10
 
 class Assignment3 : public Scene {
 private:
@@ -18,12 +18,12 @@ private:
 	Matrix4 projectionMatrix;
 	Matrix4 invMat;
 	class Body* bodies[NUM_BODIES];
-	Collider collider;
 
-	bool crashed;
+	bool clicked = false;
 	float elapsedTime;
 	unsigned long totalFrameCount;
 	unsigned long frameCount;
+
 public:
 	Assignment3(SDL_Window* sdlWindow);
 	~Assignment3();

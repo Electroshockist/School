@@ -29,23 +29,28 @@ bool Assignment3::OnCreate() {
 	
 	float aspectRatio = (float)h / (float)w;
 
-	printf("%f\n", aspectRatio);
-
 	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(-30.0f, 30.0f, -30.0f * aspectRatio, 30.0f * aspectRatio, 0.0f, 1.0f);
 	
 	invMat = MMath::inverse(projectionMatrix);
-
-	invMat.print();
 
 	//moves origin to center of screen
 	Vec3 origin(0.0f, 0.0f, 0.0f);
 	origin = invMat * origin;
 	
 	//create bodies
-	bodies[0] = new Body("planet.bmp", 1.0f, Vec3(-9.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
-	bodies[1] = new Body("brown dwarf.bmp", 1.0f, Vec3(10.0f, -5.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, false);
-	bodies[2] = new Body("star.bmp", 1000.0f, Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), 0.0f, false, true);
+	bodies[0] = new Body("planet.bmp", 1.0f, Vec3(-20.0f, 0.0f * aspectRatio, 0.0f), 0.0f, false, false);
+	bodies[1] = new Body("brown dwarf.bmp", 1.0f, Vec3(-15.0f, -5.0f * aspectRatio, 0.0f), 0.0f, false, false);
+	bodies[2] = new Body("planet.bmp", 1.0f, Vec3(-10.0f, 0.0f, 0.0f * aspectRatio), 0.0f, false, false);
+	bodies[3] = new Body("brown dwarf.bmp", 1.0f, Vec3(-5.0f, 3.0f * aspectRatio, 0.0f), 0.0f, false, false);
+	bodies[4] = new Body("planet.bmp", 1.0f, Vec3(0.0f, 12.0f, 0.0f * aspectRatio), 0.0f, false, false);
+	bodies[5] = new Body("brown dwarf.bmp", 1.0f, Vec3(10.0f, -10.0f * aspectRatio, 0.0f), 0.0f, false, false);
+	bodies[6] = new Body("planet.bmp", 1.0f, Vec3(15.0f, 8.0f * aspectRatio, 0.0f), 0.0f, false, false);
+	bodies[7] = new Body("brown dwarf.bmp", 1.0f, Vec3(20.0f, 5.0f * aspectRatio, 0.0f), 0.0f, false, false);
+	bodies[8] = new Body("planet.bmp", 1.0f, Vec3(25.0f, 6.0f * aspectRatio, 0.0f), 0.0f, false, false);
 
+	bodies[9] = new Body("star.bmp", 1000.0f, Vec3(0.0f, 0.0f * aspectRatio, 0.0f), 0.0f, false, true);
+
+	//get image bounds
 	for (int i = 0; i < NUM_BODIES; i++) {
 		Vec3 lowerRight(bodies[i]->getImage()->w, bodies[i]->getImage()->h, 0.0f);
 
@@ -75,13 +80,10 @@ void Assignment3::OnDestroy() {
 
 void Assignment3::Update(const float time) {
 
+	//handle collisions if bodies are collided
 	for (int j = 0; j < NUM_BODIES; j++) {
 			for (int i = j; i < NUM_BODIES; i++) {
-
-				if (j != i && collider.Collided(*bodies[i], *bodies[j])) {
-					printf("Collided: %s\n", collider.Collided(*bodies[i], *bodies[j]) ? "true" : "false");
-					collider.HandleCollision(*bodies[i], *bodies[j]);
-				}
+				if (j != i && Collider::Collided(*bodies[i], *bodies[j])) Collider::HandleCollision(*bodies[i], *bodies[j]);
 			}
 		}
 	
@@ -121,12 +123,16 @@ void Assignment3::Render() {
 void Assignment3::HandleEvents(SDL_Event& event) {
 	switch (event.type) {
 		case SDL_MOUSEBUTTONDOWN:
-			if (event.button.button) {
-				Vec3 v((float)event.motion.x, (float)event.motion.y, 0.0f);
-				Vec3 v2 = invMat * v;
-				v2.print();
-			}
+			if (event.button.button) clicked = true;
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if (event.button.button) clicked = false;
 		default:
 			break;
+	}
+	if (clicked) {
+		Vec3 v((float)event.motion.x, (float)event.motion.y, 0.0f);
+		Vec3 v2 = invMat * v;
+		v2.print();
 	}
 }

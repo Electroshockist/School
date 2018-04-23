@@ -1,5 +1,26 @@
 #include "Body.h" 
 
+Body::Body(char* imageName, float mass_, Vec3 pos_, float gravity_, bool ground_, bool isStatic_) {
+	mass = mass_;
+	pos.x = pos_.x;
+	pos.y = pos_.y;
+	pos.z = pos_.z;
+
+	vel = Vec3(0,0,0);
+
+	accel = Vec3(0, 0, 0);
+
+	gravity = gravity_;
+
+	ground = ground_;
+
+	isStatic = isStatic_;
+
+	bodyImage = SDL_LoadBMP(imageName);
+	if (bodyImage == nullptr) {
+		/// What should we do?
+	}
+}
 
 Body::Body(char* imageName, float mass_, Vec3 pos_, Vec3 vel_, Vec3 accel_, float gravity_, bool ground_, bool isStatic_) {
 	mass = mass_;
@@ -53,9 +74,11 @@ void Body::Update(const float deltaTime, const float gravity) {
 }
 
 void Body::ApplyForce(Vec3 force) {
-	accel.x += force.x / mass;
-	accel.y += force.y / mass;
-	accel.z += force.z / mass;
+	if (!isStatic) {
+		accel.x += force.x / mass;
+		accel.y += force.y / mass;
+		accel.z += force.z / mass;
+	}
 }
 
 
