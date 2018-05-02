@@ -1,7 +1,6 @@
 #include "Scene.h"
 
 void Scene::Physics(Body** bodies, int w) {
-	//figure out how to dynamically set this
 	for (int j = 0; j < w; j++) {
 		Vec3* Force = new Vec3[w];
 		if (!bodies[j]->isStatic){
