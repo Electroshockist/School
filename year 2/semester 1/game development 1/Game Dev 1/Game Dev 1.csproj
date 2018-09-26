@@ -304,6 +304,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Sripts\Character.cs" />
+    <Compile Include="Assets\Sripts\CursorManager.cs" />
     <Compile Include="Assets\Sripts\Projectile.cs" />
   </ItemGroup>
   <ItemGroup>

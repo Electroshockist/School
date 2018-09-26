@@ -34,7 +34,7 @@ public class Character : MonoBehaviour {
 
     void control() {
         //rotation
-        transform.Rotate(0, Input.GetAxis("Mouse X") * rotationSpeed, 0);
+        transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed, Input.GetAxis("Mouse X") * rotationSpeed, 0);
 
         moveDirection.y -= gravity * Time.deltaTime;
 
