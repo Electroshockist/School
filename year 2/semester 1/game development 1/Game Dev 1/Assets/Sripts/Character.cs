@@ -42,7 +42,7 @@ public class Character : MonoBehaviour {
 
         //is on ground
         if (cc.isGrounded) {
-            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
+            moveDirection = new Vector3(Input.GetAxis("Horizontal") * 0.8f, 0, Input.GetAxis("Vertical"));
 
             moveDirection = transform.TransformDirection(moveDirection);
 
