@@ -60,7 +60,6 @@ void Body::Update(const float deltaTime, const float gravity) {
 	vel.y += (accel.y + gravity) * deltaTime;
 	vel.z += accel.z * deltaTime;
 
-
 	/// Assuming all acceleration comes from an applied force - maybe not in the future - gravity!!
 	accel.x = 0.0f;
 	accel.y = 0.0f;

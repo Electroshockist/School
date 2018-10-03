@@ -3,13 +3,11 @@ using namespace std;
 void main() {
 	Vec3 v(3, 4, 5);
 	Vec3 v1(3, 2, 1);
-
-	Vec3 vadd = v.Add(v1);
-	Vec3 vsub = v - v1;
-	Vec3 vmulti = v * v1;
-	Vec3 vdiv = v / v1;
-	Vec3 vscale = v;
 	float scalar = 3;
+
+	Vec3 vadd = v;
+	Vec3 vsub = v;
+	Vec3 vscale = v;
 	vscale.ScalarMultiplication(scalar);
 	float vmag = v.Magnitude();
 	Vec3 vcross = v;
@@ -29,10 +27,6 @@ void main() {
 	cout << "Subtracted vectors: ";
 	v.Subtract(v1);
 	vsub.print();
-	cout << "Multiplied vectors: ";
-	vmulti.print();
-	cout << "Divided vectors: ";
-	vdiv.print();
 	cout << "Using v only\nScaled vector";
 	vscale.print();
 	cout << "Vector magnitude\n" << vmag;

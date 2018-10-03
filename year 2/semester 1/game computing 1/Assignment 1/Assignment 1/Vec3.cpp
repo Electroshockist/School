@@ -1,6 +1,4 @@
 #include "Vec3.h"
-#include <math.h>
-#include <iostream>
 
 Vec3::Vec3(float x, float y, float z) {
 	this->x = x;
