@@ -15,14 +15,17 @@ public:
 	inline Vec3 operator * (const Vec3& v)const {
 		return Vec3(x * v.x, y * v.y, z * v.z);
 	}
+	//Multiply vector by float
+	inline Vec3 operator * (const float& f)const {
+		return Vec3(x * f, y * f, z * f);
+	}
 	//Divide vectors
 	inline Vec3 operator / (const Vec3& v)const {
 		return Vec3(x / v.x, y / v.y, z / v.z);
 	}
 	//Divide vector by float
 	inline Vec3 operator / (const float& f)const {
-		Vec3 v = *this;
-		return Vec3(v.x /= f, v.y /= f, v.z /= f);
+		return Vec3(x / f, y / f, z / f);
 	}
 
 	float x, y, z;

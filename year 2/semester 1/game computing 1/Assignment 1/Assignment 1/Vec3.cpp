@@ -24,9 +24,7 @@ void Vec3::Subtract(Vec3 v) {
 }
 
 void Vec3::ScalarMultiplication(float scalar) {
-	x *= scalar;
-	y *= scalar;
-	z *= scalar;
+	*this = *this * scalar;
 }
 
 float Vec3::Magnitude() {
@@ -36,9 +34,9 @@ float Vec3::Magnitude() {
 void Vec3::Normalize(){
 	*this = *this / Magnitude();
 }
+
 Vec3 Vec3 :: Cross(Vec3 v) {
-	Vec3 vt(y*v.z - z * v.y, z*v.x - x * v.z, x*v.y - y * v.x);
-	return vt;
+	return Vec3(y*v.z - z * v.y, z*v.x - x * v.z, x*v.y - y * v.x);
 }
 
 void Vec3::print() {
