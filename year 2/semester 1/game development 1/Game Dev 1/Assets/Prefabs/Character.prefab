@@ -289,8 +289,8 @@ GameObject:
   - component: {fileID: 4397998191860956}
   - component: {fileID: 33451262386312376}
   - component: {fileID: 136324110620483918}
-  - component: {fileID: 114628607888822826}
   - component: {fileID: 143728037697381822}
+  - component: {fileID: 114628607888822826}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1439,10 +1439,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cc: {fileID: 143728037697381822}
-  camera: {fileID: 20974840555229576}
   speed: 0
   rotationSpeed: 0
   jumpSpeed: 0
+  horizontalSpeedModifier: 0
+  sprintSpeedModifier: 0
   gravity: 0
   projectilePrefab: {fileID: 114194649176582972, guid: df5bc7172387c2e4e892142efd808a66,
     type: 2}

@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
+    Camera camera1;
+
     public CharacterController cc;
-    public Camera camera;
-    public float speed;
-    public float rotationSpeed;
-    public float jumpSpeed;
-    public float gravity;
+
+    //player controller variables
+    public float speed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, sprintSpeedModifier, gravity;
+
+
     Vector3 moveDirection = Vector3.zero;
 
     public Projectile projectilePrefab;
@@ -22,36 +24,47 @@ public class Character : MonoBehaviour {
 
         if (rotationSpeed <= 0) rotationSpeed = 3.5f;
 
-        if (jumpSpeed <= 0) jumpSpeed = 10.0f;
+        if (jumpSpeed <= 0) jumpSpeed = 5.0f;
 
         if (gravity <= 0) gravity = 9.81f;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        if (horizontalSpeedModifier <= 0) horizontalSpeedModifier = 0.8f;
+
+
+        //get player's camera
+        camera1  = transform.Find("Main Camera").GetComponent<Camera>();
+    }
+
+    // Update is called once per frame
+    void Update () {
         control();	
 	}
 
     void control() {
         //rotation
         transform.Rotate(0, Input.GetAxis("Mouse X") * rotationSpeed, 0);
-        camera.transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed, 0, 0);
+        camera1.transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed, 0, 0);
 
         moveDirection.y -= gravity * Time.deltaTime;
 
         cc.Move(moveDirection * Time.deltaTime);
 
+        moveDirection = new Vector3(Input.GetAxis("Horizontal") * horizontalSpeedModifier, 0, Input.GetAxis("Vertical"));
+
         //is on ground
         if (cc.isGrounded) {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal") * 0.8f, 0, Input.GetAxis("Vertical"));
 
             moveDirection = transform.TransformDirection(moveDirection);
 
             //movement
-            moveDirection *= speed;
+            moveDirection *= speed +  sprintSpeedModifier;
             if (Input.GetButtonDown("Jump")) {
                 moveDirection.y = jumpSpeed;
             }
+        }
+        else {
+            moveDirection.x /= 2;
+            moveDirection.z /= 2;
         }
 
         //bullets
@@ -59,15 +72,8 @@ public class Character : MonoBehaviour {
             fire();
         }
     }
-    /*
-    void castRay() {
-        RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.forward * 5.0f, Color.red);
-        //raycast (see if useful)
-        //if (Physics.Raycast(transform.position, transform.forward, out hit, 5.0f));
-    }*/
+
     void fire() {
-        Debug.Log("pew");
         if (projectilePrefab && projectileSpawnpoint)
             Instantiate(projectilePrefab, projectileSpawnpoint.position, projectileSpawnpoint.rotation);
     }
