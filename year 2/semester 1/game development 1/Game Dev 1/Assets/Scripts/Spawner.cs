@@ -40,7 +40,7 @@ public class Spawner : MonoBehaviour {
                         if (random[j] > random[i]) greatestRandom = j;
                         else greatestRandom = i;
                     }
-                    else Debug.Log("Value " + random[j] * 100 + "% greater than " + percentChance + "%. Ignoring.");
+                    //else Debug.Log("Value " + random[j] * 100 + "% greater than " + percentChance + "%. Ignoring.");
                 }
             }
         }
@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour {
         if (random[greatestRandom] < percentChance / 100) {
             //spawns object
             Instantiate(spawnableEntities[greatestRandom], transform.position, transform.rotation);
-            Debug.Log("Spawned object: " + spawnableEntities[greatestRandom]);
+            //Debug.Log("Spawned object: " + spawnableEntities[greatestRandom]);
         }
     }
 }

@@ -10,8 +10,13 @@ public class Character : MonoBehaviour {
     public CharacterController cc;
 
     //player controller variables
-    public float speed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, sprintSpeedModifier, gravity;
+    public float speed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, gravity;
 
+    /*calculates as a percentage of speed.
+     A value of 100 would be 200% as fast.*/
+    public float sprintSpeedModifier;
+
+    float cameraRotation;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -41,10 +46,20 @@ public class Character : MonoBehaviour {
 	}
 
     void control() {
-        //rotation
+        //body rotation
         transform.Rotate(0, Input.GetAxis("Mouse X") * rotationSpeed, 0);
-        camera1.transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed, 0, 0);
 
+        //clamped vertical camera rotation
+        cameraRotation += Input.GetAxis("Mouse Y") * rotationSpeed;
+
+        //lock angles at 85 up and 54 down
+        cameraRotation = Mathf.Clamp(cameraRotation, -85, 54);
+
+        camera1.transform.localEulerAngles = new Vector3(cameraRotation, transform.localEulerAngles.x, transform.localEulerAngles.z );
+
+        //Debug.Log(Input.GetAxis("Mouse Y"));
+
+        //set gravity
         moveDirection.y -= gravity * Time.deltaTime;
 
         cc.Move(moveDirection * Time.deltaTime);
@@ -57,7 +72,7 @@ public class Character : MonoBehaviour {
             moveDirection = transform.TransformDirection(moveDirection);
 
             //movement
-            moveDirection *= speed +  sprintSpeedModifier;
+            moveDirection *= speed + speed * sprintSpeedModifier;
             if (Input.GetButtonDown("Jump")) {
                 moveDirection.y = jumpSpeed;
             }
