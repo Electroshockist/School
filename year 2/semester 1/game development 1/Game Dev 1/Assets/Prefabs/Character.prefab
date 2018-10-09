@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4584778296137768}
   - component: {fileID: 33971024444598766}
   - component: {fileID: 23653700691852388}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4578944972746622}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4794446954571862}
   - component: {fileID: 33076686756467360}
   - component: {fileID: 23327567706100394}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4664200780589506}
   - component: {fileID: 33329354994555274}
   - component: {fileID: 23014790668631748}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4715023241471458}
   - component: {fileID: 33923228256580136}
   - component: {fileID: 23704150378432142}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4305325924747340}
   - component: {fileID: 33523288443071816}
   - component: {fileID: 23773432291613484}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4906707878242516}
   - component: {fileID: 33779405541401348}
   - component: {fileID: 23172209100678196}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 0000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4393349361187316}
   - component: {fileID: 33565388435987826}
   - component: {fileID: 23016318442498100}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4215670840219766}
   - component: {fileID: 33153718262856716}
   - component: {fileID: 23199177859581354}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4922972271602586}
   - component: {fileID: 33425487749122826}
   - component: {fileID: 23886265353061906}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4299684795012748}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: elizabeth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 4690551217951968}
   - component: {fileID: 20974840555229576}
   - component: {fileID: 81681207040063402}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 4542134149923758}
   - component: {fileID: 33175762066166838}
   - component: {fileID: 23067151238843598}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 0003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 4426253819491154}
   - component: {fileID: 33758690219663856}
   - component: {fileID: 23910961461772792}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 4354967459414100}
   - component: {fileID: 33558124946866424}
   - component: {fileID: 23723489515666780}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 4510659989600830}
   - component: {fileID: 33750738834123474}
   - component: {fileID: 23185875471653318}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 136324110620483918}
   - component: {fileID: 143728037697381822}
   - component: {fileID: 114628607888822826}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 4871028398725840}
   - component: {fileID: 33685005878287166}
   - component: {fileID: 23295284146838784}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 4835518327919540}
   - component: {fileID: 33419275505900268}
   - component: {fileID: 23793227189431066}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 0002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 4249804445636764}
   - component: {fileID: 33299897439243286}
   - component: {fileID: 23728688759231002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 4146088787346482}
   - component: {fileID: 33232602093934450}
   - component: {fileID: 23013534510895912}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrawCall_0001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1439,15 +1439,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cc: {fileID: 143728037697381822}
+  projectilePrefab: {fileID: 114194649176582972, guid: df5bc7172387c2e4e892142efd808a66,
+    type: 2}
+  projectileSpawnpoint: {fileID: 4578944972746622}
   speed: 0
   rotationSpeed: 0
   jumpSpeed: 0
   horizontalSpeedModifier: 0
-  sprintSpeedModifier: 0
   gravity: 0
-  projectilePrefab: {fileID: 114194649176582972, guid: df5bc7172387c2e4e892142efd808a66,
-    type: 2}
-  projectileSpawnpoint: {fileID: 4578944972746622}
+  sprintSpeedModifier: 0
 --- !u!136 &136324110620483918
 CapsuleCollider:
   m_ObjectHideFlags: 1
