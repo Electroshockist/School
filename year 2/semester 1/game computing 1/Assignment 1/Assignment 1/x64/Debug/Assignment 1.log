@@ -1,7 +1,2 @@
-﻿  Ray.cpp
-  Main.cpp
-c:\users\erico\files\school\year 2\semester 1\game computing 1\assignment 1\assignment 1\main.cpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\erico\files\school\year 2\semester 1\game computing 1\assignment 1\assignment 1\main.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\erico\files\school\year 2\semester 1\game computing 1\assignment 1\assignment 1\main.cpp(7): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  Generating Code...
-  Assignment 1.vcxproj -> C:\Users\erico\Files\School\year 2\semester 1\game computing 1\Assignment 1\x64\Debug\Assignment 1.exe
+﻿  Plane.cpp
+c:\users\erico\documents\code\school\year 2\semester 1\game computing 1\assignment 1\assignment 1\plane.cpp(31): error C2106: '=': left operand must be l-value

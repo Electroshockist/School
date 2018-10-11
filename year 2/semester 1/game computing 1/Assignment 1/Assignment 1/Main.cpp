@@ -1,6 +1,7 @@
-#include "Vec3.h";
-#include "Vec4.h";
+#include "Vec3.h"
+#include "Vec4.h"
 #include "Ray.h"
+#include "Plane.h"
 
 using namespace std;
 
@@ -32,6 +33,12 @@ void main() {
 	//ray stuff
 	Ray ray(v,v1);
 	float t = 1.5;	
+
+	//plane stuff
+	Vec3 v2(1, 0, 1);
+	Vec3 v3(3, 2, 1);
+	Ray ray2(v2, v3);
+	Plane plane(2, 1, 0, -4);
 
 	//displays vector3 operators
 	cout << "3D Vector:\nUsing vectors:\nV: ";
@@ -68,6 +75,17 @@ void main() {
 	ray.dir.print();
 	cout << "Ray position at t = " << t << ": ";
 	ray.currentPosition(t).print();
+
+	//plane
+	cout << "\n\nRays:\nUsing:\n Ray start: ";
+	ray2.start.print();
+	cout << "Ray direction: ";
+	ray2.dir.print();
+	cout << "Plane: ";
+	plane.plane.print();
+	cout << "Intersection:";
+	plane.intersectionPoint(ray2).print();
+
 
 	getchar();
 }

@@ -7,6 +7,13 @@ Vec4::Vec4(float x_, float y_, float z_, float w_) {
 	w = w_;
 }
 
+Vec4::Vec4(Vec3 v3) {
+	x = v3.x;
+	y = v3.y;
+	z = v3.z;
+	w = 0;
+}
+
 // Set all x, y, z to zero, and w to one
 Vec4::Vec4() {
 	x = 0;

@@ -54,6 +54,8 @@ public:
 	// Take the cross product of the x, y, z of this vector with x, y, z of the other one. 
 	Vec3 Cross(Vec3 v);
 
+	float Dot(Vec3 v);
+
 	void print();
 
 	~Vec3();

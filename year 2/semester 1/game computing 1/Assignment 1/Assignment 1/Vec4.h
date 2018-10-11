@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <math.h>
+#include "Vec3.h"
 class Vec4
 {
 public:
@@ -29,6 +30,9 @@ public:
 
 	// Set the x, y, z member variables
 	Vec4(float x_, float y_, float z_, float w_);
+
+	//take Vec3
+	Vec4(Vec3 v3);
 
 	// Set all x, y, z to zero, and w to one
 	Vec4();
