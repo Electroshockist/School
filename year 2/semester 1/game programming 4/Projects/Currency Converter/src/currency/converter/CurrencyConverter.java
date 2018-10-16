@@ -1,26 +1,27 @@
 package currency.converter;
 
 public class CurrencyConverter {
-    public final String USD = "USD";
-    public final String CAD = "CAD";
-    public final String Euro = "Euro";    
+    double CADrate;
+    double Xenorate;
+
+    public CurrencyConverter(double CADrate, double Xenorate) {
+        this.CADrate = CADrate;
+        this.Xenorate = Xenorate;
+    }
     
-    double Euroval = 0.66;
-    double USDval = 0.77;
-    
-     public double Convert(double value, String choice){
-         
-         switch (choice){
-             case USD:
-                 value *= USDval;
+     public double Convert(double amount, String action){
+         amount *= CADrate;
+         switch (action){
+             case "buy":
+                 amount *= Xenorate;
                  break;
-             case Euro:
-                 value *= Euroval;
+             case "sell":
+                 amount /= Xenorate;
                  break;
              default:
-                 System.out.println(choice + " is not a valid value. Please use either " + USD + " or " + Euro);
-                 break;
-          }
-         return value;
+                 System.out.println(action + " is not a valid value. Please use either buy or sell");                 
+         }
+         System.out.println(amount);
+         return amount;
       }
   }
