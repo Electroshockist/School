@@ -1,7 +1,0 @@
-﻿  Assignment1.cpp
-c:\users\erico\dropbox\electroshockist\school work\semester 2\game programming 2\sdl\ball\sdl_project\assignment1.cpp(57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\erico\dropbox\electroshockist\school work\semester 2\game programming 2\sdl\ball\sdl_project\assignment1.cpp(92): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\erico\dropbox\electroshockist\school work\semester 2\game programming 2\sdl\ball\sdl_project\assignment1.cpp(93): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-     Creating library C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\SDL\Ball\Debug\SDL_Project.lib and object C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\SDL\Ball\Debug\SDL_Project.exp
-Assignment1.obj : error LNK2019: unresolved external symbol "public: struct MATH::Vec3 __thiscall Assignment1::toPhysics(int,int)" (?toPhysics@Assignment1@@QAE?AUVec3@MATH@@HH@Z) referenced in function "public: virtual void __thiscall Assignment1::Update(float)" (?Update@Assignment1@@UAEXM@Z)
-C:\Users\erico\Dropbox\Electroshockist\school work\semester 2\game programming 2\SDL\Ball\Debug\SDL_Project.exe : fatal error LNK1120: 1 unresolved externals
