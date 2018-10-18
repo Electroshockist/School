@@ -55,9 +55,9 @@ public class Character : MonoBehaviour {
         //clamped vertical camera rotation
         cameraRotation += Input.GetAxis("Mouse Y") * rotationSpeed;
 
-        //lock angles at 85 up and 54 down
+        cameraRotation = Mathf.Clamp(cameraRotation, -90, 90);
 
-        camera1.transform.localEulerAngles = new Vector3(Mathf.Clamp(cameraRotation, -85, 54), transform.localEulerAngles.x, transform.localEulerAngles.z );
+        camera1.transform.localEulerAngles = new Vector3(cameraRotation, transform.localEulerAngles.x, transform.localEulerAngles.z );
 
 
         //movement
@@ -69,7 +69,7 @@ public class Character : MonoBehaviour {
         if (Input.GetButtonDown("Sprint")) camera1.fieldOfView += 15;
         if (Input.GetButtonUp("Sprint")) camera1.fieldOfView -= 15;
         if (Input.GetButton("Sprint")) {
-            moveDirection.z = Input.GetAxis("Vertical") * speed + speed * sprintSpeedModifier;
+            moveDirection.z = Input.GetAxis("Vertical") * speed + Input.GetAxis("Vertical") * speed * sprintSpeedModifier;
             Debug.Log(camera1.fieldOfView);
         }
         else moveDirection.z = Input.GetAxis("Vertical") * speed;
@@ -78,20 +78,20 @@ public class Character : MonoBehaviour {
 
 
         //figure out why cc.grounded is so janky
-        //Debug.Log(cc.isGrounded);
+        Debug.Log(cc.isGrounded);
 
-        //set gravity
-        moveDirection.y -= gravity * Time.deltaTime;
         //is on ground
         if (cc.isGrounded) {
             //remove gravity if on ground
-            moveDirection.y = 0;
+            if (moveDirection.y < 0)moveDirection.y = 0;
 
             if (Input.GetButtonDown("Jump")) {
                 moveDirection.y += jumpSpeed;
             }
         }
         else {
+            //set gravity
+            moveDirection.y -= gravity * Time.deltaTime;
         }
 
         //bullets
