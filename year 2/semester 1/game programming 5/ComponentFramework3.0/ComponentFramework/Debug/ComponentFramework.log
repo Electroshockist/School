@@ -1,0 +1,16 @@
+﻿  Debug.cpp
+  GameSceneManager.cpp
+  Mesh.cpp
+  Model0.cpp
+  Main.cpp
+  MMath.cpp
+  ObjLoader.cpp
+  Scene.cpp
+  Scene0.cpp
+  Shader.cpp
+  Timer.cpp
+  Trackball.cpp
+  VMath.cpp
+  Window.cpp
+  Generating Code...
+  ComponentFramework.vcxproj -> C:\Users\erico\Files\School\year 2\semester 1\game programming 5\ComponentFramework3.0\Debug\ComponentFramework.exe
