@@ -1,0 +1,6 @@
+﻿  UI2.cpp
+c:\users\eguy7\source\repos\ui test2\ui test2\sdl_project\ui2.cpp(13): warning C4244: '=': conversion from 'float' to 'long', possible loss of data
+c:\users\eguy7\source\repos\ui test2\ui test2\sdl_project\ui2.cpp(113): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\eguy7\source\repos\ui test2\ui test2\sdl_project\ui2.cpp(114): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  SDL_Project.vcxproj -> C:\Users\eguy7\source\repos\UI test2\UI test2\Debug\SDL_Project.exe
+  SDL_Project.vcxproj -> C:\Users\eguy7\source\repos\UI test2\UI test2\Debug\SDL_Project.pdb (Partial PDB)

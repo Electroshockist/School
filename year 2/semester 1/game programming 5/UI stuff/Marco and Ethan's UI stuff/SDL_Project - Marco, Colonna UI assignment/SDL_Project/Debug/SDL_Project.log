@@ -1,0 +1,18 @@
+﻿  Window.cpp
+  VMath.cpp
+  UI2.cpp
+  UI1.cpp
+  Timer.cpp
+  MMath.cpp
+  Main.cpp
+  GameManager.cpp
+c:\users\erico\desktop\sdl_project - marco, colonna ui assignment\sdl_project\ui2.h(5): warning C4005: 'NUM_BODIES': macro redefinition
+  c:\users\erico\desktop\sdl_project - marco, colonna ui assignment\sdl_project\ui1.h(5): note: see previous definition of 'NUM_BODIES'
+  Body.cpp
+  Assignment1.cpp
+c:\users\erico\desktop\sdl_project - marco, colonna ui assignment\sdl_project\assignment1.cpp(62): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\erico\desktop\sdl_project - marco, colonna ui assignment\sdl_project\assignment1.cpp(63): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  LINK : C:\Users\erico\Desktop\SDL_Project - Marco, Colonna UI assignment\Debug\SDL_Project.exe not found or not built by the last incremental link; performing full link
+     Creating library C:\Users\erico\Desktop\SDL_Project - Marco, Colonna UI assignment\Debug\SDL_Project.lib and object C:\Users\erico\Desktop\SDL_Project - Marco, Colonna UI assignment\Debug\SDL_Project.exp
+  SDL_Project.vcxproj -> C:\Users\erico\Desktop\SDL_Project - Marco, Colonna UI assignment\Debug\SDL_Project.exe
