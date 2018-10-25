@@ -6,7 +6,7 @@ public abstract class Piece implements Coordinates{
     //piece type and team
     public String type, team;
     
-    public Boolean canMoveTo(int x_, int y_){
+    public boolean canMoveTo(int x_, int y_){
         return !board[y][x];
     }
     public void moveTO(int x, int y){
