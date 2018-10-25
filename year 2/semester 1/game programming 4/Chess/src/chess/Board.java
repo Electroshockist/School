@@ -24,15 +24,21 @@ public class Board {
         
     }    
     
-    public void displayBoard(){
+    public static void displayBoard(){
         boolean whiteSquare = true;
-        for (boolean[] board : Coordinates.board) {
-            for (int w = 0; w < board.length; w++) {
-                if (whiteSquare) System.out.print("□");
-                else System.out.print("■");
+        for (int l = 0; l <Piece.board.length;l++) {
+            for (int w = 0; w < Piece.board.length; w++) {
+                if (Piece.board[w][l] == null) {
+                    if (whiteSquare) System.out.print(" □");
+                    else System.out.print(" ■");
+                }
+                else {
+                    
+                }
                 whiteSquare = !whiteSquare;
             }
-            System.out.println("");
+            whiteSquare = !whiteSquare;
+            System.out.println();
         }
     }
     

@@ -5,7 +5,7 @@ public class BlackPiece extends Piece {
         team = "Black";
         this.x = x;
         this.y = y;
-        Piece.board[x][y] = true;
+        Piece.board[x][y] = team;
     }
     
 }

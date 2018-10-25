@@ -1,6 +1,6 @@
 package chess;
 public interface Coordinates {
     //occupied spaces
-    public static boolean[][] board = new boolean[8][8];
+    public static String[][] board = new String[8][8];
     
 }

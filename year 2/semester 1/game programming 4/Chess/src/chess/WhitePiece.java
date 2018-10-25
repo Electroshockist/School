@@ -5,7 +5,8 @@ public class WhitePiece extends Piece {
         team = "White";        
         this.x = x;
         this.y = y;
-        Piece.board[x][y] = true;
+        Piece.board[x][y] = team;
+        System.out.println(Piece.board[x][y]);
     }
     
 }
