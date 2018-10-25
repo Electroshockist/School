@@ -7,13 +7,13 @@ public class Character : MonoBehaviour {
 
     Camera camera1;
 
-    public CharacterController cc;
+    public Rigidbody rb;
 
     public Projectile projectilePrefab;
     public Transform projectileSpawnpoint;
 
     //player controller variables
-    public float speed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, gravity;
+    public float speed, topSpeed, rotationSpeed, jumpForce, horizontalSpeedModifier;
 
     /*calculates as a percentage of speed.
      A value of 100 would be 200% as fast.*/
@@ -26,18 +26,15 @@ public class Character : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        if (speed <= 0) speed = 6.0f;
+        if (speed <= 0) speed = 60.0f;
 
         if (rotationSpeed <= 0) rotationSpeed = 3.5f;
 
-        if (jumpSpeed <= 0) jumpSpeed = 5.0f;
-
-        if (gravity <= 0) gravity = 9.81f;
+        if (jumpForce <= 0) jumpForce = 50.0f;
 
         if (horizontalSpeedModifier <= 0) horizontalSpeedModifier = 0.8f;
 
         if (sprintSpeedModifier <= 0) sprintSpeedModifier = 0.5f;
-
 
         //get player's camera
         camera1  = transform.Find("Main Camera").GetComponent<Camera>();
@@ -57,12 +54,14 @@ public class Character : MonoBehaviour {
 
         cameraRotation = Mathf.Clamp(cameraRotation, -90, 90);
 
-        camera1.transform.localEulerAngles = new Vector3(cameraRotation, transform.localEulerAngles.x, transform.localEulerAngles.z );
+        camera1.transform.localEulerAngles = new Vector3(-cameraRotation, transform.localEulerAngles.x, transform.localEulerAngles.z );
 
-
-        //movement
-        cc.Move(moveDirection * Time.deltaTime);
         moveDirection.x = Input.GetAxis("Horizontal") * speed * horizontalSpeedModifier;
+
+        rb.velocity += moveDirection * Time.deltaTime;
+
+        //jumping
+        if (Input.GetButtonDown("Jump")) rb.AddForce(0, jumpForce, 0);
 
         //sprinting
         //todo: animate camera fov
@@ -75,24 +74,7 @@ public class Character : MonoBehaviour {
         else moveDirection.z = Input.GetAxis("Vertical") * speed;
         
         moveDirection = transform.TransformDirection(moveDirection);
-
-
-        //figure out why cc.grounded is so janky
-        Debug.Log(cc.isGrounded);
-
-        //is on ground
-        if (cc.isGrounded) {
-            //remove gravity if on ground
-            if (moveDirection.y < 0)moveDirection.y = 0;
-
-            if (Input.GetButtonDown("Jump")) {
-                moveDirection.y += jumpSpeed;
-            }
-        }
-        else {
-            //set gravity
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
+        
 
         //bullets
         if (Input.GetButtonDown("Fire1")) {
