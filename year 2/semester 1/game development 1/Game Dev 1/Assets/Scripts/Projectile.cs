@@ -5,11 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
     public float projectileLifetime, projectileForce;
     Rigidbody rb;
-    Rigidbody rootRb;
+    CharacterController rootCc;
 
 	// Use this for initialization
 	void Start () {
-        rootRb = GameObject.Find("Character").GetComponent<Rigidbody>();
+        rootCc = GameObject.Find("Character").GetComponent<CharacterController>();
 
         if (projectileLifetime <= 0) projectileLifetime = 5.0f;
         if (projectileForce <= 0) projectileForce = 10.0f;
@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         if (!rb) rb = gameObject.AddComponent<Rigidbody>();
 
-        rb.AddForce(transform.forward * projectileForce + rootRb.velocity, ForceMode.Impulse);
+        rb.AddForce(transform.forward * projectileForce + rootCc.velocity, ForceMode.Impulse);
 
         Destroy(gameObject, projectileLifetime);		
 	}

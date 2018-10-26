@@ -7,16 +7,16 @@ public class Character : MonoBehaviour {
 
     Camera camera1;
 
-    public Rigidbody rb;
+    CharacterController cc;
 
     public Projectile projectilePrefab;
     public Transform projectileSpawnpoint;
 
     //player controller variables
-    public float speed, topSpeed, rotationSpeed, jumpForce, horizontalSpeedModifier;
+    public float accel, topSpeed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, gravity;
 
     /*calculates as a percentage of speed.
-     A value of 100 would be 200% as fast.*/
+     A value of 1 would be 200% as fast.*/
     public float sprintSpeedModifier;
 
     float cameraRotation;
@@ -26,11 +26,15 @@ public class Character : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        if (speed <= 0) speed = 60.0f;
+        if (accel <= 0) accel = 1.0f;
+
+        if (gravity <= 0) gravity = -9.81f;
+
+        if (topSpeed <= 0) topSpeed = 60.0f;
 
         if (rotationSpeed <= 0) rotationSpeed = 3.5f;
 
-        if (jumpForce <= 0) jumpForce = 50.0f;
+        if (jumpSpeed <= 0) jumpSpeed = 0.1f;
 
         if (horizontalSpeedModifier <= 0) horizontalSpeedModifier = 0.8f;
 
@@ -38,6 +42,8 @@ public class Character : MonoBehaviour {
 
         //get player's camera
         camera1  = transform.Find("Main Camera").GetComponent<Camera>();
+
+        cc = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -46,6 +52,31 @@ public class Character : MonoBehaviour {
 	}
 
     void control() {
+
+        rotation();
+
+        motion();
+
+        Debug.Log(cc.isGrounded);
+
+        //jumping
+        if (Input.GetButtonDown("Jump") && cc.isGrounded) {
+            moveDirection.y = 0;
+            moveDirection.y = jumpSpeed;
+        }
+
+        //sprinting
+        //todo: animate camera fov
+        if (Input.GetButtonDown("Sprint")) camera1.fieldOfView += 15;
+        if (Input.GetButtonUp("Sprint")) camera1.fieldOfView -= 15;
+        if (Input.GetButton("Sprint")) moveDirection.z = Input.GetAxis("Vertical") * accel + Input.GetAxis("Vertical") * accel * sprintSpeedModifier;
+        else moveDirection.z = Input.GetAxis("Vertical") * accel; 
+
+        //bullets
+        if (Input.GetButtonDown("Fire1")) fire();
+    }
+
+    void rotation() {
         //body rotation
         transform.Rotate(0, Input.GetAxis("Mouse X") * rotationSpeed, 0);
 
@@ -54,36 +85,22 @@ public class Character : MonoBehaviour {
 
         cameraRotation = Mathf.Clamp(cameraRotation, -90, 90);
 
-        camera1.transform.localEulerAngles = new Vector3(-cameraRotation, transform.localEulerAngles.x, transform.localEulerAngles.z );
+        camera1.transform.localEulerAngles = new Vector3(-cameraRotation, transform.localEulerAngles.x, transform.localEulerAngles.z);
+    }
 
-        moveDirection.x = Input.GetAxis("Horizontal") * speed * horizontalSpeedModifier;
+    void motion() {
+        moveDirection.x = Input.GetAxis("Horizontal") * accel * horizontalSpeedModifier;
 
-        rb.velocity += moveDirection * Time.deltaTime;
+        moveDirection.z = Input.GetAxis("Vertical") * accel + Input.GetAxis("Vertical");
 
-        //jumping
-        if (Input.GetButtonDown("Jump")) rb.AddForce(0, jumpForce, 0);
-
-        //sprinting
-        //todo: animate camera fov
-        if (Input.GetButtonDown("Sprint")) camera1.fieldOfView += 15;
-        if (Input.GetButtonUp("Sprint")) camera1.fieldOfView -= 15;
-        if (Input.GetButton("Sprint")) {
-            moveDirection.z = Input.GetAxis("Vertical") * speed + Input.GetAxis("Vertical") * speed * sprintSpeedModifier;
-            Debug.Log(camera1.fieldOfView);
-        }
-        else moveDirection.z = Input.GetAxis("Vertical") * speed;
-        
         moveDirection = transform.TransformDirection(moveDirection);
-        
 
-        //bullets
-        if (Input.GetButtonDown("Fire1")) {
-            fire();
-        }
+        if(!cc.isGrounded) moveDirection.y += gravity * Time.deltaTime;
+
+        cc.Move(moveDirection);
     }
 
     void fire() {
-        if (projectilePrefab && projectileSpawnpoint)
-            Instantiate(projectilePrefab, projectileSpawnpoint.position, projectileSpawnpoint.rotation);
+        if (projectilePrefab && projectileSpawnpoint) Instantiate(projectilePrefab, projectileSpawnpoint.position, projectileSpawnpoint.rotation);
     }
 }
