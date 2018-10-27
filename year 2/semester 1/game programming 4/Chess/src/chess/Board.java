@@ -33,7 +33,7 @@ public class Board {
                     else System.out.print(" ■");
                 }
                 else {
-                    
+                    System.out.println("");                    
                 }
                 whiteSquare = !whiteSquare;
             }

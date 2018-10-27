@@ -5,7 +5,8 @@ public class BlackPiece extends Piece {
         team = "Black";
         this.x = x;
         this.y = y;
-        Piece.board[x][y] = team;
+        Piece.board[x][y] = team;        
+        System.out.println(Piece.board[x][y]);
     }
     
 }
