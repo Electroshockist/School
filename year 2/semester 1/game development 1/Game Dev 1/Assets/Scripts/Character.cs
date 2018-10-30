@@ -13,7 +13,9 @@ public class Character : MonoBehaviour {
     public Transform projectileSpawnpoint;
 
     //player controller variables
-    public float accel, topSpeed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, gravity;
+    public float accel, decel, topSpeed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, gravity;
+
+    public float currentSpeed = 0;
 
     /*calculates as a percentage of speed.
      A value of 1 would be 200% as fast.*/
@@ -23,18 +25,19 @@ public class Character : MonoBehaviour {
 
     Vector3 moveDirection = Vector3.zero;
 
-
     // Use this for initialization
     void Start () {
-        if (accel <= 0) accel = 1.0f;
+        if (accel <= 0) accel = 0.3f;
 
-        if (gravity <= 0) gravity = -9.81f;
+        if (decel <= 0) decel = 0.05f;
 
-        if (topSpeed <= 0) topSpeed = 60.0f;
+        if (gravity <= 0) gravity = -1.0f;
+
+        if (topSpeed <= 0) topSpeed = 0.5f;
 
         if (rotationSpeed <= 0) rotationSpeed = 3.5f;
 
-        if (jumpSpeed <= 0) jumpSpeed = 0.1f;
+        if (jumpSpeed <= 0) jumpSpeed = 0.5f;
 
         if (horizontalSpeedModifier <= 0) horizontalSpeedModifier = 0.8f;
 
@@ -57,20 +60,10 @@ public class Character : MonoBehaviour {
 
         motion();
 
-        Debug.Log(cc.isGrounded);
-
-        //jumping
-        if (Input.GetButtonDown("Jump") && cc.isGrounded) {
-            moveDirection.y = 0;
-            moveDirection.y = jumpSpeed;
-        }
-
         //sprinting
         //todo: animate camera fov
         if (Input.GetButtonDown("Sprint")) camera1.fieldOfView += 15;
         if (Input.GetButtonUp("Sprint")) camera1.fieldOfView -= 15;
-        if (Input.GetButton("Sprint")) moveDirection.z = Input.GetAxis("Vertical") * accel + Input.GetAxis("Vertical") * accel * sprintSpeedModifier;
-        else moveDirection.z = Input.GetAxis("Vertical") * accel; 
 
         //bullets
         if (Input.GetButtonDown("Fire1")) fire();
@@ -89,15 +82,47 @@ public class Character : MonoBehaviour {
     }
 
     void motion() {
-        moveDirection.x = Input.GetAxis("Horizontal") * accel * horizontalSpeedModifier;
+        //acceleration calculations
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
+            //accelerate
+            currentSpeed += accel * Time.deltaTime;
 
-        moveDirection.z = Input.GetAxis("Vertical") * accel + Input.GetAxis("Vertical");
+            //current speed caps at top speed
+            if (currentSpeed > topSpeed) currentSpeed = topSpeed;
+        }
+        else {
+            Debug.Log("decellerating");
+            if (currentSpeed < 0) currentSpeed = 0;
+            else if (currentSpeed > 0) currentSpeed -= decel * Time.deltaTime;
+        }
+
+        //moving and sprinting
+        //horizontal movement
+        moveDirection.x = Input.GetAxis("Horizontal") * currentSpeed * horizontalSpeedModifier;
+
+        //forward/backward movement
+        if (Input.GetButton("Sprint")) {
+            moveDirection.z = Input.GetAxis("Vertical") * currentSpeed + Input.GetAxis("Vertical") * currentSpeed * sprintSpeedModifier;
+        }
+        else moveDirection.z = Input.GetAxis("Vertical") * currentSpeed;
+
+        //jumping
+        if (Input.GetButtonDown("Jump") && cc.isGrounded) {
+            moveDirection.y = 0;
+            moveDirection.y = jumpSpeed;
+        }
+
+        //gravity
+        if (!cc.isGrounded) moveDirection.y += gravity * Time.deltaTime;
 
         moveDirection = transform.TransformDirection(moveDirection);
 
-        if(!cc.isGrounded) moveDirection.y += gravity * Time.deltaTime;
-
+        Debug.Log(moveDirection);
         cc.Move(moveDirection);
+    }
+    bool isControlling() {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) return true;
+        else return false;
     }
 
     void fire() {
