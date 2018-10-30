@@ -23,6 +23,7 @@ TagManager:
   - Pet
   - NpcPetReviveSlot
   - QuestLocation
+  - Friendly
   layers:
   - Default
   - TransparentFX
@@ -33,11 +34,11 @@ TagManager:
   - 
   - 
   - Player
-  - Monster
-  - Npc
-  - Pet
-  - Indicator
-  - MinimapMarker
+  - Friendly
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
