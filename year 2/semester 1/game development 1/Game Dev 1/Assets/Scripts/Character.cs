@@ -13,7 +13,7 @@ public class Character : MonoBehaviour {
     public Transform projectileSpawnpoint;
 
     //player controller variables
-    public float accel, decel, topSpeed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, gravity;
+    public float accel, topSpeed, topSprintSpeed, rotationSpeed, jumpSpeed, horizontalSpeedModifier, gravity;
 
     public float currentSpeed = 0;
 
@@ -28,8 +28,6 @@ public class Character : MonoBehaviour {
     // Use this for initialization
     void Start () {
         if (accel <= 0) accel = 0.3f;
-
-        if (decel <= 0) decel = 0.05f;
 
         if (gravity <= 0) gravity = -1.0f;
 
@@ -90,11 +88,7 @@ public class Character : MonoBehaviour {
             //current speed caps at top speed
             if (currentSpeed > topSpeed) currentSpeed = topSpeed;
         }
-        else {
-            Debug.Log("decellerating");
-            if (currentSpeed < 0) currentSpeed = 0;
-            else if (currentSpeed > 0) currentSpeed -= decel * Time.deltaTime;
-        }
+        else currentSpeed = 0;
 
         //moving and sprinting
         //horizontal movement
@@ -116,8 +110,6 @@ public class Character : MonoBehaviour {
         if (!cc.isGrounded) moveDirection.y += gravity * Time.deltaTime;
 
         moveDirection = transform.TransformDirection(moveDirection);
-
-        Debug.Log(moveDirection);
         cc.Move(moveDirection);
     }
     bool isControlling() {
