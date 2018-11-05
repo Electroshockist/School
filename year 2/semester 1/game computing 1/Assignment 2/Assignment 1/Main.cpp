@@ -8,7 +8,7 @@ void main() {
 
 	mat.Print();
 
-	mat.RotateX(90);
+	mat.Scale(1,2,3);
 
 	mat.Print();
 

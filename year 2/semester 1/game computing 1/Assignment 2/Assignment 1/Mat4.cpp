@@ -59,16 +59,38 @@ void Mat4::RotateZ(float angleInDegrees) {
 
 }
 
-// Set to the Scaling Matrix =
+// Set to the Scaling Matrix
 void Mat4::Scale(float x, float y, float z) {
 	Mat4 scalingMatrix = Mat4();
+	scalingMatrix.m[0][0] = x;
+	scalingMatrix.m[1][1] = y;
+	scalingMatrix.m[2][2] = z;
+
+	*this = *this * scalingMatrix;
 }
 
-// Set to the Translation Matrix =
-void  Mat4::Translate(Vec3 translation) {}
+// Set to the Translation Matrix
+void  Mat4::Translate(Vec3 translation) {
+	Mat4 translationMatrix = Mat4();
+
+	translationMatrix.m[0][3] = translation.x;
+	translationMatrix.m[1][3] = translation.y;
+	translationMatrix.m[2][3] = translation.z;
+
+	*this = *this * translationMatrix;
+}
 
 // Swap rows and columns
-void Mat4::Transpose() {}
+void Mat4::Transpose() {
+	Mat4 tempMatrix;
+
+	for (int i = 0; i < m.size(); i++) {
+		for (int j = 0; j < m[0].size(); j++) {
+			tempMatrix.m[j][i] = m[i][j];
+		}
+	}
+	*this = tempMatrix;
+}
 
 // print the matrix to the console
 void Mat4::Print() const {
