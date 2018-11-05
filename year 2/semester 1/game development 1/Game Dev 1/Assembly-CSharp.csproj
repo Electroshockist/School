@@ -421,6 +421,8 @@
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\RFX4_CutoutBorderMobile.shader" />
     <None Include="Assets\Universal Sound FX\#Game Genre References\Real Time Stategy (RTS) Medieval.txt" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\Portal\RFX4_PortalSky.shader" />
+    <None Include="Assets\Gaia\3rd Party Samplers\NatureManufacture\_Readme.txt" />
+    <None Include="Assets\Gaia\3rd Party Samplers\3DForge\Documents\Village Exteriors Kit v1.2.1 - user guide.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />
     <None Include="Assets\uMMORPG\Fonts\ubuntu-font-family-0.83\LICENCE-FAQ.txt" />
@@ -435,6 +437,7 @@
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\Mobile\Resources\RFX4_Bloom_Inc.cginc" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\RFX4_DistortionParticlesMobile.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
+    <None Include="Assets\Gaia\3rd Party Samplers\GameTexturesDotCom\_Readme.txt" />
     <None Include="Assets\Unity Essentials - Standard Assets\Effects\Projectors\Guidelines.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
     <None Include="Assets\Gaia\Documentation\Release Notes v1_5_3.txt" />
@@ -477,8 +480,11 @@
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Readme.txt" />
     <None Include="Assets\Gaia\Scripts\ExtensionSystem\GaiaXtnFooter.txt" />
     <None Include="Assets\Universal Sound FX\#Game Genre References\Real Time Stategy (RTS) Sci-Fi.txt" />
+    <None Include="Assets\Gaia\3rd Party Samplers\Synty Studios\Readme.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Common.cginc" />
+    <None Include="Assets\Gaia\3rd Party Samplers\Synty Studios\GeNa Spawners\Readme.txt" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
+    <None Include="Assets\Gaia\3rd Party Samplers\README.txt" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\Decal\RFX4_DecalDistortMaskMul.shader" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\RFX4_IceMobile.shader" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\Mobile\Resources\RFX4_BloomAdditive.shader" />
@@ -491,6 +497,7 @@
     <None Include="Assets\Universal Sound FX\version_history.txt" />
     <None Include="Assets\Gaia\Documentation\Release Notes v1_6_1.txt" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\Decal\RFX4_IceDecal.shader" />
+    <None Include="Assets\Gaia\3rd Party Samplers\Turboscalpeur\Readme.txt" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\RFX4_Lava.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
@@ -537,6 +544,7 @@
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\Mobile\Resources\RFX4_ReplacementPostEffect.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\Water\RFX4_WaterSplashTex.shader" />
+    <None Include="Assets\Gaia\3rd Party Samplers\MotuProprio\RealRock Vol I\Readme.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\WaveformCompute.compute" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\RFX4_LightningMobile.shader" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\RFX4_Ice.shader" />
