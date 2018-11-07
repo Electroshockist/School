@@ -5,14 +5,6 @@
         <group name="Chess">
             <file>file:/C:/Users/erico/Desktop/Projects/Chess/src/chess/Chess.java</file>
         </group>
-        <group name="Labs">
-            <file>file:/C:/Users/erico/Documents/Code/School/year%202/semester%201/game%20programming%204/Chess/src/chess/Chess.java</file>
-            <file>file:/C:/Users/erico/Documents/Code/School/year%202/semester%201/game%20programming%204/Chess/src/chess/BlackPiece.java</file>
-            <file>file:/C:/Users/erico/Documents/Code/School/year%202/semester%201/game%20programming%204/Chess/src/chess/Board.java</file>
-            <file>file:/C:/Users/erico/Documents/Code/School/year%202/semester%201/game%20programming%204/Chess/src/chess/Coordinates.java</file>
-            <file>file:/C:/Users/erico/Documents/Code/School/year%202/semester%201/game%20programming%204/Chess/src/chess/Piece.java</file>
-            <file>file:/C:/Users/erico/Documents/Code/School/year%202/semester%201/game%20programming%204/Chess/src/chess/WhitePiece.java</file>
-        </group>
         <group>
             <file>file:/C:/Users/erico/Files/School/year%202/semester%201/game%20programming%204/Chess/src/chess/Coordinates.java</file>
             <file>file:/C:/Users/erico/Files/School/year%202/semester%201/game%20programming%204/Chess/src/chess/Chess.java</file>
@@ -21,5 +13,6 @@
             <file>file:/C:/Users/erico/Files/School/year%202/semester%201/game%20programming%204/Chess/src/chess/Board.java</file>
             <file>file:/C:/Users/erico/Files/School/year%202/semester%201/game%20programming%204/Chess/src/chess/WhitePiece.java</file>
         </group>
+        <group name="Labs"/>
     </open-files>
 </project-private>
