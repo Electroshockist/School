@@ -8,10 +8,9 @@ class Body {
 friend class Collider;
 
 public:
-	Vec3 pos;
-	Vec3 vel;
+	Vec3 pos, vel;
 	float gravity;
-	bool ground, isStatic;
+	bool isStatic;
 	float mass;
 	float radius;
 

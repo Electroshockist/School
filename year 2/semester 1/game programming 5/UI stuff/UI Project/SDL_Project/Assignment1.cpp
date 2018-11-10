@@ -63,5 +63,5 @@ void Assignment1::HandleEvents(SDL_Event& event) {
 
 void Assignment1::SetUI(UI* ui_) {
 	if (!ui_) return;
-	ui = ui_;
+	//ui = ui_;
 }
