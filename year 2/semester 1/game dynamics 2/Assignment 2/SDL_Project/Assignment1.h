@@ -3,11 +3,12 @@
 
 #include "MMath.h"
 #include "Scene.h"
+#include "Body.h"
+#include "Collider.h"
 
+#include <iostream>
 #include <SDL.h>
 #include <fstream>
-
-#define POINTS_COUNT 4
 
 using namespace MATH;
 using namespace std;
@@ -16,20 +17,18 @@ class Assignment1 : public Scene {
 private:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
-	SDL_Point points[POINTS_COUNT] = {
-		{ 3.2, 2 },
-		{ 3, 2.4 },
-		{ 3.4, 2.4 },
-		{ 3.2, 2 }
-	};
+
+	Body* bodies[2] = {};
+
 	Matrix4 projectionMatrix;
 	Matrix4 invMat;
 	float elapsedTime;
 	unsigned long totalFrameCount;
 	unsigned long frameCount;
+	bool clicked;
 
 public:
-	Assignment1(SDL_Window* sdlWindow, SDL_Renderer* renderer);
+	Assignment1(SDL_Window* sdlWindow);
 	~Assignment1();
 	bool OnCreate();
 	void OnDestroy();

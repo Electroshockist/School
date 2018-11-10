@@ -1,5 +1,7 @@
 #include "Body.h" 
 
+Body::Body() {}
+
 Body::Body(char* imageName, float mass_, Vec3 pos_, float gravity_) {
 	mass = mass_;
 	pos.x = pos_.x;
@@ -59,12 +61,6 @@ void Body::Update(const float deltaTime, const float gravity) {
 	accel.x = 0.0f;
 	accel.y = 0.0f;
 	accel.z = 0.0f;
-
-	if (ground && pos.y < 1.5f) {
-		pos.y = 1.5f;
-		vel.y = 0.0f;
-		accel.y = 0.0f;
-	}
 }
 
 void Body::ApplyForce(Vec3 force) {

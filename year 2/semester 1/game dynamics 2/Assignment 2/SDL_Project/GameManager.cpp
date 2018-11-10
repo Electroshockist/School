@@ -33,7 +33,7 @@ bool GameManager::OnCreate() {
 	}
 
 	windowName = "";
-	currentScene = new Assignment1(ptr->GetSDL_Window(), ptr->GetSDL_Renderer());
+	currentScene = new Assignment1(ptr->GetSDL_Window());
 	if (currentScene == nullptr) {
 		OnDestroy();
 		return false;
@@ -50,44 +50,37 @@ bool GameManager::OnCreate() {
 void GameManager::Run() {
     SDL_Event event;
 
-    bool start =  false;
-
     while (isRunning) {
 
         if (SDL_PollEvent(&event) != 0) {
             currentScene->HandleEvents(event);
 
 			switch (event.type) {
+				//quit on escape or close
 				case SDL_QUIT:
 					isRunning = false;
 					break;
 				case SDL_KEYDOWN:
-					if (event.key.keysym.sym == SDLK_ESCAPE) {
-						isRunning = false;
+					switch (event.key.keysym.sym)
+					{
+					case SDLK_ESCAPE:
+					default:
+						break;
 					}
-					if (event.key.keysym.sym == SDLK_SPACE) {
-						start = true;
-					}
-					
-					std::cout << windowName;
-					SDL_SetWindowTitle(ptr->GetSDL_Window(), windowName);
+					if (event.key.keysym.sym == SDLK_ESCAPE) isRunning = false;
 					break;
 
 				default:
 					break;
 			}
         }
-
-        if (start) {
-
-			currentScene->Update(timer->GetDeltaTime());
-			currentScene->Render();
-        }
+		currentScene->Update(timer->GetDeltaTime());
+		currentScene->Render();
 
 		timer->UpdateFrameTicks();
 
         /// Keeep the event loop running at a proper rate
-        SDL_Delay(timer->GetSleepTime(60)); ///60 frames per sec
+        SDL_Delay(timer->GetSleepTime(1000)); ///1000 frames per sec
 
     }
 }
