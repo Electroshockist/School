@@ -38,7 +38,6 @@ void Assignment1::OnDestroy() {
 
 void Assignment1::Update(const float time) {
 
-	std::cout << bodies[0]->points[1].x << " " << bodies[0]->points[1].y << std::endl;
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < bodies[i]->pointCount; j++) {
 			bodies[i]->points[j].x = bodies[i]->basePoints[j].x + (int)bodies[i]->pos.x;
@@ -55,9 +54,6 @@ void Assignment1::Update(const float time) {
 
 void Assignment1::Render() {
 	SDL_Surface *screenSurface = SDL_GetWindowSurface(window);
-
-	const int SCREEN_WIDTH = 1024;
-	const int SCREEN_HEIGHT = 500;
 	
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
