@@ -1,6 +1,0 @@
-﻿  Collider.cpp
-     Creating library C:\Users\erico\Documents\Code\School\year 2\semester 1\game programming 5\UI stuff\UI Project\Debug\UI_Project.lib and object C:\Users\erico\Documents\Code\School\year 2\semester 1\game programming 5\UI stuff\UI Project\Debug\UI_Project.exp
-HackSlashUI.obj : error LNK2019: unresolved external symbol "public: __thiscall RpgUI::RpgUI(void)" (??0RpgUI@@QAE@XZ) referenced in function "public: __thiscall HackSlashUI::HackSlashUI(void)" (??0HackSlashUI@@QAE@XZ)
-HackSlashUI.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall RpgUI::~RpgUI(void)" (??1RpgUI@@UAE@XZ) referenced in function "public: virtual __thiscall HackSlashUI::~HackSlashUI(void)" (??1HackSlashUI@@UAE@XZ)
-HackSlashUI.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall RpgUI::render(struct SDL_Surface *)" (?render@RpgUI@@UAEXPAUSDL_Surface@@@Z)
-C:\Users\erico\Documents\Code\School\year 2\semester 1\game programming 5\UI stuff\UI Project\Debug\UI_Project.exe : fatal error LNK1120: 3 unresolved externals
