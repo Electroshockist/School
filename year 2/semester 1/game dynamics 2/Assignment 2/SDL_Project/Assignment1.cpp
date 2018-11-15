@@ -17,18 +17,18 @@ bool Assignment1::OnCreate() {
 	bodies[0] = new Body();
 	bodies[1] = new Body();
 
-	bodies[0]->basePoints[0] = { 0, 40 };
-	bodies[0]->basePoints[1] = { 0, 0 };
-	bodies[0]->basePoints[2] = { 40, 0 };
-	bodies[0]->basePoints[3] = { 0, 40 };
+	bodies[0]->basePoints[0] = { 4, 9 };
+	bodies[0]->basePoints[1] = { 9, 6 };
+	bodies[0]->basePoints[2] = { 4, 3 };
+	bodies[0]->basePoints[3] = { 4, 9 };
 
-	bodies[1]->basePoints[0] = { 15, 40 };
-	bodies[1]->basePoints[1] = { 15, 20 };
-	bodies[1]->basePoints[2] = { 40, 20 };
-	bodies[1]->basePoints[3] = { 15, 40 };
+	bodies[1]->basePoints[0] = { 8, 8 };
+	bodies[1]->basePoints[1] = { 12, 8 };
+	bodies[1]->basePoints[2] = { 8, 4 };
+	bodies[1]->basePoints[3] = { 8, 8 };
 
-	bodies[0]->pos = Vec3(450, 150, 0);
-	bodies[1]->pos = Vec3(450, 150, 0);
+	bodies[0]->pos = Vec3(0, 0, 0);
+	bodies[1]->pos = Vec3(0, 0, 0);
 
 	return true;
 }
