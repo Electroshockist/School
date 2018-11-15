@@ -5,8 +5,7 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: GOLEM_ICE_LEGACY
   m_Shader: {fileID: 4800000, guid: 4849ab9a354e9374d863e18a16dabed1, type: 3}
   m_ShaderKeywords: _EMISSION _NORMALMAP _SPECGLOSSMAP

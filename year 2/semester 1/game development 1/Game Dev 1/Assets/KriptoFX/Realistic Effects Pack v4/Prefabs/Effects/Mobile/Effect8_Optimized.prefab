@@ -439,22 +439,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderColorProperty: 0
   Color:
-    key0:
-      rgba: 16777215
-    key1:
-      rgba: 1056964607
-    key2:
-      rgba: 4278190080
-    key3:
-      rgba: 4278190080
-    key4:
-      rgba: 0
-    key5:
-      rgba: 0
-    key6:
-      rgba: 0
-    key7:
-      rgba: 0
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 0}
+    key1: {r: 1, g: 1, b: 1, a: 0.24313726}
+    key2: {r: 0, g: 0, b: 0, a: 1}
+    key3: {r: 0, g: 0, b: 0, a: 1}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 10794
+    atime1: 16384
+    atime2: 31997
+    atime3: 47417
+    atime4: 59560
+    atime5: 0
+    atime6: 0
+    atime7: 0
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 5
@@ -475,27 +484,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LightCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0.099999994
+    - serializedVersion: 3
+      time: 0.099999994
       value: 0
       inSlope: 0.04360214
       outSlope: 0.04360214
       tangentMode: 0
-    - time: 0.26
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.26
       value: 0.95
       inSlope: 0.3060169
       outSlope: 0.3060169
       tangentMode: 0
-    - time: 0.91766036
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.91766036
       value: 0.84458786
       inSlope: -0.9993553
       outSlope: -0.9993553
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0.00000000721775
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -516,22 +542,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderColorProperty: 0
   Color:
-    key0:
-      rgba: 16777215
-    key1:
-      rgba: 4294967295
-    key2:
-      rgba: 4278190080
-    key3:
-      rgba: 0
-    key4:
-      rgba: 0
-    key5:
-      rgba: 0
-    key6:
-      rgba: 0
-    key7:
-      rgba: 0
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 0}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 1}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 12143
+    atime2: 54934
+    atime3: 65535
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 4
@@ -552,27 +587,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LightCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0.17999999
+    - serializedVersion: 3
+      time: 0.17999999
       value: 0
       inSlope: 0.04360214
       outSlope: 0.04360214
       tangentMode: 0
-    - time: 0.30683348
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.30683348
       value: 0.9936802
       inSlope: 0.3060169
       outSlope: 0.3060169
       tangentMode: 0
-    - time: 0.8534384
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8534384
       value: 0.9311241
       inSlope: -0.9993553
       outSlope: -0.9993553
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -592,27 +644,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0.07
+    - serializedVersion: 3
+      time: 0.07
       value: 0
       inSlope: -0.00645515
       outSlope: -0.00645515
       tangentMode: 0
-    - time: 0.31
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.31
       value: 1
       inSlope: 0.25310487
       outSlope: 0.25310487
       tangentMode: 0
-    - time: 0.7954859
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7954859
       value: 0.9727598
       inSlope: -0.11887391
       outSlope: -0.11887391
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: 0.0000009779816
       outSlope: 0.0000009779816
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0

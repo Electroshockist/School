@@ -2958,22 +2958,35 @@ MonoBehaviour:
   TurbulenceByTime: 1
   TimeDelay: 0
   TurbulenceStrengthByTime:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 0.099999994
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 0.38441253
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.38441253
       value: 0.3473746
       inSlope: 1.1693032
       outSlope: 1.1693032
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: -0.12293629
       outSlope: -0.12293629
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -2986,17 +2999,26 @@ MonoBehaviour:
   Perfomance: 0
   ThreshholdSpeed: 0
   VelocityByDistance:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -3013,32 +3035,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LightCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 0.014867175
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.014867175
       value: 0.9980507
       inSlope: 0.028698714
       outSlope: 0.028698714
       tangentMode: 0
-    - time: 0.14912564
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.14912564
       value: 0.66478527
       inSlope: -0.1475215
       outSlope: -0.1475215
       tangentMode: 0
-    - time: 0.60085446
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.60085446
       value: 0.449397
       inSlope: -1.3798475
       outSlope: -1.3798475
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: -0.25736022
       outSlope: -0.25736022
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3071,27 +3114,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3112,27 +3172,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3153,27 +3230,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 0.034575824
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.034575824
       value: 0.0028459877
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 0.5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
       value: 0.019999996
       inSlope: 0.022958806
       outSlope: 0.022958806
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3309,27 +3403,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3372,27 +3483,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3425,27 +3553,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3466,27 +3611,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3518,27 +3680,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3559,27 +3738,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3600,27 +3796,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3654,22 +3867,35 @@ MonoBehaviour:
   ForceRadius: 10
   ForceMultiplier: 0.7
   ForceCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: -2.3261943
       outSlope: -2.3261943
       tangentMode: 34
-    - time: 0.19194055
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.19194055
       value: 0.553509
       inSlope: -1.5055898
       outSlope: -1.5055898
       tangentMode: 34
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: -0.68498546
       outSlope: -0.68498546
       tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3680,33 +3906,51 @@ MonoBehaviour:
   DestoryDistance: -1
   UseDistanceScale: 0
   DistanceScaleCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 1
+    - serializedVersion: 3
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   UseUPVector: 0
   DragCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -3738,27 +3982,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3802,27 +4063,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3854,27 +4132,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3920,27 +4215,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3972,17 +4284,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.07275212
       outSlope: 0.07275212
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: 0.0000009779816
       outSlope: 0.0000009779816
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4001,27 +4322,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4041,22 +4379,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 0
       inSlope: 0.039840475
       outSlope: 0.039840475
       tangentMode: 0
-    - time: 0.2610961
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2610961
       value: 0.3198394
       inSlope: 1.7571449
       outSlope: 1.7571449
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4109,27 +4460,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4243,27 +4611,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4331,27 +4716,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4371,27 +4773,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShakeCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 0
       inSlope: 7.0203147
       outSlope: 7.0203147
       tangentMode: 0
-    - time: 0.061838463
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.061838463
       value: 0.9978678
       inSlope: -0.038008716
       outSlope: -0.038008716
       tangentMode: 0
-    - time: 0.23835821
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.23835821
       value: 0.4172902
       inSlope: -1.6209341
       outSlope: -1.6209341
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: -0.15367037
       outSlope: -0.15367037
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4415,27 +4834,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4456,27 +4892,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4508,17 +4961,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.07275212
       outSlope: 0.07275212
       tangentMode: 0
-    - time: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: 0.0000009779816
       outSlope: 0.0000009779816
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -4549,27 +5011,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderFloatProperty: 1
   FloatCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0.4270388
       outSlope: 0.4270388
       tangentMode: 0
-    - time: 0.044999998
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.044999998
       value: 0.049999997
       inSlope: -0.092681356
       outSlope: -0.092681356
       tangentMode: 0
-    - time: 0.4343059
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4343059
       value: 0.08391799
       inSlope: 0.26925638
       outSlope: 0.26925638
       tangentMode: 0
-    - time: 0.85499996
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85499996
       value: 1.01
       inSlope: 0.036604732
       outSlope: 0.036604732
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
