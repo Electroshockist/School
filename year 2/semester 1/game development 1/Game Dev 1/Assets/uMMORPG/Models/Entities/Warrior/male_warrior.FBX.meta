@@ -111,6 +111,7 @@ ModelImporter:
     400102: pants
     400104: shoulders
     400106: top
+    2100000: 03 - Default
     4300000: Group45872
     4300002: boots
     4300004: Object011
@@ -139,12 +140,17 @@ ModelImporter:
     13700016: shoulders
     13700018: top
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 03 - Default
+    second: {fileID: 2100000, guid: 15f3e05ca1bf24e8899f75b33b9ab343, type: 2}
   materials:
-    importMaterials: 0
-    materialName: 0
+    importMaterials: 1
+    materialName: 1
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -1245,7 +1251,6 @@ ModelImporter:
     globalScale: 2
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
@@ -1270,9 +1275,6 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 0
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
-    blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -1776,6 +1778,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 1
     hasExtraRoot: 1
     skeletonHasParents: 1
