@@ -6,7 +6,7 @@
 using namespace MATH;
 
 bool Collider::Collided(const Body& b1, const Body& b2) {
-	Vec3 origin = (0, 0, 0);
+	Vec3 origin = Vec3();
 
 	//math functions do not work with SDL_POINTS, must be converted to Vec3
 	Vec3 pointHolder[2][3] = { 
@@ -22,19 +22,22 @@ bool Collider::Collided(const Body& b1, const Body& b2) {
 		} 
 	};
 
-	Vec3
-		//min point
-		A[3],
-		//max point
-		B[3],
-		//direction vectors
-		D[3],
-		P[3],
-		//normal vectors
-		N[2];
+	//min point
+	Vec3 A[3];
+
+	//max point
+	Vec3 B[3];
+	
+	//direction vectors
+	Vec3 D[3];
+
+	Vec3 P[3];
+	
+	//normal vectors
+	Vec3 N[2];
 
 	//dotted vectors
-	float dotted[3], totalX, totalY;
+	float dotted[3];
 
 	//get medians
 	Vec3 centerA = Vec3(
@@ -48,50 +51,77 @@ bool Collider::Collided(const Body& b1, const Body& b2) {
 			0.0f);
 	
 	//direction vectors
+	//positive
 	D[0] = centerB - centerA;
+	//negative
 	D[1] = centerA - centerB;
-	
-	//correct
 
-	A[0] = Min(b2, D[0]);
-	B[0] = Max(b1, D[0]);
+	// (4,3)
+	A[0] = Min(b1, D[0]);
+	// (12,8)
+	B[0] = Max(b2, D[0]);
+	// [-8, -5]
 	P[0] = Vec3(A[0] - B[0]);
 
-	A[1] = Min(b2, D[1]);
-	B[1] = Max(b1, D[1]);
+	//[8,4] 
+	A[1] = Min(b1, D[1]);
+	//[9,6]
+	B[1] = Max(b2, D[1]);
+	// [1,2]
 	P[1] = Vec3(A[1] - B[1]);
 
+	//[9,6]
+	A[2] = Max(b1, D[2]);
+	//[8,8]
+	B[2] = Min(b2, D[2]);
+	//1,-2
+	P[2] = Vec3(A[2] - B[2]);
+
+	//line from P[0] to P[1]
+	// [-9, -7]
 	Vec3 line = Vec3(P[0] - P[1]);
 
+	//[9,-7]
 	N[0] = Vec3( line.x, -line.y, line.z);
+	//[-9,7]
 	N[1] = Vec3(-line.x,  line.y, line.z);
 
+	//center of P line
 	Vec3 medianLine = Vec3(P[0] / 2 + P[1] / 2);
+
+	//line from median to origin
 	Vec3 originLine = Vec3(origin - medianLine);
 	
 	//normalized line
-	D[2] = Vec3(getNorm(N[0], N[1], originLine));
+	//[9,-7]
+	D[2] = Vec3(getCLosestToOrigin(N[0], N[1], originLine));
 
-	A[2] = Min(b2, D[2]);
-	B[2] = Max(b1, D[2]);
-	P[2] = Vec3(A[2] - B[2]);
 
-	P[0].print();
 
-	dotted[0] = VMath::dot(VMath::cross((P[1] - P[0]), (origin - P[0])), VMath::cross((P[1] - P[0]), (P[2] - P[0])));
-	dotted[1] = VMath::dot(VMath::cross((origin - P[1]), (P[2] - P[1])), VMath::cross((P[2] - P[1]), (P[0] - P[1])));
-	dotted[2] = VMath::dot(VMath::cross((P[0] - P[2]), (origin - P[0])), VMath::cross((P[0] - P[2]), (P[1] - P[2])));
-
-	//std::cout << dotted[0] << " " << dotted[1] << " " << dotted[2] << std::endl;
+	dotted[0] = 
+		VMath::dot(
+			VMath::cross((P[1] - P[0]), (origin - P[0])),
+			VMath::cross((P[1] - P[0]), (P[2] - P[0]))
+		);
+	dotted[1] =
+		VMath::dot(
+			VMath::cross((P[2] - P[1]),(origin - P[1])),
+			VMath::cross((P[2] - P[1]), (P[0] - P[1]))
+		);
+	dotted[2] = 
+		VMath::dot(
+			VMath::cross((P[0] - P[2]), (origin - P[2])),
+			VMath::cross((P[0] - P[2]), (P[1] - P[2]))
+		);
 
 	//Checks collisions
-	if (dotted[0] >= 0 && dotted[1] >= 0 && dotted[2] >= 0) return true;
+	if (dotted[0] >= VERY_SMALL && dotted[1] >= VERY_SMALL && dotted[2] >= VERY_SMALL) return true;
 	else return false;
 }
 
 void Collider::HandleCollision(Body& b1, Body& b2) {
-	if (Collided(b1, b2));// std::cout << "Collided!" << std::endl;
-	//else std::cout << "Not Collided!" << std::endl;
+	if (Collided(b1, b2)) std::cout << "Collided!" << std::endl;
+	else std::cout << "Not Collided!" << std::endl;
 }
 
 //gets largest point
@@ -150,13 +180,12 @@ Vec3 Collider::Min(const Body & body, Vec3 D) {
 	}
 }
 
-Vec3 Collider::getNorm(Vec3 N1, Vec3 N2, Vec3 orginLine) {
+Vec3 Collider::getCLosestToOrigin(Vec3 N1, Vec3 N2, Vec3 orginLine) {
 	float temp[2] = { 
 		VMath::dot(N1, orginLine), 
 		VMath::dot(N2, orginLine)
 	};
 	//std::cout << temp[0] << std::endl;
 	if (temp[0] > temp[1]) return N1;
-	else if (temp[0] < temp[1]) return N2;
-	else return NULL;	
+	return N2;
 }

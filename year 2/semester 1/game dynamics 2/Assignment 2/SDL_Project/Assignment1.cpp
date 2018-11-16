@@ -14,6 +14,21 @@ Assignment1::~Assignment1(){
 }
 
 bool Assignment1::OnCreate() {
+	//move all this to scene.cpp
+	int w, h;
+
+	SDL_GetWindowSize(window, &w, &h);
+
+	float aspectRatio = (float)h / (float)w;
+
+	projectionMatrix = MMath::viewportNDC(w, h) * MMath::orthographic(-30.0f, 30.0f, -30.0f * aspectRatio, 30.0f * aspectRatio, 0.0f, 1.0f);
+
+	invMat = MMath::inverse(projectionMatrix);
+
+	//moves origin to center of screen
+	Vec3 origin(0.0f, 0.0f, 0.0f);
+	origin = invMat * origin;
+
 	bodies[0] = new Body();
 	bodies[1] = new Body();
 
@@ -27,8 +42,8 @@ bool Assignment1::OnCreate() {
 	bodies[1]->basePoints[2] = { 8, 4 };
 	bodies[1]->basePoints[3] = { 8, 8 };
 
-	bodies[0]->pos = Vec3(0, 0, 0);
-	bodies[1]->pos = Vec3(0, 0, 0);
+	//bodies[0]->pos += origin;
+	//bodies[1]->pos += origin;
 
 	return true;
 }
@@ -40,10 +55,12 @@ void Assignment1::Update(const float time) {
 
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < bodies[i]->pointCount; j++) {
-			bodies[i]->points[j].x = bodies[i]->basePoints[j].x + (int)bodies[i]->pos.x;
-			bodies[i]->points[j].y = bodies[i]->basePoints[j].y + (int)bodies[i]->pos.y;
+			bodies[i]->points[j].x = bodies[i]->basePoints[j].x * 10 + (int)bodies[i]->pos.x;
+			bodies[i]->points[j].y = bodies[i]->basePoints[j].y * 10 + (int)bodies[i]->pos.y;
+			
 		}
 	}
+	//std::cout << bodies[0]->points[0].x << ", " << bodies[0]->points[0].y << endl;
 
 	Collider::HandleCollision(*bodies[0], *bodies[1]);
 
@@ -57,10 +74,10 @@ void Assignment1::Render() {
 	
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
-
 	for (int i = 0; i < 2; i++) {
 		for (int  j = 0; j < bodies[i]->pointCount; j++){
-
+			//Vec3 points = Vec3(bodies[i]->points.x, bodies[i]->points.y, bodies[i]->points.z);
+			//bodies[i]->points[j] = projectionMatrix * bodies[i]->points[j];
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 			SDL_RenderDrawLines(renderer, bodies[i]->points, bodies[i]->pointCount);
 		}

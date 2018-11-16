@@ -10,6 +10,7 @@ friend class Collider;
 
 public:
 	Vec3 pos, vel;
+	Vec3 screenCoords;
 	float gravity;
 	bool isStatic;
 	float mass;

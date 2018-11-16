@@ -20,6 +20,8 @@ private:
 
 	Body* bodies[2] = {};
 
+	SDL_Point points[4];
+
 	Matrix4 projectionMatrix;
 	Matrix4 invMat;
 	float elapsedTime;
