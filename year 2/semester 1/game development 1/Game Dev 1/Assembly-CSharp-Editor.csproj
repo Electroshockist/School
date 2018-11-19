@@ -61,46 +61,46 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Bloom\Editor\BloomEditor_RFX4.cs" />
-    <Compile Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Bloom\Editor\BloomGraphDrawer_RFX4.cs" />
-    <Compile Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Common\Editor\EditorGUIHelper_RFX4.cs" />
-    <Compile Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Common\Editor\FieldFinder_RFX4.cs" />
-    <Compile Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Common\Editor\MinDrawer_RFX4.cs" />
-    <Compile Include="Assets\KriptoFX\Realistic Effects Pack v4\Scripts\Editor\RFX4_CustomMaterialInspectorParticle.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Attributes\PostProcessingModelEditorAttribute.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\AmbientOcclusionModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\AntialiasingModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\BloomModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\BuiltinDebugViewsEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\ChromaticAberrationEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\ColorGradingModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\DefaultPostFxModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\DepthOfFieldModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\DitheringModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\EyeAdaptationModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\FogModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\GrainModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\MotionBlurModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\ScreenSpaceReflectionModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\UserLutModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Models\VignetteModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Monitors\HistogramMonitor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Monitors\ParadeMonitor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Monitors\VectorscopeMonitor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Monitors\WaveformMonitor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\PostProcessingBehaviourEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\PostProcessingFactory.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\PostProcessingInspector.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\PostProcessingModelEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\PostProcessingMonitor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\PropertyDrawers\GetSetDrawer.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\PropertyDrawers\MinDrawer.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\PropertyDrawers\TrackballGroupDrawer.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Utils\CurveEditor.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Utils\EditorGUIHelper.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Utils\EditorResources.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Utils\FxStyles.cs" />
-    <Compile Include="Assets\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
+    <Compile Include="Assets\Asset packs\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Bloom\Editor\BloomEditor_RFX4.cs" />
+    <Compile Include="Assets\Asset packs\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Bloom\Editor\BloomGraphDrawer_RFX4.cs" />
+    <Compile Include="Assets\Asset packs\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Common\Editor\EditorGUIHelper_RFX4.cs" />
+    <Compile Include="Assets\Asset packs\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Common\Editor\FieldFinder_RFX4.cs" />
+    <Compile Include="Assets\Asset packs\KriptoFX\Realistic Effects Pack v4\PostEffects\PC\Common\Editor\MinDrawer_RFX4.cs" />
+    <Compile Include="Assets\Asset packs\KriptoFX\Realistic Effects Pack v4\Scripts\Editor\RFX4_CustomMaterialInspectorParticle.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Attributes\PostProcessingModelEditorAttribute.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\AmbientOcclusionModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\AntialiasingModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\BloomModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\BuiltinDebugViewsEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\ChromaticAberrationEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\ColorGradingModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\DefaultPostFxModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\DepthOfFieldModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\DitheringModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\EyeAdaptationModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\FogModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\GrainModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\MotionBlurModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\ScreenSpaceReflectionModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\UserLutModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Models\VignetteModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Monitors\HistogramMonitor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Monitors\ParadeMonitor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Monitors\VectorscopeMonitor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Monitors\WaveformMonitor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\PostProcessingBehaviourEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\PostProcessingFactory.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\PostProcessingInspector.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\PostProcessingModelEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\PostProcessingMonitor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\PropertyDrawers\GetSetDrawer.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\PropertyDrawers\MinDrawer.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\PropertyDrawers\TrackballGroupDrawer.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Utils\CurveEditor.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Utils\EditorGUIHelper.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Utils\EditorResources.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Utils\FxStyles.cs" />
+    <Compile Include="Assets\Asset packs\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -357,31 +357,31 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.12f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Telepathy">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/Mirror/Telepathy.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/Mirror/Telepathy.dll</HintPath>
     </Reference>
     <Reference Include="Mirror.Editor">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/Mirror/Editor/Mirror.Editor.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/Mirror/Editor/Mirror.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Mirror.Weaver">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/Mirror/Editor/Mirror.Weaver.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/Mirror/Editor/Mirror.Weaver.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Cecil">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/Mirror/Editor/Unity.Cecil/Unity.Cecil.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/Mirror/Editor/Unity.Cecil/Unity.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Cecil.Mdb">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/Mirror/Editor/Unity.Cecil/Unity.Cecil.Mdb.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/Mirror/Editor/Unity.Cecil/Unity.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Cecil.Pdb">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/Mirror/Editor/Unity.Cecil/Unity.Cecil.Pdb.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/Mirror/Editor/Unity.Cecil/Unity.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mirror.Runtime">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/Mirror/Runtime-Editor/Mirror.Runtime.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/Mirror/Runtime-Editor/Mirror.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data.Sqlite">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/SQLite/sqlite_common/Mono.Data.Sqlite.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/SQLite/sqlite_common/Mono.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="System.Data">
-      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/uMMORPG/Plugins/SQLite/sqlite_common/System.Data.dll</HintPath>
+      <HintPath>C:/Users/erico/Files/School/year 2/semester 1/game development 1/Game Dev 1/Assets/Asset packs/uMMORPG/Plugins/SQLite/sqlite_common/System.Data.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/erico/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

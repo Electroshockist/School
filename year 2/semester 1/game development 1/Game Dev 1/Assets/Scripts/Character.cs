@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
+    public Animator anim;
+
     Camera camera1;
 
     CharacterController cc;
@@ -31,7 +33,7 @@ public class Character : MonoBehaviour {
 
         if (gravity <= 0) gravity = -1.0f;
 
-        if (topSpeed <= 0) topSpeed = 0.5f;
+        if (topSpeed <= 0) topSpeed = 0.3f;
 
         if (rotationSpeed <= 0) rotationSpeed = 3.5f;
 
@@ -49,7 +51,8 @@ public class Character : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        control();	
+        control();
+        animate();
 	}
 
     void control() {
@@ -112,6 +115,15 @@ public class Character : MonoBehaviour {
         moveDirection = transform.TransformDirection(moveDirection);
         cc.Move(moveDirection);
     }
+
+    void animate() {
+        if (isControlling()) {
+            anim.SetBool("MOVING", true);
+        }
+        else  anim.SetBool("MOVING", false);
+
+    }
+
     bool isControlling() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) return true;
         else return false;
