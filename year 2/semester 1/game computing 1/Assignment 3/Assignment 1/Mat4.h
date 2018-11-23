@@ -24,16 +24,50 @@ class Mat4
 public:
 	//Multiply matrices
 	inline Mat4 operator * (const Mat4& mat)const {
-		Mat4 mat4 = Mat4();
-		/*j iterates through each column of m, then i iterates from left to right
-		while iterating normally through the second matrix, multiplying each set of iterations*/
+		Mat4 result = Mat4();
+		result.m[0][0] = m[0][0] * mat.m[0][0] + m[0][1] * mat.m[1][0] + mat.m[0][2] * mat.m[2][0] + mat.m[0][3] * mat.m[3][0];
+		result.m[0][1] = m[0][0] * mat.m[0][1] + m[0][1] * mat.m[1][1] + mat.m[0][2] * mat.m[2][1] + mat.m[0][3] * mat.m[3][1];
+		result.m[0][2] = m[0][0] * mat.m[0][2] + m[0][1] * mat.m[1][2] + mat.m[0][2] * mat.m[2][2] + mat.m[0][3] * mat.m[3][2];
+		result.m[0][3] = m[0][0] * mat.m[0][3] + m[0][1] * mat.m[1][3] + mat.m[0][2] * mat.m[2][3] + mat.m[0][3] * mat.m[3][3];
 
-		for (int i = 0; i < m.size(); i++) {
-			for (int j = 0; j < m[0].size(); j++) {
-				mat4.m[i][j] = m[j][m.size() - (i + 1)] * mat.m[i][j];
-			}
-		}
-		return mat4;
+		result.m[1][0] = m[1][0] * mat.m[0][0] + m[1][1] * mat.m[1][0] + mat.m[1][2] * mat.m[2][0] + mat.m[1][3] * mat.m[3][0];
+		result.m[1][1] = m[1][0] * mat.m[0][1] + m[1][1] * mat.m[1][1] + mat.m[1][2] * mat.m[2][1] + mat.m[1][3] * mat.m[3][1];
+		result.m[1][2] = m[1][0] * mat.m[0][2] + m[1][1] * mat.m[1][2] + mat.m[1][2] * mat.m[2][2] + mat.m[1][3] * mat.m[3][2];
+		result.m[1][3] = m[1][0] * mat.m[0][3] + m[1][1] * mat.m[1][3] + mat.m[1][2] * mat.m[2][3] + mat.m[1][3] * mat.m[3][3];
+
+		result.m[2][0] = m[2][0] * mat.m[0][0] + m[2][1] * mat.m[1][0] + mat.m[2][2] * mat.m[2][0] + mat.m[2][3] * mat.m[3][0];
+		result.m[2][1] = m[2][0] * mat.m[0][1] + m[2][1] * mat.m[1][1] + mat.m[2][2] * mat.m[2][1] + mat.m[2][3] * mat.m[3][1];
+		result.m[2][2] = m[2][0] * mat.m[0][2] + m[2][1] * mat.m[1][2] + mat.m[2][2] * mat.m[2][2] + mat.m[2][3] * mat.m[3][2];
+		result.m[2][3] = m[2][0] * mat.m[0][3] + m[2][1] * mat.m[1][3] + mat.m[2][2] * mat.m[2][3] + mat.m[2][3] * mat.m[3][3];
+		
+		result.m[3][0] = m[3][0] * mat.m[0][0] + m[3][1] * mat.m[1][0] + mat.m[3][2] * mat.m[2][0] + mat.m[3][3] * mat.m[3][0];
+		result.m[3][1] = m[3][0] * mat.m[0][1] + m[3][1] * mat.m[1][1] + mat.m[3][2] * mat.m[2][1] + mat.m[3][3] * mat.m[3][1];
+		result.m[3][2] = m[3][0] * mat.m[0][2] + m[3][1] * mat.m[1][2] + mat.m[3][2] * mat.m[2][2] + mat.m[3][3] * mat.m[3][2];
+		result.m[3][3] = m[3][0] * mat.m[0][3] + m[3][1] * mat.m[1][3] + mat.m[3][2] * mat.m[2][3] + mat.m[3][3] * mat.m[3][3];;
+
+
+		////the first two for loops iterate through the resultant matrix
+		//for (int i = 0; i < result.m.size(); i++) {
+		//	for (int j = 0; j < result.m[i].size(); j++) {
+		//		printf("[%i, %i] = ", i, j);
+		//		//this loop iterates through the matricies that will be multiplied and multiplies and adds them
+		//		for (int k = 0; k < m.size(); k++) {
+		//			//printf(" [%i, %i] * [%i, %i] ", j, k, k, j);
+		//			std::cout << m[i][j] << "*" << mat.m[j][k] << " ";
+		//			result.m[i][j] += (m[i][j] * mat.m[k][j]);
+
+		//			if (k != 3){
+		//				printf("+ ");
+		//			}
+
+		//		}
+		//		//std::cout << std::endl;
+		//		
+		//		//std::cout << std::endl << result.m[i][j] << std::endl;
+		//	}
+		//	std::cout << std::endl;
+		//}
+		return result;
 	}
 
 	// Sixteen elements of the 4x4 matrix held inside an array
@@ -41,6 +75,13 @@ public:
 	
 	// Set member variables to the values inside the identity matrix
 	Mat4();
+
+	Mat4(
+		float f1, float f2, float f3, float f4,
+		float f5, float f6, float f7, float f8,
+		float f9, float f10, float f11, float f12,
+		float f13, float f14, float f15, float f16
+		);
 
 	Mat4(Vec4 v1, Vec4 v2, Vec4 v3, Vec4 v4);
 
