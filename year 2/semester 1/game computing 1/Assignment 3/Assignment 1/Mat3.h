@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include "Mat2.h"
 class Mat3
 {
 public:
@@ -11,5 +12,6 @@ public:
 		float f7, float f8,	float f9
 	);
 	float Det();
+	void Print() const;
 };
 

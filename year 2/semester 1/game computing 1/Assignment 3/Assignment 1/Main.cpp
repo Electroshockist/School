@@ -15,5 +15,7 @@ void main() {
 	mat.Inverse();
 	mat.Print();
 
+	cout << endl << mat.Det() << endl;
+
 	getchar();
 }
