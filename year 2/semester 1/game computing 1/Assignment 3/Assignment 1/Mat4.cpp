@@ -132,18 +132,69 @@ void Mat4::Transpose() {
 
 // Return the determinant of the matrix
 float Mat4::Det() {
-	float w = (m[2][0])*(m[0][1] * ((m[3][3] * m[1][2]) - (m[3][2] * m[1][3])) + (-m[1][1])*((m[0][2] * m[3][3]) - (m[0][2] * m[3][2])) + (m[3][1])*((m[0][2] * m[1][3]) - (m[1][2] * m[0][3])));
-	float x = -(m[2][1])*((m[0][0])* ((m[3][3] * m[1][2]) - (m[3][2] * m[1][3])) + (-m[1][0])*((m[0][2] * m[3][3]) - (m[0][3] * m[3][2])) + (m[3][0])*((m[0][2] * m[1][3]) - (m[1][2] * m[0][3])));
-	float y = (m[2][2])*((m[0][0])* ((m[3][3] * m[1][1]) - (m[3][1] * m[1][3])) + (-m[1][0])*((m[0][1] * m[3][3]) - (m[0][3] * m[3][1])) + (m[3][0])*((m[0][1] * m[1][3]) - (m[1][1] * m[0][3])));
-	float z = -(m[2][3])*((m[0][0])* ((m[3][2] * m[1][1]) - (m[3][1] * m[1][2])) + (-m[1][0])*((m[0][1] * m[3][2]) - (m[0][2] * m[3][1])) + (m[3][0])*((m[0][1] * m[1][2]) - (m[1][1] * m[0][2])));
-	return w + x + y + z;
+	float total = 0;
+	float det;
+	int symbol;
+	bool alternateSymbol = false;
+	Mat4 resultMat;
+
+
+	//loop through each row to get base multiplier
+	/*
+	|X X X X|
+	|` ` ` `|
+	|` ` ` `|
+	*/
+	for (int a = 0; a < m.size(); a++) {
+		//current indicies are the current index of the temporary 2d vector
+		/*
+		|` ` `|
+		|` ` `|
+		|` ` `|
+		*/
+		int currentXIndex = 0;
+		int currentYIndex = 0;
+		Mat3 tempMat;
+
+		//loop through each index to put it in
+		for (int b = 0; b < m.size(); b++) {
+			//starts at 1 and not 0 to automatically skip first row where the multiplier will always be
+			for (int c = 1; c < m.size(); c++) {
+
+				//2D x and y index calculations
+				/*
+				  |` ` `|->
+				->|` ` `|->
+				->|` ` `|
+				*/
+				if (currentXIndex >= tempMat.m.size()) {
+					currentXIndex = 0;
+					currentYIndex++;
+				}
+
+				//if current loop values not equal to column of multiplyer, add to vec3, increase vec3 index
+				if (b != a) {
+					tempMat.m[currentXIndex][currentYIndex] = m[c][b];
+					currentXIndex++;
+				}
+			}
+		}
+		//calculates checkerboard pattern
+		if (!alternateSymbol) symbol = 1;
+		else symbol = -1;
+
+		total += symbol * m[0][a] * tempMat.Det();
+
+		alternateSymbol = !alternateSymbol;
+	}
+	return total;
 }
 
 // Invert the matrix using minors, cofactors and adjugate
 // Your life may be easier if you create a 3x3 Mat3 class with a Det and Transpose method to use here!
 void Mat4::Inverse() {
 	int symbol;
-	bool alternateSynbol = true;
+	bool alternateSynbol = false;
 	float det = this->Det();
 
 	Mat3 m0(m[1][1], m[1][2], m[1][3], m[2][1], m[2][2], m[2][3], m[3][1], m[3][2], m[3][3]); // + 
@@ -170,15 +221,19 @@ void Mat4::Inverse() {
 
 	tempMat.Transpose();
 	det = 1 / det;
+
+	//todo: figure out why this doesn't work
 	for (int i = 0; i < m.size(); i++) {
 		for (int j = 0; j < m.size(); j++) {
 			if (!alternateSynbol) symbol = 1;
 			else symbol = -1;
 
 			m[i][j] = tempMat.m[i][j] * det * symbol;
-			alternateSynbol != alternateSynbol;
+			alternateSynbol = !alternateSynbol;
 		}
 	}
+
+	//working math
 	m[0][0] = tempMat.m[0][0] * det;
 	m[0][1] = tempMat.m[0][1] * det * -1;
 	m[0][2] = tempMat.m[0][2] * det;
