@@ -1,0 +1,15 @@
+CREATE TABLE player (
+	player_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	player_name VARCHAR(32) NOT NULL,
+    currency INT NOT NULL);
+    
+CREATE TABLE weapon (
+	weapon_name VARCHAR(32) NOT NULL,
+	weapon_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    weapon_price INT NOT NULL);
+    
+CREATE TABLE vendor (
+	store_slot_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    weapon_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT);
+    
+    
