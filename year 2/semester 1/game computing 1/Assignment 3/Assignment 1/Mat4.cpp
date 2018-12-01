@@ -100,6 +100,8 @@ void Mat4::RotateZ(float angleInDegrees) {
 // Set to the Scaling Matrix
 void Mat4::Scale(float x, float y, float z) {
 	Mat4 scalingMatrix = Mat4();
+	scalingMatrix.SetIdentity();
+
 	scalingMatrix.m[0][0] = x;
 	scalingMatrix.m[1][1] = y;
 	scalingMatrix.m[2][2] = z;
