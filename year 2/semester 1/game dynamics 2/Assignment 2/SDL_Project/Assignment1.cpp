@@ -42,9 +42,6 @@ bool Assignment1::OnCreate() {
 	bodies[1]->basePoints[2] = { 8, 4 };
 	bodies[1]->basePoints[3] = { 8, 8 };
 
-	//bodies[0]->pos += origin;
-	//bodies[1]->pos += origin;
-
 	return true;
 }
 

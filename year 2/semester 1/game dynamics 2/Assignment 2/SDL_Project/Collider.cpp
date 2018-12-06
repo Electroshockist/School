@@ -6,38 +6,41 @@
 using namespace MATH;
 
 bool Collider::Collided(const Body& b1, const Body& b2) {
-	Vec3 origin = Vec3();
-
-	//math functions do not work with SDL_POINTS, must be converted to Vec3
-	Vec3 pointHolder[2][3] = { 
-		{ 
-			Vec3(b1.points[0].x, b1.points[0].y, 0),
-			Vec3(b1.points[1].x, b1.points[1].y, 1),
-			Vec3(b1.points[2].x, b1.points[2].y, 2)
-		},
-		{
-			Vec3(b2.points[0].x, b2.points[0].y, 0),
-			Vec3(b2.points[1].x, b2.points[1].y, 1),
-			Vec3(b2.points[2].x, b2.points[2].y, 2)
-		} 
-	};
-
 	//min point
 	Vec3 A[3];
 
 	//max point
 	Vec3 B[3];
-	
+
 	//direction vectors
 	Vec3 D[3];
 
+	//Minkowski points
 	Vec3 P[3];
-	
+
 	//normal vectors
 	Vec3 N[2];
 
 	//dotted vectors
 	float dotted[3];
+
+	Vec3 origin = Vec3();
+
+	//math functions do not work with SDL_POINTS, must be converted to Vec3
+	Vec3 pointHolder[2][3] = { 
+		//first triangle
+		{ 
+			Vec3(b1.points[0].x, b1.points[0].y, 0),
+			Vec3(b1.points[1].x, b1.points[1].y, 0),
+			Vec3(b1.points[2].x, b1.points[2].y, 0)
+		},
+		//second triangle
+		{
+			Vec3(b2.points[0].x, b2.points[0].y, 0),
+			Vec3(b2.points[1].x, b2.points[1].y, 0),
+			Vec3(b2.points[2].x, b2.points[2].y, 0)
+		} 
+	};
 
 	//get medians
 	Vec3 centerA = Vec3(
@@ -56,34 +59,18 @@ bool Collider::Collided(const Body& b1, const Body& b2) {
 	//negative
 	D[1] = centerA - centerB;
 
-	// (4,3)
 	A[0] = Min(b1, D[0]);
-	// (12,8)
 	B[0] = Max(b2, D[0]);
-	// [-8, -5]
 	P[0] = Vec3(A[0] - B[0]);
 
-	//[8,4] 
-	A[1] = Min(b1, D[1]);
-	//[9,6]
-	B[1] = Max(b2, D[1]);
-	// [1,2]
-	P[1] = Vec3(A[1] - B[1]);
-
-	//[9,6]
-	A[2] = Max(b1, D[2]);
-	//[8,8]
-	B[2] = Min(b2, D[2]);
-	//1,-2
-	P[2] = Vec3(A[2] - B[2]);
+	A[1] = Max(b2, D[1]);
+	B[1] = Min(b1, D[1]);
+	P[1] = Vec3(B[1] - A[1]);
 
 	//line from P[0] to P[1]
-	// [-9, -7]
 	Vec3 line = Vec3(P[0] - P[1]);
 
-	//[9,-7]
 	N[0] = Vec3( line.x, -line.y, line.z);
-	//[-9,7]
 	N[1] = Vec3(-line.x,  line.y, line.z);
 
 	//center of P line
@@ -93,10 +80,11 @@ bool Collider::Collided(const Body& b1, const Body& b2) {
 	Vec3 originLine = Vec3(origin - medianLine);
 	
 	//normalized line
-	//[9,-7]
 	D[2] = Vec3(getCLosestToOrigin(N[0], N[1], originLine));
 
-
+	A[2] = Max(b1, D[2]);
+	B[2] = Min(b2, D[2]);
+	P[2] = Vec3(A[2] - B[2]);
 
 	dotted[0] = 
 		VMath::dot(
