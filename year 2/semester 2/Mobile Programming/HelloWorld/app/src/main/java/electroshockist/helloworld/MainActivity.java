@@ -1,6 +1,7 @@
 package electroshockist.helloworld;
 
 import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         TextView text = (TextView) findViewById(R.id.textView);
         text.setText("Button clicked " + ++totalClicks + " times.");
         //View layout = findViewById(R.id.)
-//        ConstraintLayout layout = findViewById(R.id.layout1);
-//        layout.setBackgroundColor(Color.CYAN); // feel free to use any color of your choice
+        ConstraintLayout layout = findViewById(R.id.layout1);
+        layout.setBackgroundColor(Color.CYAN); // feel free to use any color of your choice
     }
 }
