@@ -7,8 +7,16 @@ public class DataModel {
     Random r = new Random();
 
     public DataModel() {
-        this.num1 = r.nextInt(10);
-        this.num2 = r.nextInt(10);
+        rollNumbers();
+    }
+
+    public void rollNumbers(){
+        num1 = r.nextInt(10);
+        num2 = r.nextInt(10);
+
+        //reroll num 2 if they are equal
+        while(num1 == num2)num2 = r.nextInt(10);
+
         highest = Math.max(num1, num2);
     }
 
