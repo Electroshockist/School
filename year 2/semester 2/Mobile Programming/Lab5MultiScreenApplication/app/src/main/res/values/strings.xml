@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab 5: Pizza UI</string>
+    <string name="app_name">Lab 5: MultiScreen Application</string>
     <string name="title">Pizza Time!</string>
     <string name="size1">Small - 5$</string>
     <string name="size2">Medium - 7$</string>

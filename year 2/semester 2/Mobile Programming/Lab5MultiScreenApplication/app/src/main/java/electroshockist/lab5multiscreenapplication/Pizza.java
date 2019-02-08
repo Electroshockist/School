@@ -1,7 +1,6 @@
 package electroshockist.lab5multiscreenapplication;
 
 public class Pizza {
-
     private double sizePrice = 0, cheesePrice = 0, crustPrice = 0, pineapplePrice = 0;
 
     public double getSizePrice() {
@@ -36,4 +35,3 @@ public class Pizza {
         this.pineapplePrice = pineapplePrice;
     }
 }
-

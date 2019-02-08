@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".MainActivity">
 
     <TextView
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,9 +71,11 @@
             android:id="@+id/size1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/background_light"
             android:checked="false"
             android:onClick="radioClicked"
             android:text="@string/size1"
+            android:textColor="@android:color/background_light"
             tools:layout_editor_absoluteX="62dp"
             tools:layout_editor_absoluteY="139dp" />
 
@@ -80,9 +83,11 @@
             android:id="@+id/size2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/background_light"
             android:checked="false"
             android:onClick="radioClicked"
             android:text="@string/size2"
+            android:textColor="@android:color/background_light"
             tools:layout_editor_absoluteX="62dp"
             tools:layout_editor_absoluteY="220dp" />
 
@@ -90,9 +95,11 @@
             android:id="@+id/size3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/background_light"
             android:checked="false"
             android:onClick="radioClicked"
             android:text="@string/size3"
+            android:textColor="@android:color/background_light"
             tools:layout_editor_absoluteX="61dp"
             tools:layout_editor_absoluteY="180dp" />
     </RadioGroup>
@@ -102,9 +109,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
+        android:buttonTint="@android:color/background_light"
         android:checked="false"
         android:onClick="onCheckBoxClicked"
         android:text="@string/option1"
+        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="@+id/Size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Size"
@@ -115,9 +124,11 @@
         android:id="@+id/Crust"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:buttonTint="@android:color/background_light"
         android:checked="false"
         android:onClick="onCheckBoxClicked"
         android:text="@string/option2"
+        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="@+id/Size"
         app:layout_constraintStart_toStartOf="@+id/Cheese"
         app:layout_constraintTop_toBottomOf="@+id/Cheese"
@@ -127,9 +138,11 @@
         android:id="@+id/Pineapple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:buttonTint="@android:color/background_light"
         android:checked="false"
         android:onClick="onCheckBoxClicked"
         android:text="@string/option3"
+        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="@+id/Size"
         app:layout_constraintStart_toStartOf="@+id/Crust"
         app:layout_constraintTop_toBottomOf="@+id/Crust"
