@@ -8,4 +8,8 @@
     <string name="option2">Thicc Crust! - 0.50$</string>
     <string name="option3">Pineapple! - 0.25$</string>
     <string name="placeOrder">Place Order!</string>
+
+
+    <string name="title2">Receipt</string>
+    <string name="exit">Return to order</string>
 </resources>

@@ -1,7 +1,15 @@
 package electroshockist.lab5multiscreenapplication;
 
 public class Pizza {
-    private double sizePrice = 0, cheesePrice = 0, crustPrice = 0, pineapplePrice = 0;
+    private double total = 0, sizePrice = 0, cheesePrice = 0, crustPrice = 0, pineapplePrice = 0;
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
     public double getSizePrice() {
         return sizePrice;
