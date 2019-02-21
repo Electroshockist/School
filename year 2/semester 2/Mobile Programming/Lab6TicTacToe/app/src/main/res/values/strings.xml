@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Lab 6: Tic Tac Toe</string>
+    <string name="title">Tic Tac Toe</string>
+    <string name="vs">VS</string>
+    <string name="cpu">CPU</string>
+    <string name="player">Player</string>
+    <string name="symbolSelect">Choose your Symbol!</string>
 </resources>
