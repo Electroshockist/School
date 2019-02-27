@@ -1,5 +1,6 @@
 package electroshockist.lab6tictactoe;
 
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
     public void onPlay(View view) {
         if (selectedSymbol.equals(none)){
             Toast.makeText(this,"Please select a symbol",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Intent intent =
         }
     }
 
