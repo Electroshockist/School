@@ -48,7 +48,7 @@ int main(void)
 
 	cout << leaderboard.find("Canada") << endl;
 
-	system("pause");
+	getchar();
 
 	return 0;
 }

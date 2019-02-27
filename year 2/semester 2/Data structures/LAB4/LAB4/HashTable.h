@@ -169,31 +169,37 @@ class HashTable
 			
 			//BEGIN IF
 			if (size > 0) {
-
+				size = getNextPrimeNum(size * 2);
 			}
 			
 			//END IF
 
 			// Instantiate table with the new size
 			// This will create a new hash table which is double the size of the original
-			
+			table = new Node[size]();
 
 			// Create a loop to traverse all indices in the original hash table
 			// This will allow you to copy the information stored in the original hash table, and insert it into the new hash table
 			
 			//BEGIN LOOP
+			for (size_t i = 0; i < tempSize; i++) {
 				// Insert the key and value from the original hash table into the new table
 				// Use the insert method to create a new entry in the new hash table
-				
+				table[i] = tempTable[i];
+
 
 				// Erase the key from the original hash table at index i
-				
+				tempTable[i].key.clear();
+
 
 				// Erase the value from the original hash table at index i
+				tempTable[i].setValue(NULL);
+			}
 				
 			//END LOOP
 
 			// Delete the original hash table
+			delete[] tempTable;
 			
 		}
 
