@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,16 +69,24 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Please select a symbol",Toast.LENGTH_SHORT).show();
         }
         else{
-            Intent intent =
+            loadGame();
         }
+    }
+
+    private void loadGame(){
+        ToggleButton PlayerType = findViewById(R.id.PlayerType);
+
+        Intent intent = new Intent(this, Game.class);
+        intent.putExtra("PlayerType", PlayerType.getText().toString());
+        intent.putExtra("selectedSymbol", selectedSymbol);
+
+        startActivity(intent);
     }
 
     //save
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        Log.v(debugTag,"test");
 
         outState.putString("selectedSymbol", selectedSymbol);
     }
