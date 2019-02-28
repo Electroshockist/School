@@ -1,7 +1,5 @@
 package electroshockist.lab6tictactoe;
 
-import android.widget.ImageView;
-
 public class State {
     int symbol, imageID;
 

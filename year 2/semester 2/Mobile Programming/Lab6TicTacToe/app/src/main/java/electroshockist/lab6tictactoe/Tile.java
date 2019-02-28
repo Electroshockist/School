@@ -1,10 +1,14 @@
 package electroshockist.lab6tictactoe;
 
 import android.content.Context;
-import android.widget.ImageView;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class Tile {
+    private Button button;
+
     public static final int emptySymbol = 0, XSymbol = 1, OSymbol = 2;
 
     public static final State
@@ -14,26 +18,39 @@ public class Tile {
 
     public State currentState;
 
-    public Tile(){
+    public Button getButton() {
+        return button;
+    }
+
+    public Tile(Button button){
         currentState = empty;
+        this.button = button;
     }
 
     //change tile state
-    public boolean swapState(int state, Tile target, Context context){
-        if(target.currentState != empty){
+    public boolean onClick(boolean XTurn, Context context){
+        boolean returnValue;
+        if(currentState != empty){
             Toast.makeText(context,"This tile is occupied, please pick another", Toast.LENGTH_LONG).show();
-            return false;
+            returnValue = false;
         }
         else {
-            switch (state) {
-                case XSymbol:
-                    currentState = X;
-                    break;
-                case OSymbol:
-                    currentState = O;
-                    break;
+            if (XTurn){
+                changeState(X);
             }
-            return true;
+            else {
+                changeState(O);
+            }
+            returnValue = true;
+
+            Log.v(MainActivity.debugTag,Integer.toString(currentState.symbol));
         }
+
+        return returnValue;
+    }
+
+    private void changeState(State state){
+        currentState = state;
+        button.setBackgroundResource(state.imageID);
     }
 }

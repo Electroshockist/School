@@ -3,11 +3,11 @@ package electroshockist.lab6tictactoe;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 
 public class Game extends AppCompatActivity {
 
-    Tile[][] board;
+    Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,16 +18,65 @@ public class Game extends AppCompatActivity {
     }
 
     private void initializeBoard(){
-        board = new Tile[3][3];
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board.length; j++)
-                board[i][j] = new Tile();
-        }
+        Button[][] tiles = {
+                {
+                        findViewById(R.id.Grid00),
+                        findViewById(R.id.Grid01),
+                        findViewById(R.id.Grid02)
+                },
+                {
+                        findViewById(R.id.Grid10),
+                        findViewById(R.id.Grid11),
+                        findViewById(R.id.Grid12)
+                },
+                {
+                        findViewById(R.id.Grid20),
+                        findViewById(R.id.Grid21),
+                        findViewById(R.id.Grid22)
+                }
+        };
+
+        board = new Board(tiles);
     }
 
     public void onSelect(View view) {
         switch (view.getId()){
-            //case
+            case R.id.Grid00:
+                board.onClick(0,0, this);
+                break;
+
+            case R.id.Grid01:
+                board.onClick(0,1, this);
+                break;
+
+            case R.id.Grid02:
+                board.onClick(0,2, this);
+                break;
+
+            case R.id.Grid10:
+                board.onClick(1,0, this);
+                break;
+
+            case R.id.Grid11:
+                board.onClick(1,1, this);
+                break;
+
+            case R.id.Grid12:
+                board.onClick(1,2, this);
+                break;
+
+            case R.id.Grid20:
+                board.onClick(2,0, this);
+                break;
+
+            case R.id.Grid21:
+                board.onClick(2,1, this);
+                break;
+
+            case R.id.Grid22:
+                board.onClick(2,2, this);
+                break;
+
         }
     }
 }

@@ -12,14 +12,12 @@ import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String debugTag = "TicTacToeDebug";
-
-    private static final String X = "X", O = "O", none = "none";
+    public static final String debugTag = "TicTacToeDebug";
 
     int[] xImages = {R.drawable.x, R.drawable.x_unselected};
     int[] oImages = {R.drawable.o, R.drawable.o_unselected};
 
-    String selectedSymbol;
+    int selectedSymbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +28,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SelectX(View view) {
-        selectedSymbol = X;
+        selectedSymbol = Tile.XSymbol;
         resolveImages();
     }
 
     public void SelectO(View view) {
-        selectedSymbol = O;
+        selectedSymbol = Tile.OSymbol;
         resolveImages();
     }
 
     void clearSelection(){
-        selectedSymbol = none;
+        selectedSymbol = Tile.emptySymbol;
 
         ImageView ivX = findViewById(R.id.X);
         ImageView ivO = findViewById(R.id.O);
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView ivX = findViewById(R.id.X);
         ImageView ivO = findViewById(R.id.O);
 
-        if(selectedSymbol.equals(X)){
+        if(selectedSymbol == Tile.XSymbol){
             ivX.setImageResource(R.drawable.x);
             ivO.setImageResource(R.drawable.o_unselected);
         }
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlay(View view) {
-        if (selectedSymbol.equals(none)){
+        if (selectedSymbol == Tile.emptySymbol){
             Toast.makeText(this,"Please select a symbol",Toast.LENGTH_SHORT).show();
         }
         else{
@@ -88,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putString("selectedSymbol", selectedSymbol);
+        outState.putInt("selectedSymbol", selectedSymbol);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        selectedSymbol = savedInstanceState.getString("selectedSymbol");
+        selectedSymbol = savedInstanceState.getInt("selectedSymbol");
         resolveImages();
     }
 }
