@@ -1,4 +1,4 @@
-package electroshockist.lab7drawwithview;
+package electroshockist.lab7collisions;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -5,9 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.view.SurfaceView;
 import android.view.View;
 
-public class GameView extends View {
+public class GameView extends SurfaceView {
     private Bitmap duck, avocado;
     public GameView(Context context){
         super(context);
