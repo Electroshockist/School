@@ -185,7 +185,7 @@ class HashTable
 			for (size_t i = 0; i < tempSize; i++) {
 				// Insert the key and value from the original hash table into the new table
 				// Use the insert method to create a new entry in the new hash table
-				table[i] = tempTable[i];
+				insert(tempTable[i].getKey(), tempTable[i].getValue());
 
 
 				// Erase the key from the original hash table at index i
