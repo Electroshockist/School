@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CustomRigidbody : MonoBehaviour {
-    public Vector3 linA, angA;
 
-    Vector3 linV, linD, angV, angD;
+    [SerializeField]
+    private Vector3 linA, linV, angA, angV;
+    private Vector3 linD, angD;
 
     private void Start() {
         linD = transform.position;

@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GJKManager : MonoBehaviour
-{
+public class GJKManager : MonoBehaviour {
     [Serializable]
-    public struct BoxHelper
-    {
+    public struct BoxHelper {
         public GJKMesh meshGJK;
         public Transform transform;
         public Mesh meshReference;
@@ -18,9 +16,10 @@ public class GJKManager : MonoBehaviour
     public BoxHelper b;
 
     public GJKState state;
-    
-    void GJK()
-    {
+
+    public Simplex simplex;
+
+    void GJK() {
         a.meshGJK = new GJKMesh() { transform = a.transform, mesh = a.meshReference };
         b.meshGJK = new GJKMesh() { transform = b.transform, mesh = b.meshReference };
 
@@ -29,29 +28,28 @@ public class GJKManager : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
 
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         bool colliding = state.isColliding;
 
         GJK();
-    }
 
-    public Simplex simplex;
-    void GizmosDraw()
-    {
+        GizmosDraw();
+    }
+    void GizmosDraw() {
+
+        Gizmos.DrawSphere(Vector3.zero, 1);
+
         Gizmos.Clear();
 
         if (state.simplices.Count < 1)
             return;
 
-        for (int o = state.simplices.Count - 1; o > state.simplices.Count - 1; o--)
-        {
+        for (int o = state.simplices.Count - 1; o > state.simplices.Count - 1; o--) {
             simplex = state.simplices[o];
             Vector3 a = simplex.vertices[0];
 
@@ -64,17 +62,14 @@ public class GJKManager : MonoBehaviour
             Gizmos.DrawSphere(a, 0.05f);
 
             // Line Drawer
-            if (simplex.vertices.Count > 1)
-            {
-                for (int i = 1; i < simplex.vertices.Count; i++)
-                {
+            if (simplex.vertices.Count > 1) {
+                for (int i = 1; i < simplex.vertices.Count; i++) {
                     Vector3 b = simplex.vertices[i];
 
                     Gizmos.DrawSphere(b, 0.05f);
                     Gizmos.DrawLine(a, b);
 
-                    for (int j = i + 1; j < simplex.vertices.Count; j++)
-                    {
+                    for (int j = i + 1; j < simplex.vertices.Count; j++) {
                         Vector3 c = simplex.vertices[j];
 
                         Gizmos.DrawSphere(c, 0.05f);
