@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GJKManager : MonoBehaviour {
     [Serializable]
@@ -43,8 +40,6 @@ public class GJKManager : MonoBehaviour {
     void GizmosDraw() {
 
         Gizmos.DrawSphere(Vector3.zero, 1);
-
-        Gizmos.Clear();
 
         if (state.simplices.Count < 1)
             return;

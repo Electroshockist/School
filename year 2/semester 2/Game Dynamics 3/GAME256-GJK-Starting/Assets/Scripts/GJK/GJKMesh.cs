@@ -15,14 +15,14 @@ public class GJKMesh : IConvexRegion {
             //bring all vertices into V3 list
             vertices = new List<Vector3>(mesh.vertices);
         }
+        float greatest = float.PositiveInfinity;
 
         for (int i = 0; i < vertices.Count; i++) {
             //convert to world space since GJK uses world space
-            transform.TransformPoint(vertices[i]);
-            float smallest = float.PositiveInfinity;
-            float point = (direction.x * vertices[i].x) + (direction.y * vertices[i].y) + (direction.z * vertices[i].z);
-            if (point < smallest) {
-                smallest = point;
+            Vector3 tempvec = transform.TransformPoint(vertices[i]);            
+            float point = Vector3.Dot(tempvec, direction);
+            if (point > greatest) {
+                greatest = point;
                 small = vertices[i];
             }
         }

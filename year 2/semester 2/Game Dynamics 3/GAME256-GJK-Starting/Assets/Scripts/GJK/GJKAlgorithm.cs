@@ -105,9 +105,8 @@ public static class GJKAlgorithm
     /// Calculates the furthest point on the Minkowski 
     /// Sum along a given direction.
     /// </summary>
-    static Vector3 Support(IConvexRegion regionOne, IConvexRegion regionTwo, Vector3 direction, GJKState state)
-    {
-        // TODO: Get support point
-        return Vector3.zero;
+    static Vector3 Support(IConvexRegion regionOne, IConvexRegion regionTwo, Vector3 direction, GJKState state) {
+        //subtract to get different order
+        return regionOne.GetFurthestPoint(direction) + (-regionTwo.GetFurthestPoint(-direction));
     }
 }
