@@ -422,47 +422,68 @@ class BST
 		}
 
 		//Traverse pre order and use functor
-		// INSERT CODE HERE
-		void visitPreOrder(Node *node, VisitFunction f)
-		{
+  // INSERT CODE HERE
+		void visitPreOrder(Node *node, VisitFunction f) {
 			//Traverse all items in the tree by visiting the root node, then the left node, and finally the right node
-			
+			if (node == NULL)
+				return;
 
+			f(node->value);
 
+			visitPreOrder(node->left, f);
 
+			visitPreOrder(node->right, f);
 		}
 
 		//Traverse post order and use functor
 		// INSERT CODE HERE
-		void visitPostOrder(Node *node, VisitFunction f)
-		{
+		void visitPostOrder(Node *node, VisitFunction f) {
 			//Traverse all items in the tree by visiting the left node, then the right node, and finally the root node
-			
+			if (node == NULL)
+				return;
 
+			visitPostOrder(node->left, f);
 
+			visitPostOrder(node->right, f);
 
+			f(node->value);
 		}
 
 		//Traverse level order and use functor
 		// INSERT CODE HERE
-		void visitLevelOrder(Node *node, VisitFunction f)
-		{
+		void visitLevelOrder(Node *node, VisitFunction f) {
 			//Declare queue of nodes used to accumulate sibling nodes
 			//You can use STL's queue 
+			queue<Node*> queue;
 
 			//Declare a node pointer and set it to the current node
-			
+			Node* tmp = node;
+
 			//Loop until current node reaches NULL
+			while (node != NULL) {
+				//Call functor and pass current node's value as the parameter
+				f(node->value);
 
-			//Call functor and pass current node's value as the parameter
-				
-			//If the left branch is not NULL, enqueue left branch
+				//If the left branch is not NULL, enqueue left branch
+				if (node->left != NULL) {
+					queue.push(node->left);
+				}
 
-			//If the right branch is not NULL, enqueue right branch
-				
-			//If queue is not empty set current node to the front of the queue and pop from the queue
-			//Else set the current node to NULL
-				
+				//If the right branch is not NULL, enqueue right branch
+				if (node->right != NULL) {
+					queue.push(node->right);
+				}
+
+				//If queue is not empty set current node to the front of the queue and pop from the queue
+				//Else set the current node to NULL
+				if (!queue.empty()) {
+					node = queue.front();
+					queue.pop();
+				}
+				else {
+					node = NULL;
+				}
+			}
 		}
 };
 
