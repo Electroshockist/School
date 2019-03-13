@@ -2,23 +2,32 @@ package electroshockist.lab7collisions;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.util.Log;
 
-public class Image {
-    float height, width;
+class Image {
+    private float height, width;
 
-    public float x() {
-        return position[0];
+    private float[] position = new float[2];
+    private float[] velocity = new float[2];
+
+
+    private float left() {
+        return position[0] + velocity[0];
     }
-    public float y() {
-        return position[1];
+    private float top() {
+        return position[1] + velocity[1];
     }
-    public float[] position = new float[2];
-    public float[] velocity = new float[2];
 
-    Bitmap image;
+    private float right(){
+        return position[0] + velocity[0] + width;
+    }
 
-    public Image(Bitmap image,float pX, float pY,  float vX, float vY) {
+    private float bottom(){
+        return position[1] + velocity[1] + height;
+    }
+
+    private Bitmap image;
+
+    Image(Bitmap image, float pX, float pY, float vX, float vY) {
         this.image = image;
         height = image.getHeight();
         width = image.getWidth();
@@ -30,64 +39,66 @@ public class Image {
         velocity[1] = vY;
     }
 
-    public void onDraw(Canvas canvas){
+    void onDraw(Canvas canvas){
         canvas.drawBitmap(image, position[0], position[1],null);
     }
 
-    public void Move(){
+    void Move(){
         position[0] += velocity[0];
         position[1] += velocity[1];
     }
 
-    public void Physics(Canvas canvas){
-        if(position[0] <=0|| position[0] + width >= canvas.getWidth()){
-            velocity[0] *= -1;
-        }
-        if(position[1] <=0|| position[1] + height >= canvas.getHeight()){
-            velocity[1] *= -1;
-        }
+    void WallCollisions(Canvas canvas){
+        if(left() <= 0)
+            velocity[0] = Math.abs(velocity[0]);
+        if(right() >= canvas.getWidth())
+            velocity[0] = -Math.abs(velocity[0]);
+        if(top() <=0)
+            velocity[1] =Math.abs(velocity[1]);
+        if (bottom() >= canvas.getHeight())
+            velocity[1] = -Math.abs(velocity[1]);
     }
 
     private boolean isXInside(Image image2){
-        if (x() <= image2.x() + width  && x() >= image2.x() ||
+        return left() <= image2.right() && left() >= image2.left() ||
                 //y + h is between y2 and y2 + h2
-                x() + width >= image2.x() && x() + width <= image2.x() + image2.width) {
-            return true;
-        }
-        return false;
+                right() >= image2.left() && right() <= image2.right();
     }
 
     private boolean isYInside(Image image2){
         //if y is between y2 and y2 + h2 or
-        if (y() <= image2.y() + height  && y() >= image2.y() ||
+        return top() <= image2.bottom() && top() >= image2.top() ||
                 //y + h is between y2 and y2 + h2
-                position[1] + height >= image2.position[1] && position[1] + height <= image2.position[1] + image2.height) {
-            return true;
-        }
-        return false;
+                bottom() >= image2.top() && bottom() <= image2.bottom();
     }
 
     public boolean detectedCollision(Image image2){
         if (isYInside(image2)) {
             if (isXInside(image2)) {
+                interImageCollision(image2);
+                //image2.interImageCollision(this);
                 return true;
             }
         }
         return false;
     }
 
-    public void interImageCollision(Image image2){
+    private void interImageCollision(Image image2){
+        //reverse x
+        //check left
+        if (left() <= image2.left()  && right() >= image2.left())
+            velocity[0] = -Math.abs(velocity[0]);
+        //check right
+        if (left() <= image2.right()  && right() >= image2.right())
+            velocity[0] = Math.abs(velocity[0]);
 
-        //check if collision detected
-        if (detectedCollision(image2)) {
-            //reverse x
-            if (position[0] + width >= image2.position[0] && position[0] <= image2.position[0] + image2.width) {
-                velocity[0] *= -1;
-            }
-            //reverse y
-            if (position[1] + height >= image2.position[1] && position[1] <= image2.position[1] + image2.height) {
-                velocity[1] *= -1;
-            }
-        }
+        //reverse y
+        //check top
+        if (top() <= image2.top() && bottom() >= image2.top())
+            velocity[1] = -Math.abs(velocity[1]);
+
+        //check bottom
+        if (top() <= image2.bottom() && bottom() >= image2.bottom())
+            velocity[1] = Math.abs(velocity[1]);
     }
 }

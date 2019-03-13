@@ -8,18 +8,26 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameView extends SurfaceView{
     private SurfaceHolder holder;
 
-    private Image[] entities = new Image[2];
+    private List<Image> entities = new ArrayList<>();
 
     private GameThread gameThread;
+
+    boolean displayedThings = false;
 
     public GameView(Context context) {
         super(context);
 
-        entities[0] = new Image(BitmapFactory.decodeResource(getResources(),R.drawable.dvd),550,100, 5,10);
-        entities[1] = new Image(BitmapFactory.decodeResource(getResources(),R.drawable.duck),100,1000, -2,10);
+        entities.add(new Image(BitmapFactory.decodeResource(getResources(),R.drawable.dvd),550,100, 5,10));
+        entities.add(new Image(BitmapFactory.decodeResource(getResources(),R.drawable.duck),100,1000, -2,10));
+        entities.add(new Image(BitmapFactory.decodeResource(getResources(),R.drawable.dvd),750,250, 5,-7));
+        entities.add(new Image(BitmapFactory.decodeResource(getResources(),R.drawable.duck),400,1000, -2,10));
+//        entities[4] = new Image(BitmapFactory.decodeResource(getResources(),R.drawable.dvd),250,250, 5,10);
 
         gameThread = new GameThread(this);
 
@@ -61,16 +69,20 @@ public class GameView extends SurfaceView{
     protected void onDraw(Canvas canvas){
         if(canvas != null){
             canvas.drawColor(Color.WHITE);
-            Log.v("debugger", Float.toString(entities[0].position[0]));
 
-            for(int i = 0; i < entities.length; i++){
-                entities[i].onDraw(canvas);
-                entities[i].Physics(canvas);
-                entities[i].Move();
+            for(int i = 0; i < entities.size(); i++){
+                entities.get(i).onDraw(canvas);
+                entities.get(i).WallCollisions(canvas);
+
+                for (int j = 0; j < entities.size(); j++) {
+                    if(i!= j) {
+                        if(!displayedThings) Log.v("lel", Integer.toString(i) + ", " + Integer.toString(j));
+                        entities.get(i).detectedCollision(entities.get(j));
+                    }
+                }
+                entities.get(i).Move();
             }
-            entities[0].interImageCollision(entities[1]);
-            entities[1].interImageCollision(entities[0]);
-
+            displayedThings = true;
         }
     }
 
