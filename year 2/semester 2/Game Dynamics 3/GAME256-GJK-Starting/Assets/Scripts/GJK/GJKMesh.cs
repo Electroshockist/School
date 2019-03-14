@@ -8,25 +8,24 @@ public class GJKMesh : IConvexRegion {
 
     public Vector3 GetFurthestPoint(Vector3 direction) {
         // TODO: Implement support point function for mesh
-
-        Vector3 small = Vector3.zero;
-
+        // GetFurthest Point in Direction
         if (vertices == null) {
-            //bring all vertices into V3 list
             vertices = new List<Vector3>(mesh.vertices);
         }
-        float greatest = float.PositiveInfinity;
 
-        for (int i = 0; i < vertices.Count; i++) {
-            //convert to world space since GJK uses world space
-            Vector3 tempvec = transform.TransformPoint(vertices[i]);            
-            float point = Vector3.Dot(tempvec, direction);
-            if (point > greatest) {
-                greatest = point;
-                small = vertices[i];
+        float highestNum = -1;
+        Vector3 farthestPoint = Vector3.zero;
+        float dotProduct = 0;
+
+        for (int i = 0; i < mesh.vertices.Length; i++) {
+            Vector3 point = transform.TransformPoint(vertices[i]);
+            dotProduct = Vector3.Dot(point, direction);
+            if (dotProduct > highestNum) {
+                highestNum = dotProduct;
+                farthestPoint = point;
             }
         }
 
-        return small;
+        return farthestPoint;
     }
 }

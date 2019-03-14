@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-public static class GJKAlgorithm
-{
-    public static bool Intersects(IConvexRegion regionOne, Transform oneTrans, IConvexRegion regionTwo, Transform twoTrans, GJKState state)
-    {
+public static class GJKAlgorithm {
+    public static bool Intersects(IConvexRegion regionOne, Transform oneTrans, IConvexRegion regionTwo, Transform twoTrans, GJKState state) {
         // Get an initial point on the Minkowski difference.
         Vector3 s = Support(regionOne, regionTwo, twoTrans.position - oneTrans.position, state);
 
@@ -19,15 +17,13 @@ public static class GJKAlgorithm
         // infinite loop during a non-convergent search.
         int maxIterations = 32;
 
-        for (int i = 0; i < maxIterations; i++)
-        {
+        for (int i = 0; i < maxIterations; i++) {
             // Get our next simplex point toward the origin.
             Vector3 a = Support(regionOne, regionTwo, d, state);
 
             // If we move toward the origin and didn't pass it 
             // then we never will and there's no intersection.
-            if (a.IsInOppositeDirection(d))
-            {
+            if (a.IsInOppositeDirection(d)) {
                 return false;
             }
 
@@ -37,8 +33,7 @@ public static class GJKAlgorithm
             // Here we either find a collision or we find the closest feature of
             // the simplex to the origin, make that the new simplex and update the direction
             // to move toward the origin from that feature.
-            if (ProcessSimplex(simplex, ref d))
-            {
+            if (ProcessSimplex(simplex, ref d)) {
                 return true;
             }
         }
@@ -52,18 +47,14 @@ public static class GJKAlgorithm
     /// Finds a collision or the closest feature of the simplex to the origin, 
     /// and updates the simplex and direction.
     /// </summary>
-    static bool ProcessSimplex(Simplex simplex, ref Vector3 direction)
-    {
-        if (simplex.Count == 2)
-        {
+    static bool ProcessSimplex(Simplex simplex, ref Vector3 direction) {
+        if (simplex.Count == 2) {
             return ProcessLine(simplex, ref direction);
         }
-        else if (simplex.Count == 3)
-        {
+        else if (simplex.Count == 3) {
             return ProcessTriangle(simplex, ref direction);
         }
-        else
-        {
+        else {
             return ProcessTetrehedron(simplex, ref direction);
         }
     }
@@ -73,8 +64,7 @@ public static class GJKAlgorithm
     /// the origin is in, utilizing the preserved winding
     /// of the simplex to eliminate certain regions.
     /// </summary>
-    static bool ProcessLine(Simplex simplex, ref Vector3 direction)
-    {
+    static bool ProcessLine(Simplex simplex, ref Vector3 direction) {
         // TODO: Process Line
         return false;
     }
@@ -84,8 +74,7 @@ public static class GJKAlgorithm
     /// the origin is in, utilizing the preserved winding
     /// of the simplex to eliminate certain regions.
     /// </summary>
-    static bool ProcessTriangle(Simplex simplex, ref Vector3 direction)
-    {
+    static bool ProcessTriangle(Simplex simplex, ref Vector3 direction) {
         // TODO: Process Triangle
         return false;
     }
@@ -95,8 +84,7 @@ public static class GJKAlgorithm
     /// the origin is in, utilizing the preserved winding
     /// of the simplex to eliminate certain regions.
     /// </summary>
-    static bool ProcessTetrehedron(Simplex simplex, ref Vector3 direction)
-    {
+    static bool ProcessTetrehedron(Simplex simplex, ref Vector3 direction) {
         // TODO: Process Tetrahedron
         return false;
     }
@@ -106,7 +94,11 @@ public static class GJKAlgorithm
     /// Sum along a given direction.
     /// </summary>
     static Vector3 Support(IConvexRegion regionOne, IConvexRegion regionTwo, Vector3 direction, GJKState state) {
-        //subtract to get different order
-        return regionOne.GetFurthestPoint(direction) + (-regionTwo.GetFurthestPoint(-direction));
+        // TODO: Get support point
+        Vector3 supportPoint = Vector3.zero;
+        // A + (-B)
+        supportPoint = regionOne.GetFurthestPoint(direction) + (-1 * regionTwo.GetFurthestPoint(-1 * direction));
+        state.searchedSum.Add(supportPoint);
+        return supportPoint;
     }
 }
