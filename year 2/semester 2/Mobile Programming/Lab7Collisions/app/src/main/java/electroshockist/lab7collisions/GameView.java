@@ -1,6 +1,7 @@
 package electroshockist.lab7collisions;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,16 +19,14 @@ public class GameView extends SurfaceView{
 
     private GameThread gameThread;
 
-    boolean displayedThings = false;
-
     public GameView(Context context) {
         super(context);
 
-        entities.add(new Image(BitmapFactory.decodeResource(getResources(),R.drawable.dvd),550,100, 5,10));
-        entities.add(new Image(BitmapFactory.decodeResource(getResources(),R.drawable.duck),100,1000, -2,10));
-        entities.add(new Image(BitmapFactory.decodeResource(getResources(),R.drawable.dvd),750,250, 5,-7));
-        entities.add(new Image(BitmapFactory.decodeResource(getResources(),R.drawable.duck),400,1000, -2,10));
-//        entities[4] = new Image(BitmapFactory.decodeResource(getResources(),R.drawable.dvd),250,250, 5,10);
+        entities.add(new Image(DecodeBitmap(R.drawable.dvd),100,100, 10,0));
+        entities.add(new Image(DecodeBitmap(R.drawable.duck),500,100, -10,0));
+//        entities.add(new Image(DecodeBitmap(R.drawable.dvd),750,250, 5,-7));
+//        entities.add(new Image(DecodeBitmap(R.drawable.duck),400,1000, -2,-10));
+//        entities.add(new Image(DecodeBitmap(R.drawable.duck),100,1500, 5,-2));
 
         gameThread = new GameThread(this);
 
@@ -72,18 +71,21 @@ public class GameView extends SurfaceView{
 
             for(int i = 0; i < entities.size(); i++){
                 entities.get(i).onDraw(canvas);
-                entities.get(i).WallCollisions(canvas);
 
-                for (int j = 0; j < entities.size(); j++) {
-                    if(i!= j) {
-                        if(!displayedThings) Log.v("lel", Integer.toString(i) + ", " + Integer.toString(j));
-                        entities.get(i).detectedCollision(entities.get(j));
+                for (int j = i + 1; j < entities.size(); j++) {
+                    if(entities.get(i).detectedCollision(entities.get(j))){
+                        Log.v("lel", Integer.toString(i) + " " + Integer.toString(j) + " collided!");
                     }
+                    entities.get(i).interImageCollision(entities.get(j));
                 }
+                entities.get(i).WallCollisions(canvas);
                 entities.get(i).Move();
             }
-            displayedThings = true;
         }
+    }
+
+    private Bitmap DecodeBitmap(int drawable){
+        return  BitmapFactory.decodeResource(getResources(), drawable);
     }
 
 

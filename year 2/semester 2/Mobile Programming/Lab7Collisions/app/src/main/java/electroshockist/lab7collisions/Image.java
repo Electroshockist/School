@@ -75,30 +75,56 @@ class Image {
     public boolean detectedCollision(Image image2){
         if (isYInside(image2)) {
             if (isXInside(image2)) {
-                interImageCollision(image2);
-                //image2.interImageCollision(this);
                 return true;
             }
         }
         return false;
     }
 
-    private void interImageCollision(Image image2){
-        //reverse x
-        //check left
-        if (left() <= image2.left()  && right() >= image2.left())
-            velocity[0] = -Math.abs(velocity[0]);
-        //check right
-        if (left() <= image2.right()  && right() >= image2.right())
-            velocity[0] = Math.abs(velocity[0]);
+    public void interImageCollision(Image image2) {
+        if (detectedCollision(image2)) {
+            //reverse x
+            //check left
+            if (position[0] <= image2.position[0] && position[0] + width >= image2.position[0]) {
+                velocity[0] = -Math.abs(velocity[0]);
+                image2.velocity[0] = -Math.abs(image2.velocity[0]);
+            }
 
-        //reverse y
-        //check top
-        if (top() <= image2.top() && bottom() >= image2.top())
-            velocity[1] = -Math.abs(velocity[1]);
+            //check right
+            if (position[0] <= image2.position[0] + width && position[0] + width >= image2.position[0] + width){
+                velocity[0] = Math.abs(velocity[0]);
+                image2.velocity[0] = Math.abs(image2.velocity[0]);
+            }
 
-        //check bottom
-        if (top() <= image2.bottom() && bottom() >= image2.bottom())
-            velocity[1] = Math.abs(velocity[1]);
+            //reverse y
+            //check top
+            if (top() <= image2.top() && bottom() >= image2.top()){
+
+                velocity[1] = -Math.abs(velocity[1]);
+                image2.velocity[1] = -Math.abs(image2.velocity[1]);
+            }
+
+            //check bottom
+            if (top() <= image2.bottom() && bottom() >= image2.bottom()) {
+                velocity[1] = Math.abs(velocity[1]);
+                image2.velocity[1] = -Math.abs(image2.velocity[1]);
+            }
+        }
+    }
+
+    private void setXVelocityPositive(){
+        velocity[0] = Math.abs(velocity[0]);
+    }
+
+    private void setXVelocityNegative(){
+        velocity[0] = -Math.abs(velocity[0]);
+    }
+
+    private void setYVelocityPositive(){
+        velocity[1] = Math.abs(velocity[1]);
+    }
+
+    private void setYVelocityNegative(){
+        velocity[1] = -Math.abs(velocity[1]);
     }
 }
