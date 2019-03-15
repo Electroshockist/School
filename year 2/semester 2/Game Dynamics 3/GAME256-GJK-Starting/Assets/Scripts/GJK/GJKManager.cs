@@ -39,7 +39,6 @@ public class GJKManager : MonoBehaviour {
         GizmosDraw();
     }
 
-    private Vector3 direction;
     public Simplex simplex;
     void GizmosDraw() {
         // Minkowski Sum
@@ -52,14 +51,14 @@ public class GJKManager : MonoBehaviour {
         }
 
         // Support Function
-        Vector3 pointA = a.meshGJK.GetFurthestPoint(direction);
-        Vector3 pointB = b.meshGJK.GetFurthestPoint(-1 * direction);
+        Vector3 pointA = a.meshGJK.GetFurthestPoint(GJKAlgorithm.direction.normalized);
+        Vector3 pointB = b.meshGJK.GetFurthestPoint(-1 * GJKAlgorithm.direction.normalized);
         Gizmos.DrawSphere(pointA, 0.05f);
         Gizmos.DrawSphere(pointB, 0.05f);
         Gizmos.DrawLine(pointA, pointB);
 
         Gizmos.NewLine();
-        Gizmos.DrawLine(Vector3.zero, direction);
+        Gizmos.DrawLine(Vector3.zero, GJKAlgorithm.direction);
 
         // Drawing Simplicies
         if (state.simplices.Count < 1)
@@ -97,23 +96,5 @@ public class GJKManager : MonoBehaviour {
 
         Gizmos.color = Color.white;
         Gizmos.DrawSphere(Vector3.zero, 0.05f);
-    }
-
-    public void SetDirectionX(string s) {
-        float x;
-        float.TryParse(s, out x);
-        direction = new Vector3(x, direction.y, direction.z);
-    }
-
-    public void SetDirectionY(string s) {
-        float y;
-        float.TryParse(s, out y);
-        direction = new Vector3(direction.x, y, direction.z);
-    }
-
-    public void SetDirectionZ(string s) {
-        float z;
-        float.TryParse(s, out z);
-        direction = new Vector3(direction.x, direction.y, z);
     }
 }
