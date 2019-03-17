@@ -3,3 +3,5 @@
 *Saved/Config/
 *Saved/Logs/
 *Intermediate/
+*.ini
+*.log
