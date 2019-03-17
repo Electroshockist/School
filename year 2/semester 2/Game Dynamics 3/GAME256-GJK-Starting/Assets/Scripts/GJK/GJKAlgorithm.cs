@@ -1,6 +1,25 @@
 ﻿using UnityEngine;
 
 public static class GJKAlgorithm {
+    public static Vector3 direction;
+    //public void SetDirectionX(string s) {
+    //    float x;
+    //    float.TryParse(s, out x);
+    //    direction = new Vector3(x, direction.y, direction.z);
+    //}
+
+    //public void SetDirectionY(string s) {
+    //    float y;
+    //    float.TryParse(s, out y);
+    //    direction = new Vector3(direction.x, y, direction.z);
+    //}
+
+    //public void SetDirectionZ(string s) {
+    //    float z;
+    //    float.TryParse(s, out z);
+    //    direction = new Vector3(direction.x, direction.y, z);
+    //}
+
     public static bool Intersects(IConvexRegion regionOne, Transform oneTrans, IConvexRegion regionTwo, Transform twoTrans, GJKState state) {
         // Get an initial point on the Minkowski difference.
         Vector3 s = Support(regionOne, regionTwo, twoTrans.position - oneTrans.position, state);
@@ -9,7 +28,7 @@ public static class GJKAlgorithm {
         Simplex simplex = new Simplex(s);
 
         // TODO: Choose an initial direction.
-        Vector3 d = Vector3.zero;
+        direction = twoTrans.position - oneTrans.position;
 
         state.simplices.Add(new Simplex(simplex.vertices.ToArray()));
 
@@ -19,11 +38,11 @@ public static class GJKAlgorithm {
 
         for (int i = 0; i < maxIterations; i++) {
             // Get our next simplex point toward the origin.
-            Vector3 a = Support(regionOne, regionTwo, d, state);
+            Vector3 a = Support(regionOne, regionTwo, direction, state);
 
             // If we move toward the origin and didn't pass it 
             // then we never will and there's no intersection.
-            if (a.IsInOppositeDirection(d)) {
+            if (a.IsInOppositeDirection(direction)) {
                 return false;
             }
 
@@ -33,7 +52,7 @@ public static class GJKAlgorithm {
             // Here we either find a collision or we find the closest feature of
             // the simplex to the origin, make that the new simplex and update the direction
             // to move toward the origin from that feature.
-            if (ProcessSimplex(simplex, ref d)) {
+            if (ProcessSimplex(simplex, ref direction)) {
                 return true;
             }
         }

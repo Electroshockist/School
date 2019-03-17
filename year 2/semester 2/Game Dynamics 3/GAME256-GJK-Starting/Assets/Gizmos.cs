@@ -29,15 +29,17 @@ public class Gizmos : MonoBehaviour
         if (Active.lines.Count < 1)
             NewLine();
 
-        if (Active.line.positionCount < 1 || Active.line.GetPosition(Active.line.positionCount - 1) != start)
+        LineRenderer tempActive = Active.lines[activeLine];
+
+        if (tempActive.positionCount < 1 || tempActive.GetPosition(tempActive.positionCount - 1) != start)
         {
-            Active.line.positionCount++;
-            Active.line.SetPosition(Active.line.positionCount - 1, start);
+            tempActive.positionCount++;
+            tempActive.SetPosition(tempActive.positionCount - 1, start);
         }
 
-        Active.line.positionCount++;
-        Active.line.startColor = Active.line.endColor = color;
-        Active.line.SetPosition(Active.line.positionCount - 1, end);
+        tempActive.positionCount++;
+        tempActive.startColor = tempActive.endColor = color;
+        tempActive.SetPosition(tempActive.positionCount - 1, end);
     }
 
     public static void NewLine()
