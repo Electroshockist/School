@@ -73,12 +73,7 @@ class Image {
     }
 
     public boolean detectedCollision(Image image2){
-        if (isYInside(image2)) {
-            if (isXInside(image2)) {
-                return true;
-            }
-        }
-        return false;
+        return (isYInside(image2)&& isXInside(image2));
     }
 
     public void interImageCollision(Image image2) {
