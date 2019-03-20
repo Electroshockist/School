@@ -4,122 +4,130 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 class Image {
+    //stores image width and height in shorter variables
     private float height, width;
 
-    private float[] position = new float[2];
-    private float[] velocity = new float[2];
+    //position vector
+    private Vector2 position;
+    private Vector2 velocity;
 
 
+    //quick access for the next self's left side position next frame
     private float left() {
-        return position[0] + velocity[0];
+        return position.x + velocity.x;
     }
+    //quick access for the next self's top side position next frame
     private float top() {
-        return position[1] + velocity[1];
+        return position.y + velocity.y;
     }
-
+    //quick access for the next self's right side position next frame
     private float right(){
-        return position[0] + velocity[0] + width;
+        return position.x + velocity.x + width;
     }
-
+    //quick access for the next self's bottom side position next frame
     private float bottom(){
-        return position[1] + velocity[1] + height;
+        return position.y + velocity.y + height;
     }
 
     private Bitmap image;
 
+    //constructor (set default values)
     Image(Bitmap image, float pX, float pY, float vX, float vY) {
         this.image = image;
         height = image.getHeight();
         width = image.getWidth();
 
-        position[0] = pX;
-        position[1] = pY;
-
-        velocity[0] = vX;
-        velocity[1] = vY;
+        position = new Vector2(pX, pY);
+        velocity = new Vector2(vX, vY);
     }
 
+    //draw self
     void onDraw(Canvas canvas){
-        canvas.drawBitmap(image, position[0], position[1],null);
+        canvas.drawBitmap(image, position.x, position.y,null);
     }
 
+    //move self
     void Move(){
-        position[0] += velocity[0];
-        position[1] += velocity[1];
+        position.x += velocity.x;
+        position.y += velocity.y;
     }
 
+    //check border collisions
     void WallCollisions(Canvas canvas){
+        //check left border
         if(left() <= 0)
-            velocity[0] = Math.abs(velocity[0]);
+            setXVelocityPositive();
+        //check right border
         if(right() >= canvas.getWidth())
-            velocity[0] = -Math.abs(velocity[0]);
+            setXVelocityNegative();
+        //check top border
         if(top() <=0)
-            velocity[1] =Math.abs(velocity[1]);
+            setYVelocityPositive();
+        //check border
         if (bottom() >= canvas.getHeight())
-            velocity[1] = -Math.abs(velocity[1]);
+            setYVelocityNegative();
     }
 
+    //check if self's x values are between given image's x values
     private boolean isXInside(Image image2){
+        //where 2 denotes image2
+        //if left is between left2 and right2 or
         return left() <= image2.right() && left() >= image2.left() ||
-                //y + h is between y2 and y2 + h2
+                //right is between left2 and right2
                 right() >= image2.left() && right() <= image2.right();
     }
 
+    //check if self's y values are between given image's y values
     private boolean isYInside(Image image2){
-        //if y is between y2 and y2 + h2 or
+        //where 2 denotes image2
+        //if top is between top2 and bottom2 or
         return top() <= image2.bottom() && top() >= image2.top() ||
-                //y + h is between y2 and y2 + h2
+                //bottom is between top2 and bottom2
                 bottom() >= image2.top() && bottom() <= image2.bottom();
     }
 
-    public boolean detectedCollision(Image image2){
+    //check if a collision has been detected
+    boolean detectedCollision(Image image2){
         return (isYInside(image2)&& isXInside(image2));
     }
 
-    public void interImageCollision(Image image2) {
+    //check collision between self and given image
+    void interImageCollision(Image image2) {
         if (detectedCollision(image2)) {
-            //reverse x
+            ////reverse x////
             //check left
-            if (position[0] <= image2.position[0] && position[0] + width >= image2.position[0]) {
-                velocity[0] = -Math.abs(velocity[0]);
-                image2.velocity[0] = -Math.abs(image2.velocity[0]);
+            if (left() <= image2.left() && right() >= image2.left()) {
+                setXVelocityNegative();
             }
 
             //check right
-            if (position[0] <= image2.position[0] + width && position[0] + width >= image2.position[0] + width){
-                velocity[0] = Math.abs(velocity[0]);
-                image2.velocity[0] = Math.abs(image2.velocity[0]);
+            if (left() <= image2.right() && right() >= image2.right()){
+                setXVelocityPositive();
             }
 
-            //reverse y
+            ////reverse y////
             //check top
             if (top() <= image2.top() && bottom() >= image2.top()){
-
-                velocity[1] = -Math.abs(velocity[1]);
-                image2.velocity[1] = -Math.abs(image2.velocity[1]);
+                setYVelocityNegative();
             }
 
             //check bottom
             if (top() <= image2.bottom() && bottom() >= image2.bottom()) {
-                velocity[1] = Math.abs(velocity[1]);
-                image2.velocity[1] = -Math.abs(image2.velocity[1]);
+                setYVelocityPositive();
             }
         }
     }
 
+
+    //set absolute velocity
     private void setXVelocityPositive(){
-        velocity[0] = Math.abs(velocity[0]);
+        velocity.x = Math.abs(velocity.x);
     }
-
     private void setXVelocityNegative(){
-        velocity[0] = -Math.abs(velocity[0]);
+        velocity.x = -Math.abs(velocity.x);
     }
-
-    private void setYVelocityPositive(){
-        velocity[1] = Math.abs(velocity[1]);
-    }
-
+    private void setYVelocityPositive() { velocity.y = Math.abs(velocity.y); }
     private void setYVelocityNegative(){
-        velocity[1] = -Math.abs(velocity[1]);
+        velocity.y = -Math.abs(velocity.y);
     }
 }

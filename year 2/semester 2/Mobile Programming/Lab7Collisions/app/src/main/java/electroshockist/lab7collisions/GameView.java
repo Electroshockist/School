@@ -22,11 +22,12 @@ public class GameView extends SurfaceView{
     public GameView(Context context) {
         super(context);
 
-        entities.add(new Image(DecodeBitmap(R.drawable.dvd),100,100, 10,0));
-        entities.add(new Image(DecodeBitmap(R.drawable.duck),500,100, -10,0));
-//        entities.add(new Image(DecodeBitmap(R.drawable.dvd),750,250, 5,-7));
-//        entities.add(new Image(DecodeBitmap(R.drawable.duck),400,1000, -2,-10));
-//        entities.add(new Image(DecodeBitmap(R.drawable.duck),100,1500, 5,-2));
+        //istantiate 5 entities
+        entities.add(new Image(DecodeBitmap(R.drawable.dvd),200,1000, 2,-1));
+        entities.add(new Image(DecodeBitmap(R.drawable.duck),700,1000, -3,1));
+        entities.add(new Image(DecodeBitmap(R.drawable.dvd),750,250, 5,-7));
+        entities.add(new Image(DecodeBitmap(R.drawable.duck),400,1000, -2,-10));
+        entities.add(new Image(DecodeBitmap(R.drawable.duck),100,1500, 5,-2));
 
         gameThread = new GameThread(this);
 
@@ -69,14 +70,18 @@ public class GameView extends SurfaceView{
         if(canvas != null){
             canvas.drawColor(Color.WHITE);
 
+            //loop through first set of entities
             for(int i = 0; i < entities.size(); i++){
                 entities.get(i).onDraw(canvas);
 
-                for (int j = i + 1; j < entities.size(); j++) {
-                    if(entities.get(i).detectedCollision(entities.get(j))){
-                        Log.v("lel", Integer.toString(i) + " " + Integer.toString(j) + " collided!");
+                //check each entity against the first set
+                for (int j = 0; j < entities.size(); j++) {
+
+                    //do not check self
+                    if (i != j) {
+                        //do collision response if colliding
+                        entities.get(i).interImageCollision(entities.get(j));
                     }
-                    entities.get(i).interImageCollision(entities.get(j));
                 }
                 entities.get(i).WallCollisions(canvas);
                 entities.get(i).Move();
@@ -84,6 +89,7 @@ public class GameView extends SurfaceView{
         }
     }
 
+    //shortform
     private Bitmap DecodeBitmap(int drawable){
         return  BitmapFactory.decodeResource(getResources(), drawable);
     }
