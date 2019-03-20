@@ -1,25 +1,34 @@
 package electroshockist.lab7collisions;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.Log;
+import android.media.MediaPlayer;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameView extends SurfaceView{
     private SurfaceHolder holder;
 
-    private Image[] entities = new Image[2];
+    private List<Entity> entities = new ArrayList<>();
 
     private GameThread gameThread;
 
     public GameView(Context context) {
         super(context);
 
-        entities[0] = new Image(BitmapFactory.decodeResource(getResources(),R.drawable.dvd),550,100, 5,10);
-        entities[1] = new Image(BitmapFactory.decodeResource(getResources(),R.drawable.duck),100,1000, -2,10);
+        //istantiate 5 entities
+        entities.add(friendlyFactory(200,1000, 2,-1));
+        entities.add(enemyFactory(700,800, -3,1));
+        entities.add(friendlyFactory(750,250, 5,-7));
+        entities.add(friendlyFactory(400,100, -2,-10));
+        entities.add(enemyFactory(100,1500, 5,-2));
 
         gameThread = new GameThread(this);
 
@@ -56,23 +65,59 @@ public class GameView extends SurfaceView{
             }
         });
     }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        MediaPlayer mediaPlayer;
+        Entity entity;
+
+        //iterate backwards through entities to get the last one rendered that was touched
+        for (int i = entities.size(); i > 0; i--) {
+            entity = entities.get(i);
+            if (entity.detectedPointInside(new Vector2(event.getX(),event.getY()))) {
+
+                // remove entity from the entities list
+                entities.remove(entity);
+                break;
+            }
+
+        }
+        return super.onTouchEvent(event); // has to be returned by this method
+    }
 
     @Override
     protected void onDraw(Canvas canvas){
         if(canvas != null){
             canvas.drawColor(Color.WHITE);
-            Log.v("debugger", Float.toString(entities[0].position[0]));
 
-            for(int i = 0; i < entities.length; i++){
-                entities[i].onDraw(canvas);
-                entities[i].Physics(canvas);
-                entities[i].Move();
+            //loop through first set of entities
+            for(int i = 0; i < entities.size(); i++){
+                entities.get(i).onDraw(canvas);
+
+                //check each entity against the first set
+                for (int j = 0; j < entities.size(); j++) {
+
+                    //do not check self
+                    if (i != j) {
+                        //do collision response if colliding
+                        entities.get(i).interImageCollision(entities.get(j));
+                    }
+                }
+                entities.get(i).WallCollisions(canvas);
+                entities.get(i).Move();
             }
-            entities[0].interImageCollision(entities[1]);
-            entities[1].interImageCollision(entities[0]);
-
         }
     }
 
+    //shortform
+    public Bitmap DecodeBitmap(int drawable){
+        return  BitmapFactory.decodeResource(getResources(), drawable);
+    }
 
+    private Enemy enemyFactory(float pX, float pY, float vX, float vY){
+        return new Enemy(DecodeBitmap(Enemy.imageID), pX, pY, vX,vY);
+    }
+
+    private Friendly friendlyFactory(float pX, float pY, float vX, float vY){
+        return new Friendly(DecodeBitmap(Friendly.imageID), pX, pY, vX,vY);
+    }
 }
