@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -71,9 +72,10 @@ public class GameView extends SurfaceView{
         Entity entity;
 
         //iterate backwards through entities to get the last one rendered that was touched
-        for (int i = entities.size(); i > 0; i--) {
+        for (int i = entities.size()-1; i >= 0; i--) {
             entity = entities.get(i);
             if (entity.detectedPointInside(new Vector2(event.getX(),event.getY()))) {
+                Log.v("lel", Integer.toString(i));
 
                 // remove entity from the entities list
                 entities.remove(entity);
@@ -114,10 +116,10 @@ public class GameView extends SurfaceView{
     }
 
     private Enemy enemyFactory(float pX, float pY, float vX, float vY){
-        return new Enemy(DecodeBitmap(Enemy.imageID), pX, pY, vX,vY);
+        return new Enemy(DecodeBitmap(Variables.ENEMYIMAGE.getID()), pX, pY, vX,vY);
     }
 
     private Friendly friendlyFactory(float pX, float pY, float vX, float vY){
-        return new Friendly(DecodeBitmap(Friendly.imageID), pX, pY, vX,vY);
+        return new Friendly(DecodeBitmap(Variables.FRIENDLYIMAGE.getID()), pX, pY, vX,vY);
     }
 }

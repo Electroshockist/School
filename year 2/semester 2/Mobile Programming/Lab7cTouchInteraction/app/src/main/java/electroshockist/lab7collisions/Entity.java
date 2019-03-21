@@ -38,6 +38,8 @@ abstract class Entity {
 
     //constructor (set default values)
     Entity(Bitmap image, float pX, float pY, float vX, float vY) {
+        this.image = image;
+
         height = image.getHeight();
         width = image.getWidth();
 

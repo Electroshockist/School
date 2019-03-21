@@ -1,6 +1,14 @@
 package electroshockist.lab7collisions;
 
-public final class Variables {
-    private static final int enemyImageId = R.drawable.dvd;
-    private static final int friendlyImageId = R.drawable.duck;
+public enum Variables {
+    ENEMYIMAGE(R.drawable.dvd), FRIENDLYIMAGE(R.drawable.duck);
+
+    private int id;
+
+    Variables(int id) {
+        this.id = id;
+    }
+
+    public int getID() { return id; }
+
 }
