@@ -21,8 +21,11 @@ public class GameView extends SurfaceView{
 
     private GameThread gameThread;
 
+    private Context myContext;
+
     public GameView(Context context) {
         super(context);
+        myContext = context;
 
         //istantiate 5 entities
         entities.add(friendlyFactory(200,1000, 2,-1));
@@ -66,9 +69,9 @@ public class GameView extends SurfaceView{
             }
         });
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        MediaPlayer mediaPlayer;
         Entity entity;
 
         //iterate backwards through entities to get the last one rendered that was touched
@@ -76,6 +79,9 @@ public class GameView extends SurfaceView{
             entity = entities.get(i);
             if (entity.detectedPointInside(new Vector2(event.getX(),event.getY()))) {
                 Log.v("lel", Integer.toString(i));
+
+                MediaPlayer mediaPlayer = MediaPlayer.create(myContext, entity.DeathSound);
+                mediaPlayer.start();
 
                 // remove entity from the entities list
                 entities.remove(entity);
@@ -116,10 +122,10 @@ public class GameView extends SurfaceView{
     }
 
     private Enemy enemyFactory(float pX, float pY, float vX, float vY){
-        return new Enemy(DecodeBitmap(Variables.ENEMYIMAGE.getID()), pX, pY, vX,vY);
+        return new Enemy(DecodeBitmap(Variables.ImageIDs.ENEMYIMAGE.getID()), pX, pY, vX,vY);
     }
 
     private Friendly friendlyFactory(float pX, float pY, float vX, float vY){
-        return new Friendly(DecodeBitmap(Variables.FRIENDLYIMAGE.getID()), pX, pY, vX,vY);
+        return new Friendly(DecodeBitmap(Variables.ImageIDs.FRIENDLYIMAGE.getID()), pX, pY, vX,vY);
     }
 }
