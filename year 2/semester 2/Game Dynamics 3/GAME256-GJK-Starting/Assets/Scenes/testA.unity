@@ -273,10 +273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56075e315ba59c46b67d01843136753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linA: {x: -1, y: 0, z: 0}
-  linV: {x: 0, y: 0, z: 0}
-  angA: {x: 1, y: 1, z: 0}
-  angV: {x: 0, y: 0, z: 0}
+  linA: {x: 0, y: 0, z: 0}
+  linV: {x: -1, y: 0, z: 0}
+  angA: {x: 0, y: 0, z: 0}
+  angV: {x: 1, y: 1, z: 0}
 --- !u!65 &591136622
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -519,10 +519,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56075e315ba59c46b67d01843136753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linA: {x: 1, y: 0, z: 0}
-  linV: {x: 0, y: 0, z: 0}
-  angA: {x: -1, y: 1, z: 0}
-  angV: {x: 0, y: 0, z: 0}
+  linA: {x: 0, y: 0, z: 0}
+  linV: {x: 1, y: 0, z: 0}
+  angA: {x: 0, y: 0, z: 0}
+  angV: {x: -1, y: 1, z: 0}
 --- !u!65 &1784853857
 BoxCollider:
   m_ObjectHideFlags: 0

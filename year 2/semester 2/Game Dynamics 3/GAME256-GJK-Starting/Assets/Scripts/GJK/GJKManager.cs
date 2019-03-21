@@ -44,20 +44,25 @@ public class GJKManager : MonoBehaviour {
         // Minkowski Sum
         // Draw all the points in state.searchedSum
         // Iterate across mesh A iterate across mesh B and determine the Minkowski Sum
+        Gizmos.color = Color.yellow;
         foreach (Vector3 A in a.meshReference.vertices) {
             foreach (Vector3 B in b.meshReference.vertices) {
-                Gizmos.DrawSphere(a.transform.TransformPoint(A) + b.transform.TransformPoint(-B), 0.02f);
+                Gizmos.DrawSphere(a.transform.TransformPoint(A) + -b.transform.TransformPoint(B), 0.02f);
             }
         }
 
         // Support Function
-        Vector3 pointA = a.meshGJK.GetFurthestPoint(GJKAlgorithm.direction.normalized);
-        Vector3 pointB = b.meshGJK.GetFurthestPoint(-1 * GJKAlgorithm.direction.normalized);
+        Vector3 pointA = a.meshGJK.GetFurthestPoint(GJKAlgorithm.direction);
+        Vector3 pointB = b.meshGJK.GetFurthestPoint(-1 * GJKAlgorithm.direction);
+        Gizmos.color = Color.green;
         Gizmos.DrawSphere(pointA, 0.05f);
         Gizmos.DrawSphere(pointB, 0.05f);
+
+        Gizmos.color = Color.cyan;
         Gizmos.DrawLine(pointA, pointB);
 
         Gizmos.NewLine();
+        Gizmos.color = Color.red;
         Gizmos.DrawLine(Vector3.zero, GJKAlgorithm.direction);
 
         // Drawing Simplicies

@@ -28,7 +28,7 @@ public static class GJKAlgorithm {
         Simplex simplex = new Simplex(s);
 
         // TODO: Choose an initial direction.
-        direction = twoTrans.position - oneTrans.position;
+        direction = (oneTrans.position - twoTrans.position).normalized;
 
         state.simplices.Add(new Simplex(simplex.vertices.ToArray()));
 
