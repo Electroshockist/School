@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends SurfaceView{
-    private SurfaceHolder holder;
 
     private List<Entity> entities = new ArrayList<>();
+    private List<Explosion>explosions = new ArrayList<>();
 
     private GameThread gameThread;
 
@@ -27,7 +27,7 @@ public class GameView extends SurfaceView{
         super(context);
         myContext = context;
 
-        //istantiate 5 entities
+        //instantiate 5 entities
         entities.add(friendlyFactory(200,1000, 2,-1));
         entities.add(enemyFactory(700,800, -3,1));
         entities.add(friendlyFactory(750,250, 5,-7));
@@ -36,7 +36,7 @@ public class GameView extends SurfaceView{
 
         gameThread = new GameThread(this);
 
-        holder = getHolder();
+        SurfaceHolder holder = getHolder();
 
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -78,11 +78,9 @@ public class GameView extends SurfaceView{
         for (int i = entities.size()-1; i >= 0; i--) {
             entity = entities.get(i);
             if (entity.detectedPointInside(new Vector2(event.getX(),event.getY()))) {
-                Log.v("lel", Integer.toString(i));
-
                 MediaPlayer mediaPlayer = MediaPlayer.create(myContext, entity.DeathSound);
                 mediaPlayer.start();
-
+                explosions.add(explosionFactory(entity.explosionImageID,entity.position.x,entity.position.y));
                 // remove entity from the entities list
                 entities.remove(entity);
                 break;
@@ -113,6 +111,11 @@ public class GameView extends SurfaceView{
                 entities.get(i).WallCollisions(canvas);
                 entities.get(i).Move();
             }
+            //loop through first set of entities
+            for(int i = 0; i < explosions.size(); i++){
+                explosions.get(i).onDraw(canvas);
+                //Log.v("lel",)
+            }
         }
     }
 
@@ -127,5 +130,11 @@ public class GameView extends SurfaceView{
 
     private Friendly friendlyFactory(float pX, float pY, float vX, float vY){
         return new Friendly(DecodeBitmap(Variables.ImageIDs.FRIENDLYIMAGE.getID()), pX, pY, vX,vY);
+    }
+
+    private Explosion explosionFactory(int imageID, float X, float Y){
+        return new Explosion(
+                DecodeBitmap(imageID),new Vector2(X, Y)
+        );
     }
 }

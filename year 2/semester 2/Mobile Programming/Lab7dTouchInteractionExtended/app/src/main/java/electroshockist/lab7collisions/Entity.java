@@ -8,7 +8,7 @@ abstract class Entity {
     private float height, width;
 
     //position vector
-    private Vector2 position;
+    public Vector2 position;
     private Vector2 velocity;
 
     //quick access for the next self's left side position next frame
@@ -30,6 +30,7 @@ abstract class Entity {
 
     private Bitmap image;
     protected int DeathSound;
+    protected int explosionImageID;
 
     public int getDeathSound() {
         return DeathSound;
