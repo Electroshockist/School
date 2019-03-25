@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 591136623}
   - component: {fileID: 591136622}
   - component: {fileID: 591136621}
+  - component: {fileID: 591136626}
   m_Layer: 0
   m_Name: B
   m_TagString: Untagged
@@ -273,10 +274,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56075e315ba59c46b67d01843136753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linA: {x: 0, y: 0, z: 0}
-  linV: {x: -1, y: 0, z: 0}
-  angA: {x: 0, y: 0, z: 0}
-  angV: {x: 1, y: 1, z: 0}
+  linear:
+    A: {x: 0, y: 0, z: 0}
+    V: {x: 0, y: 0, z: 0}
+    D: {x: 0, y: 0, z: 0}
+  angular:
+    A: {x: 0, y: 0, z: 0}
+    V: {x: 1, y: 1, z: 0}
+    D: {x: 0, y: 0, z: 0}
 --- !u!65 &591136622
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -349,6 +354,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &591136626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591136620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e112f1b425df0e44f83875407f987042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &649338568
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +517,7 @@ GameObject:
   - component: {fileID: 1784853858}
   - component: {fileID: 1784853857}
   - component: {fileID: 1784853856}
+  - component: {fileID: 1784853861}
   m_Layer: 0
   m_Name: A
   m_TagString: Untagged
@@ -519,10 +537,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56075e315ba59c46b67d01843136753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linA: {x: 0, y: 0, z: 0}
-  linV: {x: 1, y: 0, z: 0}
-  angA: {x: 0, y: 0, z: 0}
-  angV: {x: -1, y: 1, z: 0}
+  linear:
+    A: {x: 0, y: 0, z: 0}
+    V: {x: 0, y: 0, z: 0}
+    D: {x: 0, y: 0, z: 0}
+  angular:
+    A: {x: 0, y: 0, z: 0}
+    V: {x: 1, y: 1, z: 0}
+    D: {x: 0, y: 0, z: 0}
 --- !u!65 &1784853857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -595,6 +617,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1784853861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784853855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bfcfeca0307ed549be9b0977dab4155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1908778639
 GameObject:
   m_ObjectHideFlags: 0
