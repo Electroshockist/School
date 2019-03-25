@@ -8,4 +8,9 @@ public class Friendly extends Entity {
         DeathSound = Variables.SoundIDs.FRIENDLYSOUND.getID();
         explosionImageID = Variables.Explosions.FRIENDLYEXPLOSION.getIds()[3];
     }
+
+    @Override
+    public int value() {
+        return -1;
+    }
 }

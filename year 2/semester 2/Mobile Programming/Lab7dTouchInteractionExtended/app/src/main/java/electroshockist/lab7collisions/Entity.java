@@ -31,6 +31,7 @@ abstract class Entity {
     private Bitmap image;
     protected int DeathSound;
     protected int explosionImageID;
+    public abstract int value();
 
     public int getDeathSound() {
         return DeathSound;
