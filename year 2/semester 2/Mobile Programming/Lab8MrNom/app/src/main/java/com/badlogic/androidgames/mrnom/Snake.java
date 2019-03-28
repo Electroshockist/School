@@ -55,15 +55,6 @@ public class Snake {
             head.y += 1;
         if(direction == RIGHT)
             head.x += 1;
-        
-        if(head.x < 0)
-            head.x = 9;
-        if(head.x > 9)
-            head.x = 0;
-        if(head.y < 0)
-            head.y = 12;
-        if(head.y > 12)
-            head.y = 0;
     }
     
     public boolean checkBitten() {
@@ -75,5 +66,15 @@ public class Snake {
                 return true;
         }        
         return false;
-    }      
+    }
+
+    public boolean checkOutOfBounds(){
+        SnakePart head = parts.get(0);
+        if(head.x < 0 ||
+           head.x > 9 ||
+           head.y < 0 ||
+           head.y > 12)
+           return true;
+        return false;
+    }
 }

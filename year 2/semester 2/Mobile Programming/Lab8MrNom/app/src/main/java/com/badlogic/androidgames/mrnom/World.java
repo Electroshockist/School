@@ -81,13 +81,9 @@ public class World {
 
         while (tickTime > tick) {
             tickTime -= tick;
-            //gameover if size is 0 or less
-            if (snake.parts.size() <= 0){
-                gameOver = true;
-                return;
-            }
+            //gameover checkers
             snake.advance();
-            if (snake.checkBitten()) {
+            if (snake.checkBitten() || snake.checkOutOfBounds() || snake.parts.size() <= 0) {
                 gameOver = true;
                 return;
             }
