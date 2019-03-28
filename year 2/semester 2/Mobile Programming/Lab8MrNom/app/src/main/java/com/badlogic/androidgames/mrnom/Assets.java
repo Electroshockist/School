@@ -23,7 +23,9 @@ public class Assets {
     public static Pixmap stain1;
     public static Pixmap stain2;
     public static Pixmap stain3;   
-    
+    public static Pixmap stain4;
+    public static Pixmap stain5;
+
     public static Sound click;
     public static Sound eat;
     public static Sound bitten;

@@ -22,7 +22,7 @@ public class GameScreen extends Screen {
     World world;
     int oldScore = 0;
     String score = "0";
-    
+
     public GameScreen(Game game) {
         super(game);
         world = new World();
@@ -150,12 +150,16 @@ public class GameScreen extends Screen {
         
         
         Pixmap stainPixmap = null;
-        if(stain.type == Stain.TYPE_1)
+        if(stain.type == Stain.VARIANT_1)
             stainPixmap = Assets.stain1;
-        if(stain.type == Stain.TYPE_2)
+        if(stain.type == Stain.VARIANT_2)
             stainPixmap = Assets.stain2;
-        if(stain.type == Stain.TYPE_3)
+        if(stain.type == Stain.VARIANT_3)
             stainPixmap = Assets.stain3;
+        if(stain.type == Stain.VARIANT_4)
+            stainPixmap = Assets.stain4;
+        if(stain.type == Stain.VARIANT_5)
+            stainPixmap = Assets.stain5;
         int x = stain.x * 32;
         int y = stain.y * 32;      
         g.drawPixmap(stainPixmap, x, y);             
