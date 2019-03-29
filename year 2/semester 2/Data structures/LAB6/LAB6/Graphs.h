@@ -351,25 +351,27 @@ public:
 		//Loop while stack is not empty
 		while (!searchStack.empty) {
 			//Assign end point vertex to the next unvisited vertex - use getNextUnvisitedVertex method
-
+			vert1 = getNextUnvisitedVertex(searchStack.top());
 
 			//If vertex is -1 pop from stack
-			if (vert1 == -1)
-			{
-
+			if (vert1 == -1) {
+				searchStack.pop();
 			}
 
-
 			//If vertex is not -1
+			else {
+
+				//Set visited vertex to 1
+				vertexVisits[vert1] = 1;
+
+				//Print the value of the current node visited
+				cout << vertices[vert1].getNode();
 
 
-			//Set visited vertex to 1
-
-
-			//Print the value of the current node visited
-
-
-			//Push vertex index into stack
+				//Push vertex index into stack
+				searchStack.push(vert1);
+								
+			}
 
 
 			//If vertex reach end point
@@ -405,73 +407,87 @@ public:
 	bool depthFirstSearch(char startVertex, char endVertex)
 	{
 		//Assert whether the adjacency matrix exists and is not NULL
-		
+		assert(adjacencyMatrix != NULL);
 
 		//Assert whether the vertices visited exists and is not NULL
-		
+		assert(vertexVisits != NULL);
+
 
 		//Find index for start vertex
-		
+		int startIndex = findIndex(startVertex);
 
-		//Find index for end vertex
-		
+		//Find index for end vertex		
+		int endIndex = findIndex(endVertex);
 
 		//Assert whether startIndex is not equal to -1
-		
+		assert(startIndex != -1);
 
 		//Assert whether endIndex is not equal to -1
-		
+		assert(endIndex != -1);
 
 		//Begin the traversal at the starting index
-		
+		vertexVisits[startIndex] = 1;
 
 		//Print the value at the start index
-		
+		cout << vertices[startIndex].getNode() << " ";
 
 		//Declare a stack for searching
-		
+		stack<int> searchStack;
 
 		//Declare and initialize a starting vertex point to 0
-		
+		int vert1 = 0;
 
 		//Push start index into stack
-		
+		searchStack.push(startIndex);
 
 		//Loop while stack is not empty
-		
+		while (!searchStack.empty()) {
 
-		//Assign end point vertex to the next unvisited vertex - use getNextUnvisitedVertex method
-		
+			//Assign end point vertex to the next unvisited vertex - use getNextUnvisitedVertex method
+			vert1 = getNextUnvisitedVertex(searchStack.top());
 
-		//If vertex is -1 pop from stack
-		
+			//If vertex is -1 pop from stack
+			if (vert1 == -1) {
+				searchStack.pop();
+			}
 
-		//If vertex is not -1
-		
+			//If vertex is not -1
+			else {
 
-		//Set visited vertex to 1
-		
+				//Set visited vertex to 1
+				vertexVisits[vert1] = 1;
 
-		//Print the value of the current node visited
-		
+				//Print the value of the current node visited
+				cout << vertices[vert1].getNode();
 
-		//Push vertex index into stack
-		
 
-		//If vertex reach end point
-		
+				//Push vertex index into stack
+				searchStack.push(vert1);
+
+			}
+
+			//If vertex reach end point
+			if (vert1 == endIndex) {
+				//Loop through vertexVisits and set value equal to 0
+				for (int i = 0; i < maxVertices; i++) {
+					vertexVisits[i] = NULL;
+				}
+
+				//Return true
+				return true;
+			}
+		}
+
 
 		//Loop through vertexVisits and set value equal to 0
-		
-
-		//Return true
-		
-
-		//Loop through vertexVisits and set value equal to 0
-		
+		for (int i = 0; i < maxVertices; i++)
+		{
+			vertexVisits[i] = NULL;
+		}
 
 		//Return false
-		
+		return false;
+
 
 	}
 

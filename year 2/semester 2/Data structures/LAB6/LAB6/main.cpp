@@ -56,5 +56,7 @@ int main(int args, char **argc)
 
 	cout << endl << endl;
 
+	getchar();
+
 	return 1;
 }
