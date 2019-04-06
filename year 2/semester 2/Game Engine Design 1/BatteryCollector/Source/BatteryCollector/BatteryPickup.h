@@ -7,7 +7,7 @@
 #include "BatteryPickup.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class BATTERYCOLLECTOR_API ABatteryPickup : public APickup
@@ -16,5 +16,8 @@ class BATTERYCOLLECTOR_API ABatteryPickup : public APickup
 
 public:
 	ABatteryPickup();
-	
+
+	//override onpickup implementation
+	void OnCollect_Implementation() override;
+
 };

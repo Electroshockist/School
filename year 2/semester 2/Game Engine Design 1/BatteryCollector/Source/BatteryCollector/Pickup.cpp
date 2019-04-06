@@ -19,7 +19,7 @@ APickup::APickup() {
 // Called when the game starts or when spawned
 void APickup::BeginPlay() {
 	Super::BeginPlay();
-	
+
 }
 
 
@@ -36,4 +36,10 @@ bool APickup::GetIsActive() {
 
 void APickup::SetActive(bool status) {
 	isActive = status;
+}
+
+void APickup::OnCollect_Implementation() {
+	//log message
+	FString PickupDebugMessage = GetName();
+	UE_LOG(LogClass, Log, TEXT("You have collected %s"), *PickupDebugMessage);
 }

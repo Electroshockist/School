@@ -10,8 +10,8 @@ UCLASS()
 class BATTERYCOLLECTOR_API ASpawnVolume : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	ASpawnVolume();
 
@@ -21,20 +21,20 @@ protected:
 
 	//spawnable pickup
 	UPROPERTY(EditAnywhere, Category = "Spawning")
-	TSubclassOf<class APickup> Spawnable;
+		TSubclassOf<class APickup> Spawnable;
 
 	FTimerHandle SpawnTimer;
 
 	//minimum spawn delay
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawning")
-	float SpawnDelayMin;
+		float SpawnDelayMin;
 
 	//maximum spawn delay
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawning")
-	float SpawnDelayMax;
+		float SpawnDelayMax;
 
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -48,13 +48,13 @@ public:
 
 	//gets point within spawn area to spawn item
 	UFUNCTION(BlueprintPure, Category = "Spawning")
-	FVector GetRandomPointinVolume();
+		FVector GetRandomPointinVolume();
 
 private:
 	//const char* category = "Spawning";
 	//determines spawn area
-	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "Spawning", meta = (AllowPrivateAccess = "true"))
-	class UBoxComponent* SpawnArea;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Spawning", meta = (AllowPrivateAccess = "true"))
+		class UBoxComponent* SpawnArea;
 
 	void SpawnPickup();
 

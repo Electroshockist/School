@@ -9,7 +9,7 @@
 // Sets default values
 ASpawnVolume::ASpawnVolume()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
 	//create spawn area
@@ -27,7 +27,7 @@ void ASpawnVolume::BeginPlay()
 	Super::BeginPlay();
 
 	DelaySpawning();
-	
+
 }
 
 // Called every frame
@@ -42,7 +42,7 @@ FVector ASpawnVolume::GetRandomPointinVolume()
 	FVector SpawnOrigin = SpawnArea->Bounds.Origin;
 	FVector SpawnExtent = SpawnArea->Bounds.BoxExtent;
 
-	return UKismetMathLibrary::RandomPointInBoundingBox(SpawnOrigin,SpawnExtent);
+	return UKismetMathLibrary::RandomPointInBoundingBox(SpawnOrigin, SpawnExtent);
 }
 
 void ASpawnVolume::SpawnPickup() {

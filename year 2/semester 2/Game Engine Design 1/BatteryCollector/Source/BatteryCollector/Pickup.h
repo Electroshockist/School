@@ -10,8 +10,8 @@ UCLASS()
 class BATTERYCOLLECTOR_API APickup : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	APickup();
 
@@ -22,7 +22,7 @@ protected:
 	//determines whether actor is active
 	bool isActive;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -37,9 +37,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Pickup")
 		void SetActive(bool satus);
 
+	//called on pickup
+	UFUNCTION(BlueprintNativeEvent)
+		void OnCollect();
+	virtual void OnCollect_Implementation();
+
 private:
 	//static mesh
 	UPROPERTY(visibleAnyWhere, BlueprintReadOnly, Category = "Pickup", meta = (AllowPrivateAccess = "true"))
-	class UStaticMeshComponent* PickupMesh;
+		class UStaticMeshComponent* PickupMesh;
 
 };
