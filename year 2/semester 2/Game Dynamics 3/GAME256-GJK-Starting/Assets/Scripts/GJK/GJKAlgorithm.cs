@@ -25,12 +25,13 @@ public static class GJKAlgorithm {
         Vector3 s = Support(regionOne, regionTwo, twoTrans.position - oneTrans.position, state);
 
         // Create our initial simplex.
-        Simplex simplex = new Simplex(s);
+        Simplex simplex = new Simplex();
+        simplex.Add(s);
 
         // TODO: Choose an initial direction.
-        direction = (oneTrans.position - twoTrans.position).normalized;
+        direction = -s;
 
-        state.simplices.Add(new Simplex(simplex.vertices.ToArray()));
+        state.simplices.Add(simplex.Clone());
 
         // Choose a maximim number of iterations to avoid an 
         // infinite loop during a non-convergent search.
@@ -48,7 +49,7 @@ public static class GJKAlgorithm {
 
             // otherwise we add the new point to the simplex and process it.
             simplex.Add(a);
-            state.simplices.Add(new Simplex(simplex.vertices.ToArray()));
+            state.simplices.Add(simplex.Clone());
             // Here we either find a collision or we find the closest feature of
             // the simplex to the origin, make that the new simplex and update the direction
             // to move toward the origin from that feature.
@@ -84,7 +85,13 @@ public static class GJKAlgorithm {
     /// of the simplex to eliminate certain regions.
     /// </summary>
     static bool ProcessLine(Simplex simplex, ref Vector3 direction) {
-        // TODO: Process Line
+        Vector3 A = simplex[1], B = simplex[0];
+
+        Vector3 AB = B - A;
+
+        Vector3 AO = -A;
+
+        direction = AB.TripleCross(AO).normalized;
         return false;
     }
 
@@ -94,7 +101,19 @@ public static class GJKAlgorithm {
     /// of the simplex to eliminate certain regions.
     /// </summary>
     static bool ProcessTriangle(Simplex simplex, ref Vector3 direction) {
-        // TODO: Process Triangle
+        Vector3 A = simplex[2], B = simplex[1], C = simplex[0];
+
+        Vector3 AB = B - A, AC = C - A;
+
+        Vector3 AO = -A;
+
+        Vector3 ABC = Vector3.Cross(AB, AC);
+
+        if (Vector3.Dot(ABC, AO) > 0) {
+            direction = ABC.normalized;
+        }
+        else direction = -ABC.normalized;
+
         return false;
     }
 
@@ -104,8 +123,32 @@ public static class GJKAlgorithm {
     /// of the simplex to eliminate certain regions.
     /// </summary>
     static bool ProcessTetrehedron(Simplex simplex, ref Vector3 direction) {
-        // TODO: Process Tetrahedron
+        Vector3 A = simplex[3], B = simplex[2], C = simplex[1], D = simplex[0];
+
+        Vector3 AB = B - A, AC = C - A, AD = D - A;
+
+        Vector3 ABC = Vector3.Cross(AB, AC);
+        Vector3 ABD = Vector3.Cross(AB, AD);
+        Vector3 ADC = Vector3.Cross(AD, AC);
+
+        Vector3 AO = -A;
+
+        if (Vector3.Dot(ABC, AO) > 0) {
+            simplex.Remove(D);
+            direction = ABC.normalized;
+        }
+        else if (Vector3.Dot(ABD, AO) > 0) {
+            simplex.Remove(C);
+            direction = ABD.normalized;
+        }
+        else if (Vector3.Dot(ADC, AO) > 0) {
+            simplex.Remove(B);
+            direction = ADC.normalized;
+        }
+        else return true;
+
         return false;
+
     }
 
     /// <summary>
@@ -116,8 +159,10 @@ public static class GJKAlgorithm {
         // TODO: Get support point
         Vector3 supportPoint = Vector3.zero;
         // A + (-B)
-        supportPoint = regionOne.GetFurthestPoint(direction) + (-1 * regionTwo.GetFurthestPoint(-1 * direction));
+        supportPoint = regionOne.GetFurthestPoint(direction) + (-1 * regionTwo.GetFurthestPoint(-direction));
         state.searchedSum.Add(supportPoint);
         return supportPoint;
     }
+
+
 }

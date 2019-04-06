@@ -65,6 +65,7 @@
     <Compile Include="Assets\EndGame.cs" />
     <Compile Include="Assets\Gizmos.cs" />
     <Compile Include="Assets\Scripts\CustomRigidbody.cs" />
+    <Compile Include="Assets\Scripts\CustomSlider.cs" />
     <Compile Include="Assets\Scripts\GJK\Box.cs" />
     <Compile Include="Assets\Scripts\GJK\GJKAlgorithm.cs" />
     <Compile Include="Assets\Scripts\GJK\GJKManager.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\GJK\IConvexRegion.cs" />
     <Compile Include="Assets\Scripts\GJK\PhysicsExtensionMethods.cs" />
     <Compile Include="Assets\Scripts\GJK\Simplex.cs" />
+    <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\ToggleBackground.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

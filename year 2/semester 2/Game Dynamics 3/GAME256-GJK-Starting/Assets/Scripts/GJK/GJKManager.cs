@@ -12,6 +12,9 @@ public class GJKManager : MonoBehaviour {
         public Mesh meshReference;
     }
 
+    public UI ui;
+    public static int maxVisibleSimplex, minVisibleSimplex;
+
     public GJKMeshHelper a;
     public GJKMeshHelper b;
 
@@ -27,7 +30,6 @@ public class GJKManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-
     }
 
     // Update is called once per frame
@@ -69,7 +71,11 @@ public class GJKManager : MonoBehaviour {
         if (state.simplices.Count < 1)
             return;
 
-        for (int o = state.simplices.Count - 1; o > state.simplices.Count - 1; o--) {
+        Gizmos.NewLine();
+ 
+        ui.SetVisibleSimplecies(this);
+        print("Max/total: " + maxVisibleSimplex + "/" + state.simplices.Count + "\nMin: " + minVisibleSimplex);
+        for (int o = maxVisibleSimplex - 1; o >= minVisibleSimplex; o--) {
             simplex = state.simplices[o];
             Vector3 a = simplex.vertices[0];
 

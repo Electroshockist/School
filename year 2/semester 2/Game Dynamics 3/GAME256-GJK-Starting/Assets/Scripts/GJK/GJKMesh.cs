@@ -14,10 +14,10 @@ public class GJKMesh : IConvexRegion {
         }
 
         float highestNum = -1;
-        Vector3 farthestPoint = Vector3.zero;
-        float dotProduct = 0;
+        Vector3 farthestPoint = transform.TransformPoint(vertices[0]); ;
+        float dotProduct = highestNum = Vector3.Dot(farthestPoint, direction);
 
-        for (int i = 0; i < mesh.vertices.Length; i++) {
+        for (int i = 1; i < mesh.vertices.Length; i++) {
             Vector3 point = transform.TransformPoint(vertices[i]);
             dotProduct = Vector3.Dot(point, direction);
             if (dotProduct > highestNum) {
