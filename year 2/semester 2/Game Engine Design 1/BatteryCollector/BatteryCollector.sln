@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.25807.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{C22723B6-36D2-4CAF-B3CD-EA7DB71DDCA1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{659155C3-820D-4077-8072-6577BD385079}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{EE78A655-64C8-4D2F-91B5-B5552CA04012}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{8DD2B4A0-C6B3-4153-9DFE-3D6DC59DBD4D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{9D4C464C-2B69-4637-907E-3D3DF8B14EFB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BatteryCollector", "Intermediate\ProjectFiles\BatteryCollector.vcxproj", "{5F993EA2-1989-45F7-9FB4-C4D4B73D3F2B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{39A2CDB9-3F80-4ED4-A175-4D2D051C0C23}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{005D928F-3778-4DFA-96C2-11CDECB8F0FF}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\..\..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis
+		..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis
 	EndProjectSection
 EndProject
 Global
@@ -81,7 +81,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9D4C464C-2B69-4637-907E-3D3DF8B14EFB} = {C22723B6-36D2-4CAF-B3CD-EA7DB71DDCA1}
-		{5F993EA2-1989-45F7-9FB4-C4D4B73D3F2B} = {EE78A655-64C8-4D2F-91B5-B5552CA04012}
+		{9D4C464C-2B69-4637-907E-3D3DF8B14EFB} = {659155C3-820D-4077-8072-6577BD385079}
+		{5F993EA2-1989-45F7-9FB4-C4D4B73D3F2B} = {8DD2B4A0-C6B3-4153-9DFE-3D6DC59DBD4D}
 	EndGlobalSection
 EndGlobal

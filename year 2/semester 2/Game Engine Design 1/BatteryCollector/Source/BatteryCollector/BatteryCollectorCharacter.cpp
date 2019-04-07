@@ -10,6 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/SphereComponent.h"
 #include "Pickup.h"
+#include "BatteryPickup.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ABatteryCollectorCharacter
@@ -49,6 +50,11 @@ ABatteryCollectorCharacter::ABatteryCollectorCharacter()
 	CollectionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollectionSphere"));
 	CollectionSphere->AttachTo(RootComponent);
 	CollectionSphere->SetSphereRadius(200.0f);
+
+	//set character's base power level
+	basePowerLevel = 2000.0f;
+
+	powerLevel = basePowerLevel;
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
@@ -147,20 +153,46 @@ void ABatteryCollectorCharacter::CollectPickups() {
 	TArray<AActor*> CollectedActors;
 	CollectionSphere->GetOverlappingActors(CollectedActors);
 
+	//keep track of collected power
+	float collectedPower = 0;
+
 	//for each actor we collect
 	for (size_t iCollected = 0; iCollected < CollectedActors.Num(); iCollected++) {
 		//cast actor to APickup
 		APickup* const tempPickup = Cast<APickup>(CollectedActors[iCollected]);
 
 		//if cast successful and pickup is valid and active
-		if (tempPickup && !tempPickup->IsPendingKill() && tempPickup->GetIsActive())
+		if (tempPickup && !tempPickup->IsPendingKill() && tempPickup->GetIsActive()) {
 
 			//call pickup's OnCollect
 			tempPickup->OnCollect();
 
+			//check to see if pickup is battery
+			ABatteryPickup* const tempBattery = Cast<ABatteryPickup>(tempPickup);
+			if (tempBattery) {
+				//increase collected power
+				collectedPower += tempBattery->GetBatteryPower();
+			}
+
 			//deactivate pickup
-			tempPickup->SetActive(false);
+			tempPickup->SetIsActive(false);
+		}
 	}
-
-
+	if (collectedPower > 0) {
+		UpdatePower(collectedPower);
+	}
 }
+
+float ABatteryCollectorCharacter::GetBasePowerLevel() {
+	return basePowerLevel;
+}
+
+float ABatteryCollectorCharacter::GetPowerLevel() {
+	return powerLevel;
+}
+
+void ABatteryCollectorCharacter::UpdatePower(float powerChange){
+	powerLevel += powerChange;
+}
+
+

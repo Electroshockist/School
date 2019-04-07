@@ -20,4 +20,11 @@ public:
 	//override onpickup implementation
 	void OnCollect_Implementation() override;
 
+	float GetBatteryPower();
+
+protected:
+	//amount of power battery provides
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power", Meta = (BlueprintProtected = "true"))
+	float batteryPower;
+
 };

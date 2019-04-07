@@ -33,6 +33,21 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+	//accessor for character's base power level
+	UFUNCTION(BluePrintPure, Category = "Power")
+	float GetBasePowerLevel();
+
+	//accessor for character's current power level
+	UFUNCTION(BluePrintPure, Category = "Power")
+	float GetPowerLevel();
+
+	/**
+	Update character's power
+	* @param powerChange amount of power changed
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Power")
+	void UpdatePower(float powerChange);
+
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -65,6 +80,15 @@ protected:
 	//called when a key is pressed to collect pickups within radius
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 	void CollectPickups();
+
+	//Character's base power level
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power")
+	float basePowerLevel;
+
+private:
+	//Character's current power level
+	UPROPERTY(VisibleAnywhere, Category = "Power")
+	float powerLevel;
 
 protected:
 	// APawn interface

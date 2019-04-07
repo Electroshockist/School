@@ -35,7 +35,7 @@ public:
 
 	//set isActive
 	UFUNCTION(BlueprintCallable, Category = "Pickup")
-		void SetActive(bool satus);
+		void SetIsActive(bool satus);
 
 	//called on pickup
 	UFUNCTION(BlueprintNativeEvent)

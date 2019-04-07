@@ -34,7 +34,7 @@ bool APickup::GetIsActive() {
 	return isActive;
 }
 
-void APickup::SetActive(bool status) {
+void APickup::SetIsActive(bool status) {
 	isActive = status;
 }
 
