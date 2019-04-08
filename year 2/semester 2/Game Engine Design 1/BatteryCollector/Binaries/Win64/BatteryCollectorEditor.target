@@ -18,11 +18,11 @@
 	"Launch": "$(EngineDir)/Binaries/Win64/UE4Editor.exe",
 	"BuildProducts": [
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-BatteryCollector-5769.dll",
+			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-BatteryCollector-5955.dll",
 			"Type": "DynamicLibrary"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-BatteryCollector-5769.pdb",
+			"Path": "$(ProjectDir)/Binaries/Win64/UE4Editor-BatteryCollector-5955.pdb",
 			"Type": "SymbolFile"
 		},
 		{

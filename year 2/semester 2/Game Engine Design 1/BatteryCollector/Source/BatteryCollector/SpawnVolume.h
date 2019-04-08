@@ -41,14 +41,13 @@ public:
 	//get Spawn Area
 	FORCEINLINE class UBoxComponent* GetSpawnArea() const { return SpawnArea; }
 
-	FORCEINLINE void DelaySpawning() {
-		SpawnDelay = FMath::FRandRange(SpawnDelayMin, SpawnDelayMax);
-		GetWorldTimerManager().SetTimer(SpawnTimer, this, &ASpawnVolume::SpawnPickup, SpawnDelay, false);
-	}
-
 	//gets point within spawn area to spawn item
 	UFUNCTION(BlueprintPure, Category = "Spawning")
-		FVector GetRandomPointinVolume();
+	FVector GetRandomPointinVolume();
+
+	//toggle spawning
+	UFUNCTION(BlueprintCallable, Category = "Spawning")
+	void SetSpawningActive(bool status);
 
 private:
 	//const char* category = "Spawning";

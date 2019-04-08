@@ -82,8 +82,20 @@ protected:
 	void CollectPickups();
 
 	//Character's base power level
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power", meta = (BlueprintProtected = "true"))
 	float basePowerLevel;
+
+	//speed multiplier
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power", meta = (BlueprintProtected = "true"))
+	float speedFactor;
+
+	//base speed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power", meta = (BlueprintProtected = "true"))
+	float baseSpeed;
+
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Power")
+	void powerChangeEffect();
 
 private:
 	//Character's current power level
