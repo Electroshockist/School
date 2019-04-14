@@ -1,17 +1,14 @@
-package electroshockist.finalassignmentdownwell;
+package electroshockist.finalassignmentdownwell.Gameobjects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import electroshockist.finalassignmentdownwell.Collisions.Collision;
 import electroshockist.finalassignmentdownwell.Collisions.CollisionList;
 import electroshockist.finalassignmentdownwell.Collisions.CollisionType;
+import electroshockist.finalassignmentdownwell.Vector2;
 
-abstract class Entity extends BaseObject {
-
-    Canvas canvas;
+public abstract class Entity extends BaseObject {
 
     //position vector
     private Vector2 velocity;
@@ -24,16 +21,20 @@ abstract class Entity extends BaseObject {
 
     private boolean canMoveLeft, canMoveRight, canMoveUp, canMoveDown;
 
-    //constructor (set default values)
-    Entity(Canvas canvas, Bitmap image, float pX, float pY) {
-        super(canvas, image, new Vector2(pX, pY));
+    private CollisionList collisionList;
 
-        this.canvas = canvas;
+    //constructor (set default values)
+    Entity(Bitmap image, Vector2 position, int scale) {
+        super(image, position, scale);
+
+        velocity = new Vector2(0,0);
 
         canMoveDown = true;
         canMoveUp = true;
         canMoveRight = true;
         canMoveLeft = true;
+
+        collisionList = new CollisionList();
     }
     //quick access for the next self's left side position next frame
     public float left() { return position.x + velocity.x; }
@@ -47,9 +48,15 @@ abstract class Entity extends BaseObject {
     //quick access for the next self's bottom side position next frame
     public float bottom() { return position.y + velocity.y + height; }
 
-    //draw self
-    void onDraw() {
-        canvas.drawBitmap(image, position.x, position.y, null);
+    public void setMoveableDirs(){
+
+        canMoveLeft = !collisionList.isCollisionTypeActive(CollisionType.LEFT);
+
+        canMoveRight = !collisionList.isCollisionTypeActive(CollisionType.RIGHT);
+
+        canMoveUp = !collisionList.isCollisionTypeActive(CollisionType.TOP);
+
+        canMoveDown = !collisionList.isCollisionTypeActive(CollisionType.BOTTOM);
     }
 
     //move self
@@ -58,9 +65,10 @@ abstract class Entity extends BaseObject {
         position.y += velocity.y;
     }
 
-    public void update(){
+    public void update(Canvas canvas){
+        setMoveableDirs();
         Move();
-        onDraw();
+        onDraw(canvas);
     }
 
 
@@ -88,50 +96,40 @@ abstract class Entity extends BaseObject {
         return (isYInside(entity2) && isXInside(entity2));
     }
 
-
-
-    protected void setMoveableDirs(BaseObject object){
-        CollisionList wallCollisions = WallCollisions();
-        CollisionList interCollisions = InterCollision(object);
-
-        canMoveLeft = !wallCollisions.exists(CollisionType.LEFT) && !interCollisions.exists(CollisionType.LEFT);
-
-        canMoveRight = !wallCollisions.exists(CollisionType.RIGHT) && !interCollisions.exists(CollisionType.RIGHT);
-
-        if (interCollisions.exists(CollisionType.TOP)) canMoveUp = false;
-
-
-    }
-
     //check collision between self and given image
-    CollisionList InterCollision(BaseObject entity2) {
-        CollisionList tempList = new CollisionList();
+    public void InterCollision(BaseObject entity2) {
+        String collisionID = "InterCollision";
         if (detectedCollision(entity2)) {
             ////check x////
             //check left
-            if (left() <= entity2.left() && right() >= entity2.left()) { tempList.addUnique(CollisionType.LEFT); }
+            if (left() <= entity2.left() && right() >= entity2.left()) { collisionList.addUnique(new Collision(collisionID, CollisionType.LEFT)); }
+            else collisionList.remove(new Collision(collisionID, CollisionType.LEFT));
 
             //check right
-            if (left() <= entity2.right() && right() >= entity2.right()) { tempList.addUnique(CollisionType.RIGHT); }
+            if (left() <= entity2.right() && right() >= entity2.right()) { collisionList.addUnique(new Collision(collisionID, CollisionType.RIGHT)); }
+            else collisionList.remove(new Collision(collisionID, CollisionType.RIGHT));
 
             ////check y////
             //check top
-            if (top() <= entity2.top() && bottom() >= entity2.top()) { tempList.addUnique(CollisionType.TOP); }
+            if (top() <= entity2.top() && bottom() >= entity2.top()) { collisionList.addUnique(new Collision(collisionID, CollisionType.TOP)); }
+            else collisionList.remove(new Collision(collisionID, CollisionType.TOP));
 
             //check bottom
-            if (top() <= entity2.bottom() && bottom() >= entity2.bottom()) { tempList.addUnique(CollisionType.BOTTOM);}
+            if (top() <= entity2.bottom() && bottom() >= entity2.bottom()) { collisionList.addUnique(new Collision(collisionID, CollisionType.BOTTOM)); }
+            else collisionList.remove(new Collision(collisionID, CollisionType.BOTTOM));
         }
-        return tempList;
     }
 
     //check border collisions
-    CollisionList WallCollisions() {
-        CollisionList tempList = new CollisionList();
-        //check left border
-        if (left() <= 0) tempList.addUnique(CollisionType.LEFT);
-        //check right border
-        if (right() >= canvas.getWidth()) tempList.addUnique(CollisionType.RIGHT);
+    public void WallCollisions(Canvas canvas) {
+        String collisionID = "Wall Collision";
 
-        return tempList;
+        //check left border
+        if (left() <= 0) collisionList.addUnique(new Collision(collisionID, CollisionType.LEFT));
+        else collisionList.remove(new Collision(collisionID, CollisionType.LEFT));
+        //check right border
+        if (right() >= canvas.getWidth()) collisionList.addUnique(new Collision(collisionID, CollisionType.RIGHT));
+        else collisionList.remove(new Collision(collisionID, CollisionType.RIGHT));
+        //check right border
     }
 }

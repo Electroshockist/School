@@ -1,33 +1,35 @@
 package electroshockist.finalassignmentdownwell.Collisions;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class CollisionList{
-    public CollisionType[] collisionTypes = new CollisionType[4];
+    //a list of four lists of collisions
+    public List<List<Collision>> collisions;
 
-    public void addUnique(CollisionType collisionType){
-        switch (collisionType){
-            case LEFT:
-                collisionTypes[0] = collisionType;
-                break;
-            case RIGHT:
-                collisionTypes[1] = collisionType;
-                break;
-            case TOP:
-                collisionTypes[2] = collisionType;
-                break;
-            case BOTTOM:
-                collisionTypes[3] = collisionType;
-                break;
-        }
-
+    public CollisionList(){
+        collisions = new ArrayList<>(4);
     }
 
-    public boolean exists(CollisionType collisionType){
-        for (int i = 0; i < collisionTypes.length; i++) {
-
-            if (collisionType == collisionTypes[i]){
-                return true;
-            }
+    public void addUnique(Collision collision){
+        //if collision already exists, return
+        for (int i = 0; i < collisions.get(collision.collisionType.ordinal()).size(); i++) {
+            if(collision.id == collisions.get(collision.collisionType.ordinal()).get(i).id) return;
         }
+
+        //add new collision to respective list
+        collisions.get(collision.collisionType.ordinal()).add(collision);
+    }
+
+    public void remove(Collision collision){
+        collisions.get(collision.collisionType.ordinal()).remove(collision);
+    }
+
+    public boolean isCollisionTypeActive(CollisionType collisionType){
+        if (collisions.size() == 0) return false;
+        if (collisions.get(collisionType.ordinal()).size() > 0) return true;
         return false;
     }
 

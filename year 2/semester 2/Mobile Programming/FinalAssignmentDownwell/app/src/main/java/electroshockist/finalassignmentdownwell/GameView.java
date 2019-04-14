@@ -5,23 +5,31 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DrawFilter;
 import android.graphics.Paint;
-import android.media.MediaPlayer;
-import android.text.Layout;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Filter;
+import java.util.logging.LogRecord;
+
+import electroshockist.finalassignmentdownwell.Gameobjects.Block;
+import electroshockist.finalassignmentdownwell.Gameobjects.Entity;
+import electroshockist.finalassignmentdownwell.Gameobjects.Player;
 
 public class GameView extends SurfaceView{
 
     private GameThread gameThread;
 
     private float yOffset;
+
+    private Player player;
 
     private List<Entity> entities;
     private List<Block> blocks;
@@ -30,6 +38,11 @@ public class GameView extends SurfaceView{
         super(context);
 
         gameThread = new GameThread(this);
+
+        player = playerFactory();
+
+        entities = new ArrayList<>();
+        blocks = new ArrayList<>();
 
         SurfaceHolder holder = getHolder();
 
@@ -67,7 +80,6 @@ public class GameView extends SurfaceView{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         return super.onTouchEvent(event); // has to be returned by this method
     }
 
@@ -75,67 +87,33 @@ public class GameView extends SurfaceView{
     protected void onDraw(Canvas canvas){
 
         if (canvas != null) {
-            canvas.drawColor(Color.WHITE);
+            canvas.drawColor(Color.BLACK);
 
-            Block block;
-            //loop through first set of entities
-            for (int i = 0; i < blocks.size(); i++) {
-                block = blocks.get(i);
+            if(entities.size() > 0) {
+                Entity entity;
+                //loop through first set of entities
+                for (int i = 0; i < entities.size(); i++) {
+                    entity = entities.get(i);
 
-                //check each entity against the first set
-                for (int j = 0; j < blocks.size(); j++) {
+                    //check each entity-wall collision
+                    entity.WallCollisions(canvas);
 
-                    //do not check self
-                    if (i != j) {
-                        //do collision response if colliding
-                        entities.interCollision(blocks.get(j));
+                    //check each entity against the first set
+                    for (int j = 0; j < entities.size(); j++) {
+
+                        //do not check self
+                        if (i != j) {
+                            //inter-sprite collision
+                            entity.InterCollision(entities.get(j));
+                        }
                     }
-                }
 
-                entity.onDraw(canvas);
+                    entity.update(canvas);
+                }
 
             }
 
-
-
-            Entity entity;
-
-            //loop through first set of entities
-            for (int i = 0; i < entities.size(); i++) {
-                entity = entities.get(i);
-
-                //check each entity against the first set
-                for (int j = 0; j < entities.size(); j++) {
-
-                    //do not check self
-                    if (i != j) {
-                        entity.interCollision((Entity)(BaseObject)blocks.get(j));
-                        //do collision response if colliding
-                        entity.interCollision(entities.get(j));
-                    }
-                }
-
-                entity.onDraw(canvas);
-
-            }
-            //loop through first set of entities
-            for (int i = 0; i < entities.size(); i++) {
-                entity = entities.get(i);
-
-                //check each entity against the first set
-                for (int j = 0; j < entities.size(); j++) {
-
-                    //do not check self
-                    if (i != j) {
-                        //do collision response if colliding
-                        entity.interCollision(entities.get(j));
-                    }
-                }
-
-                entity.onDraw(canvas);
-
-            }
-
+            player.update(canvas);
 
 //            //point/lose text
 //            Paint paint = new Paint();
@@ -150,10 +128,15 @@ public class GameView extends SurfaceView{
 //            }
 
         }
+        else Log.e("Canvas Error", "Could not get suitable canvas to draw game");
     }
 
     //shortform
     public Bitmap DecodeBitmap(int drawable){
         return  BitmapFactory.decodeResource(getResources(), drawable);
+    }
+
+    private Player playerFactory(){
+        return new Player(DecodeBitmap(R.drawable.gun2),new Vector2(500, 100), 4);
     }
 }
