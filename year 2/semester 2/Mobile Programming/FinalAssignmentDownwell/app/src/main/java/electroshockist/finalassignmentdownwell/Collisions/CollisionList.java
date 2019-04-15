@@ -1,7 +1,5 @@
 package electroshockist.finalassignmentdownwell.Collisions;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class CollisionList{
     }
 
     public void remove(Collision collision){
-        collisions.get(collision.collisionType.ordinal()).remove(collision);
+        if (isCollisionTypeActive(collision.collisionType)) collisions.get(collision.collisionType.ordinal()).remove(collision);
     }
 
     public boolean isCollisionTypeActive(CollisionType collisionType){

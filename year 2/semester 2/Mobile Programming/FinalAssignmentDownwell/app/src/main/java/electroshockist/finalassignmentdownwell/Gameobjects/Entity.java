@@ -11,7 +11,7 @@ import electroshockist.finalassignmentdownwell.Vector2;
 public abstract class Entity extends BaseObject {
 
     //position vector
-    private Vector2 velocity;
+    protected Vector2 velocity;
 
     protected int DeathSound;
 
@@ -21,13 +21,29 @@ public abstract class Entity extends BaseObject {
 
     private boolean canMoveLeft, canMoveRight, canMoveUp, canMoveDown;
 
+    public boolean isCanMoveLeft() {
+        return canMoveLeft;
+    }
+
+    public boolean isCanMoveRight() {
+        return canMoveRight;
+    }
+
+    public boolean isCanMoveUp() {
+        return canMoveUp;
+    }
+
+    public boolean isCanMoveDown() {
+        return canMoveDown;
+    }
+
     private CollisionList collisionList;
 
     //constructor (set default values)
     Entity(Bitmap image, Vector2 position, int scale) {
         super(image, position, scale);
 
-        velocity = new Vector2(0,0);
+        velocity = new Vector2(0, 0);
 
         canMoveDown = true;
         canMoveUp = true;
@@ -36,19 +52,28 @@ public abstract class Entity extends BaseObject {
 
         collisionList = new CollisionList();
     }
+
     //quick access for the next self's left side position next frame
-    public float left() { return position.x + velocity.x; }
+    public float left() {
+        return super.left() + velocity.x;
+    }
 
     //quick access for the next self's top side position next frame
-    public float top() { return position.y + velocity.y; }
+    public float top() {
+        return super.top() + velocity.y;
+    }
 
     //quick access for the next self's right side position next frame
-    public float right() { return position.x + velocity.x + width; }
+    public float right() {
+        return super.right() + velocity.x ;
+    }
 
     //quick access for the next self's bottom side position next frame
-    public float bottom() { return position.y + velocity.y + height; }
+    public float bottom() {
+        return super.bottom() + velocity.y ;
+    }
 
-    public void setMoveableDirs(){
+    public void setMovableDirs() {
 
         canMoveLeft = !collisionList.isCollisionTypeActive(CollisionType.LEFT);
 
@@ -61,14 +86,19 @@ public abstract class Entity extends BaseObject {
 
     //move self
     void Move() {
+        //left velocity and right velocity check
+        if (velocity.x > 0 && !canMoveRight || velocity.x < 0 && !canMoveLeft) velocity.x = 0;
+        //down velocity and up velocity check
+        if (velocity.y > 0 && !canMoveDown || velocity.y < 0 && !canMoveUp) velocity.y = 0;
+
+
         position.x += velocity.x;
         position.y += velocity.y;
     }
 
-    public void update(Canvas canvas){
-        setMoveableDirs();
+    public void update() {
+        setMovableDirs();
         Move();
-        onDraw(canvas);
     }
 
 
@@ -102,21 +132,25 @@ public abstract class Entity extends BaseObject {
         if (detectedCollision(entity2)) {
             ////check x////
             //check left
-            if (left() <= entity2.left() && right() >= entity2.left()) { collisionList.addUnique(new Collision(collisionID, CollisionType.LEFT)); }
-            else collisionList.remove(new Collision(collisionID, CollisionType.LEFT));
+            if (left() <= entity2.left() && right() >= entity2.left()) {
+                collisionList.addUnique(new Collision(collisionID, CollisionType.LEFT));
+            } else collisionList.remove(new Collision(collisionID, CollisionType.LEFT));
 
             //check right
-            if (left() <= entity2.right() && right() >= entity2.right()) { collisionList.addUnique(new Collision(collisionID, CollisionType.RIGHT)); }
-            else collisionList.remove(new Collision(collisionID, CollisionType.RIGHT));
+            if (left() <= entity2.right() && right() >= entity2.right()) {
+                collisionList.addUnique(new Collision(collisionID, CollisionType.RIGHT));
+            } else collisionList.remove(new Collision(collisionID, CollisionType.RIGHT));
 
             ////check y////
             //check top
-            if (top() <= entity2.top() && bottom() >= entity2.top()) { collisionList.addUnique(new Collision(collisionID, CollisionType.TOP)); }
-            else collisionList.remove(new Collision(collisionID, CollisionType.TOP));
+            if (top() <= entity2.top() && bottom() >= entity2.top()) {
+                collisionList.addUnique(new Collision(collisionID, CollisionType.TOP));
+            } else collisionList.remove(new Collision(collisionID, CollisionType.TOP));
 
             //check bottom
-            if (top() <= entity2.bottom() && bottom() >= entity2.bottom()) { collisionList.addUnique(new Collision(collisionID, CollisionType.BOTTOM)); }
-            else collisionList.remove(new Collision(collisionID, CollisionType.BOTTOM));
+            if (top() <= entity2.bottom() && bottom() >= entity2.bottom()) {
+                collisionList.addUnique(new Collision(collisionID, CollisionType.BOTTOM));
+            } else collisionList.remove(new Collision(collisionID, CollisionType.BOTTOM));
         }
     }
 
@@ -128,8 +162,13 @@ public abstract class Entity extends BaseObject {
         if (left() <= 0) collisionList.addUnique(new Collision(collisionID, CollisionType.LEFT));
         else collisionList.remove(new Collision(collisionID, CollisionType.LEFT));
         //check right border
-        if (right() >= canvas.getWidth()) collisionList.addUnique(new Collision(collisionID, CollisionType.RIGHT));
+        if (right() >= canvas.getWidth())
+            collisionList.addUnique(new Collision(collisionID, CollisionType.RIGHT));
         else collisionList.remove(new Collision(collisionID, CollisionType.RIGHT));
         //check right border
+    }
+
+    public Vector2 getVelocity() {
+        return velocity;
     }
 }

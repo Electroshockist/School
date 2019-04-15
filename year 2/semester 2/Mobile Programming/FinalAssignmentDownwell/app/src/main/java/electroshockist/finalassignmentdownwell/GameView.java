@@ -27,22 +27,14 @@ public class GameView extends SurfaceView{
 
     private GameThread gameThread;
 
-    private float yOffset;
-
-    private Player player;
-
-    private List<Entity> entities;
-    private List<Block> blocks;
+    World world;
 
     public GameView(Context context) {
         super(context);
 
+        world = new World(this);
+
         gameThread = new GameThread(this);
-
-        player = playerFactory();
-
-        entities = new ArrayList<>();
-        blocks = new ArrayList<>();
 
         SurfaceHolder holder = getHolder();
 
@@ -85,58 +77,11 @@ public class GameView extends SurfaceView{
 
     @Override
     protected void onDraw(Canvas canvas){
-
-        if (canvas != null) {
-            canvas.drawColor(Color.BLACK);
-
-            if(entities.size() > 0) {
-                Entity entity;
-                //loop through first set of entities
-                for (int i = 0; i < entities.size(); i++) {
-                    entity = entities.get(i);
-
-                    //check each entity-wall collision
-                    entity.WallCollisions(canvas);
-
-                    //check each entity against the first set
-                    for (int j = 0; j < entities.size(); j++) {
-
-                        //do not check self
-                        if (i != j) {
-                            //inter-sprite collision
-                            entity.InterCollision(entities.get(j));
-                        }
-                    }
-
-                    entity.update(canvas);
-                }
-
-            }
-
-            player.update(canvas);
-
-//            //point/lose text
-//            Paint paint = new Paint();
-//            paint.setColor(Color.BLACK);
-//            paint.setTextSize(200);
-//
-//            if (totalPoints >= 0) {
-//                canvas.drawText("Points: " + pointsAsString, canvas.getWidth() / 2 - 500, 300, paint);
-//            }
-//            else {
-//                canvas.drawText("You Lose!", canvas.getWidth() / 2 - 500, 300, paint);
-//            }
-
-        }
-        else Log.e("Canvas Error", "Could not get suitable canvas to draw game");
+        world.onDraw(canvas);
     }
 
     //shortform
     public Bitmap DecodeBitmap(int drawable){
         return  BitmapFactory.decodeResource(getResources(), drawable);
-    }
-
-    private Player playerFactory(){
-        return new Player(DecodeBitmap(R.drawable.gun2),new Vector2(500, 100), 4);
     }
 }
