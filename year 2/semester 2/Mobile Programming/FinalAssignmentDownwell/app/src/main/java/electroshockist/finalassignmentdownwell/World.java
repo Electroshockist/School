@@ -7,9 +7,12 @@ import android.util.Log;
 public class World {
     private EntityManager entityManager;
 
+    float screenPos;
+
     public World(GameView gameView) {
 
         entityManager = new EntityManager(gameView);
+        screenPos = 0;
     }
 
     public void onDraw(Canvas canvas) {

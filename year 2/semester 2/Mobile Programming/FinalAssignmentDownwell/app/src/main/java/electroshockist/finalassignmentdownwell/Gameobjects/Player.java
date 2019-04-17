@@ -12,16 +12,22 @@ public class Player extends GroundBasedEntity {
     public void manageInput(int x){
         boolean hasReacted = false;
     }
-    //if player is lower than y threshold,
-    private boolean doesScreenScroll() {
-        return renderedY > yThreshold;
+
+    @Override
+    public void update(){
+        super.update();
+        scrollScreen();
     }
+    //if player is lower than y threshold,
+//    private boolean doesScreenScroll() {
+//        return renderedY > yThreshold;
+//    }
 
     private void scrollScreen(){
-        if (doesScreenScroll()) {
-            yOffset = getPlayer().renderedY - yThreshold;
-            getPlayer().renderedY = yThreshold;
-        }
-        else renderedY += getVelocity().y;
+//        if (doesScreenScroll()) {
+//            yOffset = player.renderedY - yThreshold;
+//            player.renderedY = yThreshold;
+//        }
+//        else renderedY += getVelocity().y;
     }
 }

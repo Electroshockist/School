@@ -60,7 +60,6 @@ public class EntityManager {
             }
 
         }
-        scrollScreen();
     }
 
     private Player playerFactory(GameView gameView){
