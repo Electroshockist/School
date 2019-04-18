@@ -1,33 +1,30 @@
 package electroshockist.finalassignmentdownwell.Gameobjects;
 
-import android.graphics.Bitmap;
-
+import electroshockist.finalassignmentdownwell.GameView;
+import electroshockist.finalassignmentdownwell.R;
 import electroshockist.finalassignmentdownwell.Vector2;
 
 public class Player extends GroundBasedEntity {
-    public Player(Bitmap image, Vector2 position, int scale) {
-        super(image, position, scale);
+
+
+    public Player(GameView view, Vector2 position) {
+        super(view, position, R.drawable.gun2);
     }
 
-    public void manageInput(int x){
-        boolean hasReacted = false;
+    public void setPosition(Vector2 position) {
+        this.position = position;
+    }
+
+    public void manageInput(int x) {
     }
 
     @Override
-    public void update(){
+    public void update() {
         super.update();
-        scrollScreen();
     }
-    //if player is lower than y threshold,
-//    private boolean doesScreenScroll() {
-//        return renderedY > yThreshold;
-//    }
 
-    private void scrollScreen(){
-//        if (doesScreenScroll()) {
-//            yOffset = player.renderedY - yThreshold;
-//            player.renderedY = yThreshold;
-//        }
-//        else renderedY += getVelocity().y;
+    public void centerX() {
+        position.x -= width / 2.0f;
     }
+
 }

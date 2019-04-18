@@ -79,9 +79,4 @@ public class GameView extends SurfaceView{
     protected void onDraw(Canvas canvas){
         world.onDraw(canvas);
     }
-
-    //shortform
-    public Bitmap DecodeBitmap(int drawable){
-        return  BitmapFactory.decodeResource(getResources(), drawable);
-    }
 }

@@ -1,11 +1,12 @@
 package electroshockist.finalassignmentdownwell.Gameobjects;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import electroshockist.finalassignmentdownwell.Collisions.Collision;
 import electroshockist.finalassignmentdownwell.Collisions.CollisionList;
 import electroshockist.finalassignmentdownwell.Collisions.CollisionType;
+import electroshockist.finalassignmentdownwell.GameView;
+import electroshockist.finalassignmentdownwell.ScreenVariables;
 import electroshockist.finalassignmentdownwell.Vector2;
 
 public abstract class Entity extends BaseObject {
@@ -40,8 +41,8 @@ public abstract class Entity extends BaseObject {
     private CollisionList collisionList;
 
     //constructor (set default values)
-    Entity(Bitmap image, Vector2 position, int scale) {
-        super(image, position, scale);
+    Entity(GameView view, Vector2 position, int imageID) {
+        super(view, position, imageID);
 
         velocity = new Vector2(0, 0);
 
@@ -55,7 +56,7 @@ public abstract class Entity extends BaseObject {
 
     //quick access for the next self's left side position next frame
     public float left() {
-        return super.left() + velocity.x;
+        return (super.left() + velocity.y);
     }
 
     //quick access for the next self's top side position next frame
@@ -65,12 +66,12 @@ public abstract class Entity extends BaseObject {
 
     //quick access for the next self's right side position next frame
     public float right() {
-        return super.right() + velocity.x ;
+        return super.right() + velocity.x;
     }
 
     //quick access for the next self's bottom side position next frame
     public float bottom() {
-        return super.bottom() + velocity.y ;
+        return super.bottom() + velocity.y;
     }
 
     public void setMovableDirs() {
@@ -87,9 +88,9 @@ public abstract class Entity extends BaseObject {
     //move self
     void Move() {
         //left velocity and right velocity check
-        if (velocity.x > 0 && !canMoveRight || velocity.x < 0 && !canMoveLeft) velocity.x = 0;
+        if (velocity.x > 0 && !canMoveRight || velocity.x < 0 && !canMoveLeft) velocity.x = 0.0f;
         //down velocity and up velocity check
-        if (velocity.y > 0 && !canMoveDown || velocity.y < 0 && !canMoveUp) velocity.y = 0;
+        if (velocity.y > 0 && !canMoveDown || velocity.y < 0 && !canMoveUp) velocity.y = 0.0f;
 
 
         position.x += velocity.x;

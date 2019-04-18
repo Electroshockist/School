@@ -1,14 +1,12 @@
 package electroshockist.finalassignmentdownwell.Gameobjects;
 
-import android.graphics.Bitmap;
-import android.util.Log;
-
+import electroshockist.finalassignmentdownwell.GameView;
 import electroshockist.finalassignmentdownwell.Vector2;
 
 public abstract class GroundBasedEntity extends Entity {
     private float yAccel, topYVel;
-    GroundBasedEntity(Bitmap image, Vector2 position, int scale) {
-        super(image, position, scale);
+    GroundBasedEntity(GameView view, Vector2 position, int imageID) {
+        super(view, position, imageID);
 
         yAccel = 0.1f;
         topYVel = 10.0f;
@@ -16,8 +14,6 @@ public abstract class GroundBasedEntity extends Entity {
 
     @Override
     public void update() {
-
-        Log.v("lel", Float.toString(velocity.y));
         gravity();
         super.update();
     }

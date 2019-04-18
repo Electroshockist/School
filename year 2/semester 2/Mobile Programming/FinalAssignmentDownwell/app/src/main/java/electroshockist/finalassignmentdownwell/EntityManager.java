@@ -1,6 +1,7 @@
 package electroshockist.finalassignmentdownwell;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +12,47 @@ import electroshockist.finalassignmentdownwell.Gameobjects.Player;
 
 public class EntityManager {
 
-    private float yOffset, yThreshold;
-
     private List<BaseObject> baseObjects;
 
     public List<BaseObject> getBaseObjects() {
         return baseObjects;
     }
 
-    public EntityManager(GameView gameView){
-        yOffset = 0;
-        yThreshold = 200;
+    public Player player;
 
+    private float globalScale;
+
+    public EntityManager(){
         baseObjects = new ArrayList<>();
-
-        baseObjects.add(playerFactory(gameView));
     }
 
     public void add(BaseObject baseObject){
+        if (globalScale > 0) baseObject.setScale(globalScale);
         baseObjects.add(baseObject);
     }
+
+    public void add(Player player){
+        add((BaseObject) player);
+        this.player = player;
+    }
     
-    public void drawObjects(Canvas canvas){
-        for (BaseObject baseObject : baseObjects) { baseObject.onDraw(canvas);}
+    public void drawObjects(Canvas canvas, float screenPos){
+        if (!baseObjects.isEmpty()) {
+            //loop through all objects
+            for (int i = 0; i < baseObjects.size(); i++) {
+                BaseObject baseObject = baseObjects.get(i);
+                //set screen position
+                baseObject.renderedY = baseObject.getPosition().y - screenPos;
+
+                //if object is off screen, remove object
+                if (baseObject.renderedY + baseObject.bottom() < 0) {
+                    baseObjects.remove(baseObject);
+                }
+
+                //draw object
+                baseObject.onDraw(canvas);
+            }
+        }
     }
 
     public void updateEntities(Canvas canvas){
@@ -41,40 +60,34 @@ public class EntityManager {
             Entity entity;
             //loop through first set of entities
             for (int i = 0; i < baseObjects.size(); i++) {
-                entity = (Entity)baseObjects.get(i);
+                if(baseObjects.get(i) instanceof Entity) {
+                    entity = (Entity) baseObjects.get(i);
 
-                //check each entity-wall collision
-                entity.WallCollisions(canvas);
+                    //check each entity-wall collision
+                    entity.WallCollisions(canvas);
 
-                //check each entity against the first set
-                for (int j = 0; j < baseObjects.size(); j++) {
+                    //check each entity against each baseObject
+                    for (int j = 0; j < baseObjects.size(); j++) {
 
-                    //do not check self
-                    if (i != j) {
-                        //inter-sprite collision
-                        entity.InterCollision(baseObjects.get(j));
+                        //do not check self
+                        if (entity != baseObjects.get(j)) {
+                            //inter-sprite collision
+                            entity.InterCollision(baseObjects.get(j));
+                        }
                     }
+
+                    entity.update();
                 }
-
-                entity.update();
             }
 
         }
     }
 
-    private Player playerFactory(GameView gameView){
-        return new Player(gameView.DecodeBitmap(R.drawable.gun2),new Vector2(500, 0), 4);
-    }
+    public void setGlobalScale(float globalScale) {
+        this.globalScale = globalScale;
 
-    public Player getPlayer(){
         for (BaseObject baseObject : baseObjects) {
-            if (baseObject instanceof Player){
-                return (Player)baseObject;
-            }
+            baseObject.setScale(globalScale);
         }
-        return null;
     }
-
-
-
 }

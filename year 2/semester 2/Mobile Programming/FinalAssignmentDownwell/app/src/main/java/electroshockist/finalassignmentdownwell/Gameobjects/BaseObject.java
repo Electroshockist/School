@@ -1,36 +1,36 @@
 package electroshockist.finalassignmentdownwell.Gameobjects;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.Log;
 
+import electroshockist.finalassignmentdownwell.GameView;
 import electroshockist.finalassignmentdownwell.Vector2;
 
 public abstract class BaseObject {
-    protected Bitmap image;
+    public Bitmap image;
     protected Vector2 position;
-    protected int scale;
+    protected float scale;
 
     public float renderedY;
 
     //stores image width and height in shorter variables
-    protected int height, width;
+    protected float height, width;
 
-    public BaseObject(Bitmap image, Vector2 position, int scale) {
-        this.image = image;
-        this.position = position;
-        this.scale = scale;
+    public BaseObject(GameView gameView, Vector2 gridPosition, int imageID) {
+
+        this.position = new Vector2(gridPosition.x * (2 / width), gridPosition.y * (2 / width));
 
         renderedY = position.y;
 
-        height = image.getHeight() * scale;
-        width = image.getWidth() * scale;
-
-        this.image = Bitmap.createScaledBitmap(image, width, height, false);
+        //set image
+        if (imageID != 0) image = BitmapFactory.decodeResource(gameView.getResources(), imageID);
     }
 
     //draw self
     public void onDraw(Canvas canvas) {
-        canvas.drawBitmap(image, position.x, renderedY, null);
+        canvas.drawBitmap(image, (int) position.x, (int) renderedY, null);
     }
 
     //quick access for the left side position
@@ -55,5 +55,22 @@ public abstract class BaseObject {
 
     public Vector2 getPosition() {
         return position;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
+
+        height = (float) image.getHeight() * scale;
+        width = (float) image.getWidth() * scale;
+
+        this.image = Bitmap.createScaledBitmap(image, Math.round(width), Math.round(height), false);
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public float getWidth() {
+        return width;
     }
 }
