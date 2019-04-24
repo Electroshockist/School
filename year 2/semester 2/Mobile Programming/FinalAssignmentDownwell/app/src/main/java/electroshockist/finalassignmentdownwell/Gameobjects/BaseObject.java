@@ -93,4 +93,8 @@ public abstract class BaseObject {
     public float getWidth() {
         return width;
     }
+
+    public int getId() {
+        return id;
+    }
 }

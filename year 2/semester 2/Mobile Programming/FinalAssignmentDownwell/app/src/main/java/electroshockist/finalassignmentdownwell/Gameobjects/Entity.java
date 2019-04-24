@@ -7,7 +7,6 @@ import electroshockist.finalassignmentdownwell.Collisions.Collision;
 import electroshockist.finalassignmentdownwell.Collisions.CollisionList;
 import electroshockist.finalassignmentdownwell.Collisions.CollisionType;
 import electroshockist.finalassignmentdownwell.GameView;
-import electroshockist.finalassignmentdownwell.ScreenVariables;
 import electroshockist.finalassignmentdownwell.Vector2;
 
 public abstract class Entity extends BaseObject {
@@ -55,25 +54,25 @@ public abstract class Entity extends BaseObject {
         collisionList = new CollisionList();
     }
 
-    //quick access for the next self's left side position next frame
-    public float left() {
-        return (super.left() + velocity.y);
-    }
-
-    //quick access for the next self's top side position next frame
-    public float top() {
-        return super.top() + velocity.y;
-    }
-
-    //quick access for the next self's right side position next frame
-    public float right() {
-        return super.right() + velocity.x;
-    }
-
-    //quick access for the next self's bottom side position next frame
-    public float bottom() {
-        return super.bottom() + velocity.y;
-    }
+//    //quick access for the next self's left side position next frame
+//    public float left() {
+//        return (super.left() + velocity.y);
+//    }
+//
+//    //quick access for the next self's top side position next frame
+//    public float top() {
+//        return super.top() + velocity.y;
+//    }
+//
+//    //quick access for the next self's right side position next frame
+//    public float right() {
+//        return super.right() + velocity.x;
+//    }
+//
+//    //quick access for the next self's bottom side position next frame
+//    public float bottom() {
+//        return super.bottom() + velocity.y;
+//    }
 
     public void setMovableDirs() {
 
@@ -131,41 +130,36 @@ public abstract class Entity extends BaseObject {
     public void InterCollision(BaseObject object2) {
         String collisionID = "InterCollision";
 
-        Collision leftCollision = new Collision(CollisionType.LEFT, collisionID);
-        Collision rightCollision = new Collision(CollisionType.RIGHT, collisionID);
-        Collision upCollision = new Collision(CollisionType.TOP, collisionID);
-        Collision downCollision = new Collision(CollisionType.BOTTOM, collisionID);
 
-
-        if (detectedCollision(object2)) {
-            ////check x////
-            //check left
-            if (detectedCollision(object2) && checkLeft(object2)) {
-                collisionList.addUnique(leftCollision);
-            } else collisionList.remove(leftCollision);
-
-            //check right
-            if (detectedCollision(object2) && checkRight(object2)) {
-                collisionList.addUnique(rightCollision);
-            } else collisionList.remove(rightCollision);
-
-            ////check y////
-            //check top
-            if (detectedCollision(object2) && checkUp(object2)) {
-                collisionList.addUnique(upCollision);
-            } else collisionList.remove(upCollision);
-
-            //check bottom
-            if (detectedCollision(object2) && checkDown(object2)) {
-                Log.v("lel", "Added Down collision");
-                collisionList.addUnique(downCollision);
-            } else {
-                Log.v("lel", "Removed Down collision");
-                collisionList.remove(downCollision);
-            }
+        ////check x////
+        //check left
+        if (checkLeft(object2)) {
+            collisionList.addUnique( new Collision(CollisionType.LEFT, collisionID, object2.id));
         }
-        //else collisionList.removeAll();
-        //collisionList.print();
+
+        //check right
+        if (detectedCollision(object2) && checkRight(object2)) {
+            collisionList.addUnique(new Collision(CollisionType.RIGHT,  collisionID, object2.id));
+        } else collisionList.remove(new Collision(CollisionType.RIGHT,  collisionID, object2.id));
+
+        ////check y////
+        //check top
+        if (detectedCollision(object2) && checkUp(object2)) {
+            collisionList.addUnique(new Collision(CollisionType.TOP,  collisionID, object2.id));
+        } else collisionList.remove(new Collision(CollisionType.TOP,  collisionID, object2.id));
+
+        //check bottom
+        if (detectedCollision(object2) && checkDown(object2)) {
+            Log.v("lel", "Added Down collision");
+            collisionList.addUnique(new Collision(CollisionType.BOTTOM,  collisionID, object2.id));
+        }
+        else {
+            Log.v("lel", "Removed Down collision");
+            collisionList.remove(new Collision(CollisionType.BOTTOM,  collisionID, object2.id));
+        }
+//        Log.v("lel", Integer.toString(id));
+//        if(!detectedCollision(object2)) collisionList.removeAllOfID(object2.getId());
+//        collisionList.print();
     }
 
     private boolean checkLeft(BaseObject object2) {
@@ -187,8 +181,9 @@ public abstract class Entity extends BaseObject {
     //check border collisions
     public void WallCollisions(Canvas canvas) {
         String collisionID = "Wall Collision";
-        Collision leftCollision = new Collision(CollisionType.LEFT, collisionID);
-        Collision rightCollision = new Collision(CollisionType.RIGHT, collisionID);
+        int wallID = -1;
+        Collision leftCollision = new Collision(CollisionType.LEFT,  collisionID, wallID);
+        Collision rightCollision = new Collision(CollisionType.RIGHT, collisionID, wallID);
 
         //check left border
         if (left() <= 0) collisionList.addUnique(leftCollision);

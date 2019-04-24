@@ -31,10 +31,9 @@ public class Player extends GroundBasedEntity {
     }
 
     public void jump() {
-        Log.v("lel",Float.toString(velocity.y));
-//        if(jumpVelocity >= 0){
-//            jumpVelocity -= jumpVelocityDecrement;
-//        }
+        if(jumpVelocity >= 0){
+            jumpVelocity -= jumpVelocityDecrement;
+        }
         velocity.y -= jumpVelocity;
     }
 

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.Log;
 
+import electroshockist.finalassignmentdownwell.Gameobjects.BaseObject;
 import electroshockist.finalassignmentdownwell.Gameobjects.Dirt;
 import electroshockist.finalassignmentdownwell.Gameobjects.Player;
 
@@ -44,6 +45,11 @@ public class World {
         entityManager.add(new Dirt(view, new Vector2(7, 3)));
         entityManager.add(new Dirt(view, new Vector2(8, 3)));
         entityManager.add(new Dirt(view, new Vector2(9, 3)));
+
+        for (BaseObject b :
+                entityManager.getBaseObjects()) {
+            Log.v("lel", Integer.toString(b.getId()));
+        }
     }
 
     public void onDraw(Canvas canvas) {
@@ -52,7 +58,6 @@ public class World {
             if (!initializedWithCanvas) {
                 initializeWithCanvas(canvas);
             }
-
 
             canvas.drawColor(Color.BLACK);
 
@@ -91,6 +96,4 @@ public class World {
     public void onRelease(){
 
     }
-
-
 }

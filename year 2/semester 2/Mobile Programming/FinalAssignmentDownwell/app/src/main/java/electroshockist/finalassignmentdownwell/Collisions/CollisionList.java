@@ -3,7 +3,9 @@ package electroshockist.finalassignmentdownwell.Collisions;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CollisionList {
     String debugTag = "Collisions";
@@ -18,15 +20,14 @@ public class CollisionList {
         collisions.add(new ArrayList<Collision>());
     }
 
-    public void addUnique(Collision collision) {
+    public void addUnique(Collision collision){
+        List<Collision> currentList =  collisions.get(collision.collisionType.ordinal());
         //check if collision of same type exists
-        if (isCollisionTypeActive(collision.collisionType)) {
+        if(isCollisionTypeActive(collision.collisionType)) {
             //for each collision of the same type, check if id matches
-            for (int i = 0; i < collisions.get(collision.collisionType.ordinal()).size(); i++) {
-                Collision currentCollision = collisions.get(collision.collisionType.ordinal()).get(i);
+            for (int i = 0; i < currentList.size(); i++) {
                 //if collision with same type and id already exists, return
-                if (collision.name.equals(currentCollision.name))
-                    return;
+                if (collision.objectID == currentList.get(i).objectID) return;
             }
         }
 
@@ -34,26 +35,36 @@ public class CollisionList {
         collisions.get(collision.collisionType.ordinal()).add(collision);
     }
 
-    public void remove(Collision collision) {
-        if (isCollisionTypeActive(collision.collisionType)) {
-            List<Collision> currentCollisions = collisions.get(collision.collisionType.ordinal());
-            //print();
-            for (int i = 0; i < currentCollisions.size(); i++) {
-                boolean condition = currentCollisions.get(i).name.equals(collision.name);
-                //Log.v(debugTag, " \n" + currentCollisions.get(i).debugString() + " = \n" + collision.debugString() + "\n" + Boolean.toString(condition));
+    public void remove(Collision collision){
+        List<Collision> currentList =  collisions.get(collision.collisionType.ordinal());
+        Collision currentItem;
+        for (int i = 0; i < currentList.size(); i++) {
 
-                if (condition) {
-                    currentCollisions.remove(i);
-                }
+            currentItem = currentList.get(i);
 
+            //Log.v("lel","Initial size: " + Integer.toString(collisions.get(collision.collisionType.ordinal()).size()) );
+            if (currentItem.doesEqual(collision)) {
+
+                collisions.get(collision.collisionType.ordinal()).remove(i);
+
+                //Log.v("lel", "New size" + Integer.toString(collisions.get(collision.collisionType.ordinal()).size()) );
+
+                return;
             }
         }
+        if (isCollisionTypeActive(collision.collisionType)) {
+
+            //Log.v("lel", Boolean.toString(collisions.get(collision.collisionType.ordinal()).contains(collision)));
+        }
+
     }
 
-    public void removeAll() {
-        for (int i = 0; i < collisions.size(); i++) {
-            collisions.get(i).clear();
-        }
+    public void removeAllOfID(int id) {
+
+//        Collision currentCollision;
+//        for (int i = 0; i < collisions.size(); i++) {
+//            if (collisions.get(collision.collisionType.ordinal()))
+//        }
     }
 
     public boolean isCollisionTypeActive(CollisionType collisionType) {
