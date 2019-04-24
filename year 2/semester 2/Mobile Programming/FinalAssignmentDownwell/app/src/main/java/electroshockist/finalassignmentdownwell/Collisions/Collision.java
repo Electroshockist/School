@@ -1,13 +1,16 @@
 package electroshockist.finalassignmentdownwell.Collisions;
 
-
-//collisions hold a collisiontype and an id
+//collisions hold a collisiontype, a name and an object id
 public class Collision {
     public CollisionType collisionType;
-    public String id;
+    public String name;
 
-    public Collision(String id, CollisionType collisionType) {
-        this.id = id;
+    public Collision(CollisionType collisionType, String name) {
         this.collisionType = collisionType;
+        this.name = name;
+    }
+
+    public String debugString() {
+        return name + "\t" + collisionType.name();
     }
 }
