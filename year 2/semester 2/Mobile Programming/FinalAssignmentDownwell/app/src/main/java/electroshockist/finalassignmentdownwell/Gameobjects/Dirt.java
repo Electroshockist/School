@@ -6,6 +6,6 @@ import electroshockist.finalassignmentdownwell.Vector2;
 
 public class Dirt extends Block {
     public Dirt(GameView view, Vector2 position) {
-        super(view, position, R.drawable.dirt2);
+        super(view, position, R.drawable.dirt);
     }
 }

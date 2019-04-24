@@ -1,6 +1,7 @@
 package electroshockist.finalassignmentdownwell.Gameobjects;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 import electroshockist.finalassignmentdownwell.Collisions.Collision;
 import electroshockist.finalassignmentdownwell.Collisions.CollisionList;
@@ -92,7 +93,6 @@ public abstract class Entity extends BaseObject {
         //down velocity and up velocity check
         if (velocity.y > 0 && !canMoveDown || velocity.y < 0 && !canMoveUp) velocity.y = 0.0f;
 
-
         position.x += velocity.x;
         position.y += velocity.y;
     }
@@ -128,48 +128,83 @@ public abstract class Entity extends BaseObject {
     }
 
     //check collision between self and given image
-    public void InterCollision(BaseObject entity2) {
+    public void InterCollision(BaseObject object2) {
         String collisionID = "InterCollision";
-        if (detectedCollision(entity2)) {
+
+        Collision leftCollision = new Collision(CollisionType.LEFT, collisionID);
+        Collision rightCollision = new Collision(CollisionType.RIGHT, collisionID);
+        Collision upCollision = new Collision(CollisionType.TOP, collisionID);
+        Collision downCollision = new Collision(CollisionType.BOTTOM, collisionID);
+
+
+        if (detectedCollision(object2)) {
             ////check x////
             //check left
-            if (left() <= entity2.left() && right() >= entity2.left()) {
-                collisionList.addUnique(new Collision(collisionID, CollisionType.LEFT));
-            } else collisionList.remove(new Collision(collisionID, CollisionType.LEFT));
+            if (detectedCollision(object2) && checkLeft(object2)) {
+                collisionList.addUnique(leftCollision);
+            } else collisionList.remove(leftCollision);
 
             //check right
-            if (left() <= entity2.right() && right() >= entity2.right()) {
-                collisionList.addUnique(new Collision(collisionID, CollisionType.RIGHT));
-            } else collisionList.remove(new Collision(collisionID, CollisionType.RIGHT));
+            if (detectedCollision(object2) && checkRight(object2)) {
+                collisionList.addUnique(rightCollision);
+            } else collisionList.remove(rightCollision);
 
             ////check y////
             //check top
-            if (top() <= entity2.top() && bottom() >= entity2.top()) {
-                collisionList.addUnique(new Collision(collisionID, CollisionType.TOP));
-            } else collisionList.remove(new Collision(collisionID, CollisionType.TOP));
+            if (detectedCollision(object2) && checkUp(object2)) {
+                collisionList.addUnique(upCollision);
+            } else collisionList.remove(upCollision);
 
             //check bottom
-            if (top() <= entity2.bottom() && bottom() >= entity2.bottom()) {
-                collisionList.addUnique(new Collision(collisionID, CollisionType.BOTTOM));
-            } else collisionList.remove(new Collision(collisionID, CollisionType.BOTTOM));
+            if (detectedCollision(object2) && checkDown(object2)) {
+                Log.v("lel", "Added Down collision");
+                collisionList.addUnique(downCollision);
+            } else {
+                Log.v("lel", "Removed Down collision");
+                collisionList.remove(downCollision);
+            }
         }
+        //else collisionList.removeAll();
+        //collisionList.print();
+    }
+
+    private boolean checkLeft(BaseObject object2) {
+        return left() <= object2.right() && right() >= object2.right();
+    }
+
+    private boolean checkRight(BaseObject object2) {
+        return left() <= object2.left() && right() >= object2.left();
+    }
+
+    private boolean checkUp(BaseObject object2) {
+        return top() <= object2.bottom() && bottom() >= object2.bottom();
+    }
+
+    private boolean checkDown(BaseObject object2) {
+        return top() <= object2.top() && bottom() >= object2.top();
     }
 
     //check border collisions
     public void WallCollisions(Canvas canvas) {
         String collisionID = "Wall Collision";
+        Collision leftCollision = new Collision(CollisionType.LEFT, collisionID);
+        Collision rightCollision = new Collision(CollisionType.RIGHT, collisionID);
 
         //check left border
-        if (left() <= 0) collisionList.addUnique(new Collision(collisionID, CollisionType.LEFT));
-        else collisionList.remove(new Collision(collisionID, CollisionType.LEFT));
+        if (left() <= 0) collisionList.addUnique(leftCollision);
+        else collisionList.remove(leftCollision);
         //check right border
         if (right() >= canvas.getWidth())
-            collisionList.addUnique(new Collision(collisionID, CollisionType.RIGHT));
-        else collisionList.remove(new Collision(collisionID, CollisionType.RIGHT));
+            collisionList.addUnique(rightCollision);
+        else collisionList.remove(rightCollision);
         //check right border
     }
 
     public Vector2 getVelocity() {
         return velocity;
+    }
+
+    public CollisionList getCollisionList() {
+        return collisionList;
     }
 }

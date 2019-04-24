@@ -72,6 +72,14 @@ public class GameView extends SurfaceView{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                world.onPress();
+                break;
+            case MotionEvent.ACTION_UP:
+                world.onRelease();
+                break;
+        }
         return super.onTouchEvent(event); // has to be returned by this method
     }
 

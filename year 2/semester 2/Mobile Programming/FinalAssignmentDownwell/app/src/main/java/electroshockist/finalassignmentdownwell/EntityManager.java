@@ -79,6 +79,7 @@ public class EntityManager {
                     entity.update();
                 }
             }
+//            player.getCollisionList().print();
 
         }
     }
