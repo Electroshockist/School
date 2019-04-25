@@ -45,11 +45,6 @@ public class World {
         entityManager.add(new Dirt(view, new Vector2(7, 3)));
         entityManager.add(new Dirt(view, new Vector2(8, 3)));
         entityManager.add(new Dirt(view, new Vector2(9, 3)));
-
-        for (BaseObject b :
-                entityManager.getBaseObjects()) {
-            Log.v("lel", Integer.toString(b.getId()));
-        }
     }
 
     public void onDraw(Canvas canvas) {

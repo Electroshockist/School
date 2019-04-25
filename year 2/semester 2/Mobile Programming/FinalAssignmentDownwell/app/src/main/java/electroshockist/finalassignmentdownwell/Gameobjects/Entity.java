@@ -130,36 +130,27 @@ public abstract class Entity extends BaseObject {
     public void InterCollision(BaseObject object2) {
         String collisionID = "InterCollision";
 
-
         ////check x////
         //check left
-        if (checkLeft(object2)) {
-            collisionList.addUnique( new Collision(CollisionType.LEFT, collisionID, object2.id));
-        }
+        if (checkLeft(object2))
+            collisionList.addUnique(new Collision(CollisionType.LEFT, collisionID, object2.id));
+        else collisionList.remove(new Collision(CollisionType.LEFT, collisionID, object2.id));
 
         //check right
-        if (detectedCollision(object2) && checkRight(object2)) {
-            collisionList.addUnique(new Collision(CollisionType.RIGHT,  collisionID, object2.id));
-        } else collisionList.remove(new Collision(CollisionType.RIGHT,  collisionID, object2.id));
+        if (detectedCollision(object2) && checkRight(object2))
+            collisionList.addUnique(new Collision(CollisionType.RIGHT, collisionID, object2.id));
+        else collisionList.remove(new Collision(CollisionType.RIGHT, collisionID, object2.id));
 
         ////check y////
         //check top
-        if (detectedCollision(object2) && checkUp(object2)) {
-            collisionList.addUnique(new Collision(CollisionType.TOP,  collisionID, object2.id));
-        } else collisionList.remove(new Collision(CollisionType.TOP,  collisionID, object2.id));
+        if (detectedCollision(object2) && checkUp(object2))
+            collisionList.addUnique(new Collision(CollisionType.TOP, collisionID, object2.id));
+        else collisionList.remove(new Collision(CollisionType.TOP, collisionID, object2.id));
 
         //check bottom
-        if (detectedCollision(object2) && checkDown(object2)) {
-            Log.v("lel", "Added Down collision");
-            collisionList.addUnique(new Collision(CollisionType.BOTTOM,  collisionID, object2.id));
-        }
-        else {
-            Log.v("lel", "Removed Down collision");
-            collisionList.remove(new Collision(CollisionType.BOTTOM,  collisionID, object2.id));
-        }
-//        Log.v("lel", Integer.toString(id));
-//        if(!detectedCollision(object2)) collisionList.removeAllOfID(object2.getId());
-//        collisionList.print();
+        if (detectedCollision(object2) && checkDown(object2))
+            collisionList.addUnique(new Collision(CollisionType.BOTTOM, collisionID, object2.id));
+        else collisionList.remove(new Collision(CollisionType.BOTTOM, collisionID, object2.id));
     }
 
     private boolean checkLeft(BaseObject object2) {
@@ -182,7 +173,7 @@ public abstract class Entity extends BaseObject {
     public void WallCollisions(Canvas canvas) {
         String collisionID = "Wall Collision";
         int wallID = -1;
-        Collision leftCollision = new Collision(CollisionType.LEFT,  collisionID, wallID);
+        Collision leftCollision = new Collision(CollisionType.LEFT, collisionID, wallID);
         Collision rightCollision = new Collision(CollisionType.RIGHT, collisionID, wallID);
 
         //check left border
