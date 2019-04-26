@@ -76,11 +76,18 @@ public class GameView extends SurfaceView{
             case MotionEvent.ACTION_DOWN:
                 world.onPress();
                 break;
+            case MotionEvent.ACTION_MOVE:
+                break;
             case MotionEvent.ACTION_UP:
                 world.onRelease();
                 break;
         }
-        return super.onTouchEvent(event); // has to be returned by this method
+
+        world.setTouchPos(new Vector2(event.getX(), event.getY()));
+
+        super.onTouchEvent(event); // has to be returned by this method
+
+        return true;
     }
 
     @Override

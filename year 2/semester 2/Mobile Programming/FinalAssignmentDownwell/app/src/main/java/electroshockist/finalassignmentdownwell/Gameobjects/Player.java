@@ -8,12 +8,12 @@ import electroshockist.finalassignmentdownwell.Vector2;
 
 public class Player extends GroundBasedEntity {
 
-    boolean pressDown = false;
+    boolean pressDown = false, previousCanMoveDownState = false;
     float jumpVelocity, baseJumpVelocity, jumpVelocityDecrement;
 
     public Player(GameView view, Vector2 position) {
         super(view, position, R.drawable.gun2);
-        baseJumpVelocity = 2;
+        baseJumpVelocity = 7.0f;
         jumpVelocityDecrement = 0.1f;
     }
 
@@ -22,8 +22,14 @@ public class Player extends GroundBasedEntity {
 
     @Override
     public void update() {
+        //reset velocity on ground
+//        if (previousCanMoveDownState != isCanMoveDown() && !isCanMoveDown() && !pressDown) {
+//            velocity.x = 0;
+//        }
+
         if (pressDown) ;
         super.update();
+        previousCanMoveDownState = isCanMoveDown();
     }
 
     public void centerX() {
@@ -31,10 +37,12 @@ public class Player extends GroundBasedEntity {
     }
 
     public void jump() {
-        if(jumpVelocity >= 0){
-            jumpVelocity -= jumpVelocityDecrement;
+        if (velocity.y >= 0) {
+            velocity.y = 0.0f;
+            if (!isCanMoveDown()) {
+                velocity.y -= jumpVelocity;
+            }
         }
-        velocity.y -= jumpVelocity;
     }
 
     public void onPress() {
@@ -43,8 +51,16 @@ public class Player extends GroundBasedEntity {
         jumpVelocity = baseJumpVelocity;
     }
 
-    public void onRelease(){
+    public void onRelease() {
         pressDown = false;
+    }
+
+    public void getTouchPos(Vector2 touchPos) {
+        float x = -((position.x + (width / 2)) - touchPos.x);
+        float xSign = x/Math.abs(x);
+
+        velocity.x =  (x /50);
+
     }
 
 }
