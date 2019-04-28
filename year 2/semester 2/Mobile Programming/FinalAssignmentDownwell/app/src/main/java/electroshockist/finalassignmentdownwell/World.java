@@ -89,6 +89,10 @@ public class World {
     }
 
     public void onRelease(){
+        entityManager.player.onRelease();
+    }
 
+    public void setTouchPos(Vector2 touchPos){
+        entityManager.player.getTouchPos(touchPos);
     }
 }

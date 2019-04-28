@@ -16,6 +16,8 @@ public abstract class Entity extends BaseObject {
 
     protected int DeathSound;
 
+    private static final int collisionBuffer  = 1;
+
     public int getDeathSound() {
         return DeathSound;
     }
@@ -54,25 +56,25 @@ public abstract class Entity extends BaseObject {
         collisionList = new CollisionList();
     }
 
-//    //quick access for the next self's left side position next frame
-//    public float left() {
-//        return (super.left() + velocity.y);
-//    }
-//
-//    //quick access for the next self's top side position next frame
-//    public float top() {
-//        return super.top() + velocity.y;
-//    }
-//
-//    //quick access for the next self's right side position next frame
-//    public float right() {
-//        return super.right() + velocity.x;
-//    }
-//
-//    //quick access for the next self's bottom side position next frame
-//    public float bottom() {
-//        return super.bottom() + velocity.y;
-//    }
+    //quick access for the next self's left side position next frame
+    public float left() {
+        return (super.left() + velocity.y);
+    }
+
+    //quick access for the next self's top side position next frame
+    public float top() {
+        return super.top() + velocity.y;
+    }
+
+    //quick access for the next self's right side position next frame
+    public float right() {
+        return super.right() + velocity.x;
+    }
+
+    //quick access for the next self's bottom side position next frame
+    public float bottom() {
+        return super.bottom() + velocity.y;
+    }
 
     public void setMovableDirs() {
 
@@ -103,6 +105,22 @@ public abstract class Entity extends BaseObject {
 
 
     //////Collisions//////
+    private boolean checkLeft(BaseObject object2) {
+        return left() <= object2.right() && right() >= object2.right();
+    }
+
+    private boolean checkRight(BaseObject object2) {
+        return left() <= object2.left() && right() >= object2.left();
+    }
+
+    private boolean checkUp(BaseObject object2) {
+        return top() <= object2.bottom() && bottom() >= object2.bottom();
+    }
+
+    private boolean checkDown(BaseObject object2) {
+        return top() <= object2.top() && bottom() >= object2.top();
+    }
+
     //check if self's x values are between given image's x values
     private boolean isXInside(BaseObject entity2) {
         //where 2 denotes entity2
@@ -132,7 +150,7 @@ public abstract class Entity extends BaseObject {
 
         ////check x////
         //check left
-        if (checkLeft(object2))
+        if (detectedCollision(object2) && checkLeft(object2))
             collisionList.addUnique(new Collision(CollisionType.LEFT, collisionID, object2.id));
         else collisionList.remove(new Collision(CollisionType.LEFT, collisionID, object2.id));
 
@@ -151,22 +169,6 @@ public abstract class Entity extends BaseObject {
         if (detectedCollision(object2) && checkDown(object2))
             collisionList.addUnique(new Collision(CollisionType.BOTTOM, collisionID, object2.id));
         else collisionList.remove(new Collision(CollisionType.BOTTOM, collisionID, object2.id));
-    }
-
-    private boolean checkLeft(BaseObject object2) {
-        return left() <= object2.right() && right() >= object2.right();
-    }
-
-    private boolean checkRight(BaseObject object2) {
-        return left() <= object2.left() && right() >= object2.left();
-    }
-
-    private boolean checkUp(BaseObject object2) {
-        return top() <= object2.bottom() && bottom() >= object2.bottom();
-    }
-
-    private boolean checkDown(BaseObject object2) {
-        return top() <= object2.top() && bottom() >= object2.top();
     }
 
     //check border collisions
