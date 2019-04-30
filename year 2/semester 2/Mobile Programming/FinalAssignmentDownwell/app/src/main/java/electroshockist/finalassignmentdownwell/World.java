@@ -35,16 +35,16 @@ public class World {
 
     private void initializeEntities(){
         entityManager.add(new Player(view, new Vector2(5, 0)));
-        entityManager.add(new Dirt(view, new Vector2(0, 3)));
-        entityManager.add(new Dirt(view, new Vector2(1, 3)));
-        entityManager.add(new Dirt(view, new Vector2(2, 3)));
-        entityManager.add(new Dirt(view, new Vector2(3, 3)));
-        entityManager.add(new Dirt(view, new Vector2(4, 3)));
-        entityManager.add(new Dirt(view, new Vector2(5, 3)));
-        entityManager.add(new Dirt(view, new Vector2(6, 3)));
-        entityManager.add(new Dirt(view, new Vector2(7, 3)));
-        entityManager.add(new Dirt(view, new Vector2(8, 3)));
-        entityManager.add(new Dirt(view, new Vector2(9, 3)));
+        entityManager.add(new Dirt(view, new Vector2(0, 12)));
+        entityManager.add(new Dirt(view, new Vector2(9, 10)));
+        entityManager.add(new Dirt(view, new Vector2(4, 30)));
+        entityManager.add(new Dirt(view, new Vector2(3, 25)));
+        entityManager.add(new Dirt(view, new Vector2(2, 12)));
+        entityManager.add(new Dirt(view, new Vector2(7, 5)));
+        entityManager.add(new Dirt(view, new Vector2(5, 15)));
+        entityManager.add(new Dirt(view, new Vector2(1, 13)));
+        entityManager.add(new Dirt(view, new Vector2(2, 32)));
+        entityManager.add(new Dirt(view, new Vector2(9, 22)));
     }
 
     public void onDraw(Canvas canvas) {
