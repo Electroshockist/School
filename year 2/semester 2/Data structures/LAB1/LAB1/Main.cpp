@@ -68,4 +68,6 @@ int main(void)
 	for (num=sequence.rbegin(); num!=sequence.rend(); --num)
 		cout << *num << ' ';
 	cout << endl;
+
+	getchar();
 }
