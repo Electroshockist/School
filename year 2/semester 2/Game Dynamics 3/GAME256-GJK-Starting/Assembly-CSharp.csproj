@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\CustomRigidbody.cs" />
     <Compile Include="Assets\Scripts\CustomSlider.cs" />
     <Compile Include="Assets\Scripts\GJK\Box.cs" />
+    <Compile Include="Assets\Scripts\GJK\Edge.cs" />
     <Compile Include="Assets\Scripts\GJK\GJKAlgorithm.cs" />
     <Compile Include="Assets\Scripts\GJK\GJKManager.cs" />
     <Compile Include="Assets\Scripts\GJK\GJKMesh.cs" />

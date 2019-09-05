@@ -2,6 +2,8 @@
 
 public static class GJKAlgorithm {
     public static Vector3 direction;
+
+    public static Vector3 sa, sb;
     //public void SetDirectionX(string s) {
     //    float x;
     //    float.TryParse(s, out x);
@@ -22,7 +24,8 @@ public static class GJKAlgorithm {
 
     public static bool Intersects(IConvexRegion regionOne, Transform oneTrans, IConvexRegion regionTwo, Transform twoTrans, GJKState state) {
         // Get an initial point on the Minkowski difference.
-        Vector3 s = Support(regionOne, regionTwo, twoTrans.position - oneTrans.position, state);
+        Vector3 s = Support(regionOne, regionTwo, twoTrans.position - oneTrans.position, state, out sa);
+
 
         // Create our initial simplex.
         Simplex simplex = new Simplex();
@@ -39,7 +42,7 @@ public static class GJKAlgorithm {
 
         for (int i = 0; i < maxIterations; i++) {
             // Get our next simplex point toward the origin.
-            Vector3 a = Support(regionOne, regionTwo, direction, state);
+            Vector3 a = Support(regionOne, regionTwo, direction, state, out sa, out sb);
 
             // If we move toward the origin and didn't pass it 
             // then we never will and there's no intersection.
@@ -54,6 +57,18 @@ public static class GJKAlgorithm {
             // the simplex to the origin, make that the new simplex and update the direction
             // to move toward the origin from that feature.
             if (ProcessSimplex(simplex, ref direction)) {
+                float tolerance = 0.000001f; // Or another such small number
+                    while (true) {
+                    Edge e = simplex.FindClosestEdge();
+                    Vector3 p = Support(regionOne, regionTwo, e.normal, state, out sa, out sb);
+                    float proj = Vector3.Dot(p, e.normal);
+
+                    if (proj - e.distance < tolerance) {
+                    }
+}
+                    else {
+                    }
+                }
                 return true;
             }
         }
@@ -155,7 +170,7 @@ public static class GJKAlgorithm {
     /// Calculates the furthest point on the Minkowski 
     /// Sum along a given direction.
     /// </summary>
-    static Vector3 Support(IConvexRegion regionOne, IConvexRegion regionTwo, Vector3 direction, GJKState state) {
+    static Vector3 Support(IConvexRegion regionOne, IConvexRegion regionTwo, Vector3 direction, GJKState state, out Vector3 supporta, out Vector3 supportb) {
         // TODO: Get support point
         Vector3 supportPoint = Vector3.zero;
         // A + (-B)
@@ -164,5 +179,6 @@ public static class GJKAlgorithm {
         return supportPoint;
     }
 
+    
 
 }
