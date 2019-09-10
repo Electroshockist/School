@@ -1,10 +1,11 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-
+#include "GameInterfaceh.h"
+#include "Scene.h"
 #include "Window.h"
+#include "Debug.h"
 #include <memory>
-
 
 class Engine {
 	Engine();
@@ -12,6 +13,10 @@ class Engine {
 
 	Window* window;
 	bool isRunning;
+
+	int currentScene;
+
+	GameInterface* gameInterface;
 
 	static std::unique_ptr<Engine> instance;
 	friend std::default_delete<Engine>;
@@ -29,7 +34,12 @@ public:
 	bool OnCreate(std::string name, int width, int height);
 	void Run();
 	bool getIsRunning();
+	void setIsRuning(const bool isRunning);
 	static Engine* getInstance();
+	void setGameInterface(GameInterface* gameInterface);
+
+	void setCurrentScene(int currentScene);
+	int getCurrentScene() const;
 };
 #endif // !ENGINE_H
 
