@@ -4,7 +4,7 @@
 
 std::unique_ptr<Engine> Engine::instance = nullptr;
 
-Engine::Engine() : window(nullptr), isRunning(false), gameInterface(nullptr), currentScene(0) {}
+Engine::Engine() : window(nullptr), isRunning(false), gameInterface(nullptr), fps(120), currentScene(0) {}
 
 Engine::~Engine() {
 	OnDestroy();
@@ -16,20 +16,24 @@ bool Engine::OnCreate(std::string name, int width, int height) {
 
 	window = new Window();
 	if (!window->OnCreate(name, width, height)) {
-		Debug::fatalerror("Window Failed to create", "Engine.h", __LINE__);
+		Debug::fatalerror("Window Failed to create", __FILE__, __LINE__);
 		return isRunning = false;
 	}
 	if (!gameInterface->OnCreate()) {
-		//Debug::
+		Debug::fatalerror("Game failed to create", __FILE__, __LINE__);
+		return isRunning = false;
 	}
 
+	timer.Start();
 	return isRunning = true;
 }
 
 void Engine::Run() {
 	while (isRunning) {
-		Update(0.016f);
+		timer.UpdateFrameTicks();
+		Update(timer.GetDeltaTime());
 		Render();
+		SDL_Delay(timer.GetSleepTime(fps));
 	}
 
 	//if not running, destroy

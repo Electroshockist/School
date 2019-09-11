@@ -11,7 +11,7 @@ StartScene::~StartScene() {
 }
 
 bool StartScene::OnCreate() {
-	Debug::info("creating startscene", "StartScene", __LINE__);
+	Debug::info("creating startscene", __FILE__, __LINE__);
 	std::cout << "creating startscene" << std::endl;
 	Engine::getInstance()->setCurrentScene(1);
 	return true;

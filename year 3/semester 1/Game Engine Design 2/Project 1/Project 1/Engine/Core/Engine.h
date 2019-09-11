@@ -5,11 +5,16 @@
 #include "Scene.h"
 #include "Window.h"
 #include "Debug.h"
+#include "Timer.h"
+
 #include <memory>
 
 class Engine {
 	Engine();
 	~Engine();
+
+	Timer timer;
+	unsigned int fps;
 
 	Window* window;
 	bool isRunning;
