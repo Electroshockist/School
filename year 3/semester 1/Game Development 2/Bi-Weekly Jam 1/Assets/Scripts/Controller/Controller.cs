@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour {
-    public abstract class InputComponent {
-        public abstract void Gather(Data data);
-        public abstract void Input();
-    }
-    public abstract class ControlComponent {
-        public abstract void Gather(Data data);
-        public abstract void Execute();
-    }
+public abstract class InputComponent : MonoBehaviour {
+    public abstract void Gather(Data data);
+    public abstract void Input();
+}
+public abstract class ControlComponent : MonoBehaviour {
+    public abstract void Gather(Data data);
+    public abstract void Execute();
+}
 
+public class Controller : MonoBehaviour {
     [Header("Inputs")]
     [SerializeField]
     List<InputComponent> inputs = new List<InputComponent>();

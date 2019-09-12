@@ -62,9 +62,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Controller.cs" />
-    <Compile Include="Assets\Scripts\Data.cs" />
-    <Compile Include="Assets\Scripts\DataNode.cs" />
+    <Compile Include="Assets\Scripts\ButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\Controller\Controller.cs" />
+    <Compile Include="Assets\Scripts\Controller\ControlVector2ToTranslate.cs" />
+    <Compile Include="Assets\Scripts\Controller\Input\InputGroup.cs" />
+    <Compile Include="Assets\Scripts\Controller\Input\InputHandler.cs" />
+    <Compile Include="Assets\Scripts\Controller\Input\InputKeysToVector2.cs" />
+    <Compile Include="Assets\Scripts\Controller\Input\InputPair.cs" />
+    <Compile Include="Assets\Scripts\Controller\InputTransformDeltaToVector2.cs" />
+    <Compile Include="Assets\Scripts\Data\Data.cs" />
+    <Compile Include="Assets\Scripts\Data\DataNode.cs" />
+    <Compile Include="Assets\Scripts\Entity.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/erico/Documents/Code/School/year 3/semester 1/Game Development 2/Bi-Weekly Jam 1/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
