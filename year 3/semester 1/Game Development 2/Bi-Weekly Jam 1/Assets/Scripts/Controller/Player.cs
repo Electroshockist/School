@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PlayerSpawnBullet : ControlComponent {
+public class Player : ControlComponent {
+    public GameObject DeathMenu;
+    private bool isDead = false;
+
     [Header("Bullet")]
     [SerializeField] GameObject bullet;
     [Header("Wait Time")]
@@ -17,13 +21,20 @@ public class PlayerSpawnBullet : ControlComponent {
     }
 
     public override void Execute() {
-        Vector2 tempVector = (Vector2)cachedVector;
-        if (tempVector.magnitude > 1) {
-            tempVector.Normalize();
-        }
+        if (!isDead) {
+            Vector2 tempVector = (Vector2)cachedVector;
+            if (tempVector.magnitude > 1) {
+                tempVector.Normalize();
+            }
 
-        if (tempVector.magnitude > 0) {
-            shoot(tempVector);
+            if (tempVector.magnitude > 0) {
+                shoot(tempVector);
+            }
+        }
+        else {
+            if (Input.GetKey(KeyCode.Space)) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 
@@ -47,5 +58,12 @@ public class PlayerSpawnBullet : ControlComponent {
         print(g);
         yield return new WaitForSeconds(3.0f);
         Destroy(g);
+    }
+
+    public void kill() {
+        DeathMenu.SetActive(true);
+        gameObject.GetComponent<ControlVector2ToTranslate>().speed = 0;
+        isDead = true;
+        print(isDead);
     }
 }

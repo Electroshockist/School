@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputTransformDeltaToVector2 : InputComponent {
     [Header("Targetting")]
-    [SerializeField] private Transform target;
+    [SerializeField] public Transform target;
     [Header("Data Node")]
     [SerializeField] private string dataName = "inputVector2";
 

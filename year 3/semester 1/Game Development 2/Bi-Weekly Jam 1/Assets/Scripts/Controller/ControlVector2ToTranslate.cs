@@ -2,7 +2,7 @@
 
 public class ControlVector2ToTranslate : ControlComponent {
     [Header("Speed")]
-    [SerializeField] private float speed = 1;
+    [SerializeField] public float speed = 1;
     [Header("Data Node")]
     [SerializeField] private string dataName = "inputVector2";
 
