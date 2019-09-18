@@ -2,6 +2,7 @@
 #define SCENE0_H
 #include "Scene.h"
 #include "Vector.h"
+
 using namespace MATH;
 
 /// Forward declarations 
@@ -17,6 +18,11 @@ private:
 	Camera *camera;
 	GameObject *gameObject;
 	Vec3 lightSource;
+	Vec3 lightSource1;
+	//static const int lightNum = 2;
+	//Vec3 lightSources [lightNum];
+	//glm::vec3 lights[lightNum];
+
 	Mesh *meshPtr;
 	Shader *shaderPtr;
 	Texture *texturePtr;

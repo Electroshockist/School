@@ -10,6 +10,8 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "MMath.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 Scene0::Scene0() :
 	camera(nullptr), gameObject(nullptr), meshPtr(nullptr), shaderPtr(nullptr), texturePtr(nullptr) {}
@@ -38,7 +40,14 @@ bool Scene0::OnCreate() {
 		Debug::FatalError("GameObject could not be created", __FILE__, __LINE__);
 		return false;
 	}
-	lightSource = Vec3(3.0, 16.0, 0.0);
+	lightSource = Vec3(3.0, 16.0, 1.0);
+	lightSource1 = Vec3(-16.0, -3.0, 1.0);
+	//lightSources[0] = Vec3(3.0, 16.0, 0.0);
+	//lightSources[1] = Vec3(12.0, 6.0, 2.0);
+
+	/*for (size_t i = 0; i < lightNum; i++) {
+		lights[i] = lightSources[i].toGlVec3();
+	}*/
 
 	return true;
 }
@@ -61,6 +70,7 @@ void Scene0::Update(const float deltaTime_) {
 }
 
 void Scene0::Render() const {
+
 	/// Clear the screen
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -73,6 +83,8 @@ void Scene0::Render() const {
 	glUniformMatrix4fv(gameObject->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
 	glUniformMatrix4fv(gameObject->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
 	glUniform3fv(gameObject->getShader()->getUniformID("lightPos"), 1, lightSource);
+	glUniform3fv(gameObject->getShader()->getUniformID("lightPos1"), 1, lightSource1);
+	//glUniform3fv(gameObject->getShader()->getUniformID("lightPos"), lightNum, glm::value_ptr(lights[0]));
 
 	gameObject->Render();
 

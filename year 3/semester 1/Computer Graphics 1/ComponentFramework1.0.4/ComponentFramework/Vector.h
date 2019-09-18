@@ -2,6 +2,7 @@
 #define VECTOR_H
 #include <iostream>
 #include <string> /// Used for passing exceptions 
+#include <glm/glm.hpp>
 		///
 		/// Vec3 definitions followed by Vec4 
 		/// There are notes at the bottom of this file you might want to read
@@ -171,6 +172,10 @@ namespace  MATH {
 
 		inline operator float* () {
 			return static_cast<float*>(&x);
+		}
+
+		inline glm::vec3 toGlVec3() {
+			return glm::vec3(x, y, z);
 		}
 
 	};
