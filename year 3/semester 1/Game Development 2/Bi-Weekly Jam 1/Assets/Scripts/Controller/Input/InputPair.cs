@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class InputPair : MonoBehaviour {
+public class InputPair : InputComponent {
     private int keyScalar = 0;
     private KeyCode currentActiveKey = KeyCode.None;
+
+    public string dataName = "";
 
     public int KeyScalar {
         get { return keyScalar; }
@@ -18,20 +18,31 @@ public class InputPair : MonoBehaviour {
     [SerializeField] private KeyCode negativeKey;
 
     public int UpdateKeys() {
-        if (Input.GetKeyUp(currentActiveKey)) {
+        if (UnityEngine.Input.GetKeyUp(currentActiveKey)) {
             currentActiveKey = KeyCode.None;
             keyScalar = 0;
         }
 
-        if (Input.GetKeyDown(positiveKey)) {
+        if (UnityEngine.Input.GetKeyDown(positiveKey)) {
             currentActiveKey = positiveKey;
             keyScalar = 1;
         }
 
-        if (Input.GetKeyDown(negativeKey)) {
+        if (UnityEngine.Input.GetKeyDown(negativeKey)) {
             currentActiveKey = negativeKey;
             keyScalar = -1;
         }
 
+        print(currentActiveKey);
+
+        return KeyScalar;
+    }
+
+    public override void Gather(Data data) {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Input() {
+        throw new System.NotImplementedException();
     }
 }

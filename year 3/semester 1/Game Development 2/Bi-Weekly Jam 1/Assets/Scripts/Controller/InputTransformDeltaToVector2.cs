@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputTransformDeltaToVector2 : InputComponent
-{
+public class InputTransformDeltaToVector2 : InputComponent {
     [Header("Targetting")]
     [SerializeField] private Transform target;
     [Header("Data Node")]
@@ -11,13 +10,11 @@ public class InputTransformDeltaToVector2 : InputComponent
 
     private DataNode cachedVector;
 
-    public override void Gather(Data data)
-    {
+    public override void Gather(Data data) {
         data[dataName] = cachedVector = new DataNode();
     }
 
-    public override void Input()
-    {
+    public override void Input() {
         cachedVector.Assign((target.position - transform.position).normalized);
     }
 }

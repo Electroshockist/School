@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputKeysToVector2 : InputComponent
-{
+public class InputKeysToVector2 : InputComponent {
     [Header("Keys")]
     [SerializeField] private KeyCode up = KeyCode.W;
     [SerializeField] private KeyCode down = KeyCode.S;
@@ -14,23 +13,22 @@ public class InputKeysToVector2 : InputComponent
 
     private DataNode cachedVector;
 
-    public override void Gather(Data data)
-    {
+    public override void Gather(Data data) {
         data[dataName] = cachedVector = new DataNode();
     }
 
-    public override void Input()
-    {
+    public override void Input() {
         Vector2 v2 = Vector2.zero;
 
         if (UnityEngine.Input.GetKey(up))
-           v2.y += 1;
+            v2.y += 1;
         if (UnityEngine.Input.GetKey(down))
-           v2.y = -1;
-        if (UnityEngine.Input.GetKey(left))
-           v2.x += 1;
+            v2.y = -1;
         if (UnityEngine.Input.GetKey(right))
-           v2.x = -1;
+            v2.x += 1;
+        if (UnityEngine.Input.GetKey(left))
+            v2.x = -1;
+;
 
         v2.Normalize();
 
