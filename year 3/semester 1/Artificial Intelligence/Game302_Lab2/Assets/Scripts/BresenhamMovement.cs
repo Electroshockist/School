@@ -31,37 +31,38 @@ public class BresenhamMovement : GridMovement {
         }
 
         // To do: Update the "positionOnGrid" variable with the position information in the "path" variable in order
-
+        positionOnGrid = path[stepCounter];
+        stepCounter++;
 
 
         // To do: Disable the following code block
         //---------------------------------------------------------------------
-        Vector3 playerPos = player.GetComponent<Player>().GetPositionOnGrid();
-        Vector3 pos = GetPositionOnGrid();
-        Vector3 movement = Vector3.zero;
-        float d = Vector3.Distance(pos, playerPos);
+        //Vector3 playerPos = player.GetComponent<Player>().GetPositionOnGrid();
+        //Vector3 pos = GetPositionOnGrid();
+        //Vector3 movement = Vector3.zero;
+        //float d = Vector3.Distance(pos, playerPos);
 
-        if (d < reactionRadius) {
-            if (pos.x > playerPos.x) {
-                movement.x--;
-            }
-            else if (pos.x < playerPos.x) {
-                movement.x++;
-            }
+        //if (d < reactionRadius) {
+        //    if (pos.x > playerPos.x) {
+        //        movement.x--;
+        //    }
+        //    else if (pos.x < playerPos.x) {
+        //        movement.x++;
+        //    }
 
-            if (pos.y > playerPos.y) {
-                movement.y--;
-            }
-            else if (pos.y < playerPos.y) {
-                movement.y++;
-            }
-        }
-        positionOnGrid += movement;
-        base.Update();
+        //    if (pos.y > playerPos.y) {
+        //        movement.y--;
+        //    }
+        //    else if (pos.y < playerPos.y) {
+        //        movement.y++;
+        //    }
+        //}
+        //positionOnGrid += movement;
+        //base.Update();
 
-        if (movement != Vector3.zero) {
-            timer = pauseTime;
-        }
+        //if (movement != Vector3.zero) {
+        //    timer = pauseTime;
+        //}
         //-----------------------------------------------------------------------
 
 
