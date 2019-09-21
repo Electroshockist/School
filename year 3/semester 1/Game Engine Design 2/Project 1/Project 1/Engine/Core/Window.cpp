@@ -1,5 +1,5 @@
+#include "Debug.h"
 #include "Window.h"
-#include <iostream>
 
 
 Window::Window() {
@@ -11,7 +11,7 @@ Window::~Window(){
 
 bool Window::OnCreate(std::string name, int width, int height) {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cout << "Failed to init SDL" << std::endl;
+		Debug::fatalError("Failed to Initialize SDL", __FILE__, __LINE__);
 		return false;
 	}
 	this->height = height;
@@ -25,14 +25,14 @@ bool Window::OnCreate(std::string name, int width, int height) {
 		SDL_WINDOW_OPENGL
 		);
 	if (!window) {
-		std::cout << "Failed to create window" << std::endl;
+		Debug::error("Failed to create window", __FILE__, __LINE__);
 		return false;
 	}
 	context = SDL_GL_CreateContext(window);
 	setAttributes();
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
-		std::cout << "Failed to initialize GLEW" << std::endl;
+		Debug::error("Failed to create window", __FILE__, __LINE__);
 		return false;
 	}
 
@@ -61,8 +61,8 @@ SDL_Window * Window::getWindow() const {
 
 void Window::setAttributes() {
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32);
 	SDL_GL_SetSwapInterval(1);

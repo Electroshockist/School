@@ -33,8 +33,8 @@ public:
 	static void info(const std::string& message, const std::string& filename, const int line);
 	static void trace(const std::string& message, const std::string& filename, const int line);
 	static void warning(const std::string& message, const std::string& filename, const int line);
-	static void eror(const std::string& message, const std::string& filename, const int line);
-	static void fatalerror(const std::string& message, const std::string& filename, const int line);
+	static void error(const std::string& message, const std::string& filename, const int line);
+	static void fatalError(const std::string& message, const std::string& filename, const int line);
 
 private:
 	static void log(const MessageType type, const std::string& message, const std::string& filename, const int line);

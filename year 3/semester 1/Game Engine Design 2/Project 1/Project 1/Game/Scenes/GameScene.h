@@ -1,9 +1,11 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include "../../Engine/Core/Scene.h"
+#include "../../Engine/Core/Engine.h"
 
 class GameScene : public Scene {
+	GameObject* triangle;
+	GameObject* triangle2;
 public:
 	GameScene();
 	~GameScene();

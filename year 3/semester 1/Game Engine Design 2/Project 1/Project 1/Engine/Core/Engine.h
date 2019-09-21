@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Debug.h"
 #include "Timer.h"
+#include "../Rendering/3D/GameObject.h"
 
 #include <memory>
 

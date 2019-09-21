@@ -1,7 +1,6 @@
 #include "Mesh.h"
 
 Mesh::Mesh(std::vector<Vertex>* vertexList_)
-
 	: vertexList(std::vector<Vertex>()),
 	VAO(0), VBO(0) {
 	vertexList = *vertexList_;
@@ -50,8 +49,7 @@ void Mesh::Render() {
 	glBindVertexArray(0);
 }
 
-void Mesh::OnDestroy()
-{
+void Mesh::OnDestroy() {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	vertexList.clear();

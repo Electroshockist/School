@@ -2,11 +2,9 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-
 #include "Model.h"
 
-class GameObject
-{
+class GameObject {
 public:
 	GameObject(Model* model_);
 	~GameObject();

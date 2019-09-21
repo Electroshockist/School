@@ -1,7 +1,7 @@
 #ifndef STARTSCENE_H
 #define STARTSCENE_H
 
-#include "../../Engine/Core/Scene.h"
+#include "../../Engine/Core/Engine.h"
 
 class StartScene : public Scene{
 public:

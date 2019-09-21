@@ -54,11 +54,11 @@ void Debug::warning(const string & message, const string & filename, const int l
 	log(MessageType::TYPE_INFO, "Warning: " + message, simplifyFileName(filename), line);
 }
 
-void Debug::eror(const string & message, const string & filename, const int line) {
+void Debug::error(const string & message, const string & filename, const int line) {
 	log(MessageType::TYPE_INFO, "Error: " + message, simplifyFileName(filename), line);
 }
 
-void Debug::fatalerror(const string & message, const string & filename, const int line) {
+void Debug::fatalError(const string & message, const string & filename, const int line) {
 	log(MessageType::TYPE_INFO, "Fatal Error: " + message, simplifyFileName(filename), line);
 }
 

@@ -7,6 +7,7 @@ Game0::Game0() : GameInterface(), currentScene(nullptr), sceneNumber(0) {
 
 
 Game0::~Game0() {
+	onDestroy();
 }
 
 bool Game0::OnCreate() {
@@ -27,6 +28,7 @@ void Game0::Update(const float deltaTime) {
 }
 
 void Game0::Render() {
+	currentScene->Render();
 }
 
 void Game0::onDestroy() {

@@ -16,11 +16,11 @@ bool Engine::OnCreate(std::string name, int width, int height) {
 
 	window = new Window();
 	if (!window->OnCreate(name, width, height)) {
-		Debug::fatalerror("Window Failed to create", __FILE__, __LINE__);
+		Debug::fatalError("Window Failed to create", __FILE__, __LINE__);
 		return isRunning = false;
 	}
 	if (!gameInterface->OnCreate()) {
-		Debug::fatalerror("Game failed to create", __FILE__, __LINE__);
+		Debug::fatalError("Game failed to create", __FILE__, __LINE__);
 		return isRunning = false;
 	}
 
@@ -46,7 +46,7 @@ void Engine::Update(const float deltaTime) {
 
 void Engine::Render() {
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.1f, 0.01f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	if (gameInterface) gameInterface->Render();
@@ -66,7 +66,7 @@ void Engine::OnDestroy() {
 }
 
 bool Engine::getIsRunning() {
-	return false;
+	return isRunning;
 }
 
 void Engine::setIsRuning(const bool isRunning) {
@@ -88,7 +88,7 @@ void Engine::setCurrentScene(int currentScene) {
 	this->currentScene = currentScene;
 }
 
-int Engine::getCurrentScene() const{
+int Engine::getCurrentScene() const {
 	return currentScene;
 }
 
