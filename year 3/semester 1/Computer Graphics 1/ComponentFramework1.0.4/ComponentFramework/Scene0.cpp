@@ -21,7 +21,7 @@ Scene0::~Scene0() {}
 bool Scene0::OnCreate() {
 	camera = new Camera();
 
-	if (ObjLoader::loadOBJ("skull.obj") == false) {
+	if (ObjLoader::loadOBJ("sphere.obj") == false) {
 		return false;
 	}
 	meshPtr = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
@@ -31,7 +31,7 @@ bool Scene0::OnCreate() {
 		Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
 		return false;
 	}
-	if (texturePtr->LoadImage("skull_texture.jpg") == false) {
+	if (texturePtr->LoadImage("earthclouds.jpg") == false) {
 		Debug::FatalError("Couldn't load texture", __FILE__, __LINE__);
 		return false;
 	}

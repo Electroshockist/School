@@ -9,9 +9,44 @@ Camera::Camera() {
 Camera::~Camera() {}
 
 void Camera::createProjection(float fovy, float aspect, float near, float far) {
+	fovY = fovy;
+	aspectRatio = aspect;
+	nearClip = near;
+	farClip = far;
 	projection = MMath::perspective(fovy, aspect, near, far);
 }
 
 void Camera::createView(Vec3 pos, Vec3 at, Vec3 up) {
+	this->pos = pos;
+	this->at = at;
+	this->up = up;
 	view = MMath::lookAt(pos, at, up);
+}
+
+void Camera::setFovY(float fovY) {
+	createProjection(fovY, aspectRatio, nearClip, farClip);
+}
+
+void Camera::setAspectRatio(float aspectRatio) {
+	createProjection(fovY, aspectRatio, nearClip, farClip);
+}
+
+void Camera::setNearClip(float nearClip) {
+	createProjection(fovY, aspectRatio, nearClip, farClip);
+}
+
+void Camera::setFarClip(float farClip) {
+	createProjection(fovY, aspectRatio, nearClip, farClip);
+}
+
+void Camera::setPos(Vec3 pos) {
+	createView(pos, at, up);
+}
+
+void Camera::setAt(Vec3 at) {
+	createView(pos, at, up);
+}
+
+void Camera::setUp(Vec3 up) {
+	createView(pos, at, up);
 }

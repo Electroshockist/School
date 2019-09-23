@@ -8,12 +8,22 @@ private:
 
 	Matrix4 projection;
 	Matrix4 view;
+	float fovY, aspectRatio, nearClip, farClip;
+	Vec3 pos, at, up;
 public:
 	inline Matrix4 getProjectionMatrix() const { return projection; }
 	inline Matrix4 getViewMatrix() const { return view; }
 
 	void createProjection(float fovy, float aspectRatio, float near, float far);
 	void createView(Vec3 pos, Vec3 at, Vec3 up);
+
+	void setFovY(float fovY);
+	void setAspectRatio(float aspectRatio);
+	void setNearClip(float nearClip);
+	void setFarClip(float farClip);
+	void setPos(Vec3 pos);
+	void setAt(Vec3 at);
+	void setUp(Vec3 up);
 	Camera();
 	~Camera();
 };
