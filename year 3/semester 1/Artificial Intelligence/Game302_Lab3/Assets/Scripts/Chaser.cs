@@ -17,7 +17,7 @@ public class Chaser : MonoBehaviour {
         float dt = Time.deltaTime;
 
         // To do: Get the direction(dir) towards the target. The direction should be a unit vector.
-        Vector3 dir = Vector3.zero;
+        Vector3 dir = target.transform.position - transform.position;
         
 
         // Update orientation 
@@ -27,6 +27,7 @@ public class Chaser : MonoBehaviour {
         Vector3 pos = transform.position;        
         Vector3 velocity = orientation * speed;
         // To do: Update the current position (pos) using S_final = S_initial + v * t
+        pos += velocity * dt;
         
 
         transform.position = pos;
