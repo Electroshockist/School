@@ -23,7 +23,7 @@ public class MonsterRandom : GridMovement {
         // To do : Replace Random.Range(1,9) with Perlin Noise function
         // * FYI: Random.Range(int min, int max) returns a random interger number between min[inclusive] and max[exclusive]
         // * For more details about Random.Range, https://docs.unity3d.com/ScriptReference/Random.Range.html
-        int direction = (int)(1 + Mathf.PerlinNoise(transform.position.x, transform.position.y) * 7.9f);
+        int direction = (int)(1 + Mathf.PerlinNoise(counter++ * 0.1f + Time.time, 0.5f) * 7.9f);
 
         switch (direction) {
             case 1: // Up Left
