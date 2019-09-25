@@ -21,8 +21,16 @@ public class Chaser2 : MonoBehaviour {
         // 2. limit the rotation (orientation). The rotation angle cannot be over the max angle based on maxAngularSpeed.
         float dt = Time.deltaTime;
 
+
         // To do: Get the direction(dir) towards the target. The direction should be a unit vector.
         Vector3 dir = target.transform.position - transform.position;
+
+        float angle = -Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+
+        if (angle > maxAngularSpeed) {
+            //dir = new Vector3(0, 0, -Mathf.Atan(maxAngularSpeed) * Mathf.Rad2Deg);
+        }
+        print(dir);
 
         // Update orientation 
         orientation = dir;
