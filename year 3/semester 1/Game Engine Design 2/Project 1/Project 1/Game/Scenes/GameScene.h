@@ -5,7 +5,7 @@
 
 class GameScene : public Scene {
 	GameObject* triangle;
-	GameObject* triangle2;
+
 public:
 	GameScene();
 	~GameScene();

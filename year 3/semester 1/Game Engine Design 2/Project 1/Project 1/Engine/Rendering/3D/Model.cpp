@@ -1,7 +1,7 @@
 #include "Model.h"
 
-Model::Model() : subMeshes(std::vector<Mesh*>()) {
-
+Model::Model(GLuint shaderProgram) : subMeshes(std::vector<Mesh*>()) {
+	this->shaderProgram = shaderProgram;
 }
 
 Model::~Model() {
@@ -13,6 +13,7 @@ void Model::AddMesh(Mesh * mesh_) {
 }
 
 void Model::Render() {
+	glUseProgram(shaderProgram);
 	for (auto m : subMeshes) {
 		m->Render();
 	}

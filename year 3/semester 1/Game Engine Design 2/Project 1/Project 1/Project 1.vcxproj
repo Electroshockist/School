@@ -135,6 +135,7 @@
     <ClCompile Include="Engine\Core\Timer.cpp" />
     <ClCompile Include="Engine\Rendering\3D\Mesh.cpp" />
     <ClCompile Include="Engine\Rendering\3D\Model.cpp" />
+    <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Core\Debug.h" />
@@ -149,6 +150,11 @@
     <ClInclude Include="Engine\Core\Timer.h" />
     <ClInclude Include="Engine\Rendering\3D\Mesh.h" />
     <ClInclude Include="Engine\Rendering\3D\Model.h" />
+    <ClInclude Include="Engine\Graphics\ShaderHandler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine\Shaders\colourFragmentShader.glsl" />
+    <None Include="Engine\Shaders\colourVertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,7 +9,7 @@ out vec4 fragColor;
 uniform sampler2D myTexture; 
 
 struct Light{
-	vec4 ks;
+	vec4 specularScale;
 	vec4 kd; /// const means it cannot be changed just like C++
 	vec4 ka;	
 	float brightness;
@@ -23,6 +23,7 @@ void main() {
 			vec4(1, 1, 1, 1),
 			vec4(1, 1, 1, 1),
 			1);
+			l1.ka;
 			
 	const vec4 ks = vec4(1.0, 0.0, 0.0, 1.0);
 	const vec4 kd = vec4(1.0, 0.0, 0.0, 1.0); /// const means it cannot be changed just like C++

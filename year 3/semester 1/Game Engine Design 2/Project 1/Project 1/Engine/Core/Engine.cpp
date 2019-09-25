@@ -1,5 +1,6 @@
 #include "Engine.h"
 
+#include "../Graphics/ShaderHandler.h"
 #include <iostream>
 
 std::unique_ptr<Engine> Engine::instance = nullptr;
@@ -19,6 +20,11 @@ bool Engine::OnCreate(std::string name, int width, int height) {
 		Debug::fatalError("Window Failed to create", __FILE__, __LINE__);
 		return isRunning = false;
 	}
+
+	ShaderHandler::getInstance()->createProgram("colourShader", 
+												"Engine/Shaders/colourVertexShader.glsl",
+												"Engine/Shaders/colourFragmentShader.glsl"
+												);
 	if (!gameInterface->OnCreate()) {
 		Debug::fatalError("Game failed to create", __FILE__, __LINE__);
 		return isRunning = false;
