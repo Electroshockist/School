@@ -25,12 +25,21 @@ public class Chaser2 : MonoBehaviour {
         // To do: Get the direction(dir) towards the target. The direction should be a unit vector.
         Vector3 dir = target.transform.position - transform.position;
 
-        float angle = -Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        //1.
+        float availableAngle = maxAngularSpeed * dt;
 
-        if (angle > maxAngularSpeed) {
-            //dir = new Vector3(0, 0, -Mathf.Atan(maxAngularSpeed) * Mathf.Rad2Deg);
+        //2. theta = acos(A . B / |A||B|)
+        float targetAngle = Mathf.Acos(
+            Vector2.Dot(dir, orientation) / dir.magnitude * orientation.magnitude) * Mathf.Rad2Deg;
+
+        dir.Normalize();
+
+
+        if(targetAngle > availableAngle) {
+            availableAngle *= checkRight(dir);
+            dir.x = orientation.x * Mathf.Cos(availableAngle * Mathf.Deg2Rad) - orientation.y * Mathf.Sin(availableAngle * Mathf.Deg2Rad);
+            dir.y = orientation.x * Mathf.Sin(availableAngle * Mathf.Deg2Rad) + orientation.y * Mathf.Cos(availableAngle * Mathf.Deg2Rad);
         }
-        print(dir);
 
         // Update orientation 
         orientation = dir;
@@ -48,5 +57,11 @@ public class Chaser2 : MonoBehaviour {
     void UpdateOrientation() {
         Vector3 angle = new Vector3(0, 0, -Mathf.Atan2(orientation.x, orientation.y) * Mathf.Rad2Deg);
         transform.eulerAngles = angle;
+    }
+
+    private int checkRight(Vector3 dir) {
+        Vector2 normal = new Vector2(orientation.y, -orientation.x);
+
+        return Vector2.Dot(dir, normal) > 0 ? -1 : 1;
     }
 }

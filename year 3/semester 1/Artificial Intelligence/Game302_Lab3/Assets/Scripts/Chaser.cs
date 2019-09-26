@@ -18,6 +18,7 @@ public class Chaser : MonoBehaviour {
 
         // To do: Get the direction(dir) towards the target. The direction should be a unit vector.
         Vector3 dir = target.transform.position - transform.position;
+        dir.Normalize();
         
 
         // Update orientation 
