@@ -1,45 +1,100 @@
-#include "SkyBox.h"
-
-#include <SDL_image.h>
-#include "Mesh.h"
-#include "ObjLoader.h"
-
-SkyBox::SkyBox(){
-	onCreate();
-}
-
-
-SkyBox::~SkyBox(){
-
-}
-
-bool SkyBox::onCreate(){
-	if(ObjLoader::loadOBJ("cube.obj") == false){
-		return false;
-	}
-	mesh = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
-	ObjLoader::loadOBJ(nullptr);
-	return true;
-}
-
-bool SkyBox::LoadImage(std::vector<char*>* faces){
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	SDL_Surface * textureSurfaces[6];
-	for(int i = faces->size(); i > 0; i--){
-		textureSurfaces[i] = IMG_Load(faces->at(i));
-
-		if(textureSurfaces[i] == nullptr){
-			return false;
-		}
-		int mode = (textureSurfaces[i]->format->BytesPerPixel == 4) ? GL_RGBA : GL_RGB;
-		glTexImage2D(GL_TEXTURE_2D, 0, mode, textureSurfaces[i]->w, textureSurfaces[i]->h, 0, mode, GL_UNSIGNED_BYTE, textureSurfaces[i]->pixels);
-		SDL_FreeSurface(textureSurfaces[i]);
-	}
-
-	/// Wrapping and filtering options
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0); /// Unbind the texture
-	return true;
-}
+//#include "SkyBox.h"
+//
+//#include <SDL_image.h>
+//#include "ObjLoader.h"
+//#include "Mesh.h"
+//#include "Shader.h"
+//
+//SkyBox::SkyBox() {
+//	onCreate();
+//}
+//
+//
+//SkyBox::~SkyBox() {
+//
+//}
+//
+//bool SkyBox::onCreate() {
+//	glGenTextures(1, &textureID);
+//	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+//
+//	LoadTextures("CN Tower/posx.jpg", "CN Tower/negx.jpg", "CN Tower/negx.jpg", "CN Tower/negx.jpg", "CN Tower/negx.jpg", "CN Tower/negx.jpg");
+//
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+//
+//	//unbind texture
+//	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+//
+//	if(!ObjLoader::loadOBJ("cube.obj")) {
+//		return false;
+//	}
+//	mesh = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
+//	shader = new Shader("skyVert", "skyFrag");
+//
+//	return true;
+//}
+//
+//void SkyBox::Render() const {
+//
+//}
+//
+//bool SkyBox::LoadTextures(const char * posX, const char * negX, const char * posY, const char * negY, const char * posZ, const char * negZ) {
+//	//posX
+//	SDL_Surface *textureSurface = IMG_Load(posX);
+//	if(textureSurface == nullptr) {
+//		return false;
+//	}
+//	int mode = (textureSurface->format->BytesPerPixel == 4) ? GL_RGBA : GL_RGB;
+//	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, mode, textureSurface->w, textureSurface->h, 0, mode, GL_UNSIGNED_BYTE, textureSurface->pixels);
+//	SDL_FreeSurface(textureSurface);
+//	//negX
+//	textureSurface = IMG_Load(negX);
+//	if(textureSurface == nullptr) {
+//		return false;
+//	}
+//	mode = (textureSurface->format->BytesPerPixel == 4) ? GL_RGBA : GL_RGB;
+//	glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, mode, textureSurface->w, textureSurface->h, 0, mode, GL_UNSIGNED_BYTE, textureSurface->pixels);
+//	SDL_FreeSurface(textureSurface);
+//
+//	//posY
+//	textureSurface = IMG_Load(posY);
+//	if(textureSurface == nullptr) {
+//		return false;
+//	}
+//	mode = (textureSurface->format->BytesPerPixel == 4) ? GL_RGBA : GL_RGB;
+//	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, mode, textureSurface->w, textureSurface->h, 0, mode, GL_UNSIGNED_BYTE, textureSurface->pixels);
+//	SDL_FreeSurface(textureSurface);
+//
+//	//negY
+//	textureSurface = IMG_Load(negY);
+//	if(textureSurface == nullptr) {
+//		return false;
+//	}
+//	mode = (textureSurface->format->BytesPerPixel == 4) ? GL_RGBA : GL_RGB;
+//	glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, mode, textureSurface->w, textureSurface->h, 0, mode, GL_UNSIGNED_BYTE, textureSurface->pixels);
+//	SDL_FreeSurface(textureSurface);
+//	//posZ
+//	textureSurface = IMG_Load(posZ);
+//	if(textureSurface == nullptr) {
+//		return false;
+//	}
+//	mode = (textureSurface->format->BytesPerPixel == 4) ? GL_RGBA : GL_RGB;
+//	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, mode, textureSurface->w, textureSurface->h, 0, mode, GL_UNSIGNED_BYTE, textureSurface->pixels);
+//	SDL_FreeSurface(textureSurface);
+//
+//	//negZ
+//	textureSurface = IMG_Load(negZ);
+//	if(textureSurface == nullptr) {
+//		return false;
+//	}
+//	mode = (textureSurface->format->BytesPerPixel == 4) ? GL_RGBA : GL_RGB;
+//	glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, mode, textureSurface->w, textureSurface->h, 0, mode, GL_UNSIGNED_BYTE, textureSurface->pixels);
+//	SDL_FreeSurface(textureSurface);
+//
+//	return true;
+//}
+//

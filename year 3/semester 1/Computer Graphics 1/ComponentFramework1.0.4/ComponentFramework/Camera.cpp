@@ -20,7 +20,9 @@ void Camera::createView(Vec3 pos, Vec3 at, Vec3 up) {
 	this->pos = pos;
 	this->at = at;
 	this->up = up;
-	view = MMath::lookAt(pos, at, up);
+	view = MMath::rotate(5.0, Vec3(0.0, 1.0, 0.0)) * MMath::translate(0.0, 0.0, -10.0);
+	//view = MMath::lookAt(pos, at, up);
+	view.print();
 }
 
 void Camera::setFovY(float fovY) {
