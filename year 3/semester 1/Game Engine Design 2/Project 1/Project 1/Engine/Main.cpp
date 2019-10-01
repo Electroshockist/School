@@ -7,7 +7,7 @@ int main(int argc, char* argv[]) {
 	Engine::getInstance()->setGameInterface(new Game0());
 	Debug::setProjectPath(argv[0]);
 
-	if (!Engine::getInstance()->OnCreate("test", 1280, 720)) {
+	if (!Engine::getInstance()->OnCreate("test", 800, 600)) {
 		Debug::fatalError("Failed to create engine", __FILE__, __LINE__);
 		return 1;
 	}

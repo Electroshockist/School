@@ -5,6 +5,8 @@
 
 class GameScene : public Scene {
 	GameObject* triangle;
+	Model* triangleModel;
+	Camera* camera;
 
 public:
 	GameScene();

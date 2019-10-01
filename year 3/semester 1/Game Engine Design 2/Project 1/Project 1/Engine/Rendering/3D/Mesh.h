@@ -4,6 +4,9 @@
 #include <glew.h>
 #include <vector>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include "../../Camera/Camera.h"
 
 struct Vertex {
 	glm::vec3 position;
@@ -13,16 +16,22 @@ struct Vertex {
 };
 
 class Mesh {
-public:
-	Mesh(std::vector<Vertex>* vertexList_);
-	~Mesh();
-
-	void Render();
-	void OnDestroy();
-private:
 	void GenerateBuffers();
 	GLuint VAO, VBO;
 	std::vector<Vertex> vertexList;
+	GLuint shaderProgram;
+	GLuint modelLoc;
+	GLuint viewLoc;
+	GLuint projLoc;
+
+
+public:
+	Mesh(std::vector<Vertex>* vertexList, GLuint shaderProgram);
+	~Mesh();
+
+	void Render(glm::mat4 transform, Camera* camera);
+	void OnDestroy();
+
 };
 
 #endif // !MESH_H

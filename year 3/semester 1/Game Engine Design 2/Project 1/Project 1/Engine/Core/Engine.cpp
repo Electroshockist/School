@@ -98,3 +98,7 @@ int Engine::getCurrentScene() const {
 	return currentScene;
 }
 
+glm::vec2 Engine::getScreenSize() const {
+	return glm::vec2(window->getWidth(), window->getHeight());
+}
+

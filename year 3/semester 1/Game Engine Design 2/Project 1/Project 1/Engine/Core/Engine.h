@@ -7,6 +7,7 @@
 #include "Debug.h"
 #include "Timer.h"
 #include "../Rendering/3D/GameObject.h"
+#include "../Camera/Camera.h"
 
 #include <memory>
 
@@ -46,6 +47,8 @@ public:
 
 	void setCurrentScene(int currentScene);
 	int getCurrentScene() const;
+
+	glm::vec2 getScreenSize() const;
 };
 #endif // !ENGINE_H
 
