@@ -5,13 +5,15 @@ public class Boid : MonoBehaviour {
     public Vector3 velocity;
     public Vector3 acceleration = Vector3.zero;
     static float desiredSeparion = 2.5f;
-    static float neighborDistance = 7;
+    static float neighborDistance = 15;
     float maxForce = 2;
     float maxSpeed = 5;
     public Flock flock;
+    [SerializeField]private SpriteRenderer sprite;
 
     // Use this for initialization
     void Start() {
+        sprite = GetComponent<SpriteRenderer>();
         float angle = Random.Range(0, Mathf.PI * 2);
         velocity = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
     }
@@ -53,6 +55,10 @@ public class Boid : MonoBehaviour {
         float angle = Mathf.Acos(Vector3.Dot(velocity.normalized, Vector3.up));
 
         transform.eulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * angle * (velocity.x > 0 ? -1 : 1));
+
+        float x = ((pos.x + 150) / 100) * 255;
+        float y = (pos.y / 100) * 255;
+        sprite.color = new Color(x, y, Time.time % 255);
     }
 
     Vector3 Separate(List<GameObject> boids) {
@@ -167,7 +173,7 @@ public class Boid : MonoBehaviour {
     Vector3 AvoidObstacles(List<GameObject> obstacles) {
         Vector3 steer = Vector3.zero;
         float collision_visibilty = 20;
-        float obstacle_radius = 5;
+        float obstacle_radius = 10;
 
         foreach(GameObject obstacle in obstacles) {
             Vector3 a = obstacle.transform.position - transform.position;

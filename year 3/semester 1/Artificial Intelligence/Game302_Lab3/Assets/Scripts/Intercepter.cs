@@ -64,7 +64,7 @@ public class Intercepter : MonoBehaviour {
         UpdateOrientation();
 
         Vector3 pos = transform.position;
-        Vector3 velocity = orientation * speed;
+        velocity = orientation * speed;
         // To do: Update the current position (pos) using S_final = S_initial + v * t
         pos += velocity * dt;
 
