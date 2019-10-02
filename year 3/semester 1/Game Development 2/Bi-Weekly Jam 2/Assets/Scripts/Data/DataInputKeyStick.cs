@@ -18,36 +18,51 @@ public class DataInputKeyStick : DataInput {
     [SerializeField] private UnityEvent onInputStop;
 
     public override void Start(Data data) {
-        if(data.Has(dataNode))
+        if (data.Has(dataNode)) {
             dataNode = data.GetVector2(dataNode.Name);
-        else
+        }
+        else {
             data.Add(dataNode);
+        }
     }
 
     public override void Update() {
         Vector2 input = Vector2.zero;
 
-        if(Input.GetKey(positiveX))
+        if (Input.GetKey(positiveX)) {
             input.x += 1;
-        if(Input.GetKey(negativeX))
+        }
+
+        if (Input.GetKey(negativeX)) {
             input.x -= 1;
-        if(Input.GetKey(positiveY))
+        }
+
+        if (Input.GetKey(positiveY)) {
             input.y += 1;
-        if(Input.GetKey(negativeY))
+        }
+
+        if (Input.GetKey(negativeY)) {
             input.y -= 1;
+        }
 
         float inputMag = input.sqrMagnitude;
         float dataMag = dataNode.Value.sqrMagnitude;
 
-        if(inputMag != 0 && dataMag == 0)
+        if (inputMag != 0 && dataMag == 0) {
             onInputStart.Invoke();
-        if(inputMag != 0 && dataMag != 0)
-            onInput.Invoke();
-        if(inputMag == 0 && dataMag != 0)
-            onInputStop.Invoke();
+        }
 
-        if(inputMag > 0)
+        if (inputMag != 0 && dataMag != 0) {
+            onInput.Invoke();
+        }
+
+        if (inputMag == 0 && dataMag != 0) {
+            onInputStop.Invoke();
+        }
+
+        if (inputMag > 0) {
             input.Normalize();
+        }
 
         dataNode.Value = input;
     }

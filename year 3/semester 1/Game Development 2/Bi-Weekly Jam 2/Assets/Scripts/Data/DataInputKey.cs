@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
-public class DataInputKey : DataInput
-{
+public class DataInputKey : DataInput {
     [SerializeField] private string name;
     public string Name { get { return name; } set { name = value; } }
     [SerializeField] private KeyCode positive;
@@ -23,37 +21,46 @@ public class DataInputKey : DataInput
     private bool pressedPositive;
     private bool pressedNegative;
 
-    public override void Start(Data data)
-    {
-        if (data.Has(dataNode))
+    public override void Start(Data data) {
+        if (data.Has(dataNode)) {
             dataNode = data.GetFloat(dataNode.Name);
-        else
+        }
+        else {
             data.Add(dataNode);
+        }
     }
 
-    public override void Update()
-    {
+    public override void Update() {
         bool currentlyPressedPositive = Input.GetKey(positive);
         bool currentlyPressedNegative = Input.GetKey(negative);
 
-        if (currentlyPressedPositive && !pressedPositive)
+        if (currentlyPressedPositive && !pressedPositive) {
             onPositiveKeyDown.Invoke();
-        else if (currentlyPressedPositive && pressedPositive)
+        }
+        else if (currentlyPressedPositive && pressedPositive) {
             onPositiveKey.Invoke();
-        else if (!currentlyPressedPositive && pressedPositive)
+        }
+        else if (!currentlyPressedPositive && pressedPositive) {
             onPositiveKeyUp.Invoke();
-        else if (currentlyPressedNegative && !pressedNegative)
+        }
+        else if (currentlyPressedNegative && !pressedNegative) {
             onNegativeKeyDown.Invoke();
-        else if (currentlyPressedNegative && pressedNegative)
+        }
+        else if (currentlyPressedNegative && pressedNegative) {
             onNegativeKey.Invoke();
-        else if (!currentlyPressedNegative && pressedNegative)
+        }
+        else if (!currentlyPressedNegative && pressedNegative) {
             onNegativeKeyUp.Invoke();
+        }
 
         dataNode.Value = 0;
-        if (currentlyPressedPositive)
+        if (currentlyPressedPositive) {
             dataNode += 1;
-        if (currentlyPressedNegative)
+        }
+
+        if (currentlyPressedNegative) {
             dataNode -= 1;
+        }
 
         pressedPositive = currentlyPressedPositive;
         pressedNegative = currentlyPressedNegative;
