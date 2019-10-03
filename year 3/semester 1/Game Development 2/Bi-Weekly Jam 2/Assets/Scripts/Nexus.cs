@@ -16,8 +16,8 @@ public class Nexus : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == "Boid") {
-            if (isBoidSpawnable) {
+        if(collision.tag == "Boid") {
+            if(isBoidSpawnable) {
                 SpawnBoid();
             }
         }
@@ -34,5 +34,8 @@ public class Nexus : MonoBehaviour {
         isBoidSpawnable = true;
     }
 
+    public void damage(int damage) {
+        health -= damage;
+    }
 
 }

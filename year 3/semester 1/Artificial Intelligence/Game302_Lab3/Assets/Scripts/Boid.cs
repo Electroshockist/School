@@ -55,10 +55,6 @@ public class Boid : MonoBehaviour {
         float angle = Mathf.Acos(Vector3.Dot(velocity.normalized, Vector3.up));
 
         transform.eulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * angle * (velocity.x > 0 ? -1 : 1));
-
-        float x = ((pos.x + 150) / 100) * 255;
-        float y = (pos.y / 100) * 255;
-        sprite.color = new Color(x, y, Time.time % 255);
     }
 
     Vector3 Separate(List<GameObject> boids) {

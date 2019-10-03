@@ -113,3 +113,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boid: {fileID: 729322810286382877, guid: 71025eb1bbaf9f64288a4142a528c984, type: 3}
   spawnTime: 1
+  health: 100

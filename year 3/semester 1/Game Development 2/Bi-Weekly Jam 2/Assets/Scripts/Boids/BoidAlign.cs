@@ -30,6 +30,6 @@ public class BoidAlign : BoidInput {
             }
         }
 
-        dataNode.Value = steer;
+        dataNode.Value = steer * strength;
     }
 }

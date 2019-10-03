@@ -39,12 +39,12 @@ public class BoidInputController : MonoBehaviour {
     }
 
     private IEnumerator waitToPoll() {
-        align.pollOthers(transform.position);
-        avoid.pollOthers(transform.position);
-        cohere.pollOthers(transform.position);
+        while(isActiveAndEnabled) {
+            align.pollOthers(transform.position);
+            avoid.pollOthers(transform.position);
+            cohere.pollOthers(transform.position);
 
-        yield return new WaitForSeconds(pollTime);
-
-        StartCoroutine(waitToPoll());
+            yield return new WaitForSeconds(pollTime);
+        }
     }
 }

@@ -16,8 +16,8 @@ public class BoidAvoid : BoidInput {
             float d = Vector3.Distance(self.transform.position, other.transform.position);
             // Calculate vector pointing away from neighbor
             Vector2 diff = self.transform.position - other.transform.position;
-            diff.Normalize();
-            diff /= d;
+            diff = diff.normalized * (1 - Mathf.Clamp01(diff.magnitude / radius));
+            //diff /= d;
             steer += diff;
             count++;
         }
@@ -34,6 +34,6 @@ public class BoidAvoid : BoidInput {
                 steer *= maxForce;
             }
         }
-        dataNode.Value = steer;
+        dataNode.Value = steer * strength;
     }
 }

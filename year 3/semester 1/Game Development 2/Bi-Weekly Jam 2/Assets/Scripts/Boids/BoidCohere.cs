@@ -35,7 +35,7 @@ public class BoidCohere : BoidInput {
 
         Vector2 pos = new Vector2(self.transform.position.x, self.transform.position.y);
         Vector2 desired = target - pos;
-        desired.Normalize();
+        desired = desired.normalized;// * Mathf.Clamp01(desired.magnitude / radius);
         desired /= maxSpeed;
 
         Vector3 steer = desired - self.GetComponent<Rigidbody2D>().velocity;
@@ -44,6 +44,6 @@ public class BoidCohere : BoidInput {
             steer *= maxForce;
         }
 
-        return steer;
+        return steer *strength;
     }
 }

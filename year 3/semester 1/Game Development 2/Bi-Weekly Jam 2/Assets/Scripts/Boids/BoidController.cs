@@ -2,7 +2,7 @@
 
 public class BoidController : MonoBehaviour {
 
-    [SerializeField] private float maxVelocity;
+    [SerializeField] private float acceleration, maxVelocity;
     [Header("Data")]
     [SerializeField] DataVector2 align;
     [SerializeField] DataVector2 avoid;
@@ -20,10 +20,10 @@ public class BoidController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Vector2 acceleration = Vector3.zero;
-        acceleration += avoid.Value * 1.5f;
-        acceleration += align.Value;
-        acceleration += cohere.Value;
+        Vector2 input = Vector3.zero;
+        input += avoid.Value;
+        input += align.Value;
+        input += cohere.Value;
 
 
         //get mousepos
@@ -31,9 +31,10 @@ public class BoidController : MonoBehaviour {
         tempPos = Camera.main.ScreenToWorldPoint(tempPos);
         Vector2 mousePos = new Vector2(tempPos.x, tempPos.y);
         Vector2 pos = new Vector2(transform.position.x, transform.position.y);
-       // acceleration += (mousePos - pos) * 2;
+        input += (mousePos - pos).normalized;
+        input.Normalize();
 
-        rigidbody.velocity += acceleration * Time.deltaTime;
+        rigidbody.velocity += input * acceleration * Time.deltaTime;
 
         float angle = Mathf.Acos(Vector3.Dot(rigidbody.velocity.normalized, Vector3.up));
 

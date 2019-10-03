@@ -7,7 +7,7 @@ public class BoidInput : DataInput {
     protected float maxSpeed, maxForce;
 
     [Header("Data")]
-    [SerializeField] private float radius;
+    [SerializeField] protected float radius, strength = 1;
     [SerializeField] protected DataVector2 dataNode;
 
     protected List<GameObject> boids = new List<GameObject>();
