@@ -1,29 +1,37 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Nexus : MonoBehaviour {
-    [SerializeField] private GameObject boid;
+
+    [SerializeField] private GameObject boid, loseUI;
+    [SerializeField] private Text healthText;
     [SerializeField] private float spawnTime;
     [SerializeField] private float health;
     private bool isBoidSpawnable = true;
-    // Start is called before the first frame update
-    void Start() {
 
-    }
-
-    // Update is called once per frame
-    void Update() {
+    private void Update() {
+        if (lost()) {
+            loseUI.SetActive(true);
+            if (Input.anyKeyDown) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+        else {
+            healthText.text = "Health: " + health;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.tag == "Boid") {
-            if(isBoidSpawnable) {
+        if (collision.tag == "Boid") {
+            if (isBoidSpawnable) {
                 SpawnBoid();
             }
         }
     }
 
-    void SpawnBoid() {
+    private void SpawnBoid() {
         StartCoroutine(onBoidSpawn());
         Instantiate(boid, transform);
     }
@@ -36,6 +44,10 @@ public class Nexus : MonoBehaviour {
 
     public void damage(int damage) {
         health -= damage;
+    }
+
+    public bool lost() {
+        return health <= 0;
     }
 
 }
