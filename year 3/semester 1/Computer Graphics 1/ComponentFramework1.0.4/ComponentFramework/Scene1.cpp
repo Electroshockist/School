@@ -9,6 +9,7 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "SkyBox.h"
 #include "MMath.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -80,7 +81,7 @@ void Scene1::OnDestroy() {
 void Scene1::HandleEvents(const SDL_Event &sdlEvent) {}
 
 void Scene1::Update(const float deltaTime_) {
-	camZ += 0.25 * deltaTime_;
+	camZ += 0.25f * deltaTime_;
 	camera->setPos(Vec3(0.0f, 0.0f, camZ));
 	std::cout << camZ << std::endl;
 
@@ -121,6 +122,8 @@ void Scene1::Render() const {
 
 	earthGameObject->Render();
 	moonGameObject->Render();
+
+
 
 	glUseProgram(0);
 }

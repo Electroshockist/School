@@ -13,6 +13,7 @@ class GameObject;
 class Mesh;
 class Shader;
 class Texture;
+class SkyBox;
 
 class Scene1 : public Scene {
 public:
@@ -20,10 +21,9 @@ private:
 	Camera *camera;
 	GameObject *earthGameObject;
 	GameObject *moonGameObject;
+	GameObject *skyBoxGameObject;
+	SkyBox* skybox;
 	Vec3 lightSource;
-	//static const int lightNum = 2;
-	//Vec3 lightSources [lightNum];
-	//glm::vec3 lights[lightNum];
 
 	Mesh *earthMeshPtr;
 	Shader *earthShaderPtr;

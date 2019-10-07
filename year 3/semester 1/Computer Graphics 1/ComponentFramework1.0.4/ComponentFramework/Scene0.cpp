@@ -60,7 +60,9 @@ void Scene0::OnDestroy() {
 	if (gameObject) delete gameObject, gameObject = nullptr;
 }
 
-void Scene0::HandleEvents(const SDL_Event &sdlEvent) {}
+void Scene0::HandleEvents(const SDL_Event &sdlEvent) {
+	camera->handleEvents(sdlEvent);
+}
 
 void Scene0::Update(const float deltaTime_) {
 	gameObject->Update(deltaTime_);
