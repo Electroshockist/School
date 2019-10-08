@@ -8,7 +8,7 @@ using namespace MATH;
 union SDL_Event;
 class Camera {
 private:
-	//class SkyBox* skybox;
+	class SkyBox* skybox;
 	Matrix4 projection;
 	Matrix4 view;
 	float fovY, aspectRatio, nearClip, farClip;
@@ -21,7 +21,7 @@ public:
 	void createProjection(float fovy, float aspectRatio, float near, float far);
 	void createView(Vec3 pos, Vec3 at, Vec3 up);
 
-	void render() const;
+	void render();
 	void handleEvents(const SDL_Event &sdlEvent);
 
 	void setFovY(float fovY);

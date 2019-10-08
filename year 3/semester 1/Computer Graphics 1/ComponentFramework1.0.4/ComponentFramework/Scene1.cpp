@@ -45,6 +45,7 @@ bool Scene1::OnCreate() {
 	moonMeshPtr = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
 	moonShaderPtr = new Shader("textureVert.glsl", "textureFrag.glsl");
 	moonTexturePtr = new Texture();
+
 	if (moonMeshPtr == nullptr || moonShaderPtr == nullptr || moonTexturePtr == nullptr) {
 		Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
 		return false;
@@ -81,9 +82,9 @@ void Scene1::OnDestroy() {
 void Scene1::HandleEvents(const SDL_Event &sdlEvent) {}
 
 void Scene1::Update(const float deltaTime_) {
+	//move camera back
 	camZ += 0.25f * deltaTime_;
 	camera->setPos(Vec3(0.0f, 0.0f, camZ));
-	std::cout << camZ << std::endl;
 
 	earthGameObject->Update(deltaTime_);
 	static float rotation = 0.0f;

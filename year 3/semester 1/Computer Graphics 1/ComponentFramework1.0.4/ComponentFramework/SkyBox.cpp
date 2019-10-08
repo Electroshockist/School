@@ -36,8 +36,15 @@ bool SkyBox::onCreate() {
 	return true;
 }
 
-void SkyBox::Render() const {
+void SkyBox::Render(MATH::Matrix4* proj, MATH::Matrix4* view) const {
+	glUseProgram(getShader()->getProgram());
+	glDisable(GL_DEPTH_TEST);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, getTextureID());
+	glUniformMatrix4fv(getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, *proj);
+	glUniformMatrix4fv(getShader()->getUniformID("modelMatrix"), 1, GL_FALSE, *view);
 
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+	glEnable(GL_DEPTH_TEST);
 }
 
 bool SkyBox::LoadTextures(const char * posX, const char * negX, const char * posY, const char * negY, const char * posZ, const char * negZ) {

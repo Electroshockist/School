@@ -5,7 +5,7 @@
 #include "Scene0.h"
 #include "Scene1.h"
 
-GameSceneManager::GameSceneManager(): 
+GameSceneManager::GameSceneManager() :
 	currentScene(nullptr), window(nullptr), timer(nullptr),
 	fps(60), isRunning(false) {}
 
@@ -15,7 +15,7 @@ GameSceneManager::~GameSceneManager() {
 		delete currentScene;
 		currentScene = nullptr;
 	}
-	
+
 	if (timer) {
 		delete timer;
 		timer = nullptr;
@@ -42,7 +42,7 @@ bool GameSceneManager::Init(std::string name_, int width_, int height_) {
 		Debug::FatalError("Failed to initialize Timer object", __FILE__, __LINE__);
 		return false;
 	}
-	
+
 	currentScene = BuildScene(SCENE1);
 	if (currentScene == nullptr) {
 		Debug::FatalError("Failed to initialize Opening Scene", __FILE__, __LINE__);
@@ -80,11 +80,11 @@ void GameSceneManager::HandleEvents() {
 }
 
 Scene* GameSceneManager::BuildScene(SCENE_NUMBER scene_) {
-	
+
 	Scene* newScene = nullptr;
-	bool status; 
+	bool status;
 	switch (scene_) {
-	case SCENE0:  
+	case SCENE0:
 		newScene = new Scene0();
 		status = newScene->OnCreate();
 		break;
@@ -102,7 +102,7 @@ Scene* GameSceneManager::BuildScene(SCENE_NUMBER scene_) {
 		return nullptr;
 	}
 	return newScene;
-	
+
 }
 
 
