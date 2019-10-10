@@ -11,7 +11,7 @@
 struct Vertex {
 	glm::vec3 position;
 	glm::vec3 normal;
-	glm::vec3 texCoords;
+	glm::vec2 texCoords;
 	glm::vec3 colour;
 };
 
@@ -20,13 +20,15 @@ class Mesh {
 	GLuint VAO, VBO;
 	std::vector<Vertex> vertexList;
 	GLuint shaderProgram;
+	GLuint textureID;
+	GLuint textureLoc;
 	GLuint modelLoc;
 	GLuint viewLoc;
 	GLuint projLoc;
 
 
 public:
-	Mesh(std::vector<Vertex>* vertexList, GLuint shaderProgram);
+	Mesh(std::vector<Vertex>* vertexList, GLuint shaderProgram, GLuint textureID);
 	~Mesh();
 
 	void Render(glm::mat4 transform, Camera* camera);

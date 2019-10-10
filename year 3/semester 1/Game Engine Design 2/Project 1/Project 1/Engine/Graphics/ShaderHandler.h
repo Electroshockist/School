@@ -1,5 +1,5 @@
-#ifndef SADERHANDLER_H
-#define SADERHANDLER_H
+#ifndef SHADERHANDLER_H
+#define SHADERHANDLER_H
 #include <sstream>
 #include <map>
 #include <vector>
@@ -38,5 +38,5 @@ public:
 	static ShaderHandler* getInstance();
 };
 
-#endif SADERHANDLER_H
+#endif //SHADERHANDLER_H
 

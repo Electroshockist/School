@@ -16,16 +16,22 @@ bool Engine::OnCreate(std::string name, int width, int height) {
 	Debug::setSeverity(MessageType::TYPE_INFO);
 
 	window = new Window();
-	if (!window->OnCreate(name, width, height)) {
+	if(!window->OnCreate(name, width, height)) {
 		Debug::fatalError("Window Failed to create", __FILE__, __LINE__);
 		return isRunning = false;
 	}
 
-	ShaderHandler::getInstance()->createProgram("colourShader", 
+	ShaderHandler::getInstance()->createProgram("colourShader",
 												"Engine/Shaders/colourVertexShader.glsl",
 												"Engine/Shaders/colourFragmentShader.glsl"
-												);
-	if (!gameInterface->OnCreate()) {
+	);
+
+	ShaderHandler::getInstance()->createProgram("basicShader",
+												"Engine/Shaders/vertexShader.glsl",
+												"Engine/Shaders/fragmentShader.glsl"
+	);
+
+	if(!gameInterface->OnCreate()) {
 		Debug::fatalError("Game failed to create", __FILE__, __LINE__);
 		return isRunning = false;
 	}
@@ -35,7 +41,7 @@ bool Engine::OnCreate(std::string name, int width, int height) {
 }
 
 void Engine::Run() {
-	while (isRunning) {
+	while(isRunning) {
 		timer.UpdateFrameTicks();
 		Update(timer.GetDeltaTime());
 		Render();
@@ -47,7 +53,7 @@ void Engine::Run() {
 }
 
 void Engine::Update(const float deltaTime) {
-	if (gameInterface) gameInterface->Update(deltaTime);
+	if(gameInterface) gameInterface->Update(deltaTime);
 }
 
 void Engine::Render() {
@@ -55,7 +61,7 @@ void Engine::Render() {
 	glClearColor(0.1f, 0.01f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	if (gameInterface) gameInterface->Render();
+	if(gameInterface) gameInterface->Render();
 
 	SDL_GL_SwapWindow(window->getWindow());
 }
@@ -80,7 +86,7 @@ void Engine::setIsRuning(const bool isRunning) {
 }
 
 Engine * Engine::getInstance() {
-	if (instance.get() == nullptr) {
+	if(instance.get() == nullptr) {
 		instance.reset(new Engine);
 	}
 	return instance.get();
