@@ -111,6 +111,9 @@ void Scene1::Render() const {
 	/// Clear the screen
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	
+	camera->render();
 
 	/// Draw your scene here
 	GLuint program = earthGameObject->getShader()->getProgram();

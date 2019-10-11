@@ -21,8 +21,6 @@ private:
 	Camera *camera;
 	GameObject *earthGameObject;
 	GameObject *moonGameObject;
-	GameObject *skyBoxGameObject;
-	SkyBox* skybox;
 	Vec3 lightSource;
 
 	Mesh *earthMeshPtr;

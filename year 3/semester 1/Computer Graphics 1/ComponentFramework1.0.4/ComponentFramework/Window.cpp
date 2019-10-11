@@ -88,5 +88,3 @@ void Window::SetAttributes(int major_, int minor_) {
 	glewExperimental = GL_TRUE;
 	return;
 }
-
-

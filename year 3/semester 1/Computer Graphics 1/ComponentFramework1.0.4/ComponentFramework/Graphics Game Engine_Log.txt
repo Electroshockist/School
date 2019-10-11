@@ -1,2 +1,3 @@
-[INFO]: Starting the GameSceneManager in file: c:\users\erico\files\school\school\year 3\semester 1\computer graphics 1\componentframework1.0.4\componentframework\main.cpp on line: 14
-[INFO]: OpenGL version: 4.6.0 NVIDIA 436.48 in file: c:\users\erico\files\school\school\year 3\semester 1\computer graphics 1\componentframework1.0.4\componentframework\window.cpp on line: 41
+[INFO]: Starting the GameSceneManager in file: c:\users\erico\documents\code\school\year 3\semester 1\computer graphics 1\componentframework1.0.4\componentframework\main.cpp on line: 14
+[INFO]: OpenGL version: 4.5.13467 Compatibility Profile Context 21.19.414.1538 in file: c:\users\erico\documents\code\school\year 3\semester 1\computer graphics 1\componentframework1.0.4\componentframework\window.cpp on line: 41
+[INFO]: Deleting the GameSceneManager in file: c:\users\erico\documents\code\school\year 3\semester 1\computer graphics 1\componentframework1.0.4\componentframework\gamescenemanager.cpp on line: 28

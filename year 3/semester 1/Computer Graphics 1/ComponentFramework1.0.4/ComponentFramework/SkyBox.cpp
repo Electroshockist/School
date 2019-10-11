@@ -31,7 +31,7 @@ bool SkyBox::onCreate() {
 		return false;
 	}
 	mesh = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
-	shader = new Shader("skyVert", "skyFrag");
+	shader = new Shader("skyVert.glsl", "skyFrag.glsl");
 
 	return true;
 }
@@ -42,6 +42,8 @@ void SkyBox::Render(MATH::Matrix4* proj, MATH::Matrix4* view) const {
 	glBindTexture(GL_TEXTURE_CUBE_MAP, getTextureID());
 	glUniformMatrix4fv(getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, *proj);
 	glUniformMatrix4fv(getShader()->getUniformID("modelMatrix"), 1, GL_FALSE, *view);
+
+	mesh->Render();
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	glEnable(GL_DEPTH_TEST);
@@ -56,6 +58,7 @@ bool SkyBox::LoadTextures(const char * posX, const char * negX, const char * pos
 	int mode = (textureSurface->format->BytesPerPixel == 4) ? GL_RGBA : GL_RGB;
 	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, mode, textureSurface->w, textureSurface->h, 0, mode, GL_UNSIGNED_BYTE, textureSurface->pixels);
 	SDL_FreeSurface(textureSurface);
+
 	//negX
 	textureSurface = IMG_Load(negX);
 	if(textureSurface == nullptr) {
