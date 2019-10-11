@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/1.Graph.unity
+- path: Assets/Scenes/3.BFS.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
