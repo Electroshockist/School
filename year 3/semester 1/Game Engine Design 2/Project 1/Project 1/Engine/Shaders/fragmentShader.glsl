@@ -8,5 +8,5 @@ out vec4 color;
 uniform sampler2D inTexture;
 
 void main(){
-	color = vec4(inTexture, TexCoords);
+	color = texture(inTexture, TexCoords);
 }
