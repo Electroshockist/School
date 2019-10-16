@@ -4,9 +4,11 @@
 #include "../../Engine/Core/Engine.h"
 
 class GameScene : public Scene {
-	GameObject* triangle;
-	Model* triangleModel;
+	//GameObject* triangle;
+	//Model* triangleModel;
 	Camera* camera;
+	GameObject* object;
+	Model* model;
 
 public:
 	GameScene();

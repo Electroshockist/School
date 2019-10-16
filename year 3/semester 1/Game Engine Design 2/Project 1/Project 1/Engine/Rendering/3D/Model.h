@@ -2,34 +2,30 @@
 #define MODEL_H
 
 #include "Mesh.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 class Model {
 public:
-	Model(GLuint shaderProgram);
-	Model(GLuint shaderProgram, glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
+	Model(const std::string& objPath, const std::string& mathPath, GLuint shaderProgram);
 	~Model();
-	void AddMesh(Mesh* mesh_);
-	void Render(Camera* camera);
-	void OnDestroy();
+	void addMesh(Mesh* mesh);
+	void render(Camera* camera);
+	void onDestroy();
+	int createInstance(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
+	void updateInstance(int index, glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
+	glm::mat4 getTransform(int index) const;
+	
 
-	inline glm::vec3 GetPosition() const { return position; };
-	inline float GetAngle() const { return angle; };
-	inline glm::vec3 GetRotation() const { return rotation; };
-	inline glm::vec3 GetScale() const { return scale; };
-	glm::mat4 getTransform() const;
-
-	void setPosition(glm::vec3 position);
-	void setAngle(float angle);
-	void setRotation(glm::vec3 rotation);
-	void setScale(glm::vec3 scale);
 
 private:
-	GLuint shaderProgram;
 	std::vector<Mesh*> subMeshes;
-
-	glm::vec3 position, rotation, scale;
+	GLuint shaderProgram;
 	float angle;
-	glm::mat4 GetTransform() const;
+	glm::mat4 GetTransform(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale) const;
+	void LoadModel();
+	std::vector<glm::mat4> modelInstance;
+
+
 };
 #endif // !MODEL_H
 
