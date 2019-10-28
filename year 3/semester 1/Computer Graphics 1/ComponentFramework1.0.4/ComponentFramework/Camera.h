@@ -9,6 +9,7 @@ union SDL_Event;
 class Camera {
 private:
 	class SkyBox* skybox;
+	class Trackball* trackball;
 	Matrix4 projection;
 	Matrix4 view;
 	float fovY, aspectRatio, nearClip, farClip;
@@ -31,6 +32,9 @@ public:
 	void setPos(Vec3 pos);
 	void setAt(Vec3 at);
 	void setUp(Vec3 up);
+
+
+	Vec3 getPos();
 	Camera();
 	~Camera();
 };

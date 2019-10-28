@@ -2,16 +2,22 @@
 #include "MMath.h"
 #include "SkyBox.h"
 #include "Shader.h"
+#include "TrackBall.h"
 #include <SDL.h>
 
-Camera::Camera() : skybox(new SkyBox()) {
+Vec3 Camera::getPos() {
+	return pos;
+}
+
+Camera::Camera() : skybox(new SkyBox()), trackball(new Trackball()) {
 	createProjection(45.0f, (16.0f / 9.0f), 0.5f, 100.0f);
 	createView(Vec3(0.0, 0.0, 10.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 1.0f, 0.0f));
 	skybox->onCreate();
 }
 
 Camera::~Camera() {
-	if (skybox) delete skybox;
+	if(skybox) delete skybox;
+	if(trackball) delete trackball;
 }
 
 void Camera::createProjection(float fovy, float aspect, float near, float far) {
@@ -30,12 +36,17 @@ void Camera::createView(Vec3 pos, Vec3 at, Vec3 up) {
 }
 
 void Camera::render() {
-	if (skybox != nullptr) {
-		skybox->Render(&projection, &view);
+	if(skybox != nullptr) {
+		GLuint program1 = skybox->getShader()->getProgram();
+		glUseProgram(program1);
+		glUniformMatrix4fv(skybox->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, getProjectionMatrix() * trackball->getMatrix4());
+		skybox->Render();
 	}
 }
 
-void Camera::handleEvents(const SDL_Event & sdlEvent) {}
+void Camera::handleEvents(const SDL_Event & sdlEvent) {
+	trackball->HandleEvents(sdlEvent);
+}
 
 void Camera::setFovY(float fovY) {
 	createProjection(fovY, aspectRatio, nearClip, farClip);

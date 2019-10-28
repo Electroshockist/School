@@ -5,15 +5,18 @@
 
 class Shader;
 class SkyBox {
-	GLuint textureID;
+	GLuint textureID, VAO, modelMatrixID;
 	class Mesh* mesh;
 	Shader* shader;
+
+	MATH::Matrix4 modelMatrix;
+
 public:
 	SkyBox();
 	~SkyBox();
 	bool onCreate();
 	void onDestroy();
-	void Render(MATH::Matrix4* proj, MATH::Matrix4* view) const;
+	void Render() const;
 	inline GLuint getTextureID() const { return textureID; }
 	inline Shader* getShader() const { return shader; }
 

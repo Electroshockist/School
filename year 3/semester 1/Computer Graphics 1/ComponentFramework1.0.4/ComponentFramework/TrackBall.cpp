@@ -4,7 +4,6 @@
 #include "VMath.h"
 #include "MMath.h"
 
-
 using namespace MATH;
 
 Trackball::Trackball() {
@@ -56,7 +55,6 @@ void Trackball::onMouseMove(int x, int y) {
 	/// reset for the next mousemove
 	beginV = endV;
 }
-
 
 const Vec3 Trackball::getMouseVector(int x, int y) {
 	Vec3 mousePosition(static_cast<float>(x), static_cast<float>(y), 0.0f);

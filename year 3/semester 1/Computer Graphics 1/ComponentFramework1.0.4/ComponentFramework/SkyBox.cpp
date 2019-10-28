@@ -16,7 +16,7 @@ bool SkyBox::onCreate() {
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
-	LoadTextures("CN Tower/posx.jpg", "CN Tower/negx.jpg", "CN Tower/negx.jpg", "CN Tower/negx.jpg", "CN Tower/negx.jpg", "CN Tower/negx.jpg");
+	LoadTextures("CN Tower/posx.jpg", "CN Tower/negx.jpg", "CN Tower/posy.jpg", "CN Tower/negy.jpg", "CN Tower/posz.jpg", "CN Tower/negz.jpg");
 
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -33,20 +33,37 @@ bool SkyBox::onCreate() {
 	mesh = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
 	shader = new Shader("skyVert.glsl", "skyFrag.glsl");
 
+	//skybox VAO
+	glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VAO);
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VAO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(mesh->vertices), &mesh->vertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+    modelMatrixID = shader->getUniformID("modelMatrix");
+
 	return true;
 }
 
-void SkyBox::Render(MATH::Matrix4* proj, MATH::Matrix4* view) const {
-	glUseProgram(getShader()->getProgram());
-	glDisable(GL_DEPTH_TEST);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, getTextureID());
-	glUniformMatrix4fv(getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, *proj);
-	glUniformMatrix4fv(getShader()->getUniformID("modelMatrix"), 1, GL_FALSE, *view);
-
-	mesh->Render();
+void SkyBox::Render() const {
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	glEnable(GL_DEPTH_TEST);
+
+	glDepthMask(GL_FALSE);
+    glUniformMatrix4fv(modelMatrixID,1,GL_FALSE, modelMatrix);
+
+    glUseProgram(shader->getProgram());
+
+    glBindVertexArray(VAO);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    mesh->Render();
+    glDepthMask(GL_TRUE);
+
+    GLuint program = shader->getProgram();
+    glUseProgram(program);
 }
 
 bool SkyBox::LoadTextures(const char * posX, const char * negX, const char * posY, const char * negY, const char * posZ, const char * negZ) {
