@@ -93,7 +93,6 @@ public class Missle : MonoBehaviour {
             r.hit2D = Physics2D.Raycast(pos, angle, 2.0f);
             Debug.DrawRay(pos, angle * r.length, r.drawColor);
 
-            print(r.hit2D.collider);
             if(r.hit2D.collider != null && r.hit2D.collider.tag == "Obstacle") {
                 r.isHitting = true;
             }
