@@ -5,7 +5,7 @@
 #include "TrackBall.h"
 #include <SDL.h>
 
-Vec3 Camera::getPos() {
+Vec3 Camera::getPos() const {
 	return pos;
 }
 
@@ -35,7 +35,7 @@ void Camera::createView(Vec3 pos, Vec3 at, Vec3 up) {
 	view = MMath::rotate(0.0, Vec3(0.0, 1.0, 0.0)) * MMath::translate(0.0, 0.0, -10.0);
 }
 
-void Camera::render() {
+void Camera::render() const {
 	if(skybox != nullptr) {
 		GLuint program1 = skybox->getShader()->getProgram();
 		glUseProgram(program1);

@@ -60,7 +60,7 @@ bool Scene1::OnCreate() {
 	}
 
 
-	lightSource = Vec3(30.0, 0.0, 1.0);
+	//lightSource = Vec3(30.0, 0.0, 1.0);
 
 	return true;
 }

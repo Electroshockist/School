@@ -7,7 +7,6 @@ using namespace MATH;
 
 union SDL_Event;
 class Camera {
-private:
 	class SkyBox* skybox;
 	class Trackball* trackball;
 	Matrix4 projection;
@@ -22,7 +21,7 @@ public:
 	void createProjection(float fovy, float aspectRatio, float near, float far);
 	void createView(Vec3 pos, Vec3 at, Vec3 up);
 
-	void render();
+	void render() const;
 	void handleEvents(const SDL_Event &sdlEvent);
 
 	void setFovY(float fovY);
@@ -33,8 +32,7 @@ public:
 	void setAt(Vec3 at);
 	void setUp(Vec3 up);
 
-
-	Vec3 getPos();
+	Vec3 getPos() const;
 	Camera();
 	~Camera();
 };

@@ -47,6 +47,8 @@ bool SkyBox::onCreate() {
 	return true;
 }
 
+void SkyBox::onDestroy() {}
+
 void SkyBox::Render() const {
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
