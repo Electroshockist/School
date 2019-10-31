@@ -130,6 +130,7 @@
     <ClCompile Include="Engine\Main.cpp" />
     <ClCompile Include="Engine\Core\Window.cpp" />
     <ClCompile Include="Engine\Rendering\3D\GameObject.cpp" />
+    <ClCompile Include="Engine\Rendering\3D\LoadObjModel.cpp" />
     <ClCompile Include="Game\Scenes\GameScene.cpp" />
     <ClCompile Include="Game\Game0.cpp" />
     <ClCompile Include="Game\Scenes\StartScene.cpp" />
@@ -138,7 +139,6 @@
     <ClCompile Include="Engine\Rendering\3D\Model.cpp" />
     <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
-    <ClCompile Include="LoadObjModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Camera\Camera.h" />
@@ -148,6 +148,7 @@
     <ClInclude Include="Engine\Core\Window.h" />
     <ClInclude Include="Engine\Core\GameInterfaceh.h" />
     <ClInclude Include="Engine\Rendering\3D\GameObject.h" />
+    <ClInclude Include="Engine\Rendering\3D\LoadObjModel.h" />
     <ClInclude Include="Game\Scenes\GameScene.h" />
     <ClInclude Include="Game\Game0.h" />
     <ClInclude Include="Game\Scenes\StartScene.h" />
@@ -156,7 +157,6 @@
     <ClInclude Include="Engine\Rendering\3D\Model.h" />
     <ClInclude Include="Engine\Graphics\ShaderHandler.h" />
     <ClInclude Include="Engine\Graphics\TextureHandler.h" />
-    <ClInclude Include="LoadObjModel.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\colourFragmentShader.glsl" />

@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include "Mesh.h"
+#include "LoadObjModel.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 class Model {
@@ -9,11 +10,12 @@ class Model {
 	GLuint shaderProgram;
 	float angle;
 	glm::mat4 getTransform(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale) const;
-	void LoadModel();
+	void loadModel();
 	std::vector<glm::mat4> modelInstance;
+	LoadObjModel* obj;
 
 public:
-	Model(const std::string& objPath, const std::string& mathPath, GLuint shaderProgram);
+	Model(const std::string& objPath, const std::string& matPath, GLuint shaderProgram);
 	~Model();
 	void addMesh(Mesh* mesh);
 	void render(Camera* camera);

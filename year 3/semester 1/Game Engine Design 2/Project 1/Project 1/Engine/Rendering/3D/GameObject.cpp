@@ -21,7 +21,7 @@ GameObject::~GameObject() {
 
 void GameObject::Render(Camera* camera) {
 	if(model) {
-		model->Render(camera);
+		model->render(camera);
 	}
 }
 
@@ -41,7 +41,7 @@ float GameObject::getAngle() const {
 }
 
 glm::vec3 GameObject::getRotation() const {
-	return rotation
+	return rotation;
 }
 
 glm::vec3 GameObject::getScale() const {
@@ -51,27 +51,27 @@ glm::vec3 GameObject::getScale() const {
 void GameObject::setPosition(glm::vec3 position) {
 	this->position = position;
 	if(model) {
-		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
 }
 
 void GameObject::setAngle(float angle) {
 	this->angle = angle;
 	if(model) {
-		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
 }
 
 void GameObject::setRotation(glm::vec3 rotation) {
 	this->rotation = rotation;
 	if(model) {
-		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
 }
 
 void GameObject::setScale(glm::vec3 scale) {
 	this->scale = scale;
 	if(model) {
-		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
 }

@@ -18,17 +18,15 @@ struct LoadObjModel {
 	std::vector<SubMesh> getSubMeshes();
 
 private:
-	std::vector<glm::vec3> verticies, normals;
+	std::vector<glm::vec3> vertices, normals;
 	std::vector<glm::vec2> textureCoords;
-	std::vector<int> indecies, normalIndecies, textureIndecies;
+	std::vector<int> indices, normalIndices, textureIndices;
 	std::vector<Vertex> meshVerticies;
 	std::vector<SubMesh> meshes;
 	void postProcessing();
 	void loadMaterial(const std::string& fileName);
 	void loadMaterialLibrary(const std::string& matName);
-	Gluint currentTexture;
-
-
+	GLuint currentTexture;
 };
 #endif // LOADOBJMODEL_H
 

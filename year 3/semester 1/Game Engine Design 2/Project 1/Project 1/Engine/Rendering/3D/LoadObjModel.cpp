@@ -1,31 +1,30 @@
 #include "LoadObjModel.h"
+#include <iostream>
 
-LoadObjModel::LoadObjModel() :
-	verticies(std::vector<glm::vec3>()),
+LoadObjModel::LoadObjModel() : currentTexture(0) /*:
+	vertices(std::vector<glm::vec3>()),
 	normals(std::vector<glm::vec3>()),
 	textureCoords(std::vector<glm::vec2>()),
-	indicies(std::vector<int>()),
-	normalIndicies(std::vector<int>()),
-	textureIndicies(std::vector<int>()),
+	indices(std::vector<int>()),
+	normalIndices(std::vector<int>()),
+	textureIndices(std::vector<int>()),
 	meshVerticies(std::vector<Vertex>()),
-	meshes(std::vector<SubMesh>()) {
-}
-
-LoadObjModel::LoadObjModel() {}
+	meshes(std::vector<SubMesh>())*/ {}
 
 LoadObjModel::~LoadObjModel() {
-	verticies.clear();
-	normals.clear();
-	textureCoords.clear();
-	indicies.clear();
-	normalIndicies.clear();
-	textureIndicies.clear();
-	meshVerticies.clear();
-	meshes.clear();
-
+	OnDestroy();
 }
 
-void LoadObjModel::OnDestroy() {}
+void LoadObjModel::OnDestroy() {
+	vertices.clear();
+	normals.clear();
+	textureCoords.clear();
+	indices.clear();
+	normalIndices.clear();
+	textureIndices.clear();
+	meshVerticies.clear();
+	meshes.clear();
+}
 
 void LoadObjModel::loadModel(const std::string & fileName) {
 	std::ifstream in(fileName.c_str(), std::ios::in);
@@ -35,24 +34,47 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 	}
 	std::string line;
 	while(std::getline(in, line)) {
+		//vetex indecies
 		if(line.substr(0, 2) == "v ") {
 			std::istringstream v(line.substr(2));
 			glm::vec3 vert;
 			double x, y, z;
 			v >> x >> y >> z;
 			vert = glm::vec3(x, y, z);
-			verticies.push_back(vert);
+			vertices.push_back(vert);
 		}
 
 		//normal data
+		if(line.substr(0, 3) == "vn ") {
+			std::istringstream vn(line.substr(3));
+			glm::vec3 norm;
+			double x, y, z;
+			vn >> x >> y >> z;
+			norm = glm::vec3(x, y, z);
+			normals.push_back(norm);
+		}
 		//texture coodinate data
+		if(line.substr(0, 3) == "vc ") {
+			std::istringstream vc(line.substr(3));
+			glm::vec2 tex;
+			double x, y;
+			vc >> x >> y;
+			tex = glm::vec2(x, y);
+			textureCoords.push_back(tex);
+		}
 		//face data
-		//vetex indecies/texture indecies/normal indecies
-
+		//if(line.substr(0, 2) == "f ") {
+		//	std::istringstream vc(line.substr(2));
+		//	glm::vec3 face;
+		//	std::string x, y, z;
+		//	vc >> x >> y >> z;
+		//	face = glm::vec3(x, y, z);
+		//	textureCoords.push_back(face);
+		//}
 
 		//new material (new mesh)
 		else if(line.substr(0, 7) == "usemtl ") {
-			if(indecies.size() > 0) {
+			if(indices.size() > 0) {
 				postProcessing();
 			}
 			loadMaterial(line.substr(0, 7));
@@ -69,11 +91,11 @@ void LoadObjModel::loadModel(const std::string & fileName, const std::string & m
 }
 
 std::vector<Vertex> LoadObjModel::getVerts() {
-	return verticies;
+	return meshVerticies;
 }
 
 std::vector<int> LoadObjModel::getIndecies() {
-	return indecies;
+	return indices;
 }
 
 std::vector<SubMesh> LoadObjModel::getSubMeshes() {
@@ -81,21 +103,21 @@ std::vector<SubMesh> LoadObjModel::getSubMeshes() {
 }
 
 void LoadObjModel::postProcessing() {
-	for(size_t i = 0; i < indecies.size(); i++) {
+	for(size_t i = 0; i < indices.size(); i++) {
 		Vertex vert;
-		vert.position = verticies[indecies[i]];
-		vert.normal = normals[normalIndecies[i]];
-		vert.texCoords = textureCoords[textureIndecies[i]];
+		vert.position = vertices[indices[i]];
+		vert.normal = normals[normalIndices[i]];
+		vert.texCoords = textureCoords[textureIndices[i]];
 		meshVerticies.push_back(vert);
 	}
 	SubMesh mesh;
 	mesh.vertexList = meshVerticies;
-	mesh.meshIndices = indecies;
+	mesh.meshIndices = indices;
 	mesh.textureID = currentTexture;
 	meshes.push_back(mesh);
-	indecies.clear();
-	normalIndecies.clear();
-	textureIndecies.clear();
+	indices.clear();
+	normalIndices.clear();
+	textureIndices.clear();
 	meshVerticies.clear();
 	currentTexture = 0;
 }
