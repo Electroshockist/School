@@ -10,7 +10,7 @@ public class AStar : MonoBehaviour {
 
     Dictionary<Node, Node> predecessorDict = new Dictionary<Node, Node>();
     Dictionary<Node, float> fDistanceDict = new Dictionary<Node, float>();
-    Dictionary<Node, float> gDistanceDict = new Dictionary<Node, float>();//
+    Dictionary<Node, float> gDistanceDict = new Dictionary<Node, float>();
 
     // Use this for initialization
     void Start() {
@@ -37,7 +37,7 @@ public class AStar : MonoBehaviour {
         // To do: Initialize visited and unvisited
 
         visited.Clear();
-        unvisited = nodes;
+        unvisited = new Lis nodes;
 
         predecessorDict.Clear(); // to generate the result path
 

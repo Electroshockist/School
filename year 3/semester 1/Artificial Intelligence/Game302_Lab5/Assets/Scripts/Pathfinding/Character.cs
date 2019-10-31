@@ -43,22 +43,17 @@ namespace Pathfinding {
 
             // To do: Get the shortest path between start and target using astar algorithm
             // List<Node> path = ?
-            List<Node> path;
 
+            List<Node> path = aStarPathfinder.Search(start, target);
 
+            for(int i = 0; i < path.Count; i++) {
 
-            yield return new WaitForSeconds(0.5f);
-            // To do: move the character using the position info in the shortest path
-            // you need to use "yield return new WaitForSeconds(0.5f);" to make a delay between each movement
-            // Refer to https://docs.unity3d.com/Manual/Coroutines.html
-
-
-
-
-
-
-
-
+                transform.position = new Vector3(path[i].x, path[i].y, transform.position.z);
+                yield return new WaitForSeconds(0.05f);
+                // To do: move the character using the position info in the shortest path
+                // you need to use "yield return new WaitForSeconds(0.5f);" to make a delay between each movement
+                // Refer to https://docs.unity3d.com/Manual/Coroutines.html
+            }
 
             // set state to IDLE in order to enable next movement
             state = State.IDLE;

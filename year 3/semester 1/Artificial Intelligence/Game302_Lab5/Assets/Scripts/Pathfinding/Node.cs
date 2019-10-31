@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Pathfinding {
+    [Serializable]
 	public class Node {    
 		public int x;
 		public int y;
