@@ -17,7 +17,7 @@ bool GameScene::OnCreate() {
 	camera = new Camera();
 	camera->setPosition(glm::vec3(0.0f, 0.0f, 4.0f));
 
-	model = new Model("Resources/Models/Dice.obj", "Resources/Materials/Dice.mtl", ShaderHandler::getInstance()->getShader("basicShader"));
+	model = new Model("Resources/Models/Apple.obj", "Resources/Materials/Apple.mtl", ShaderHandler::getInstance()->getShader("basicShader"));
 	object = new GameObject(model);
 	if(!object || !model) {
 		return false;

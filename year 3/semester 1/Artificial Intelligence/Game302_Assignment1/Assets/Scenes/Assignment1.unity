@@ -951,6 +951,7 @@ GameObject:
   - component: {fileID: 759474996}
   - component: {fileID: 759474999}
   - component: {fileID: 759475000}
+  - component: {fileID: 759475001}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Untagged
@@ -1099,6 +1100,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &759475001
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759474995}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f20978abc5c5314f8d004d7af5da84a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &821495584
 GameObject:
   m_ObjectHideFlags: 0

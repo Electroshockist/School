@@ -1,4 +1,5 @@
 #include "TextureHandler.h"
+#include <iostream>
 
 std::unique_ptr<TextureHandler> TextureHandler::textureInstance = nullptr;
 std::map<std::string, Texture*> TextureHandler::textures = std::map<std::string, Texture*>();
@@ -62,6 +63,7 @@ void TextureHandler::createTexture(const std::string & textureName, const std::s
 
 const GLuint TextureHandler::getTexture(const std::string & textureName) {
 	if(textures.find(textureName) != textures.end()) {
+		std::cout << textures.size() << std::endl;
 		return textures[textureName]->textureID;
 	}
 	return 0;

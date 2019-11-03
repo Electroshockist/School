@@ -1,15 +1,8 @@
 #include "LoadObjModel.h"
+#include <algorithm>
 #include <iostream>
 
-LoadObjModel::LoadObjModel() : currentTexture(0) /*:
-	vertices(std::vector<glm::vec3>()),
-	normals(std::vector<glm::vec3>()),
-	textureCoords(std::vector<glm::vec2>()),
-	indices(std::vector<int>()),
-	normalIndices(std::vector<int>()),
-	textureIndices(std::vector<int>()),
-	meshVerticies(std::vector<Vertex>()),
-	meshes(std::vector<SubMesh>())*/ {}
+LoadObjModel::LoadObjModel() : currentTexture(0) {}
 
 LoadObjModel::~LoadObjModel() {
 	OnDestroy();
@@ -62,22 +55,33 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 			tex = glm::vec2(x, y);
 			textureCoords.push_back(tex);
 		}
+
 		//face data
-		//if(line.substr(0, 2) == "f ") {
-		//	std::istringstream vc(line.substr(2));
-		//	glm::vec3 face;
-		//	std::string x, y, z;
-		//	vc >> x >> y >> z;
-		//	face = glm::vec3(x, y, z);
-		//	textureCoords.push_back(face);
-		//}
+		if(line.substr(0, 2) == "f ") {
+			std::istringstream vc(line.substr(2));
+			Face face;
+
+			//divide string by spaces
+			std::string s[3];			
+			vc >> s[0] >> s[1] >> s[2];
+
+			Face::Point p[3];
+			for(int i = 0; i < 3; i++) {
+				p[i] = getIndicesFromString(s[i]);
+			}
+			face = Face(p[0], p[1], p[2]);
+
+			faces.push_back(face);
+		}
 
 		//new material (new mesh)
 		else if(line.substr(0, 7) == "usemtl ") {
 			if(indices.size() > 0) {
 				postProcessing();
 			}
-			loadMaterial(line.substr(0, 7));
+			std::string tempLine = line;
+			tempLine.erase(0, 7);
+			loadMaterial(tempLine);
 		}
 	}
 	postProcessing();
@@ -125,7 +129,7 @@ void LoadObjModel::postProcessing() {
 void LoadObjModel::loadMaterial(const std::string & fileName) {
 	currentTexture = TextureHandler::getInstance()->getTexture(fileName);
 	if(currentTexture == 0) {
-		TextureHandler::getInstance()->createTexture(fileName, "Resources/Textures/" + fileName + "png");
+		TextureHandler::getInstance()->createTexture(fileName, "Resources/Textures/" + fileName + ".jpg");
 		currentTexture = TextureHandler::getInstance()->getTexture(fileName);
 	}
 }
@@ -142,4 +146,19 @@ void LoadObjModel::loadMaterialLibrary(const std::string & matName) {
 			loadMaterial(line.substr(7));
 		}
 	}
+}
+
+LoadObjModel::Face::Point LoadObjModel::getIndicesFromString(std::string s) {
+	std::string temp = s;
+
+	//replace delimiter with space
+	std::replace( temp.begin(), temp.end(), '/', ' ');
+
+	std::istringstream tempStream = std::istringstream(temp);
+
+	int v, t, n;
+	//convert string to numbers
+	tempStream >> v >> t >> n;
+
+	return Face::Point(vertices[indices[v]], textureCoords[textureIndices[t]], normals[normalIndices[n]]);
 }

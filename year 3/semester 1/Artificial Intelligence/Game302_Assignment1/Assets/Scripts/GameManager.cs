@@ -22,15 +22,6 @@ public class GameManager : MonoBehaviour {
             }
         }
 
-        if(missle == null) {
-            StartCoroutine(restart());
-        }
-
-    }
-
-    IEnumerator restart() {
-        yield return new WaitForSeconds(3.0f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }
