@@ -71,7 +71,6 @@ public class Dijkstra : MonoBehaviour {
                     distanceDict[v] = distanceDict[u] + map.GetDistance(u, v);
                 }
 
-
                 // update predecessorDict to build the result path                
                 predecessorDict[v] = u;
             }

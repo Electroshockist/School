@@ -37,7 +37,7 @@ public class AStar : MonoBehaviour {
         // To do: Initialize visited and unvisited
 
         visited.Clear();
-        unvisited = new Lis nodes;
+        unvisited = new List<Node>(nodes);
 
         predecessorDict.Clear(); // to generate the result path
 

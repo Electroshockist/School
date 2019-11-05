@@ -10,14 +10,12 @@
 struct LoadObjModel {
 	struct Face {
 		struct Point {
-			std::shared_ptr<glm::vec3> vertex;
-			std::shared_ptr<glm::vec2> textureCoord;
-			std::shared_ptr<glm::vec3> normal;
+			int vertex, textureCoord, normal;
 			Point() {}
-			Point(glm::vec3 vertex, glm::vec2 textureCoord, glm::vec3 normal) {
-				this->vertex.reset(&vertex);
-				this->textureCoord.reset(&textureCoord);
-				this->normal.reset(&normal);
+			Point(int vertex, int textureCoord, int normal) {
+				this->vertex = vertex;
+				this->textureCoord = textureCoord;
+				this->normal = normal;
 			}
 		};
 		
@@ -28,7 +26,6 @@ struct LoadObjModel {
 			p[1] = two;
 			p[2] = three;
 		}
-
 	};
 
 	LoadObjModel();
@@ -38,14 +35,13 @@ struct LoadObjModel {
 	void loadModel(const std::string& fileName);
 	void loadModel(const std::string& fileName, const std::string& matName);
 	std::vector<Vertex> getVerts();
-	std::vector<int> getIndecies();
+	std::vector<int> getIndices();
 	std::vector<SubMesh> getSubMeshes();
 
 private:
 	std::vector<glm::vec3> vertices, normals;
 	std::vector<glm::vec2> textureCoords;
-	std::vector<Face> faces;
-	std::vector<int> indices, normalIndices, textureIndices, faceIndices;
+	std::vector<int> indices, normalIndices, textureIndices;
 	std::vector<Vertex> meshVerticies;
 	std::vector<SubMesh> meshes;
 	void postProcessing();
@@ -54,6 +50,7 @@ private:
 	GLuint currentTexture;
 
 	Face::Point getIndicesFromString(std::string s);
+	void pushFaceToVectors(Face f);
 };
 #endif // LOADOBJMODEL_H
 

@@ -63,7 +63,7 @@ void TextureHandler::createTexture(const std::string & textureName, const std::s
 
 const GLuint TextureHandler::getTexture(const std::string & textureName) {
 	if(textures.find(textureName) != textures.end()) {
-		std::cout << textures.size() << std::endl;
+		std::cout << textureName << std::endl;
 		return textures[textureName]->textureID;
 	}
 	return 0;

@@ -1,8 +1,9 @@
 #ifndef SCENE1_H
 #define SCENE1_H
 #include "Scene.h"
-#include "Scene.h"
 #include "Vector.h"
+
+GLuint CreateNoise3D();
 
 using namespace MATH;
 
@@ -16,8 +17,7 @@ class Texture;
 class SkyBox;
 
 class Scene1 : public Scene {
-public:
-private:
+	GLuint noise;
 	Camera *camera;
 	GameObject *earthGameObject;
 	GameObject *moonGameObject;
@@ -31,6 +31,7 @@ private:
 	Shader *moonShaderPtr;
 	Texture *moonTexturePtr;
 	float camZ = 10.0f;
+	float elapsedTime = 0;
 
 public:
 	explicit Scene1();

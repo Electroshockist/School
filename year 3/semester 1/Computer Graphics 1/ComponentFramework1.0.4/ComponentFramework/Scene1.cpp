@@ -1,4 +1,3 @@
-#include <glew.h>
 #include <iostream>
 #include "Window.h"
 #include "Debug.h"
@@ -20,12 +19,13 @@ Scene1::~Scene1() {}
 
 bool Scene1::OnCreate() {
 	camera = new Camera();
+	noise = CreateNoise3D();
 
 	if(ObjLoader::loadOBJ("skull.obj") == false) {
 		return false;
 	}
 	earthMeshPtr = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
-	earthShaderPtr = new Shader("refractVert.glsl", "refractFrag.glsl");
+	earthShaderPtr = new Shader("noiseVert.glsl", "noiseFrag.glsl");
 	earthTexturePtr = new Texture();
 	if(earthMeshPtr == nullptr || earthShaderPtr == nullptr || earthTexturePtr == nullptr) {
 		Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
@@ -83,6 +83,7 @@ void Scene1::HandleEvents(const SDL_Event &sdlEvent) {
 }
 
 void Scene1::Update(const float deltaTime_) {
+	elapsedTime += deltaTime_;
 	//move camera back
 	camZ += 0.25f * deltaTime_;
 	camera->setPos(Vec3(0.0f, 0.0f, camZ));
@@ -126,12 +127,10 @@ void Scene1::Render() const {
 	glUniformMatrix4fv(earthGameObject->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
 	glUniformMatrix4fv(earthGameObject->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
 	glUniformMatrix3fv(earthGameObject->getShader()->getUniformID("cameraPos"), 1, GL_FALSE, camera->getPos());
-	//glUniform3fv(earthGameObject->getShader()->getUniformID("lightPos"), 1, lightSource);
+	glUniform1f(earthGameObject->getShader()->getUniformID("time"), elapsedTime);
 
 	earthGameObject->Render();
 	moonGameObject->Render();
-
-
 
 	glUseProgram(0);
 }

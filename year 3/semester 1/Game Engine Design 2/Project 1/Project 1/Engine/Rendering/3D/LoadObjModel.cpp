@@ -56,13 +56,35 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 			textureCoords.push_back(tex);
 		}
 
+		//if (line.substr(0, 2) == "f ")
+  //      {
+  //          int vt, vt2, vt3, textIndex, textIndex2, textIndex3 , normal, normal2, normal3;
+
+  //              char c;
+
+  //              std::istringstream f(line.substr(2));
+
+  //              f >> vt >> c >> textIndex >> c >> normal >> vt2 >> c >> textIndex2 >> c >> normal2 >> vt3 >> c >> textIndex3 >> c >> normal3;
+  //              indices.push_back(vt-1);
+  //              indices.push_back(vt2-1);
+  //              indices.push_back(vt3-1);
+
+  //              textureIndices.push_back(textIndex-1);
+  //              textureIndices.push_back(textIndex2 - 1);
+  //              textureIndices.push_back(textIndex3 - 1);
+
+  //              normalIndices.push_back(normal - 1);
+  //              normalIndices.push_back(normal2 - 1);
+  //              normalIndices.push_back(normal3 - 1);
+
+  //      }
 		//face data
 		if(line.substr(0, 2) == "f ") {
 			std::istringstream vc(line.substr(2));
 			Face face;
 
 			//divide string by spaces
-			std::string s[3];			
+			std::string s[3];
 			vc >> s[0] >> s[1] >> s[2];
 
 			Face::Point p[3];
@@ -70,8 +92,7 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 				p[i] = getIndicesFromString(s[i]);
 			}
 			face = Face(p[0], p[1], p[2]);
-
-			faces.push_back(face);
+			pushFaceToVectors(face);
 		}
 
 		//new material (new mesh)
@@ -79,9 +100,7 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 			if(indices.size() > 0) {
 				postProcessing();
 			}
-			std::string tempLine = line;
-			tempLine.erase(0, 7);
-			loadMaterial(tempLine);
+			loadMaterial(line.substr(7));
 		}
 	}
 	postProcessing();
@@ -98,7 +117,7 @@ std::vector<Vertex> LoadObjModel::getVerts() {
 	return meshVerticies;
 }
 
-std::vector<int> LoadObjModel::getIndecies() {
+std::vector<int> LoadObjModel::getIndices() {
 	return indices;
 }
 
@@ -152,7 +171,7 @@ LoadObjModel::Face::Point LoadObjModel::getIndicesFromString(std::string s) {
 	std::string temp = s;
 
 	//replace delimiter with space
-	std::replace( temp.begin(), temp.end(), '/', ' ');
+	std::replace(temp.begin(), temp.end(), '/', ' ');
 
 	std::istringstream tempStream = std::istringstream(temp);
 
@@ -160,5 +179,13 @@ LoadObjModel::Face::Point LoadObjModel::getIndicesFromString(std::string s) {
 	//convert string to numbers
 	tempStream >> v >> t >> n;
 
-	return Face::Point(vertices[indices[v]], textureCoords[textureIndices[t]], normals[normalIndices[n]]);
+	return Face::Point(v - 1, t - 1, n - 1);
+}
+
+void LoadObjModel::pushFaceToVectors(Face f) {
+	for(int i = 0; i < 3; i++) {
+		indices.push_back(f.p[i].vertex);
+		textureIndices.push_back(f.p[i].textureCoord);
+		normalIndices.push_back(f.p[i].normal);
+	}
 }
