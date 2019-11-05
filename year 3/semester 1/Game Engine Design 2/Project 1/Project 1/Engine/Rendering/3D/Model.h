@@ -11,7 +11,7 @@ class Model {
 	float angle;
 	glm::mat4 getTransform(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale) const;
 	void loadModel();
-	std::vector<glm::mat4> modelInstance;
+	std::vector<glm::mat4> modelInstances;
 	LoadObjModel* obj;
 
 public:

@@ -42,7 +42,7 @@ private:
 	std::vector<glm::vec3> vertices, normals;
 	std::vector<glm::vec2> textureCoords;
 	std::vector<int> indices, normalIndices, textureIndices;
-	std::vector<Vertex> meshVerticies;
+	std::vector<Vertex> meshVertices;
 	std::vector<SubMesh> meshes;
 	void postProcessing();
 	void loadMaterial(const std::string& fileName);

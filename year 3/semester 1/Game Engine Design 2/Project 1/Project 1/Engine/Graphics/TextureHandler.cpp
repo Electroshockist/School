@@ -1,5 +1,4 @@
 #include "TextureHandler.h"
-#include <iostream>
 
 std::unique_ptr<TextureHandler> TextureHandler::textureInstance = nullptr;
 std::map<std::string, Texture*> TextureHandler::textures = std::map<std::string, Texture*>();
@@ -9,6 +8,9 @@ TextureHandler::TextureHandler() {}
 
 TextureHandler::~TextureHandler() {
 	onDestroy();
+}
+
+void TextureHandler::onDestroy() {	
 	for(auto t : textures) {
 		glDeleteTextures(1, &t.second->textureID);
 		delete t.second;
@@ -16,8 +18,6 @@ TextureHandler::~TextureHandler() {
 	}
 	textures.clear();
 }
-
-void TextureHandler::onDestroy() {}
 
 TextureHandler * TextureHandler::getInstance() {
 	if(textureInstance == nullptr) {
@@ -63,7 +63,6 @@ void TextureHandler::createTexture(const std::string & textureName, const std::s
 
 const GLuint TextureHandler::getTexture(const std::string & textureName) {
 	if(textures.find(textureName) != textures.end()) {
-		std::cout << textureName << std::endl;
 		return textures[textureName]->textureID;
 	}
 	return 0;

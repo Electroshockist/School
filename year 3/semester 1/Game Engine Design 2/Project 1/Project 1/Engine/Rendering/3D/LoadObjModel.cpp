@@ -15,7 +15,7 @@ void LoadObjModel::OnDestroy() {
 	indices.clear();
 	normalIndices.clear();
 	textureIndices.clear();
-	meshVerticies.clear();
+	meshVertices.clear();
 	meshes.clear();
 }
 
@@ -47,7 +47,7 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 			normals.push_back(norm);
 		}
 		//texture coodinate data
-		if(line.substr(0, 3) == "vc ") {
+		if(line.substr(0, 3) == "vt ") {
 			std::istringstream vc(line.substr(3));
 			glm::vec2 tex;
 			double x, y;
@@ -114,7 +114,7 @@ void LoadObjModel::loadModel(const std::string & fileName, const std::string & m
 }
 
 std::vector<Vertex> LoadObjModel::getVerts() {
-	return meshVerticies;
+	return meshVertices;
 }
 
 std::vector<int> LoadObjModel::getIndices() {
@@ -131,17 +131,17 @@ void LoadObjModel::postProcessing() {
 		vert.position = vertices[indices[i]];
 		vert.normal = normals[normalIndices[i]];
 		vert.texCoords = textureCoords[textureIndices[i]];
-		meshVerticies.push_back(vert);
+		meshVertices.push_back(vert);
 	}
 	SubMesh mesh;
-	mesh.vertexList = meshVerticies;
+	mesh.vertexList = meshVertices;
 	mesh.meshIndices = indices;
 	mesh.textureID = currentTexture;
 	meshes.push_back(mesh);
 	indices.clear();
 	normalIndices.clear();
 	textureIndices.clear();
-	meshVerticies.clear();
+	meshVertices.clear();
 	currentTexture = 0;
 }
 
