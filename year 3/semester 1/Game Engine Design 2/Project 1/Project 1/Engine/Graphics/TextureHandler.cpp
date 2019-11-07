@@ -11,10 +11,12 @@ TextureHandler::~TextureHandler() {
 }
 
 void TextureHandler::onDestroy() {	
-	for(auto t : textures) {
-		glDeleteTextures(1, &t.second->textureID);
-		delete t.second;
-		t.second = nullptr;
+	if(textures.size() > 0) {
+		for(auto t : textures) {
+			glDeleteTextures(1, &t.second->textureID);
+			delete t.second;
+			t.second = nullptr;
+		}
 	}
 	textures.clear();
 }

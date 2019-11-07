@@ -5,7 +5,7 @@
 
 std::unique_ptr<Engine> Engine::instance = nullptr;
 
-Engine::Engine() : window(nullptr), isRunning(false), gameInterface(nullptr), fps(120), currentScene(0) {}
+Engine::Engine() : window(nullptr), isRunning(false), gameInterface(nullptr), fps(120), currentScene(0), camera(nullptr) {}
 
 Engine::~Engine() {
 	OnDestroy();
@@ -20,6 +20,11 @@ bool Engine::OnCreate(std::string name, int width, int height) {
 		Debug::fatalError("Window Failed to create", __FILE__, __LINE__);
 		return isRunning = false;
 	}
+
+	SDL_WarpMouseInWindow(window->getWindow(),
+						  window->getWidth() / 2, window->getHeight() / 2);
+
+	MouseEventListener::RegisterEngineObject(this);
 
 	ShaderHandler::getInstance()->createProgram("colourShader",
 												"Engine/Shaders/colourVertexShader.glsl",
@@ -42,6 +47,7 @@ bool Engine::OnCreate(std::string name, int width, int height) {
 
 void Engine::Run() {
 	while(isRunning) {
+		EventListener::update();
 		timer.UpdateFrameTicks();
 		Update(timer.GetDeltaTime());
 		Render();
@@ -50,6 +56,14 @@ void Engine::Run() {
 
 	//if not running, destroy
 	OnDestroy();
+}
+
+void Engine::setCamera(Camera * camera) {
+	this->camera = camera;
+}
+
+Camera * Engine::getCamera() {
+	return camera;
 }
 
 void Engine::Update(const float deltaTime) {
@@ -67,6 +81,9 @@ void Engine::Render() {
 }
 
 void Engine::OnDestroy() {
+	delete camera;
+	camera = nullptr;
+
 	delete gameInterface;
 	gameInterface = nullptr;
 
@@ -102,6 +119,32 @@ void Engine::setCurrentScene(int currentScene) {
 
 int Engine::getCurrentScene() const {
 	return currentScene;
+}
+
+void Engine::notifyMousePressed(int x, int y) {
+
+}
+
+void Engine::notifyMouseReleased(int x, int y, int buttonType) {
+
+}
+
+void Engine::notifyMouseMove(int x, int y) {
+	if(camera) {
+		camera->processMouseMovement(MouseEventListener::GetMouseOffset().x,
+									 MouseEventListener::GetMouseOffset().y);
+	}
+
+}
+
+void Engine::notifyMouseScroll(int y) {
+	if(camera) {
+		camera->processMouseZoom(y);
+	}
+}
+
+void Engine::exitGame() {
+	isRunning = false;
 }
 
 glm::vec2 Engine::getScreenSize() const {

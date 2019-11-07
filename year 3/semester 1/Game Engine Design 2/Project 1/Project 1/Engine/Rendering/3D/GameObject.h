@@ -21,11 +21,14 @@ struct GameObject {
 	void setRotation(glm::vec3 rotation_);
 	void setScale(glm::vec3 scale_);
 
+	BoundingBox getBoundingBox();
+
 private:
 	Model* model;
 	glm::vec3 position, rotation, scale;
 	float angle;
 	int modelInstance;
+	BoundingBox b;
 };
 #endif // !GAMEOBJECT_H
 

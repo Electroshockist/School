@@ -54,3 +54,34 @@ const glm::mat4 Camera::getOrthographic() {
 	orthographic = glm::ortho(0.0f, Engine::getInstance()->getScreenSize().x, 0.0f, Engine::getInstance()->getScreenSize().y, -1.0f, 1.0f);
 	return perspective;
 }
+
+void Camera::processMouseMovement(float xOffset, float yOffset) {
+	xOffset *= 0.05f;
+	yOffset *= 0.05f;
+
+	yaw += xOffset;
+	pitch += yOffset;
+
+	if(pitch > 89.0f) {
+		pitch = 89.0f;
+	}
+
+	if(pitch < -89.0f) {
+		pitch = -89.0f;
+	}
+
+	if(yaw > 360) {
+		yaw -= 360;
+	}
+	if(yaw < 0) {
+		yaw += 360;
+	}
+	updateCameraVectors();
+}
+
+void Camera::processMouseZoom(int y) {
+	if(y < 0 || y>0) {
+		position += static_cast<float>(y) * (forwardVector * 2.0f);
+	}
+	updateCameraVectors();
+}

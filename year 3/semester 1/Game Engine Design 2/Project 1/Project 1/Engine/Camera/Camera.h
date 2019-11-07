@@ -21,6 +21,9 @@ public:
 	glm::mat4 getView() const;
 	const glm::mat4 getPerspective();
 	const glm::mat4 getOrthographic();
+
+	void processMouseMovement(float xOffset, float yOffset);
+	void processMouseZoom(int y);
 };
 #endif // !CAMERA_H
 

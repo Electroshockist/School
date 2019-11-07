@@ -13,6 +13,7 @@ class Model {
 	void loadModel();
 	std::vector<glm::mat4> modelInstances;
 	LoadObjModel* obj;
+	BoundingBox b;
 
 public:
 	Model(const std::string& objPath, const std::string& matPath, GLuint shaderProgram);
@@ -23,6 +24,7 @@ public:
 	int createInstance(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
 	void updateInstance(int index, glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
 	glm::mat4 getTransform(int index) const;
+	BoundingBox getBoundingBox();
 };
 #endif // !MODEL_H
 

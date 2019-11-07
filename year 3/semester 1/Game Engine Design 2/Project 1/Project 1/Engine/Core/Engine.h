@@ -9,6 +9,7 @@
 #include "../Graphics/TextureHandler.h"
 #include "../Rendering/3D/GameObject.h"
 #include "../Camera/Camera.h"
+#include "../Events/EventListener.h"
 
 #include <memory>
 
@@ -23,6 +24,8 @@ class Engine {
 	bool isRunning;
 
 	int currentScene;
+
+	Camera* camera;
 
 	GameInterface* gameInterface;
 
@@ -49,7 +52,17 @@ public:
 	void setCurrentScene(int currentScene);
 	int getCurrentScene() const;
 
+	void notifyMousePressed(int x, int y);
+	void notifyMouseReleased(int x, int y, int buttonType);
+	void notifyMouseMove(int x, int y);
+	void notifyMouseScroll(int y);
+
+	void exitGame();
+
 	glm::vec2 getScreenSize() const;
+
+	void setCamera(Camera* camera);
+	Camera* getCamera();
 };
 #endif // !ENGINE_H
 

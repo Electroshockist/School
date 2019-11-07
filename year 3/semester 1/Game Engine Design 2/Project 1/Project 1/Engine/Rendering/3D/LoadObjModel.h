@@ -3,6 +3,7 @@
 
 #include "Mesh.h"
 #include "../../Graphics/TextureHandler.h"
+#include "../../Math/BoundingBox.h"
 
 #include <memory>
 #include <sstream>
@@ -38,6 +39,8 @@ struct LoadObjModel {
 	std::vector<int> getIndices();
 	std::vector<SubMesh> getSubMeshes();
 
+	BoundingBox getBoundingBox();
+
 private:
 	std::vector<glm::vec3> vertices, normals;
 	std::vector<glm::vec2> textureCoords;
@@ -51,6 +54,8 @@ private:
 
 	Face::Point getIndicesFromString(std::string s);
 	void pushFaceToVectors(Face f);
+
+	BoundingBox b;
 };
 #endif // LOADOBJMODEL_H
 

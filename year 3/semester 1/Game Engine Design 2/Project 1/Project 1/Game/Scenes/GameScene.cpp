@@ -14,11 +14,11 @@ GameScene::~GameScene() {
 }
 
 bool GameScene::OnCreate() {
-	camera = new Camera();
-	camera->setPosition(glm::vec3(0.0f, 0.0f, 4.0f));
+	Engine::getInstance()->setCamera(new Camera());
+	Engine::getInstance()->getCamera()->setPosition(glm::vec3(0.0f, 0.0f, 4.0f));
 
 	model = new Model("Resources/Models/Apple.obj", "Resources/Materials/Apple.mtl", ShaderHandler::getInstance()->getShader("basicShader"));
-	object = new GameObject(model);
+	object = new GameObject(model, glm::vec3());
 	if(!object || !model) {
 		return false;
 	}
@@ -31,10 +31,10 @@ void GameScene::Update(const float deltaTime) {
 }
 
 void GameScene::Render() {
+	object->Render(Engine::getInstance()->getCamera());
 }
 
 void GameScene::onDestroy() {
-
-	delete camera;
-	camera = nullptr;
+	delete object;
+	object = nullptr;
 }

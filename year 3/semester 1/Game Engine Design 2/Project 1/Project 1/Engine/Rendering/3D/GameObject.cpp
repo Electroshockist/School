@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include <iostream>
 
 GameObject::GameObject(Model * model) {
 	GameObject(model, glm::vec3());
@@ -12,6 +13,8 @@ GameObject::GameObject(Model * model, glm::vec3 position) {
 	scale = glm::vec3(1.0f);
 	if(model) {
 		modelInstance = model->createInstance(position, angle, rotation, scale);
+		b = model->getBoundingBox();
+		b.transform = this->model->getTransform(modelInstance);
 	}
 }
 
@@ -53,13 +56,18 @@ void GameObject::setPosition(glm::vec3 position) {
 	if(model) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
+
+	b.transform = this->model->getTransform(modelInstance);
 }
 
 void GameObject::setAngle(float angle) {
 	this->angle = angle;
+
 	if(model) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
+
+	b.transform = this->model->getTransform(modelInstance);
 }
 
 void GameObject::setRotation(glm::vec3 rotation) {
@@ -67,6 +75,8 @@ void GameObject::setRotation(glm::vec3 rotation) {
 	if(model) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
+
+	b.transform = this->model->getTransform(modelInstance);
 }
 
 void GameObject::setScale(glm::vec3 scale) {
@@ -74,4 +84,12 @@ void GameObject::setScale(glm::vec3 scale) {
 	if(model) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
+
+	b.transform = this->model->getTransform(modelInstance);
+	b.min *= scale.x > 1.0f ? scale : (scale / 2.0f);
+	b.max *= scale.x > 1.0f ? scale : (scale / 2.0f);
+}
+
+BoundingBox GameObject::getBoundingBox() {
+	return b;
 }

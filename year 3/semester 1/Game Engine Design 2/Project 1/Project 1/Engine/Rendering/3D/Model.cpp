@@ -53,9 +53,13 @@ glm::mat4 Model::getTransform(int index_) const {
 	return modelInstances[index_];
 }
 
+BoundingBox Model::getBoundingBox() {
+	return b;
+}
+
 void Model::loadModel() {
+	b = obj->getBoundingBox();
 	for(int i = 0; i < obj->getSubMeshes().size(); i++) {
-		std::cout << obj->getSubMeshes().size() << " " << i << std::endl;
 		subMeshes.push_back(new Mesh(obj->getSubMeshes()[i], shaderProgram));
 	}
 	delete obj;
@@ -65,7 +69,7 @@ void Model::loadModel() {
 glm::mat4 Model::getTransform(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) const {
 	glm::mat4 model;
 	model = glm::translate(model, position_);
-	model = glm::rotate(model, angle, rotation_);
+	model = glm::rotate(model, angle_, rotation_);
 	model = glm::scale(model, scale_);
 
 	return model;

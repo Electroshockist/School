@@ -56,44 +56,44 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 			textureCoords.push_back(tex);
 		}
 
-		//if (line.substr(0, 2) == "f ")
-  //      {
-  //          int vt, vt2, vt3, textIndex, textIndex2, textIndex3 , normal, normal2, normal3;
+		if (line.substr(0, 2) == "f ")
+        {
+            int vt, vt2, vt3, textIndex, textIndex2, textIndex3 , normal, normal2, normal3;
 
-  //              char c;
+                char c;
 
-  //              std::istringstream f(line.substr(2));
+                std::istringstream f(line.substr(2));
 
-  //              f >> vt >> c >> textIndex >> c >> normal >> vt2 >> c >> textIndex2 >> c >> normal2 >> vt3 >> c >> textIndex3 >> c >> normal3;
-  //              indices.push_back(vt-1);
-  //              indices.push_back(vt2-1);
-  //              indices.push_back(vt3-1);
+                f >> vt >> c >> textIndex >> c >> normal >> vt2 >> c >> textIndex2 >> c >> normal2 >> vt3 >> c >> textIndex3 >> c >> normal3;
+                indices.push_back(vt-1);
+                indices.push_back(vt2-1);
+                indices.push_back(vt3-1);
 
-  //              textureIndices.push_back(textIndex-1);
-  //              textureIndices.push_back(textIndex2 - 1);
-  //              textureIndices.push_back(textIndex3 - 1);
+                textureIndices.push_back(textIndex-1);
+                textureIndices.push_back(textIndex2 - 1);
+                textureIndices.push_back(textIndex3 - 1);
 
-  //              normalIndices.push_back(normal - 1);
-  //              normalIndices.push_back(normal2 - 1);
-  //              normalIndices.push_back(normal3 - 1);
+                normalIndices.push_back(normal - 1);
+                normalIndices.push_back(normal2 - 1);
+                normalIndices.push_back(normal3 - 1);
 
-  //      }
+        }
 		//face data
-		if(line.substr(0, 2) == "f ") {
-			std::istringstream vc(line.substr(2));
-			Face face;
+		//if(line.substr(0, 2) == "f ") {
+		//	std::istringstream vc(line.substr(2));
+		//	Face face;
 
-			//divide string by spaces
-			std::string s[3];
-			vc >> s[0] >> s[1] >> s[2];
+		//	//divide string by spaces
+		//	std::string s[3];
+		//	vc >> s[0] >> s[1] >> s[2];
 
-			Face::Point p[3];
-			for(int i = 0; i < 3; i++) {
-				p[i] = getIndicesFromString(s[i]);
-			}
-			face = Face(p[0], p[1], p[2]);
-			pushFaceToVectors(face);
-		}
+		//	Face::Point p[3];
+		//	for(int i = 0; i < 3; i++) {
+		//		p[i] = getIndicesFromString(s[i]);
+		//	}
+		//	face = Face(p[0], p[1], p[2]);
+		//	pushFaceToVectors(face);
+		//}
 
 		//new material (new mesh)
 		else if(line.substr(0, 7) == "usemtl ") {
@@ -104,8 +104,6 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 		}
 	}
 	postProcessing();
-
-
 }
 
 void LoadObjModel::loadModel(const std::string & fileName, const std::string & matName) {
@@ -123,6 +121,10 @@ std::vector<int> LoadObjModel::getIndices() {
 
 std::vector<SubMesh> LoadObjModel::getSubMeshes() {
 	return meshes;
+}
+
+BoundingBox LoadObjModel::getBoundingBox() {
+	return b;
 }
 
 void LoadObjModel::postProcessing() {
