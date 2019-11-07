@@ -288,9 +288,7 @@ void make3DNoiseTexture() {
 				inck = 1.0 / (Noise3DTexSize / frequency);
 				for(k = 0; k < Noise3DTexSize; ++k, ni[2] += inck, ptr += 4) {
 					*(ptr + inc) = (GLubyte)(((noise3(ni) + 1.0) * amp) * 128.0);
-					std::cout << (GLubyte)(((noise3(ni) + 1.0) * amp) * 128.0);
-				}	
-				std::cout << std::endl;
+				}
 			}
 		}
 	}

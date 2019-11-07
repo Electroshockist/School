@@ -15,7 +15,10 @@ uniform sampler3D noise3D;
 void main() {
 	vec3 texPos = vec3(time, time, time);
 	vec4 noise = texture(noise3D, texPos);
-	vec3 p = aPos + (noise.xyz * aNormal);
+	float l = length(noise);
+	vec3 randN = aNormal * l;
+	vec3 p = aPos + (randN - (randN/2));
+	
     Normal = mat3(transpose(inverse(modelMatrix))) * aNormal;
     Position = vec3(modelMatrix * vec4(p, 1.0));
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(p, 1.0);
