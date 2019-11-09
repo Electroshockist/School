@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AStar {
+public class AStar : MonoBehaviour {
     public Tilemap map;
 
     List<Node> visited = new List<Node>();
@@ -104,10 +104,9 @@ public class AStar {
 
         // Keep track of where we are in the input path. 
         // We start at 2, because we assume two adjacent nodes will pass the raycast
+
         int inputIndex = 2;
 
-
-        List<Node> n = new List<Node>(inputPath);
         while(inputIndex < inputPath.Count - 2) { // Loop until we find the last item in the input
 
             // To do: Complete this while loop
@@ -115,14 +114,17 @@ public class AStar {
             // if the ray test failed, then add the last node that passed to the output list
             // For more detailed information, refer to Path Smoothing Algorithm in the lecture slide
 
-            Vector2 point1 = new Vector2(inputPath[inputIndex].x, inputPath[inputIndex].y);
-            for(int i = n.Count; i > 0; i--) {
-                Vector2 point2 = new Vector2(n[i].x, n[i].y);
+            Vector2 point1 = new Vector2(outputPath[outputPath.Count - 1].x, outputPath[outputPath.Count - 1].y);
 
-                RaycastHit2D ray = Physics2D.Raycast(point2, point1);
-                if(ray.collider != null) {
-                    outputPath.Add(inputPath[inputIndex]);
-                }
+            Node n2 = inputPath[inputIndex + 2];
+            Vector2 point2 = new Vector2(n2.x, n2.y) - point1;
+            RaycastHit2D ray = Physics2D.Raycast(point1, point2);
+
+            Debug.DrawRay(point1, point2, Color.red, 2);
+
+            print(ray.collider);
+            if(ray.collider != null) {
+                outputPath.Add(inputPath[inputIndex - 1]);
             }
 
             inputIndex++;
