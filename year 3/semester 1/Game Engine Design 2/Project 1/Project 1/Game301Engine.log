@@ -1,0 +1,6 @@
+Error: Shader basicShader failed to compile. F
+in project 1\engine\graphics\shaderhandler.cpp on line 54
+Error: Shader basicShader failed to link. F
+in project 1\engine\graphics\shaderhandler.cpp on line 88
+Warning: Replaced gameobject with name Apple that already existed.
+in project 1\engine\rendering\scenegraph.cpp on line 27

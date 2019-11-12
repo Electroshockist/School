@@ -25,6 +25,8 @@ public:
 	void updateInstance(int index, glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
 	glm::mat4 getTransform(int index) const;
 	BoundingBox getBoundingBox();
+	
+	GLuint getShaderProgram() const;
 };
 #endif // !MODEL_H
 

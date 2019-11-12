@@ -21,8 +21,6 @@ void Model::addMesh(Mesh * mesh_) {
 }
 
 void Model::render(Camera* camera_) {
-	glUseProgram(shaderProgram);
-
 	for(auto m : subMeshes) {
 		m->Render(camera_, modelInstances);
 	}
@@ -55,6 +53,10 @@ glm::mat4 Model::getTransform(int index_) const {
 
 BoundingBox Model::getBoundingBox() {
 	return b;
+}
+
+GLuint Model::getShaderProgram() const {
+	return shaderProgram;
 }
 
 void Model::loadModel() {

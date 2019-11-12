@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 
-LoadObjModel::LoadObjModel() : currentTexture(0) {}
+LoadObjModel::LoadObjModel() : material(Material()) {}
 
 LoadObjModel::~LoadObjModel() {
 	OnDestroy();
@@ -138,35 +138,22 @@ void LoadObjModel::postProcessing() {
 	SubMesh mesh;
 	mesh.vertexList = meshVertices;
 	mesh.meshIndices = indices;
-	mesh.textureID = currentTexture;
+	mesh.material = material;
 	meshes.push_back(mesh);
 	indices.clear();
 	normalIndices.clear();
 	textureIndices.clear();
 	meshVertices.clear();
-	currentTexture = 0;
+	material = Material();
 }
 
 void LoadObjModel::loadMaterial(const std::string & fileName) {
-	currentTexture = TextureHandler::getInstance()->getTexture(fileName);
-	if(currentTexture == 0) {
-		TextureHandler::getInstance()->createTexture(fileName, "Resources/Textures/" + fileName + ".jpg");
-		currentTexture = TextureHandler::getInstance()->getTexture(fileName);
-	}
+	material = MaterialHandler::getInstance()->getMaterial(fileName);
+
 }
 
 void LoadObjModel::loadMaterialLibrary(const std::string & matName) {
-	std::ifstream in(matName.c_str(), std::ios::in);
-	if(!in) {
-		Debug::error("Cannot open MTL file " + matName, __FILE__, __LINE__);
-		return;
-	}
-	std::string line;
-	while(std::getline(in, line)) {
-		if(line.substr(0, 7) == "newmtl ") {
-			loadMaterial(line.substr(7));
-		}
-	}
+	MaterialLoader::LoadMaterial(matName);
 }
 
 LoadObjModel::Face::Point LoadObjModel::getIndicesFromString(std::string s) {

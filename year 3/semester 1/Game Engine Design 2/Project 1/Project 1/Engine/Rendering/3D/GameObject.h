@@ -8,6 +8,7 @@ struct GameObject {
 	GameObject(Model* model);
 	GameObject(Model* model, glm::vec3 position);
 	~GameObject();
+	void Update(const float deltaTime);
 	void Render(Camera* camera);
 	void OnDestroy();
 
@@ -23,12 +24,16 @@ struct GameObject {
 
 	BoundingBox getBoundingBox();
 
+	std::string getTag() const;
+	void setTag(std::string tag);
+
 private:
 	Model* model;
 	glm::vec3 position, rotation, scale;
 	float angle;
 	int modelInstance;
 	BoundingBox b;
+	std::string tag;
 };
 #endif // !GAMEOBJECT_H
 

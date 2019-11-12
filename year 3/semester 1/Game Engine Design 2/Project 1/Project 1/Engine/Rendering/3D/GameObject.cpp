@@ -93,3 +93,11 @@ void GameObject::setScale(glm::vec3 scale) {
 BoundingBox GameObject::getBoundingBox() {
 	return b;
 }
+
+std::string GameObject::getTag() const {
+	return tag;
+}
+
+void GameObject::setTag(std::string tag) {
+	this->tag = tag;
+}

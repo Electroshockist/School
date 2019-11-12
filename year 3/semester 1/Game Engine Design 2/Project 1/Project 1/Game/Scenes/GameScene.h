@@ -4,9 +4,6 @@
 #include "../../Engine/Core/Engine.h"
 
 class GameScene : public Scene {
-	GameObject* object;
-	Model* model;
-
 public:
 	GameScene();
 	~GameScene();

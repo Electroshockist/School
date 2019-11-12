@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "../../Graphics/MaterialHandler.h"
 #include "../../Camera/Camera.h"
 
 struct Vertex {
@@ -18,7 +19,7 @@ struct Vertex {
 struct SubMesh {
 	std::vector<Vertex> vertexList;
 	std::vector<int> meshIndices;
-	GLuint textureID;
+	Material material;
 };
 
 class Mesh {
@@ -26,7 +27,9 @@ class Mesh {
 	GLuint VAO, VBO;
 	std::vector<Vertex> vertexList;
 	GLuint shaderProgram;
-	GLuint textureLoc, modelLoc, viewLoc, projLoc;
+	GLuint modelLoc, viewLoc, projLoc;
+	GLuint viewPositionLoc, lightPosLoc, lightAmbientLoc, lightDiffuseLoc, lightColourLoc;
+	GLuint diffuseMapLoc, shineLoc, trancparencyLoc, ambientLoc, diffuseLoc, specLoc;
 	SubMesh subMesh;
 
 

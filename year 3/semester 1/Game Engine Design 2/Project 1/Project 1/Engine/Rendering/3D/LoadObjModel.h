@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "../../Graphics/TextureHandler.h"
 #include "../../Math/BoundingBox.h"
+#include "../../FX/MaterialLoader.h"
 
 #include <memory>
 #include <sstream>
@@ -50,7 +51,7 @@ private:
 	void postProcessing();
 	void loadMaterial(const std::string& fileName);
 	void loadMaterialLibrary(const std::string& matName);
-	GLuint currentTexture;
+	Material material;
 
 	Face::Point getIndicesFromString(std::string s);
 	void pushFaceToVectors(Face f);
