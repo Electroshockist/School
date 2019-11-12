@@ -1,23 +1,28 @@
 #version 410 core
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNormal;
+layout (location = 2) in  vec2 texCoords;
 
 out vec3 Normal;
 out vec3 Position;
+out vec4 Offset;
 
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 uniform mat4 normalMatrix;
+uniform vec3 lightPos;
 uniform float time;
 uniform sampler3D noise3D;
 
 void main() {
-	vec3 texPos = vec3(time, time, time);
+	vec3 texPos = vec3(time, time + 1000, time -1000) * aPos;
 	vec4 noise = texture(noise3D, texPos);
-	float l = length(noise);
-	vec3 randN = aNormal * l;
-	vec3 p = aPos + (randN - (randN/2));
+	vec3 randN = aNormal * noise.xyz;
+	
+	Offset = noise;
+	
+	vec3 p = aPos + randN;
 	
     Normal = mat3(transpose(inverse(modelMatrix))) * aNormal;
     Position = vec3(modelMatrix * vec4(p, 1.0));

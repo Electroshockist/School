@@ -174,10 +174,6 @@ namespace  MATH {
 			return static_cast<float*>(&x);
 		}
 
-		inline glm::vec3 toGlVec3() {
-			return glm::vec3(x, y, z);
-		}
-
 	};
 
 

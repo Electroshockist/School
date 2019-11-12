@@ -22,7 +22,7 @@ bool Scene1::OnCreate() {
 	noise = CreateNoise3D();
 	//SetNoiseFrequency(100);
 
-	if(ObjLoader::loadOBJ("sphere.obj") == false) {
+	if(ObjLoader::loadOBJ("skull.obj") == false) {
 		return false;
 	}
 	earthMeshPtr = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
@@ -61,7 +61,7 @@ bool Scene1::OnCreate() {
 	}
 
 
-	//lightSource = Vec3(30.0, 0.0, 1.0);
+	lightSource = Vec3(30.0, 0.0, 1.0);
 
 	return true;
 }
@@ -85,29 +85,29 @@ void Scene1::HandleEvents(const SDL_Event &sdlEvent) {
 
 void Scene1::Update(const float deltaTime_) {
 	elapsedTime += deltaTime_;
-	////move camera back
-	//camZ += 0.25f * deltaTime_;
-	//camera->setPos(Vec3(0.0f, 0.0f, camZ));
+	//move camera back
+	camZ += 0.25f * deltaTime_;
+	camera->setPos(Vec3(0.0f, 0.0f, camZ));
 
-	//earthGameObject->Update(deltaTime_);
-	//static float rotation = 0.0f;
-	//rotation += 0.5;
+	earthGameObject->Update(deltaTime_);
+	static float rotation = 0.0f;
+	rotation += 0.5;
 
-	//Matrix4 rotationMatrix =
-	//	MMath::rotate(rotation, Vec3(0.0, 1.0, 0.0));
+	Matrix4 rotationMatrix =
+		MMath::rotate(rotation, Vec3(0.0, 1.0, 0.0));
 
-	//moonGameObject->Update(deltaTime_);
-	//moonGameObject->setModelMatrix(
-	//	//MMath::rotate(-90, Vec3(1.0, 0.0, 0.0)) *
-	//	rotationMatrix *
-	//	MMath::translate(Vec3(10, 0, 0)) *
-	//	MMath::scale(0.25, 0.25, 0.25) *
-	//	MMath::rotate(-90, Vec3(0.0, 1.0, 0.0))
-	//);
-	//earthGameObject->setModelMatrix(
-	//	/*MMath::rotate(-90, Vec3(1.0 * rotation, 0.0, 0.0))* rotationMatrix*/
-	//	rotationMatrix * MMath::rotate(90, Vec3(0.0, 1.0, 0.0))
-	//);
+	moonGameObject->Update(deltaTime_);
+	moonGameObject->setModelMatrix(
+		//MMath::rotate(-90, Vec3(1.0, 0.0, 0.0)) *
+		rotationMatrix *
+		MMath::translate(Vec3(10, 0, 0)) *
+		MMath::scale(0.25, 0.25, 0.25) *
+		MMath::rotate(-90, Vec3(0.0, 1.0, 0.0))
+	);
+	earthGameObject->setModelMatrix(
+		/*MMath::rotate(-90, Vec3(1.0 * rotation, 0.0, 0.0))* rotationMatrix*/
+		rotationMatrix * MMath::rotate(90, Vec3(0.0, 1.0, 0.0))
+	);
 
 }
 
@@ -128,7 +128,11 @@ void Scene1::Render() const {
 	glUniformMatrix4fv(earthGameObject->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
 	glUniformMatrix4fv(earthGameObject->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
 	glUniformMatrix3fv(earthGameObject->getShader()->getUniformID("cameraPos"), 1, GL_FALSE, camera->getPos());
+	glUniform1f(earthGameObject->getShader()->getUniformID("noise3D"), noise);
 	glUniform1f(earthGameObject->getShader()->getUniformID("time"), elapsedTime);
+
+	glm::vec3 v = glm::vec3(lightSource.x, lightSource.y, lightSource.z);
+	glUniform3fv(earthGameObject->getShader()->getUniformID("lightPos"), GL_FALSE, glm::value_ptr(v));
 
 	earthGameObject->Render();
 	moonGameObject->Render();

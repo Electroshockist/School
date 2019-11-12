@@ -4,7 +4,7 @@
 #include "Vector.h"
 
 GLuint CreateNoise3D();
-void SetNoiseFrequency(int frequency);
+//void SetNoiseFrequency(int frequency);
 
 using namespace MATH;
 
