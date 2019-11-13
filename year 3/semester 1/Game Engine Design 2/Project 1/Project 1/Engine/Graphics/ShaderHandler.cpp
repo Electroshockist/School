@@ -8,7 +8,7 @@ std::map<std::string, GLuint> ShaderHandler::programs = std::map<std::string, GL
 ShaderHandler::ShaderHandler() {}
 
 ShaderHandler::~ShaderHandler() {
-	onDestroy();
+	//onDestroy();
 }
 
 void ShaderHandler::onDestroy() {

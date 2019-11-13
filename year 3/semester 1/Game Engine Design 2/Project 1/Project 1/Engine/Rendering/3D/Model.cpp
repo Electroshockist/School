@@ -60,8 +60,10 @@ GLuint Model::getShaderProgram() const {
 }
 
 void Model::loadModel() {
+	int i = 0;
 	b = obj->getBoundingBox();
 	for(int i = 0; i < obj->getSubMeshes().size(); i++) {
+		std::cout << i << std::endl;
 		subMeshes.push_back(new Mesh(obj->getSubMeshes()[i], shaderProgram));
 	}
 	delete obj;

@@ -1,8 +1,7 @@
 #include "GameObject.h"
 #include <iostream>
 
-GameObject::GameObject(Model * model) {
-	GameObject(model, glm::vec3());
+GameObject::GameObject(Model * model) : GameObject(model, glm::vec3()){
 }
 
 GameObject::GameObject(Model * model, glm::vec3 position) {
@@ -55,9 +54,8 @@ void GameObject::setPosition(glm::vec3 position) {
 	this->position = position;
 	if(model) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
+		b.transform = this->model->getTransform(modelInstance);
 	}
-
-	b.transform = this->model->getTransform(modelInstance);
 }
 
 void GameObject::setAngle(float angle) {

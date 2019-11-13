@@ -7,7 +7,7 @@ TextureHandler::TextureHandler() {}
 
 
 TextureHandler::~TextureHandler() {
-	onDestroy();
+	//onDestroy();
 }
 
 void TextureHandler::onDestroy() {	
