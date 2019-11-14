@@ -13,7 +13,13 @@ public class GameManager : MonoBehaviour {
             // To do : Select one of the spawning points(spawningPoints) randomly
             // and then instantiate an alien object
             // Don't forget to set the alien's target to player
-            
+
+            int spawnPoint = Random.Range(0, spawningPoints.Length - 1);
+
+            GameObject temp = Instantiate(alien, spawningPoints[spawnPoint].transform.position, Quaternion.identity);
+
+            temp.GetComponent<Alien>().target = player;
+
             yield return new WaitForSeconds(5f);
         }
 	}

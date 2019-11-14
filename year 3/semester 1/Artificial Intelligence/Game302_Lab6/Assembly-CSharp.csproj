@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\3.NavMesh Application\Bullet.cs" />
     <Compile Include="Assets\Scripts\3.NavMesh Application\GameManager.cs" />
     <Compile Include="Assets\Scripts\3.NavMesh Application\HideMesh.cs" />
+    <Compile Include="Assets\Scripts\4.NavMesh FPS\Astronaut2.cs" />
     <Compile Include="Assets\Scripts\SnapToGrid.cs" />
     <None Include="Assets\Kenney Assets\Space Kit\License.txt" />
     <Reference Include="Unity.Timeline.Editor">
