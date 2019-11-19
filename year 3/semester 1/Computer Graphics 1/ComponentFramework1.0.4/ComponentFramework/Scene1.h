@@ -18,7 +18,6 @@ class Texture;
 class SkyBox;
 
 class Scene1 : public Scene {
-	GLuint noise;
 	Camera *camera;
 	GameObject *earthGameObject;
 	GameObject *moonGameObject;

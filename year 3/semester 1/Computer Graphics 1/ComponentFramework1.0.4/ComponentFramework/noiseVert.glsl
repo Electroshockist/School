@@ -16,9 +16,11 @@ uniform float time;
 uniform sampler3D noise3D;
 
 void main() {
-	vec3 texPos = vec3(time, time + 1000, time -1000) * aPos;
-	vec4 noise = texture(noise3D, texPos);
-	vec3 randN = aNormal * noise.xyz;
+	float timeMag = 0.25;
+	float posMag = 0.25;
+	vec3 texPos = vec3(time) * timeMag + aPos * posMag;
+	vec4 noise = texture(noise3D, texPos) - vec4(0.5) * timeMag;
+	vec3 randN = aNormal * noise.xyz * 3;
 	
 	Offset = noise;
 	

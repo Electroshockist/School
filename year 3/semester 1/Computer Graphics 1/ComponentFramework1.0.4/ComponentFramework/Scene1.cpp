@@ -19,7 +19,7 @@ Scene1::~Scene1() {}
 
 bool Scene1::OnCreate() {
 	camera = new Camera();
-	noise = CreateNoise3D();
+	CreateNoise3D();
 	//SetNoiseFrequency(100);
 
 	if(ObjLoader::loadOBJ("skull.obj") == false) {
@@ -128,7 +128,6 @@ void Scene1::Render() const {
 	glUniformMatrix4fv(earthGameObject->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
 	glUniformMatrix4fv(earthGameObject->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
 	glUniformMatrix3fv(earthGameObject->getShader()->getUniformID("cameraPos"), 1, GL_FALSE, camera->getPos());
-	glUniform1f(earthGameObject->getShader()->getUniformID("noise3D"), noise);
 	glUniform1f(earthGameObject->getShader()->getUniformID("time"), elapsedTime);
 
 	glm::vec3 v = glm::vec3(lightSource.x, lightSource.y, lightSource.z);

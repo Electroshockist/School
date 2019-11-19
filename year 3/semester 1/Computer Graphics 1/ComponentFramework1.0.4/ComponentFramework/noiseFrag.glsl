@@ -17,12 +17,11 @@ void main()
 	vec3 mixed = mix(RL, RR, 0.5);
 	
 	vec2 range = vec2(sin(time), cos(time));
-	vec4 test = vec4(1);
 	
 	if(Position.x > range.x - 0.5 && Position.x < range.x + 0.5 && Position.y > range.y - 0.5 && Position.y < range.y + 0.5){
-		test = Offset * 255;
+		FragColor = Offset * 255;
+	}	
+	else {
+		FragColor = vec4(texture(skybox, mixed).rgb, 1.0);
 	}
-	
-	
-    FragColor = vec4(texture(skybox, mixed).rgb, 1.0) * test;
 }
