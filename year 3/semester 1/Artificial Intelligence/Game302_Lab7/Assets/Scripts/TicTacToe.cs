@@ -95,7 +95,7 @@ public class TicTacToe : MonoBehaviour {
             // To do: remove the following line after implementing this part.
             child = GetNextChild(node, child);
         }
-
+        print(alpha);
         return alpha;
     }
 
@@ -147,7 +147,7 @@ public class TicTacToe : MonoBehaviour {
         // O(n) is the total of opponent's possible winning lines
         int possibleWinningLinesForX = GetPossibleWinningLines(node, 2);
 
-        return possibleWinningLinesForO - possibleWinningLinesForX;
+        return possibleWinningLinesForX - possibleWinningLinesForO;
 
     }
     int GetPossibleWinningLines(Node node, int ox) {
@@ -159,6 +159,7 @@ public class TicTacToe : MonoBehaviour {
             if(filled.cells[i] == 0) {
                 filled.cells[i] = ox;
             }
+            
         }
 
         return GetWinningLines(filled, ox);
@@ -289,8 +290,6 @@ public class TicTacToe : MonoBehaviour {
                 value = -1;
             }
         }
-        print(value);
-
 
         return value;
     }
