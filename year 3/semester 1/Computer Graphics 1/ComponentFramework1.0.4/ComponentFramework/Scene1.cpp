@@ -9,6 +9,7 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "MMath.h"
+#include "Fabric.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -20,7 +21,6 @@ Scene1::~Scene1() {}
 bool Scene1::OnCreate() {
 	camera = new Camera();
 	CreateNoise3D();
-	//SetNoiseFrequency(100);
 
 	if(ObjLoader::loadOBJ("skull.obj") == false) {
 		return false;
@@ -60,6 +60,12 @@ bool Scene1::OnCreate() {
 		return false;
 	}
 
+	Fabric f = Fabric(earthMeshPtr);
+
+	GLuint fabricBuffer;
+
+	glGenFramebuffers(f.getMesh()->indices.size(), &fabricBuffer);
+	glBindBuffer(GL_FRAMEBUFFER, fabricBuffer);
 
 	lightSource = Vec3(30.0, 0.0, 1.0);
 
