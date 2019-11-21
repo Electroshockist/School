@@ -48,6 +48,7 @@ void Game0::BuildScene() {
 	}
 
 	if (!currentScene->OnCreate()) {
+		Debug::fatalError("Failed to create scene", __FILE__, __LINE__);
 		Engine::getInstance()->setIsRuning(false);
 	}
 	sceneNumber = Engine::getInstance()->getCurrentScene();

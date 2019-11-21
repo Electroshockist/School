@@ -56,7 +56,7 @@ private:
 	Face::Point getIndicesFromString(std::string s);
 	void pushFaceToVectors(Face f);
 
-	BoundingBox b;
+	BoundingBox boundingBox;
 };
 #endif // LOADOBJMODEL_H
 

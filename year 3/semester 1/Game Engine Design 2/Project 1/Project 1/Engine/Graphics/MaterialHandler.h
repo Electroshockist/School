@@ -19,9 +19,7 @@ struct Material {
 };
 
 class MaterialHandler {
-	std::map<std::string, Material> materials;
-
-
+	static std::map<std::string, Material> materials;
 
 public:
 	void AddMaterial(const std::string& name, Material mat);

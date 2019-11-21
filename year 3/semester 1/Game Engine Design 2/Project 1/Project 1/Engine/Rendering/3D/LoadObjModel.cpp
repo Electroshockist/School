@@ -26,6 +26,8 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 		return;
 	}
 	std::string line;
+	boundingBox.max = glm::vec3(FLT_MIN);
+	boundingBox.min = glm::vec3(FLT_MAX);
 	while(std::getline(in, line)) {
 		//vetex indecies
 		if(line.substr(0, 2) == "v ") {
@@ -34,6 +36,15 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 			double x, y, z;
 			v >> x >> y >> z;
 			vert = glm::vec3(x, y, z);
+
+			if(vert.x < boundingBox.min.x) boundingBox.min.x = vert.x;
+			if(vert.y < boundingBox.min.y) boundingBox.min.y = vert.y;
+			if(vert.z < boundingBox.min.z) boundingBox.min.z = vert.z;
+
+			if(vert.x > boundingBox.max.x) boundingBox.max.x = vert.x;
+			if(vert.y > boundingBox.max.y) boundingBox.max.y = vert.y;
+			if(vert.z > boundingBox.max.z) boundingBox.max.z = vert.z;
+
 			vertices.push_back(vert);
 		}
 
@@ -56,28 +67,27 @@ void LoadObjModel::loadModel(const std::string & fileName) {
 			textureCoords.push_back(tex);
 		}
 
-		if (line.substr(0, 2) == "f ")
-        {
-            int vt, vt2, vt3, textIndex, textIndex2, textIndex3 , normal, normal2, normal3;
+		if(line.substr(0, 2) == "f ") {
+			int vt, vt2, vt3, textIndex, textIndex2, textIndex3, normal, normal2, normal3;
 
-                char c;
+			char c;
 
-                std::istringstream f(line.substr(2));
+			std::istringstream f(line.substr(2));
 
-                f >> vt >> c >> textIndex >> c >> normal >> vt2 >> c >> textIndex2 >> c >> normal2 >> vt3 >> c >> textIndex3 >> c >> normal3;
-                indices.push_back(vt-1);
-                indices.push_back(vt2-1);
-                indices.push_back(vt3-1);
+			f >> vt >> c >> textIndex >> c >> normal >> vt2 >> c >> textIndex2 >> c >> normal2 >> vt3 >> c >> textIndex3 >> c >> normal3;
+			indices.push_back(vt - 1);
+			indices.push_back(vt2 - 1);
+			indices.push_back(vt3 - 1);
 
-                textureIndices.push_back(textIndex-1);
-                textureIndices.push_back(textIndex2 - 1);
-                textureIndices.push_back(textIndex3 - 1);
+			textureIndices.push_back(textIndex - 1);
+			textureIndices.push_back(textIndex2 - 1);
+			textureIndices.push_back(textIndex3 - 1);
 
-                normalIndices.push_back(normal - 1);
-                normalIndices.push_back(normal2 - 1);
-                normalIndices.push_back(normal3 - 1);
+			normalIndices.push_back(normal - 1);
+			normalIndices.push_back(normal2 - 1);
+			normalIndices.push_back(normal3 - 1);
 
-        }
+		}
 		//face data
 		//if(line.substr(0, 2) == "f ") {
 		//	std::istringstream vc(line.substr(2));
@@ -124,7 +134,7 @@ std::vector<SubMesh> LoadObjModel::getSubMeshes() {
 }
 
 BoundingBox LoadObjModel::getBoundingBox() {
-	return b;
+	return boundingBox;
 }
 
 void LoadObjModel::postProcessing() {

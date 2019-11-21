@@ -45,7 +45,7 @@ void SceneGraph::addModel(Model * m) {
 }
 
 GameObject * SceneGraph::getGameObject(std::string name) {
-	if(sceneGameObjects.find(name) == sceneGameObjects.end()) {
+	if(sceneGameObjects.find(name) != sceneGameObjects.end()) {
 		return sceneGameObjects[name];
 	};
 	return nullptr;

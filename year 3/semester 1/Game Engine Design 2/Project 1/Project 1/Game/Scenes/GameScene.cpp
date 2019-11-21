@@ -4,12 +4,12 @@
 
 
 
-GameScene::GameScene() {
-	OnCreate();
+GameScene::GameScene() : Scene() {
 }
 
 
 GameScene::~GameScene() {
+	onDestroy();
 }
 
 bool GameScene::OnCreate() {
@@ -22,17 +22,18 @@ bool GameScene::OnCreate() {
 	SceneGraph::getInstance()->addModel(diceModel);
 	SceneGraph::getInstance()->addModel(appleModel);
 
-	SceneGraph::getInstance()->addGameObject(new GameObject(diceModel, glm::vec3(3.0, 0, 0)));
+	SceneGraph::getInstance()->addGameObject(new GameObject(diceModel, glm::vec3(3.0, -4.0, 0)));
 	SceneGraph::getInstance()->addGameObject(new GameObject(appleModel),"Apple");
 
-	//SceneGraph::getInstance()->getGameObject("Apple")->setPosition(glm::vec3(1, 0, 3));
+	SceneGraph::getInstance()->getGameObject("Apple")->setPosition(glm::vec3(1, -3.0, 3));
 
 	return true;
 }
 
 void GameScene::Update(const float deltaTime) {
+	
+	SceneGraph::getInstance()->getGameObject("Apple")->setAngle(SceneGraph::getInstance()->getGameObject("Apple")->getAngle() + 0.0005f);
 	SceneGraph::getInstance()->Update(deltaTime);
-	//object->setAngle(object->getAngle() + 0.0005f);
 }
 
 void GameScene::Render() {

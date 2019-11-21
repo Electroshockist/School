@@ -2,7 +2,7 @@
 #include "../Core/Debug.h"
 
 std::unique_ptr<MaterialHandler> MaterialHandler::instance = nullptr;
-std::map<std::string, Material> materials = std::map<std::string, Material>();
+std::map<std::string, Material> MaterialHandler::materials = std::map<std::string, Material>();
 
 MaterialHandler::MaterialHandler() {}
 
