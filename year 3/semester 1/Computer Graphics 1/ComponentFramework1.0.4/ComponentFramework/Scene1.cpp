@@ -58,16 +58,24 @@ bool Scene1::OnCreate() {
 	if(moonGameObject == nullptr) {
 		Debug::FatalError("GameObject could not be created", __FILE__, __LINE__);
 		return false;
-	}
+	}	  
+
+	lightSource = Vec3(30.0, 0.0, 1.0);
 
 	Fabric f = Fabric(earthMeshPtr);
 
+	//frame buffer test
 	GLuint fabricBuffer;
 
 	glGenFramebuffers(f.getMesh()->indices.size(), &fabricBuffer);
 	glBindBuffer(GL_FRAMEBUFFER, fabricBuffer);
 
-	lightSource = Vec3(30.0, 0.0, 1.0);
+	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "Frame buffer created" << std::endl;
+	}
+	//glFramebufferParameteri(GL_FRAMEBUFFER,  GL_,);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0); 
+	glDeleteFramebuffers(f.getMesh()->indices.size(), &fabricBuffer);  
 
 	return true;
 }

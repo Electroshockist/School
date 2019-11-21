@@ -1,6 +1,7 @@
 #ifndef FABRIC_H
 #define FABRIC_H
 
+class Shader;
 class Mesh;
 class Fabric {
 public:
@@ -12,8 +13,13 @@ public:
 		return mesh;
 	}
 
+	inline const Shader* getShader() {
+		return shader;
+	}
+
 private:
 	Mesh* mesh;
+	Shader* shader;
 };
 #endif // !FABRIC_H
 
