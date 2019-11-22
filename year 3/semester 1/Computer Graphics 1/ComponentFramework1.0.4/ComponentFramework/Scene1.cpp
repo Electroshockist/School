@@ -61,8 +61,13 @@ bool Scene1::OnCreate() {
 	}	  
 
 	lightSource = Vec3(30.0, 0.0, 1.0);
-
+	
 	Fabric f = Fabric(earthMeshPtr);
+
+	GLuint program = f.getShader()->getProgram();
+	glUseProgram(program);
+	
+	glUniform1f(f.getShader()->getUniformID("gravity"), 9.81f);
 
 	//frame buffer test
 	GLuint fabricBuffer;
@@ -76,6 +81,7 @@ bool Scene1::OnCreate() {
 	//glFramebufferParameteri(GL_FRAMEBUFFER,  GL_,);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0); 
 	glDeleteFramebuffers(f.getMesh()->indices.size(), &fabricBuffer);  
+	glUseProgram(0);
 
 	return true;
 }

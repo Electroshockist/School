@@ -9,11 +9,11 @@ public:
 	Fabric(Mesh* model);
 	~Fabric();
 
-	inline const Mesh* getMesh() {
+	inline Mesh* getMesh() const {
 		return mesh;
 	}
 
-	inline const Shader* getShader() {
+	inline Shader* getShader() const {
 		return shader;
 	}
 
