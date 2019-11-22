@@ -46,7 +46,6 @@ int main(int argc, char* argv[])
 			cin >> num_enemy;
 			cout << "Distance to enemy: ";
 			cin >> distance_enemy;
-			cout << "Aggressiveness: ";
 
 			// To do : set input variables (num_enemy and distance_enemy) using the ffll_set_value function.
 			ffll_set_value(model, child, NUM_ENEMY, num_enemy);
@@ -57,7 +56,7 @@ int main(int argc, char* argv[])
 
 
 			// To do : uncomment the following after completing the above part
-			cout << "Flame strength = " << output;
+			cout << "Flame strength: " << output;
 
 			cout << endl;
 		}
