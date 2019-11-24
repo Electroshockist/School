@@ -7,7 +7,7 @@ TextureHandler::TextureHandler() {}
 
 
 TextureHandler::~TextureHandler() {
-	//onDestroy();
+	onDestroy();
 }
 
 void TextureHandler::onDestroy() {	
@@ -16,9 +16,9 @@ void TextureHandler::onDestroy() {
 			glDeleteTextures(1, &t.second->textureID);
 			delete t.second;
 			t.second = nullptr;
-		}
+		}		
+		textures.clear();
 	}
-	textures.clear();
 }
 
 TextureHandler * TextureHandler::getInstance() {

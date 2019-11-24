@@ -12,8 +12,8 @@ GameObject::GameObject(Model * model, glm::vec3 position) {
 	scale = glm::vec3(1.0f);
 	if(model) {
 		modelInstance = model->createInstance(position, angle, rotation, scale);
-		b = model->getBoundingBox();
-		b.transform = this->model->getTransform(modelInstance);
+		boundingBox = model->getBoundingBox();
+		boundingBox.transform = this->model->getTransform(modelInstance);
 	}
 }
 
@@ -54,7 +54,7 @@ void GameObject::setPosition(glm::vec3 position) {
 	this->position = position;
 	if(model) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
-		b.transform = this->model->getTransform(modelInstance);
+		boundingBox.transform = this->model->getTransform(modelInstance);
 	}
 }
 
@@ -65,7 +65,7 @@ void GameObject::setAngle(float angle) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
 
-	b.transform = this->model->getTransform(modelInstance);
+	boundingBox.transform = this->model->getTransform(modelInstance);
 }
 
 void GameObject::setRotation(glm::vec3 rotation) {
@@ -74,7 +74,7 @@ void GameObject::setRotation(glm::vec3 rotation) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
 
-	b.transform = this->model->getTransform(modelInstance);
+	boundingBox.transform = this->model->getTransform(modelInstance);
 }
 
 void GameObject::setScale(glm::vec3 scale) {
@@ -83,13 +83,13 @@ void GameObject::setScale(glm::vec3 scale) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
 	}
 
-	b.transform = this->model->getTransform(modelInstance);
-	b.min *= scale.x > 1.0f ? scale : (scale / 2.0f);
-	b.max *= scale.x > 1.0f ? scale : (scale / 2.0f);
+	boundingBox.transform = this->model->getTransform(modelInstance);
+	boundingBox.min *= scale.x > 1.0f ? scale : (scale / 2.0f);
+	boundingBox.max *= scale.x > 1.0f ? scale : (scale / 2.0f);
 }
 
 BoundingBox GameObject::getBoundingBox() {
-	return b;
+	return boundingBox;
 }
 
 std::string GameObject::getTag() const {
@@ -98,4 +98,13 @@ std::string GameObject::getTag() const {
 
 void GameObject::setTag(std::string tag) {
 	this->tag = tag;
+}
+
+void GameObject::setHit(bool hit_, int buttonType) {
+	hit = hit_;
+	std::cout << "Hit: " << tag << std::endl;
+}
+
+bool GameObject::getHit() const {
+	return hit;
 }

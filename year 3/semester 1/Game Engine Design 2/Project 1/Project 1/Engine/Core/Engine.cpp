@@ -1,5 +1,6 @@
 #include "Engine.h"
 
+#include "../Math/CollisionHandler.h"
 #include "../Graphics/ShaderHandler.h"
 #include <iostream>
 
@@ -126,7 +127,7 @@ void Engine::notifyMousePressed(int x, int y) {
 }
 
 void Engine::notifyMouseReleased(int x, int y, int buttonType) {
-
+	CollisionHandler::GetInstance()->Update(glm::vec2(x, y), buttonType);
 }
 
 void Engine::notifyMouseMove(int x, int y) {

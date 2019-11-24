@@ -8,7 +8,7 @@
 #include "Timer.h"
 #include "../Graphics/TextureHandler.h"
 #include "../Rendering/3D/GameObject.h"
-#include "../Camera/Camera.h"
+#include "Camera/Camera.h"
 #include "../Events/EventListener.h"
 #include "../Rendering/SceneGraph.h"
 

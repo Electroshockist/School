@@ -7,7 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "../../Graphics/MaterialHandler.h"
-#include "../../Camera/Camera.h"
+#include "../../Core/Camera/Camera.h"
 
 struct Vertex {
 	glm::vec3 position;

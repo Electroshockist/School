@@ -2,7 +2,9 @@
 #define CAMERA_H
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <vector>
 
+class LightSource;
 class Camera {
 	glm::vec3 position;
 	glm::mat4 perspective, orthographic;
@@ -11,6 +13,7 @@ class Camera {
 	float nearPlane, farPlane;
 	glm::vec3 forwardVector, upVector, rightVector, worldUp;
 	void updateCameraVectors();
+	std::vector<LightSource*> lightSources;
 
 public:
 	Camera();
@@ -24,6 +27,11 @@ public:
 
 	void processMouseMovement(float xOffset, float yOffset);
 	void processMouseZoom(int y);
+
+	void addLightSources(LightSource* light);
+	std::vector<LightSource*> getLightSource();
+
+	glm::vec2 getClippingPlanes() const;
 };
 #endif // !CAMERA_H
 

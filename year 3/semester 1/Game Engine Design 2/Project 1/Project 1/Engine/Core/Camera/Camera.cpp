@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "../Core/Engine.h"
+#include "../Engine.h"
 
 
 void Camera::updateCameraVectors() {
@@ -84,4 +84,16 @@ void Camera::processMouseZoom(int y) {
 		position += static_cast<float>(y) * (forwardVector * 2.0f);
 	}
 	updateCameraVectors();
+}
+
+void Camera::addLightSources(LightSource * light) {
+	lightSources.push_back(light);
+}
+
+std::vector<LightSource*> Camera::getLightSource() {
+	return lightSources;
+}
+
+glm::vec2 Camera::getClippingPlanes() const {
+	return glm::vec2(nearPlane, farPlane);
 }
