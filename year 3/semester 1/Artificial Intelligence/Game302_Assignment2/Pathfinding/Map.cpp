@@ -51,8 +51,14 @@ void Map::CreateGraph() {
 		}
 	}
 
-	for each (auto& node in graph->GetAllNodes()) {
-
+	for (auto& fromNode : graph->GetAllNodes()) {
+		Node* toNode = (Node*)graph->GetNode(fromNode.position + Vector2(1, 0));
+		if(toNode != nullptr) {
+			Edge e1(toNode);
+			Edge e2(&fromNode);
+			fromNode.AddEdge(e1);
+			toNode->AddEdge(e2);
+		}
 	}
 }
 

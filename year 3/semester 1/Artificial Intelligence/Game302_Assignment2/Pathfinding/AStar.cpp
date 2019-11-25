@@ -125,7 +125,7 @@ Node * AStar::GetClosestFromUnvisited() {
 	}
 
 	//remove the shortest node from the unvisited
-	unvisited.erase(unvisited.begin() + i);
+	unvisited.erase(unvisited.begin() + i - 1);
 
 	return shortestNode;
 }

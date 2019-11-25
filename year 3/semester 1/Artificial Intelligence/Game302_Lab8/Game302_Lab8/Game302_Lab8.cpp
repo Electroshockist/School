@@ -54,7 +54,6 @@ int main(int argc, char* argv[])
 			// To do : get the output value using the ffll_get_output_value function.
 			int output = (int)ffll_get_output_value(model, child);
 
-
 			// To do : uncomment the following after completing the above part
 			cout << "Flame strength: " << output;
 
