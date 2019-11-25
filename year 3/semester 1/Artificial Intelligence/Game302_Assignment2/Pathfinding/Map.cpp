@@ -39,12 +39,20 @@ void Map::CreateGraph() {
 	graph = new Graph();
 
 	// To do: Complete this function.
-	for(size_t i = 0; i < tiles.size(); i++) {
-		if(i + 1 % 10 == 0) {
-			std::cout << std::endl;
+	//loop trough all tiles in the map
+	for(size_t y = 0; y < mapSize.y; y++) {
+		for(size_t x = 0; x < mapSize.x; x++) {
+			//add tile to graph if tile is a valid path
+			if(tiles[x + y * mapSize.x] == 0) {
+				Node n;
+				n.position = Vector2(x, y);
+				graph->AddNode(n);
+			}
 		}
+	}
 
-		std::cout << tiles[i] ;
+	for each (auto& node in graph->GetAllNodes()) {
+
 	}
 }
 
