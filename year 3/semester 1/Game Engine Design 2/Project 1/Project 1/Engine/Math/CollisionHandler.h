@@ -6,7 +6,15 @@
 #include "../Rendering/3D/GameObject.h"
 #include "../Core/Engine.h"
 
-class CollisionHandler {
+class CollisionHandler {	
+	CollisionHandler();
+	~CollisionHandler();
+
+	static std::unique_ptr<CollisionHandler> collisionInstance;
+	friend std::default_delete<CollisionHandler>;
+	static std::vector<GameObject*> colliders;
+	static std::vector<GameObject*> prevCollisions;
+
 public:
 	CollisionHandler(const CollisionHandler&) = delete;
 	CollisionHandler(CollisionHandler&&) = delete;
@@ -19,15 +27,6 @@ public:
 	void AddObject(GameObject* gameObject_);
 	void Update(glm::vec2 mousePosition_, int buttonType_);
 	void OnDestroy();
-
-private:
-	CollisionHandler();
-	~CollisionHandler();
-
-	static std::unique_ptr<CollisionHandler> collisionInstance;
-	friend std::default_delete<CollisionHandler>;
-	static std::vector<GameObject*> colliders;
-	static std::vector<GameObject*> prevCollisions;
 };
 
 #endif

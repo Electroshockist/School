@@ -15,6 +15,7 @@ GameScene::~GameScene() {
 bool GameScene::OnCreate() {
 	Engine::getInstance()->setCamera(new Camera());
 	Engine::getInstance()->getCamera()->setPosition(glm::vec3(0.0f, 0.0f, 4.0f));
+	Engine::getInstance()->getCamera()->addLightSources(new LightSource(glm::vec3(5.0f, 10.0f, 5.0f), 1.0f, 0.5f, glm::vec3(1.0f, 1.0f, 1.0f)));
 
 	Model* diceModel = new Model("./Resources/Models/Dice.obj", "./Resources/Materials/Dice.mtl", ShaderHandler::getInstance()->getShader("basicShader"));
 	Model* appleModel = new Model("./Resources/Models/Apple.obj", "./Resources/Materials/Apple.mtl", ShaderHandler::getInstance()->getShader("basicShader"));
@@ -32,7 +33,8 @@ bool GameScene::OnCreate() {
 
 void GameScene::Update(const float deltaTime) {
 	
-	SceneGraph::getInstance()->getGameObject("Apple")->setAngle(SceneGraph::getInstance()->getGameObject("Apple")->getAngle() + 0.0005f);
+	SceneGraph::getInstance()->getGameObject("Apple")->setAngle(SceneGraph::getInstance()->getGameObject("Apple")->getAngle() + 0.05f);
+	SceneGraph::getInstance()->getGameObject("GameObject1")->setAngle(SceneGraph::getInstance()->getGameObject("Apple")->getAngle() + 0.05f);
 	SceneGraph::getInstance()->Update(deltaTime);
 }
 

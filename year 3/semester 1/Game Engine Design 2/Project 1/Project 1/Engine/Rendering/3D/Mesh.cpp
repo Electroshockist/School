@@ -1,20 +1,17 @@
 #include "Mesh.h"
 
 Mesh::Mesh(SubMesh subMesh_, GLuint shaderProgram_)
-	: VAO(0), VBO(0), shaderProgram(0)
-{
+	: VAO(0), VBO(0), shaderProgram(0) {
 	shaderProgram = shaderProgram_;
 	subMesh = subMesh_;
 	GenerateBuffers();
 }
 
-Mesh::~Mesh()
-{
+Mesh::~Mesh() {
 	OnDestroy();
 }
 
-void Mesh::GenerateBuffers()
-{
+void Mesh::GenerateBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 
@@ -46,24 +43,49 @@ void Mesh::GenerateBuffers()
 	viewLoc = glGetUniformLocation(shaderProgram, "view");
 	projLoc = glGetUniformLocation(shaderProgram, "proj");
 
+	viewPositionLoc = glGetUniformLocation(shaderProgram, "cameraPos");
+	lightPosLoc = glGetUniformLocation(shaderProgram, "light.lightPos");
+	lightAmbientLoc = glGetUniformLocation(shaderProgram, "light.ambientValue");
+	lightDiffuseLoc = glGetUniformLocation(shaderProgram, "light.diffuseValue");
+	lightColourLoc = glGetUniformLocation(shaderProgram, "light.color");
+
 
 	diffuseMapLoc = glGetUniformLocation(shaderProgram, "material.diffuseMap");
+	shineLoc = glGetUniformLocation(shaderProgram, "material.shininess");
+	transparencyLoc = glGetUniformLocation(shaderProgram, "material.transparency");
+	ambientLoc = glGetUniformLocation(shaderProgram, "material.ambient");
+	diffuseLoc = glGetUniformLocation(shaderProgram, "material.diffuse");
+	specLoc = glGetUniformLocation(shaderProgram, "material.specular");
 }
 
-void Mesh::Render(Camera* camera_, std::vector<glm::mat4> &instances_)
-{
+void Mesh::Render(Camera* camera, std::vector<glm::mat4> &instances_) {
 	glUniform1i(diffuseMapLoc, 0);
 	glActiveTexture(GL_TEXTURE0);
 
 	glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
 
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera_->getView()));
-	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(camera_->getPerspective()));
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera->getView()));
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(camera->getPerspective()));
+
+	glm::vec3 copyCamPos = camera->getPosition();
+	glm::vec3 copyLightPos = camera->getLightSources()[0]->GetPosition();
+	glm::vec3 copyLightColor = camera->getLightSources()[0]->GetColor();
+
+	glUniform3f(viewPositionLoc, copyCamPos.x, copyCamPos.y, copyCamPos.z);
+	glUniform3f(lightPosLoc, copyLightPos.x, copyLightPos.y, copyLightPos.z);
+	glUniform1f(lightAmbientLoc, camera->getLightSources()[0]->GetAmbientValue());
+	glUniform1f(lightDiffuseLoc, camera->getLightSources()[0]->GetDiffuseValue());
+	glUniform3f(lightColourLoc, copyLightColor.x, copyLightColor.y, copyLightColor.z);
+
+	glUniform1f(shineLoc, subMesh.material.shine);
+	glUniform1f(transparencyLoc, subMesh.material.transparency);
+	glUniform3f(ambientLoc, subMesh.material.ambient.x, subMesh.material.ambient.y, subMesh.material.ambient.z);
+	glUniform3f(diffuseLoc, subMesh.material.diffuse.x, subMesh.material.diffuse.y, subMesh.material.diffuse.z);
+	glUniform3f(specLoc, subMesh.material.specular.x, subMesh.material.specular.y, subMesh.material.specular.z);
 
 	glBindVertexArray(VAO);
 
-	for (int i = 0; i < instances_.size(); i++)
-	{
+	for(int i = 0; i < instances_.size(); i++) {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(instances_[i]));
 		glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
 	}
@@ -73,8 +95,7 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4> &instances_)
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Mesh::OnDestroy()
-{
+void Mesh::OnDestroy() {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 

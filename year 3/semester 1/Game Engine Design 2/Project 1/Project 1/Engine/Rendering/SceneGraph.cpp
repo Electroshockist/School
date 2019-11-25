@@ -1,6 +1,7 @@
 #include "SceneGraph.h"
 #include "3D\Model.h"
 #include "3D\GameObject.h"
+#include "../Math/CollisionHandler.h"
 
 std::unique_ptr<SceneGraph> SceneGraph::instance = nullptr;
 std::map<std::string, GameObject*> SceneGraph::sceneGameObjects = std::map<std::string, GameObject*>();
@@ -13,34 +14,35 @@ SceneGraph * SceneGraph::getInstance() {
 	return instance.get();
 }
 
-void SceneGraph::addGameObject(GameObject * g, std::string name) {
+void SceneGraph::addGameObject(GameObject * gameObject, std::string name) {
 	if(name == "") {
 		std::string newName = "GameObject" + std::to_string(sceneGameObjects.size() + 1);
-		g->setTag(newName);
-		sceneGameObjects[newName] = g;
+		gameObject->setTag(newName);
+		sceneGameObjects[newName] = gameObject;
 	}
 	else if(sceneGameObjects.find(name) == sceneGameObjects.end()) {
-		g->setTag(name);
-		sceneGameObjects[name] = g;
+		gameObject->setTag(name);
+		sceneGameObjects[name] = gameObject;
 	}
 	else {
 		Debug::warning("Replaced gameobject with name " + name + " that already existed.", __FILE__, __LINE__);
 		std::string newName = "GameObject" + std::to_string(sceneGameObjects.size() + 1);
-		g->setTag(newName);
-		sceneGameObjects[newName] = g;
+		gameObject->setTag(newName);
+		sceneGameObjects[newName] = gameObject;
 	}
+	CollisionHandler::GetInstance()->AddObject(gameObject);
 }
 
-void SceneGraph::addModel(Model * m) {
-	if(sceneModels.find(m->getShaderProgram()) == sceneModels.end()) {
+void SceneGraph::addModel(Model * model) {
+	if(sceneModels.find(model->getShaderProgram()) == sceneModels.end()) {
 		sceneModels.insert(std::pair < GLuint, std::vector<Model*>>(
-			m->getShaderProgram(),
-			std::vector<Model*>({m})
+			model->getShaderProgram(),
+			std::vector<Model*>({model})
 			)
 		);
 	}
 	else {
-		sceneModels[m->getShaderProgram()].push_back(m);
+		sceneModels[model->getShaderProgram()].push_back(model);
 	}
 }
 
@@ -52,7 +54,9 @@ GameObject * SceneGraph::getGameObject(std::string name) {
 }
 
 void SceneGraph::Update(const float deltaTime) {
-
+	for (auto gameObject : sceneGameObjects) {
+		gameObject.second->Update(deltaTime);
+	}
 }
 
 void SceneGraph::Render(Camera * camera) {
@@ -72,6 +76,7 @@ void SceneGraph::onDestroy() {
 		}
 		sceneGameObjects.clear();
 	}
+
 	if(sceneModels.size() > 0) {
 		for(auto entry : sceneModels) {
 			if(entry.second.size() > 0) {

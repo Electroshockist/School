@@ -29,7 +29,7 @@ class Mesh {
 	GLuint shaderProgram;
 	GLuint modelLoc, viewLoc, projLoc;
 	GLuint viewPositionLoc, lightPosLoc, lightAmbientLoc, lightDiffuseLoc, lightColourLoc;
-	GLuint diffuseMapLoc, shineLoc, trancparencyLoc, ambientLoc, diffuseLoc, specLoc;
+	GLuint diffuseMapLoc, shineLoc, transparencyLoc, ambientLoc, diffuseLoc, specLoc;
 	SubMesh subMesh;
 
 

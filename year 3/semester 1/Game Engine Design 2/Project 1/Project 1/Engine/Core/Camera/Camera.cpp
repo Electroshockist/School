@@ -90,10 +90,67 @@ void Camera::addLightSources(LightSource * light) {
 	lightSources.push_back(light);
 }
 
-std::vector<LightSource*> Camera::getLightSource() {
+std::vector<LightSource*> Camera::getLightSources() {
 	return lightSources;
+}
+
+glm::vec3 Camera::getPosition() const {
+	return position;
 }
 
 glm::vec2 Camera::getClippingPlanes() const {
 	return glm::vec2(nearPlane, farPlane);
+}
+
+void Camera::Frustum::transform(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale) {
+	glm::mat4 matrix;
+	matrix = glm::translate(matrix, position);
+	matrix = glm::rotate(matrix, angle, rotation);
+	matrix = glm::scale(matrix, scale);
+
+	transformMatrix = matrix;
+}
+
+glm::vec3 Camera::Frustum::getPosition() const {
+	return position;
+}
+
+float Camera::Frustum::getAngle() const {
+	return angle;
+}
+
+glm::vec3 Camera::Frustum::getRotation() const {
+	return rotation;
+}
+
+glm::vec3 Camera::Frustum::getScale() const {
+	return scale;
+}
+
+void  Camera::Frustum::setPosition(glm::vec3 position) {
+	this->position = position;
+	transform(position, angle, rotation, scale);
+}
+
+void Camera::Frustum::setAngle(float angle) {
+	this->angle = angle;
+	transform(position, angle, rotation, scale);
+}
+
+void Camera::Frustum::setRotation(glm::vec3 rotation) {
+	this->rotation = rotation;
+	transform(position, angle, rotation, scale);
+}
+
+void Camera::Frustum::setScale(glm::vec3 scale) {
+	this->scale = scale;
+	transform(position, angle, rotation, scale);
+}
+
+std::vector<glm::vec3> Camera::Frustum::getPoints() {
+	std::vector<glm::vec3> p;
+	for(size_t i = 0; i < 8; i++) {
+		p.push_back(points[i]);
+	}
+	return p;
 }

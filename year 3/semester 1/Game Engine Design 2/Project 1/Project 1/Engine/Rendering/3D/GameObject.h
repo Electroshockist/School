@@ -16,10 +16,10 @@ struct GameObject {
 	glm::vec3 getRotation() const;
 	glm::vec3 getScale() const;
 
-	void setPosition(glm::vec3 position_);
-	void setAngle(float angle_);
-	void setRotation(glm::vec3 rotation_);
-	void setScale(glm::vec3 scale_);
+	void setPosition(glm::vec3 position);
+	void setAngle(float angle);
+	void setRotation(glm::vec3 rotation);
+	void setScale(glm::vec3 scale);
 
 	BoundingBox getBoundingBox();
 
@@ -27,6 +27,8 @@ struct GameObject {
 	void setTag(std::string tag);
 	void setHit(bool hit, int buttonType);
 	bool getHit() const;
+
+	void Update(float deltaTime);
 
 private:
 	Model* model;

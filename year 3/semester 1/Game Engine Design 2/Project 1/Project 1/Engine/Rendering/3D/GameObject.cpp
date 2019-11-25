@@ -1,8 +1,7 @@
 #include "GameObject.h"
 #include <iostream>
 
-GameObject::GameObject(Model * model) : GameObject(model, glm::vec3()){
-}
+GameObject::GameObject(Model * model) : GameObject(model, glm::vec3()) {}
 
 GameObject::GameObject(Model * model, glm::vec3 position) {
 	this->model = model;
@@ -81,11 +80,11 @@ void GameObject::setScale(glm::vec3 scale) {
 	this->scale = scale;
 	if(model) {
 		model->updateInstance(modelInstance, position, angle, rotation, scale);
-	}
 
-	boundingBox.transform = this->model->getTransform(modelInstance);
-	boundingBox.min *= scale.x > 1.0f ? scale : (scale / 2.0f);
-	boundingBox.max *= scale.x > 1.0f ? scale : (scale / 2.0f);
+		boundingBox.transform = this->model->getTransform(modelInstance);
+		boundingBox.min *= scale.x > 1.0f ? scale : (scale / 2.0f);
+		boundingBox.max *= scale.x > 1.0f ? scale : (scale / 2.0f);
+	}
 }
 
 BoundingBox GameObject::getBoundingBox() {
@@ -108,3 +107,5 @@ void GameObject::setHit(bool hit_, int buttonType) {
 bool GameObject::getHit() const {
 	return hit;
 }
+
+void GameObject::Update(float deltaTime) {}
