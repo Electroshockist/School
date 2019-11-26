@@ -54,7 +54,7 @@ public:
 	void processMouseMovement(float xOffset, float yOffset);
 	void processMouseZoom(int y);
 
-	void addLightSources(LightSource* light);
+	void addLightSource(LightSource* light);
 	std::vector<LightSource*> getLightSources();
 
 	glm::vec3 getPosition() const;

@@ -86,7 +86,7 @@ void Camera::processMouseZoom(int y) {
 	updateCameraVectors();
 }
 
-void Camera::addLightSources(LightSource * light) {
+void Camera::addLightSource(LightSource * light) {
 	lightSources.push_back(light);
 }
 
