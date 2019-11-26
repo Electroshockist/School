@@ -5,6 +5,7 @@
 #include "Ray.h"
 #include "../Rendering/3D/GameObject.h"
 #include "../Core/Engine.h"
+#include "../Core/OctTree.h"
 
 class CollisionHandler {	
 	CollisionHandler();
@@ -12,8 +13,8 @@ class CollisionHandler {
 
 	static std::unique_ptr<CollisionHandler> collisionInstance;
 	friend std::default_delete<CollisionHandler>;
-	static std::vector<GameObject*> colliders;
 	static std::vector<GameObject*> prevCollisions;
+	static OctTree* octTree;
 
 public:
 	CollisionHandler(const CollisionHandler&) = delete;
@@ -23,7 +24,7 @@ public:
 
 	static CollisionHandler* GetInstance();
 
-	void OnCreate();
+	void OnCreate(float WorldSize);
 	void AddObject(GameObject* gameObject_);
 	void Update(glm::vec2 mousePosition_, int buttonType_);
 	void OnDestroy();

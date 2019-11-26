@@ -1,6 +1,7 @@
 #ifndef BOUNDINGBOX_H
 #define BOUNDINGBOX_H
 #include <glm\glm.hpp>
+#include <glm\gtx\string_cast.hpp>
 
 struct BoundingBox {
 	glm::vec3 min, max;
@@ -15,6 +16,22 @@ struct BoundingBox {
 		this->min = min;
 		this->max = max;
 		this->transform = transform;
+	}
+
+	inline bool intersects(BoundingBox* box) {
+		glm::vec3
+			minCorner = getTransformPoint(min, transform),
+			maxCorner = getTransformPoint(max, transform);
+
+		glm::vec3
+			otherMinCorner = getTransformPoint(box->min, box->transform),
+			otherMaxCorner = getTransformPoint(box->max, box->transform);
+
+		return true;
+	}
+
+	inline glm::vec3 getTransformPoint(glm::vec3 point, glm::mat4 transformationMatrix) {
+		return glm::vec3(transformationMatrix[3].x, transformationMatrix[3].y, transformationMatrix[3].z) + point;
 	}
 };
 

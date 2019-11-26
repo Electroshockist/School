@@ -101,7 +101,9 @@ void GameObject::setTag(std::string tag) {
 
 void GameObject::setHit(bool hit_, int buttonType) {
 	hit = hit_;
-	std::cout << "Hit: " << tag << std::endl;
+	if(hit) {
+		std::cout << "Hit: " << tag << std::endl;
+	}
 }
 
 bool GameObject::getHit() const {

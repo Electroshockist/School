@@ -1,8 +1,8 @@
 #include "CollisionHandler.h"
 
 std::unique_ptr<CollisionHandler> CollisionHandler::collisionInstance = nullptr;
-std::vector<GameObject*> CollisionHandler::colliders = std::vector<GameObject*>();
 std::vector<GameObject*> CollisionHandler::prevCollisions = std::vector<GameObject*>();
+OctTree* CollisionHandler::octTree = nullptr;
 
 CollisionHandler::CollisionHandler() {}
 
@@ -17,20 +17,36 @@ CollisionHandler* CollisionHandler::GetInstance() {
 	return collisionInstance.get();
 }
 
-void CollisionHandler::OnCreate() {
+void CollisionHandler::OnCreate(float worldSize) {
 	prevCollisions.clear();
-	colliders.clear();
+	octTree = new OctTree(worldSize);
 }
 
-void CollisionHandler::AddObject(GameObject* gameObject_) {
-	colliders.push_back(gameObject_);
+void CollisionHandler::AddObject(GameObject* gameObject) {
+	octTree->addObject(gameObject);
 }
 
 void CollisionHandler::Update(glm::vec2 mousePosition, int buttonType) {
-	Ray mouseRay = CollisionDetection::screenPosToWorldRay(mousePosition, Engine::getInstance()->getScreenSize(),
-														   Engine::getInstance()->getCamera());
+	Ray mouseRay = CollisionDetection::screenPosToWorldRay(
+		mousePosition,
+		Engine::getInstance()->getScreenSize(),
+		Engine::getInstance()->getCamera());
 
-	GameObject* hitResult = nullptr;
+	if(octTree != nullptr) {
+		GameObject* hitResult = octTree->getCollision(mouseRay);
+		if(hitResult) {
+			hitResult->setHit(true, buttonType);
+		}
+		for(auto c : prevCollisions) {
+			if(hitResult != c && c != nullptr) {
+				c->setHit(false, buttonType);
+				c = nullptr;
+			}
+		}
+		prevCollisions.clear();
+	}
+
+	/*GameObject* hitResult = nullptr;
 	float shortestDist = FLT_MAX;
 
 	for(auto go : colliders) {
@@ -56,14 +72,12 @@ void CollisionHandler::Update(glm::vec2 mousePosition, int buttonType) {
 
 	if(hitResult) {
 		prevCollisions.push_back(hitResult);
-	}
+	}*/
 }
 
 void CollisionHandler::OnDestroy() {
-	for(auto go : colliders) {
-		go = nullptr;
-	}
-	colliders.clear();
+	delete octTree;
+	octTree = nullptr;
 
 	for(auto go : prevCollisions) {
 		go = nullptr;

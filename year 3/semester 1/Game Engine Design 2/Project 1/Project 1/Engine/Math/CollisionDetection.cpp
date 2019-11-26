@@ -77,8 +77,70 @@ bool CollisionDetection::rayOBBIntersection(Ray* ray_, BoundingBox* box_) {
 
 	//HOMEWORK
 	//Y Axis
+	glm::vec3 yAxis(modelMatrix[0].x, modelMatrix[0].y, modelMatrix[0].z);
+	e = glm::dot(yAxis, delta);
+	f = glm::dot(rayDir, yAxis);
+
+	if(fabs(f) > 0.001f) {
+		float t1 = (e + aabbMin.y) / f;
+		float t2 = (e + aabbMax.y) / f;
+
+		if(t1 > t2) {
+			float tmp = t1;
+			t1 = t2;
+			t2 = tmp;
+		}
+
+		if(t2 < tMax) {
+			tMax = t2;
+		}
+
+		if(t1 > tMin) {
+			tMin = t1;
+		}
+
+		if(tMax < tMin) {
+			return false;
+		}
+	}
+	else {
+		if(-e + aabbMin.y > 0.0f || -e + aabbMax.y < 0.0f) {
+			return false;
+		}
+	}
 
 	//Z Axis
+	glm::vec3 zAxis(modelMatrix[0].x, modelMatrix[0].y, modelMatrix[0].z);
+	e = glm::dot(zAxis, delta);
+	f = glm::dot(rayDir, zAxis);
+
+	if(fabs(f) > 0.001f) {
+		float t1 = (e + aabbMin.z) / f;
+		float t2 = (e + aabbMax.z) / f;
+
+		if(t1 > t2) {
+			float tmp = t1;
+			t1 = t2;
+			t2 = tmp;
+		}
+
+		if(t2 < tMax) {
+			tMax = t2;
+		}
+
+		if(t1 > tMin) {
+			tMin = t1;
+		}
+
+		if(tMax < tMin) {
+			return false;
+		}
+	}
+	else {
+		if(-e + aabbMin.z > 0.0f || -e + aabbMax.z < 0.0f) {
+			return false;
+		}
+	}
 
 	ray_->intersectionDistance = tMin;
 	return true;

@@ -9,7 +9,7 @@ private:
 	glm::vec3 position;
 	float ambientValue;
 	float diffuseValue;
-	glm::vec3 color;
+	glm::vec3 colour;
 
 public:
 	LightSource();
