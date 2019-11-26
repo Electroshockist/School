@@ -16,11 +16,11 @@ class Mesh;
 class Shader;
 class Texture;
 class SkyBox;
+class Fabric;
 
 class Scene1 : public Scene {
 	Camera *camera;
-	GameObject *earthGameObject;
-	GameObject *moonGameObject;
+	GameObject *earthGameObject, *moonGameObject, *fabricObject;
 	Vec3 lightSource;
 
 	Mesh *earthMeshPtr;
@@ -30,6 +30,10 @@ class Scene1 : public Scene {
 	Mesh *moonMeshPtr;
 	Shader *moonShaderPtr;
 	Texture *moonTexturePtr;
+
+	Fabric *fabric;
+	Texture *fabricTexturePtr;
+	
 	float camZ = 10.0f;
 	float elapsedTime = 0;
 

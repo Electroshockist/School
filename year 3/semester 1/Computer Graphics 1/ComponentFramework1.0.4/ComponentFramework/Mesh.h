@@ -15,11 +15,14 @@ public:
 	std::vector<GLuint> indices;
 
 	Mesh(GLenum drawmode_, std::vector<Vec3>&, std::vector<Vec3>&, std::vector<Vec2>&);
-	~Mesh();
+	virtual ~Mesh();
+
 	void Render() const;
-private:
+
+protected:
 	GLuint vao, vbo;
-	void setupMesh();
+	Mesh(){ }
+	virtual void setupMesh();
 };
 
 #endif

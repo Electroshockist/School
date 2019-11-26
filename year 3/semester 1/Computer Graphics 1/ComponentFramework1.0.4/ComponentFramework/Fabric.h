@@ -1,25 +1,22 @@
 #ifndef FABRIC_H
 #define FABRIC_H
 
-class Shader;
-class Mesh;
-class Fabric {
+#include "Mesh.h"
+#include "Shader.h"
+#include <memory>
+
+class Fabric : public Mesh{
 public:
-	Fabric() {};
-	Fabric(Mesh* model);
-	~Fabric();
+	std::vector<Vec3> velocities;
 
-	inline Mesh* getMesh() const {
-		return mesh;
-	}
+	Fabric(GLenum drawmode_, std::vector<Vec3>&, std::vector<Vec3>&, std::vector<Vec2>&);
+	virtual ~Fabric() {};
 
-	inline Shader* getShader() const {
-		return shader;
-	}
+	Shader* getShader() const;
 
 private:
-	Mesh* mesh;
-	Shader* shader;
+	void setupMesh();
+	std::shared_ptr<Shader> shader;
 };
 #endif // !FABRIC_H
 

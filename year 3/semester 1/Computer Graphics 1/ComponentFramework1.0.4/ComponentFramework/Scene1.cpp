@@ -25,6 +25,7 @@ bool Scene1::OnCreate() {
 	if(ObjLoader::loadOBJ("skull.obj") == false) {
 		return false;
 	}
+
 	earthMeshPtr = new Mesh(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
 	earthShaderPtr = new Shader("noiseVert.glsl", "noiseFrag.glsl");
 	earthTexturePtr = new Texture();
@@ -32,10 +33,12 @@ bool Scene1::OnCreate() {
 		Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
 		return false;
 	}
+
 	if(earthTexturePtr->LoadImage("earthclouds.jpg") == false) {
 		Debug::FatalError("Couldn't load texture", __FILE__, __LINE__);
 		return false;
 	}
+
 	earthGameObject = new GameObject(earthMeshPtr, earthShaderPtr, earthTexturePtr);
 	if(earthGameObject == nullptr) {
 		Debug::FatalError("GameObject could not be created", __FILE__, __LINE__);
@@ -50,38 +53,44 @@ bool Scene1::OnCreate() {
 		Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
 		return false;
 	}
+
 	if(moonTexturePtr->LoadImage("moon.jpg") == false) {
 		Debug::FatalError("Couldn't load texture", __FILE__, __LINE__);
 		return false;
 	}
+
 	moonGameObject = new GameObject(moonMeshPtr, moonShaderPtr, moonTexturePtr);
 	if(moonGameObject == nullptr) {
 		Debug::FatalError("GameObject could not be created", __FILE__, __LINE__);
 		return false;
-	}	  
+	}
 
 	lightSource = Vec3(30.0, 0.0, 1.0);
-	
-	Fabric f = Fabric(earthMeshPtr);
 
-	GLuint program = f.getShader()->getProgram();
-	glUseProgram(program);
-	
-	glUniform1f(f.getShader()->getUniformID("gravity"), 9.81f);
 
-	//frame buffer test
-	GLuint fabricBuffer;
+	fabric = new Fabric(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
 
-	glGenFramebuffers(f.getMesh()->indices.size(), &fabricBuffer);
-	glBindBuffer(GL_FRAMEBUFFER, fabricBuffer);
+	fabricTexturePtr = new Texture();
 
-	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE) {
-		std::cout << "Frame buffer created" << std::endl;
+	if(fabric == nullptr || fabric->getShader() == nullptr || fabricTexturePtr == nullptr) {
+		Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
+		return false;
 	}
-	//glFramebufferParameteri(GL_FRAMEBUFFER,  GL_,);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0); 
-	glDeleteFramebuffers(f.getMesh()->indices.size(), &fabricBuffer);  
+
+	if(fabricTexturePtr->LoadImage("moon.jpg") == false) {
+		Debug::FatalError("Couldn't load texture", __FILE__, __LINE__);
+		return false;
+	}
+
+	fabricObject = new GameObject(fabric, fabric->getShader(), fabricTexturePtr);
+
+	GLuint program = fabric->getShader()->getProgram();
+	glUseProgram(program);
+
+	glUniform1f(fabric->getShader()->getUniformID("gravity"), 9.81f);
+
 	glUseProgram(0);
+
 
 	return true;
 }
@@ -97,6 +106,8 @@ void Scene1::OnDestroy() {
 	if(moonTexturePtr) delete moonTexturePtr, moonTexturePtr = nullptr;
 	if(moonShaderPtr) delete moonShaderPtr, moonShaderPtr = nullptr;
 	if(moonGameObject) delete moonGameObject, moonGameObject = nullptr;
+
+	if(fabric) delete fabric, fabric = nullptr;
 }
 
 void Scene1::HandleEvents(const SDL_Event &sdlEvent) {
@@ -155,6 +166,20 @@ void Scene1::Render() const {
 
 	earthGameObject->Render();
 	moonGameObject->Render();
+
+	//fabric
+	program = fabric->getShader()->getProgram();
+	glUseProgram(program);
+
+	/// These pass the matricies and the light position to the GPU
+	glUniformMatrix4fv(fabric->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
+	glUniformMatrix4fv(fabric->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
+	glUniformMatrix3fv(fabric->getShader()->getUniformID("cameraPos"), 1, GL_FALSE, camera->getPos());
+	glUniform1f(fabric->getShader()->getUniformID("time"), elapsedTime);
+
+	glUniform3fv(fabric->getShader()->getUniformID("lightPos"), GL_FALSE, glm::value_ptr(v));
+
+	fabricObject->Render();
 
 	glUseProgram(0);
 }
