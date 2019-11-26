@@ -45,6 +45,7 @@ class SDL_Surface;
 		Graph* GetGraph();
 	private:
 		void CreateGraph();
+		void addEdges(Node* n, Node* n2);
 	};
 
 
