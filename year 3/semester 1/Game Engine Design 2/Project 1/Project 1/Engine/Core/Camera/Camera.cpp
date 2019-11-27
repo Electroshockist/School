@@ -28,8 +28,10 @@ Camera::Camera() : position(glm::vec3()), pitch(0.0f) {
 	updateCameraVectors();
 }
 
-
-Camera::~Camera() {}
+Camera::~Camera() {
+	delete frustum;
+	frustum = nullptr;
+}
 
 void Camera::setPosition(glm::vec3 position) {
 	this->position = position;
@@ -86,7 +88,11 @@ void Camera::processMouseZoom(int y) {
 	updateCameraVectors();
 }
 
-void Camera::addLightSource(LightSource * light) {
+Camera::Frustum * Camera::getFrustum() const {
+	return frustum;
+}
+
+void Camera::addLightSources(LightSource * light) {
 	lightSources.push_back(light);
 }
 
@@ -102,55 +108,45 @@ glm::vec2 Camera::getClippingPlanes() const {
 	return glm::vec2(nearPlane, farPlane);
 }
 
-void Camera::Frustum::transform(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale) {
-	glm::mat4 matrix;
-	matrix = glm::translate(matrix, position);
-	matrix = glm::rotate(matrix, angle, rotation);
-	matrix = glm::scale(matrix, scale);
+Camera::Frustum::Frustum(glm::mat4 projMatrix) {
+	// Left clipping plane
+	planes[Left].x = projMatrix[3].x + projMatrix[0].x;
+	planes[Left].y = projMatrix[3].y + projMatrix[0].y;
+	planes[Left].z = projMatrix[3].z + projMatrix[0].z;
+	planes[Left].w = projMatrix[3].w + projMatrix[0].w;
+	// Right clipping plane
+	planes[Right].x = projMatrix[3].x - projMatrix[0].x;
+	planes[Right].y = projMatrix[3].y - projMatrix[0].y;
+	planes[Right].z = projMatrix[3].z - projMatrix[0].z;
+	planes[Right].w = projMatrix[3].w - projMatrix[0].w;
+	// Top clipping plane
+	planes[Top].x = projMatrix[3].x - projMatrix[1].x;
+	planes[Top].y = projMatrix[3].y - projMatrix[1].y;
+	planes[Top].z = projMatrix[3].z - projMatrix[1].z;
+	planes[Top].w = projMatrix[3].w - projMatrix[1].w;
+	// Bottom clipping plane
+	planes[Bottom].x = projMatrix[3].x + projMatrix[1].x;
+	planes[Bottom].y = projMatrix[3].y + projMatrix[1].y;
+	planes[Bottom].z = projMatrix[3].z + projMatrix[1].z;
+	planes[Bottom].w = projMatrix[3].w + projMatrix[1].w;
+	// Near clipping plane
+	planes[Near].x = projMatrix[3].x + projMatrix[2].x;
+	planes[Near].y = projMatrix[3].y + projMatrix[2].y;
+	planes[Near].z = projMatrix[3].z + projMatrix[2].z;
+	planes[Near].w = projMatrix[3].w + projMatrix[2].w;
+	// Far clipping plane
+	planes[Far].x = projMatrix[3].x - projMatrix[2].x;
+	planes[Far].y = projMatrix[3].y - projMatrix[2].y;
+	planes[Far].z = projMatrix[3].z - projMatrix[2].z;
+	planes[Far].w = projMatrix[3].w - projMatrix[2].w;
 
-	transformMatrix = matrix;
+	//normalize plane
+	planes[Left] = glm::normalize(planes[Left]);
+	planes[Right] = glm::normalize(planes[Right]);
+	planes[Top] = glm::normalize(planes[Top]);
+	planes[Bottom] = glm::normalize(planes[Bottom]);
+	planes[Near] = glm::normalize(planes[Near]);
+	planes[Far] = glm::normalize(planes[Far]);
 }
 
-glm::vec3 Camera::Frustum::getPosition() const {
-	return position;
-}
-
-float Camera::Frustum::getAngle() const {
-	return angle;
-}
-
-glm::vec3 Camera::Frustum::getRotation() const {
-	return rotation;
-}
-
-glm::vec3 Camera::Frustum::getScale() const {
-	return scale;
-}
-
-void  Camera::Frustum::setPosition(glm::vec3 position) {
-	this->position = position;
-	transform(position, angle, rotation, scale);
-}
-
-void Camera::Frustum::setAngle(float angle) {
-	this->angle = angle;
-	transform(position, angle, rotation, scale);
-}
-
-void Camera::Frustum::setRotation(glm::vec3 rotation) {
-	this->rotation = rotation;
-	transform(position, angle, rotation, scale);
-}
-
-void Camera::Frustum::setScale(glm::vec3 scale) {
-	this->scale = scale;
-	transform(position, angle, rotation, scale);
-}
-
-std::vector<glm::vec3> Camera::Frustum::getPoints() {
-	std::vector<glm::vec3> p;
-	for(size_t i = 0; i < 8; i++) {
-		p.push_back(points[i]);
-	}
-	return p;
-}
+Camera::Frustum::~Frustum() {}

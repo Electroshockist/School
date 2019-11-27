@@ -38,6 +38,7 @@ std::string ShaderHandler::readShader(const std::string & fileName) {
 
 GLuint ShaderHandler::createShader(GLenum shaderType, const std::string & source, const std::string & shaderName) {
 	GLint compileResult = 0;
+
 	GLuint shader = glCreateShader(shaderType);
 	const char* shaderCode = source.c_str();
 	const GLint shaderSize = source.size();
@@ -46,12 +47,13 @@ GLuint ShaderHandler::createShader(GLenum shaderType, const std::string & source
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &compileResult);
 
 	if(!compileResult) {
-		GLint logLength = 0;
-		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
-		std::vector<char> shaderLog(logLength);
-		glGetShaderInfoLog(shader, logLength, NULL, &shaderLog[0]);
-		std::string logString(shaderLog.begin(), shaderLog.end());
-		Debug::error("Shader " + shaderName + " failed to compile. " + shaderLog[0], __FILE__, __LINE__);
+		GLsizei errorLogSize = 0;
+		std::string errorLog;
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &errorLogSize);
+		errorLog.resize(errorLogSize);
+		glGetShaderInfoLog(shader, errorLogSize, &errorLogSize, &errorLog[0]);
+		Debug::error("Shader " + shaderName + " failed to compile. " + errorLog, __FILE__, __LINE__);
+		std::cout << "Shader " << shaderName << " failed to compile:\n" << errorLog << std::endl;
 	}
 	return shader;
 }

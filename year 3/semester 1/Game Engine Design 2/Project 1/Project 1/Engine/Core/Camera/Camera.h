@@ -5,31 +5,36 @@
 #include <vector>
 #include "../../FX/LightSource.h"
 
-
-
 class Camera {
-	class Frustum {	
-		glm::mat4 transformMatrix;
+	class Frustum {
+		glm::vec4 planes[6];
 
-		glm::vec3 points[8];
+		enum Halfspace {
+			NEGATIVE = -1,
+			ON_PLANE = 0,
+			POSITIVE = 1
+		};
 
-		glm::vec3 position, rotation, scale;
-		float angle;
+		inline Halfspace ClassifyPoint(const glm::vec4 & plane, const glm::vec3 & pt) {
+			float d;
+			d = plane.x * pt.x + plane.y * pt.y + plane.z * pt.z + plane.w;
+			if(d < 0) return NEGATIVE;
+			if(d > 0) return POSITIVE;
+			return ON_PLANE;
+		}
 
-		void transform(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale) ;
+	public:
+		Frustum(glm::mat4 projMatrix);
+		~Frustum();
 
-	public:		
-		glm::vec3 getPosition() const;
-		float getAngle() const;
-		glm::vec3 getRotation() const;
-		glm::vec3 getScale() const;
-
-		void setPosition(glm::vec3 position);
-		void setAngle(float angle);
-		void setRotation(glm::vec3 rotation);
-		void setScale(glm::vec3 scale);
-
-		std::vector<glm::vec3> getPoints();
+		enum PlaneName {
+			Left,
+			Right,
+			Top,
+			Bottom,
+			Near,
+			Far
+		};
 	};
 
 	glm::vec3 position;
@@ -40,6 +45,8 @@ class Camera {
 	glm::vec3 forwardVector, upVector, rightVector, worldUp;
 	void updateCameraVectors();
 	std::vector<LightSource*> lightSources;
+
+	Frustum* frustum;
 
 public:
 	Camera();
@@ -54,7 +61,9 @@ public:
 	void processMouseMovement(float xOffset, float yOffset);
 	void processMouseZoom(int y);
 
-	void addLightSource(LightSource* light);
+	Frustum* getFrustum() const;
+
+	void addLightSources(LightSource* light);
 	std::vector<LightSource*> getLightSources();
 
 	glm::vec3 getPosition() const;
