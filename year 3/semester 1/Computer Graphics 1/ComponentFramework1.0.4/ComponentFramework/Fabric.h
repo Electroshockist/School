@@ -7,6 +7,8 @@
 
 class Fabric : public Mesh{
 public:
+	
+	std::vector<float> locks;
 	std::vector<Vec3> velocities;
 
 	Fabric(GLenum drawmode_, std::vector<Vec3>&, std::vector<Vec3>&, std::vector<Vec2>&);

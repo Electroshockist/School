@@ -1,6 +1,7 @@
 #include "AStar.h"
 #include "Map.h"
 #include "SDL.h"
+#include <iostream>
 
 AStar::AStar(Map* m)
 	:map(m),
@@ -30,17 +31,15 @@ void AStar::OnSearchDone() {
 		map->SetPathMap(p->position, Map::RESULT_PATH_FOUND); // the second param value '2' means that it will draw
 	}
 
+	//clear lists
+	pathFound.clear();
+	visited.clear();
+	unvisited.clear();
+	predecessorDict.clear();
 }
 
 int AStar::SearchThread(void * data) {
 	AStar* astar = static_cast<AStar*>(data);
-
-	///shorthand variables
-	Map* map = astar->map;
-	Graph* graph = map->GetGraph();
-	std::vector<Node*>* visited = &astar->visited;
-	std::vector<Node*>* unvisited = &astar->unvisited;
-
 
 	if(!astar->startNode || !astar->goalNode) {
 		astar->OnSearchDone();
@@ -49,29 +48,26 @@ int AStar::SearchThread(void * data) {
 
 	// To do: Complete this function.	
 
-	//clear lists
-	visited->clear();
-	unvisited->clear();
-	astar->predecessorDict.clear();
-
 	//loop through all nodes in map
-	for(int i = graph->GetAllNodes().size() - 1; i > 0; i--) {
-		Node* node = &graph->GetAllNodes().at(i);
+	for (auto& n : astar->map->GetGraph()->GetAllNodes()) {
 
 		//set value at each node to max
-		astar->distanceDict[node] = std::numeric_limits<float>::max();
-		astar->actualDistanceDict[node] = std::numeric_limits<float>::max();
+		astar->distanceDict[&n] = std::numeric_limits<float>::max();
+		astar->actualDistanceDict[&n] = std::numeric_limits<float>::max();
 
 		//set all nodes in map to unvisited
-		unvisited->push_back(node);
+		astar->unvisited.push_back(&n);
 	}
 
 	astar->distanceDict[astar->startNode] = 0;
 	astar->actualDistanceDict[astar->startNode] = 0;
 
-	while(unvisited->size() > 0) {
+	while(astar->unvisited.size() > 0) {
+		SDL_Delay(100);
 		//set u to closest unvisited node
 		Node* u = astar->GetClosestFromUnvisited();
+
+		astar->map->SetPathMap(u->position, Map::SEARCH_IN_PROGRESS);
 
 		//quit if u is goal
 		if(u == astar->goalNode) {
@@ -79,53 +75,51 @@ int AStar::SearchThread(void * data) {
 		}
 
 		//add u to visited nodes
-		visited->push_back(u);
+		astar->visited.push_back(u);
 
 		//loop through adjacent nodes
-		for each (auto node in graph->GetAdjacentNodes(u)) {
+		for(auto & v : astar->map->GetGraph()->GetAdjacentNodes(u)) {
 			//if visited contains current node, continue to next node
-			if(std::find(visited->begin(), visited->end(), node) != visited->end()) {
+			if(std::find(astar->visited.begin(), astar->visited.end(), v) != astar->visited.end()) {
 				continue;
 			}
 
 			//astar heuristic distance vs real distance calculation
-			if(astar->distanceDict[node] > astar->actualDistanceDict[node] + graph->GetDistance(u, node) + graph->GetDistance(node, astar->goalNode)) {
-				astar->distanceDict[node] = astar->actualDistanceDict[u] + graph->GetDistance(u, node) + graph->GetDistance(node, astar->goalNode);
-				astar->actualDistanceDict[node] = astar->actualDistanceDict[u] + graph->GetDistance(u, node);
+			auto a = astar->map->GetGraph()->GetDistance(u, v) + astar->map->GetGraph()->GetDistance(u, astar->goalNode);
+			if(astar->distanceDict.at(v) > astar->actualDistanceDict.at(u) + a) {
+				astar->distanceDict[v] = astar->actualDistanceDict.at(u) + a;
+				astar->actualDistanceDict[v] = astar->actualDistanceDict.at(u) + astar->map->GetGraph()->GetDistance(u, v);
 			}
-			astar->predecessorDict[node] = u;
+			astar->predecessorDict[v] = u;
 		}
 	}
 	astar->pathFound.push_back(astar->goalNode);
-	Node* p = astar->predecessorDict[astar->goalNode];
+	Node* p = astar->predecessorDict.at(astar->goalNode);
 
 	while(p != astar->startNode) {
 		astar->pathFound.push_back(p);
-		p = astar->predecessorDict[p];
+		p = astar->predecessorDict.at(p);
 	}
+	astar->pathFound.push_back(p);
+	std::reverse(astar->pathFound.begin(), astar->pathFound.end());
 
 	astar->OnSearchDone();
 	return 0;
 }
 
 Node * AStar::GetClosestFromUnvisited() {
-
 	float shortest = std::numeric_limits<float>::max();
 	Node* shortestNode = nullptr;
 
 	// To do: Complete this function.
-	int i = 0;
-	for each (auto var in unvisited) {
-		Node* tempNode = &map->GetGraph()->GetAllNodes().at(i);
-		if(shortest > distanceDict[tempNode]) {
-			shortest = distanceDict[tempNode];
+	for (auto& tempNode : unvisited) {
+		if(shortest > distanceDict.at(tempNode)) {
+			shortest = distanceDict.at(tempNode);
 			shortestNode = tempNode;
 		}
-		i++;
 	}
-
 	//remove the shortest node from the unvisited
-	unvisited.erase(unvisited.begin() + i - 1);
+	unvisited.erase(std::find(unvisited.begin(), unvisited.end(), shortestNode));
 
 	return shortestNode;
 }

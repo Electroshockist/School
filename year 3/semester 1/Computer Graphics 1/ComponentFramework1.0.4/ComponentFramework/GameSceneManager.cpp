@@ -4,24 +4,25 @@
 #include "Window.h"
 #include "Scene0.h"
 #include "Scene1.h"
+#include "Scene2.h"
 
 GameSceneManager::GameSceneManager() :
 	currentScene(nullptr), window(nullptr), timer(nullptr),
 	fps(60), isRunning(false) {}
 
 GameSceneManager::~GameSceneManager() {
-	if (currentScene) {
+	if(currentScene) {
 		currentScene->OnDestroy();
 		delete currentScene;
 		currentScene = nullptr;
 	}
 
-	if (timer) {
+	if(timer) {
 		delete timer;
 		timer = nullptr;
 	}
 
-	if (window) {
+	if(window) {
 		delete window;
 		window = nullptr;
 	}
@@ -32,19 +33,19 @@ GameSceneManager::~GameSceneManager() {
 bool GameSceneManager::Init(std::string name_, int width_, int height_) {
 
 	window = new Window();
-	if (!window->OnCreate(name_, width_, height_)) {
+	if(!window->OnCreate(name_, width_, height_)) {
 		Debug::FatalError("Failed to initialize Window object", __FILE__, __LINE__);
 		return false;
 	}
 
 	timer = new Timer();
-	if (timer == nullptr) {
+	if(timer == nullptr) {
 		Debug::FatalError("Failed to initialize Timer object", __FILE__, __LINE__);
 		return false;
 	}
 
-	currentScene = BuildScene(SCENE1);
-	if (currentScene == nullptr) {
+	currentScene = BuildScene(SCENE2);
+	if(currentScene == nullptr) {
 		Debug::FatalError("Failed to initialize Opening Scene", __FILE__, __LINE__);
 		return false;
 	}
@@ -55,7 +56,7 @@ bool GameSceneManager::Init(std::string name_, int width_, int height_) {
 void GameSceneManager::Run() {
 	timer->Start();
 	isRunning = true;
-	while (isRunning) {
+	while(isRunning) {
 		timer->UpdateFrameTicks();
 		HandleEvents();
 		currentScene->Update(timer->GetDeltaTime());
@@ -67,38 +68,42 @@ void GameSceneManager::Run() {
 
 void GameSceneManager::HandleEvents() {
 	SDL_Event sdlEvent;
-	while (SDL_PollEvent(&sdlEvent)) {
-		switch (sdlEvent.type) {
-		case SDL_EventType::SDL_QUIT:
-			isRunning = false;
-			return;
-		default:
-			currentScene->HandleEvents(sdlEvent);
-			break;
+	while(SDL_PollEvent(&sdlEvent)) {
+		switch(sdlEvent.type) {
+			case SDL_EventType::SDL_QUIT:
+				isRunning = false;
+				return;
+			default:
+				currentScene->HandleEvents(sdlEvent);
+				break;
 		}
 	}
 }
 
 Scene* GameSceneManager::BuildScene(SCENE_NUMBER scene_) {
-
+	std::cout << "Scene Loaded: " << scene_ << std::endl;
 	Scene* newScene = nullptr;
 	bool status;
-	switch (scene_) {
-	case SCENE0:
-		newScene = new Scene0();
-		status = newScene->OnCreate();
-		break;
-	case SCENE1:
-		newScene = new Scene1();
-		status = newScene->OnCreate();
-		break;
-	default:
-		Debug::Error("Incorrect scene number assigned in the manager", __FILE__, __LINE__);
-		newScene = nullptr;
-		break;
+	switch(scene_) {
+		case SCENE0:
+			newScene = new Scene0();
+			status = newScene->OnCreate();
+			break;
+		case SCENE1:
+			newScene = new Scene1();
+			status = newScene->OnCreate();
+			break;
+		case SCENE2:
+			newScene = new Scene2();
+			status = newScene->OnCreate();
+			break;
+		default:
+			Debug::Error("Incorrect scene number assigned in the manager", __FILE__, __LINE__);
+			newScene = nullptr;
+			break;
 	}
-	if (status == false) {
-		if (newScene) delete newScene;
+	if(status == false) {
+		if(newScene) delete newScene;
 		return nullptr;
 	}
 	return newScene;

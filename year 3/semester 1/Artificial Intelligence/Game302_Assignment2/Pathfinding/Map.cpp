@@ -51,8 +51,9 @@ void Map::CreateGraph() {
 		}
 	}
 
-
 	for (Node& fromNode : graph->GetAllNodes()) {
+		std::cout << "From Node: [" << fromNode.position.x << ", " << fromNode.position.y << "]" << std::endl;
+
 		Node* toNode = (Node*)graph->GetNode(fromNode.position + Vector2(1, 0));
 		addEdges(&fromNode, toNode);
 
@@ -63,16 +64,17 @@ void Map::CreateGraph() {
 		addEdges(&fromNode, toNode);
 
 		toNode = (Node*)graph->GetNode(fromNode.position + Vector2(0, -1));
-		addEdges(&fromNode, toNode);
+		addEdges(&fromNode, toNode);	
+
+		std::cout << std::endl;
 	}
 }
 
 void Map::addEdges(Node * n, Node * n2) {
 	if(n2 != nullptr) {
 		Edge e1(n2);
-		Edge e2(n);
-		n->AddEdge(e1);
-		n2->AddEdge(e2);
+		n->AddEdge(e1);	
+		std::cout << "\tTo Node: [" << n2->position.x << ", " << n2->position.y << "]" << std::endl;
 	}
 }
 

@@ -1,5 +1,5 @@
-#ifndef SCENE1_H
-#define SCENE1_H
+#ifndef Scene2_H
+#define Scene2_H
 #include "Scene.h"
 #include "Vector.h"
 
@@ -18,9 +18,10 @@ class Texture;
 class SkyBox;
 class Fabric;
 
-class Scene1 : public Scene {
+class Scene2 : public Scene {
 	Camera *camera;
-	GameObject *earthGameObject, *moonGameObject;
+	GameObject *earthGameObject, *moonGameObject, *fabricObject;
+	Vec3 lightSource;
 
 	Mesh *earthMeshPtr;
 	Shader *earthShaderPtr;
@@ -29,14 +30,17 @@ class Scene1 : public Scene {
 	Mesh *moonMeshPtr;
 	Shader *moonShaderPtr;
 	Texture *moonTexturePtr;
+
+	Fabric *fabric;
+	Texture *fabricTexturePtr;
 	
 	float camZ = 10.0f;
 	float elapsedTime = 0;
 	float deltaTime = 0;
 
 public:
-	explicit Scene1();
-	virtual ~Scene1();
+	explicit Scene2();
+	virtual ~Scene2();
 
 	virtual bool OnCreate() override;
 	virtual void OnDestroy() override;
@@ -46,4 +50,4 @@ public:
 };
 
 
-#endif // !SCENE1_H
+#endif // !Scene2_H

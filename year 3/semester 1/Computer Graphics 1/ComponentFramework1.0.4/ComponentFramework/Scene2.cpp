@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Window.h"
 #include "Debug.h"
-#include "Scene1.h"
+#include "Scene2.h"
 #include "Camera.h"
 #include "GameObject.h"
 #include "ObjLoader.h"
@@ -13,12 +13,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Scene1::Scene1() :
+Scene2::Scene2() :
 	camera(nullptr), earthGameObject(nullptr), earthMeshPtr(nullptr), earthShaderPtr(nullptr), earthTexturePtr(nullptr), moonGameObject(nullptr), moonMeshPtr(nullptr), moonShaderPtr(nullptr), moonTexturePtr(nullptr) {}
 
-Scene1::~Scene1() {}
+Scene2::~Scene2() {}
 
-bool Scene1::OnCreate() {
+bool Scene2::OnCreate() {
 	camera = new Camera();
 	CreateNoise3D();
 
@@ -64,11 +64,41 @@ bool Scene1::OnCreate() {
 		Debug::FatalError("GameObject could not be created", __FILE__, __LINE__);
 		return false;
 	}
-	
+
+	lightSource = Vec3(30.0, 0.0, 1.0);
+
+
+	fabric = new Fabric(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
+
+	fabricTexturePtr = new Texture();
+
+	if(fabric == nullptr || fabric->getShader() == nullptr || fabricTexturePtr == nullptr) {
+		Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
+		return false;
+	}
+
+	if(fabricTexturePtr->LoadImage("moon.jpg") == false) {
+		Debug::FatalError("Couldn't load texture", __FILE__, __LINE__);
+		return false;
+	}
+
+	fabricObject = new GameObject(fabric, fabric->getShader(), fabricTexturePtr);
+	fabricObject->setModelMatrix(MMath::translate(Vec3(5, 0, 0)));
+
+	GLuint program = fabric->getShader()->getProgram();
+	glUseProgram(program);
+
+	glUniform1f(fabric->getShader()->getUniformID("gravity"), 0.001f);
+
+	glUseProgram(0);
+
+	lightSource = Vec3(30.0, 0.0, 1.0);
+
+
 	return true;
 }
 
-void Scene1::OnDestroy() {
+void Scene2::OnDestroy() {
 	if(camera) delete camera, camera = nullptr;
 	if(earthMeshPtr) delete earthMeshPtr, earthMeshPtr = nullptr;
 	if(earthTexturePtr) delete earthTexturePtr, earthTexturePtr = nullptr;
@@ -79,13 +109,15 @@ void Scene1::OnDestroy() {
 	if(moonTexturePtr) delete moonTexturePtr, moonTexturePtr = nullptr;
 	if(moonShaderPtr) delete moonShaderPtr, moonShaderPtr = nullptr;
 	if(moonGameObject) delete moonGameObject, moonGameObject = nullptr;
+
+	if(fabric) delete fabric, fabric = nullptr;
 }
 
-void Scene1::HandleEvents(const SDL_Event &sdlEvent) {
+void Scene2::HandleEvents(const SDL_Event &sdlEvent) {
 	camera->handleEvents(sdlEvent);
 }
 
-void Scene1::Update(const float deltaTime_) {
+void Scene2::Update(const float deltaTime_) {
 	deltaTime = deltaTime_;
 	elapsedTime += deltaTime_;
 	//move camera back
@@ -114,7 +146,7 @@ void Scene1::Update(const float deltaTime_) {
 
 }
 
-void Scene1::Render() const {
+void Scene2::Render() const {
 
 	/// Clear the screen
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -132,10 +164,27 @@ void Scene1::Render() const {
 	glUniformMatrix4fv(earthGameObject->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
 	glUniformMatrix3fv(earthGameObject->getShader()->getUniformID("cameraPos"), 1, GL_FALSE, camera->getPos());
 	glUniform1f(earthGameObject->getShader()->getUniformID("time"), elapsedTime);
-	glUniform1f(earthGameObject->getShader()->getUniformID("deltaTime"), deltaTime);
+
+	glm::vec3 v = glm::vec3(lightSource.x, lightSource.y, lightSource.z);
+	glUniform3fv(earthGameObject->getShader()->getUniformID("lightPos"), GL_FALSE, glm::value_ptr(v));
 
 	earthGameObject->Render();
 	moonGameObject->Render();
+
+	//fabric
+	program = fabric->getShader()->getProgram();
+	glUseProgram(program);
+
+	/// These pass the matricies and the light position to the GPU
+	glUniformMatrix4fv(fabric->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
+	glUniformMatrix4fv(fabric->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
+	glUniformMatrix3fv(fabric->getShader()->getUniformID("cameraPos"), 1, GL_FALSE, camera->getPos());
+	glUniform1f(fabric->getShader()->getUniformID("time"), elapsedTime);
+	glUniform1f(fabric->getShader()->getUniformID("deltaTime"), deltaTime);
+
+	glUniform3fv(fabric->getShader()->getUniformID("lightPos"), GL_FALSE, glm::value_ptr(v));
+
+	fabricObject->Render();
 
 	glUseProgram(0);
 }
