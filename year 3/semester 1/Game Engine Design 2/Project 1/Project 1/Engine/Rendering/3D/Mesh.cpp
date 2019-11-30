@@ -69,7 +69,7 @@ void Mesh::Render(Camera* camera, std::vector<glm::mat4> &instances_) {
 
 	glm::vec3 copyCamPos = camera->getPosition();
 	glm::vec3 copyLightPos = camera->getLightSources()[0]->GetPosition();
-	glm::vec3 copyLightColor = camera->getLightSources()[0]->GetColor();
+	glm::vec3 copyLightColor = camera->getLightSources()[0]->GetColour();
 
 	glUniform3f(viewPositionLoc, copyCamPos.x, copyCamPos.y, copyCamPos.z);
 	glUniform3f(lightPosLoc, copyLightPos.x, copyLightPos.y, copyLightPos.z);
@@ -77,6 +77,7 @@ void Mesh::Render(Camera* camera, std::vector<glm::mat4> &instances_) {
 	glUniform1f(lightDiffuseLoc, camera->getLightSources()[0]->GetDiffuseValue());
 	glUniform3f(lightColourLoc, copyLightColor.x, copyLightColor.y, copyLightColor.z);
 
+	//material
 	glUniform1f(shineLoc, subMesh.material.shine);
 	glUniform1f(transparencyLoc, subMesh.material.transparency);
 	glUniform3f(ambientLoc, subMesh.material.ambient.x, subMesh.material.ambient.y, subMesh.material.ambient.z);

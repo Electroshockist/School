@@ -4,39 +4,45 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 #include "../../FX/LightSource.h"
+class Model;
+class Frustum {
+	friend class Camera;
+	glm::vec4 planes[6];
 
-class Camera {
-	class Frustum {
-		glm::vec4 planes[6];
-
-		enum Halfspace {
-			NEGATIVE = -1,
-			ON_PLANE = 0,
-			POSITIVE = 1
-		};
-
-		inline Halfspace ClassifyPoint(const glm::vec4 & plane, const glm::vec3 & pt) {
-			float d;
-			d = plane.x * pt.x + plane.y * pt.y + plane.z * pt.z + plane.w;
-			if(d < 0) return NEGATIVE;
-			if(d > 0) return POSITIVE;
-			return ON_PLANE;
-		}
-
-	public:
-		Frustum(glm::mat4 projMatrix);
-		~Frustum();
-
-		enum PlaneName {
-			Left,
-			Right,
-			Top,
-			Bottom,
-			Near,
-			Far
-		};
+	enum Halfspace {
+		NEGATIVE = -1,
+		ON_PLANE = 0,
+		POSITIVE = 1
 	};
 
+	inline Halfspace classifyPoint(const glm::vec4 & plane, const glm::vec3 & pt) {
+		float d;
+		d = plane.x * pt.x + plane.y * pt.y + plane.z * pt.z + plane.w;
+		if(d < 0) return NEGATIVE;
+		if(d > 0) return POSITIVE;
+		return ON_PLANE;
+	}
+
+	void updateMatrix(glm::mat4 matrix);
+
+public:
+	Frustum() {}
+	Frustum(glm::mat4 projMatrix);
+	~Frustum();
+
+	enum PlaneName {
+		Left,
+		Right,
+		Top,
+		Bottom,
+		Near,
+		Far
+	};
+
+	bool isModelInView(Model* model);
+};
+
+class Camera {
 	glm::vec3 position;
 	glm::mat4 perspective, orthographic;
 	float fieldOfView;
@@ -46,7 +52,9 @@ class Camera {
 	void updateCameraVectors();
 	std::vector<LightSource*> lightSources;
 
-	Frustum* frustum;
+	Frustum frustum;
+
+	void onCameraUpdate();
 
 public:
 	Camera();
@@ -61,7 +69,7 @@ public:
 	void processMouseMovement(float xOffset, float yOffset);
 	void processMouseZoom(int y);
 
-	Frustum* getFrustum() const;
+	Frustum getFrustum() const;
 
 	void addLightSources(LightSource* light);
 	std::vector<LightSource*> getLightSources();

@@ -63,7 +63,9 @@ void SceneGraph::Render(Camera * camera) {
 	for(auto entry : sceneModels) {
 		glUseProgram(entry.first);
 		for(auto m : entry.second) {
-			m->render(camera);
+			if(camera->getFrustum().isModelInView(m)) {
+				m->render(camera);
+			}
 		}
 	}
 }

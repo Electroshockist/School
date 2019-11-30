@@ -3,11 +3,8 @@
 #include "../../Engine/Graphics/ShaderHandler.h"
 #include "../../Engine/Math/CollisionHandler.h"
 
-
-
 GameScene::GameScene() : Scene() {
 }
-
 
 GameScene::~GameScene() {
 	onDestroy();

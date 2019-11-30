@@ -3,8 +3,7 @@
 
 #include <glm/glm.hpp>
 
-class LightSource
-{
+class LightSource {
 private:
 	glm::vec3 position;
 	float ambientValue;
@@ -25,7 +24,7 @@ public:
 	glm::vec3 GetPosition();
 	float GetAmbientValue();
 	float GetDiffuseValue();
-	glm::vec3 GetColor();
+	glm::vec3 GetColour();
 };
 
 #endif

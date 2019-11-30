@@ -8,8 +8,9 @@
 class Model {
 	std::vector<Mesh*> subMeshes;
 	GLuint shaderProgram;
+	glm::vec3 position;
 	float angle;
-	glm::mat4 getTransform(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale) const;
+	glm::mat4 getTransform(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
 	void loadModel();
 	std::vector<glm::mat4> modelInstances;
 	LoadObjModel* obj;
@@ -25,6 +26,10 @@ public:
 	void updateInstance(int index, glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
 	glm::mat4 getTransform(int index) const;
 	BoundingBox getBoundingBox();
+
+	inline glm::vec3 getPosition() {
+		return position;
+	}
 	
 	GLuint getShaderProgram() const;
 };

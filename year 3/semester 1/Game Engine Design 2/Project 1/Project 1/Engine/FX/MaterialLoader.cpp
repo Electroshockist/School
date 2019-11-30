@@ -62,6 +62,7 @@ void MaterialLoader::LoadMaterial(std::string file) {
 			m.specular = glm::vec3(x, y, z);
 		}
 	}
+
 	if(m.diffuseMap != 0) {
 		MaterialHandler::getInstance()->AddMaterial(matName, m);
 	}

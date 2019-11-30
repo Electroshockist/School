@@ -1,6 +1,6 @@
 #include "Camera.h"
 #include "../Engine.h"
-
+#include "../../Rendering/3D/Model.h"
 
 void Camera::updateCameraVectors() {
 	forwardVector.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -11,7 +11,11 @@ void Camera::updateCameraVectors() {
 
 	rightVector = glm::normalize(glm::cross(forwardVector, worldUp));
 	upVector = glm::normalize(glm::cross(rightVector, forwardVector));
+
+	frustum.updateMatrix(getPerspective() * getView());
 }
+
+void Camera::onCameraUpdate() {}
 
 Camera::Camera() : position(glm::vec3()), pitch(0.0f) {
 	fieldOfView = 45.0f;
@@ -28,10 +32,7 @@ Camera::Camera() : position(glm::vec3()), pitch(0.0f) {
 	updateCameraVectors();
 }
 
-Camera::~Camera() {
-	delete frustum;
-	frustum = nullptr;
-}
+Camera::~Camera() {}
 
 void Camera::setPosition(glm::vec3 position) {
 	this->position = position;
@@ -54,7 +55,7 @@ const glm::mat4 Camera::getPerspective() {
 
 const glm::mat4 Camera::getOrthographic() {
 	orthographic = glm::ortho(0.0f, Engine::getInstance()->getScreenSize().x, 0.0f, Engine::getInstance()->getScreenSize().y, -1.0f, 1.0f);
-	return perspective;
+	return orthographic;
 }
 
 void Camera::processMouseMovement(float xOffset, float yOffset) {
@@ -88,7 +89,7 @@ void Camera::processMouseZoom(int y) {
 	updateCameraVectors();
 }
 
-Camera::Frustum * Camera::getFrustum() const {
+Frustum Camera::getFrustum() const {
 	return frustum;
 }
 
@@ -108,37 +109,55 @@ glm::vec2 Camera::getClippingPlanes() const {
 	return glm::vec2(nearPlane, farPlane);
 }
 
-Camera::Frustum::Frustum(glm::mat4 projMatrix) {
+Frustum::Frustum(glm::mat4 matrix) {
+	updateMatrix(matrix);
+}
+
+Frustum::~Frustum() {}
+
+bool Frustum::isModelInView(Model * model) {
+	int sum = 0;
+	for(auto plane : planes) {
+		sum += (int)classifyPoint(plane, model->getPosition());
+		std::cout << classifyPoint(plane, model->getPosition())  << std::endl;
+	}
+	std::cout << std::endl;
+	
+
+	return sum == 6;
+}
+
+void Frustum::updateMatrix(glm::mat4 matrix) {
 	// Left clipping plane
-	planes[Left].x = projMatrix[3].x + projMatrix[0].x;
-	planes[Left].y = projMatrix[3].y + projMatrix[0].y;
-	planes[Left].z = projMatrix[3].z + projMatrix[0].z;
-	planes[Left].w = projMatrix[3].w + projMatrix[0].w;
+	planes[Left].x = matrix[3].x + matrix[0].x;
+	planes[Left].y = matrix[3].y + matrix[0].y;
+	planes[Left].z = matrix[3].z + matrix[0].z;
+	planes[Left].w = matrix[3].w + matrix[0].w;
 	// Right clipping plane
-	planes[Right].x = projMatrix[3].x - projMatrix[0].x;
-	planes[Right].y = projMatrix[3].y - projMatrix[0].y;
-	planes[Right].z = projMatrix[3].z - projMatrix[0].z;
-	planes[Right].w = projMatrix[3].w - projMatrix[0].w;
+	planes[Right].x = matrix[3].x - matrix[0].x;
+	planes[Right].y = matrix[3].y - matrix[0].y;
+	planes[Right].z = matrix[3].z - matrix[0].z;
+	planes[Right].w = matrix[3].w - matrix[0].w;
 	// Top clipping plane
-	planes[Top].x = projMatrix[3].x - projMatrix[1].x;
-	planes[Top].y = projMatrix[3].y - projMatrix[1].y;
-	planes[Top].z = projMatrix[3].z - projMatrix[1].z;
-	planes[Top].w = projMatrix[3].w - projMatrix[1].w;
+	planes[Top].x = matrix[3].x - matrix[1].x;
+	planes[Top].y = matrix[3].y - matrix[1].y;
+	planes[Top].z = matrix[3].z - matrix[1].z;
+	planes[Top].w = matrix[3].w - matrix[1].w;
 	// Bottom clipping plane
-	planes[Bottom].x = projMatrix[3].x + projMatrix[1].x;
-	planes[Bottom].y = projMatrix[3].y + projMatrix[1].y;
-	planes[Bottom].z = projMatrix[3].z + projMatrix[1].z;
-	planes[Bottom].w = projMatrix[3].w + projMatrix[1].w;
+	planes[Bottom].x = matrix[3].x + matrix[1].x;
+	planes[Bottom].y = matrix[3].y + matrix[1].y;
+	planes[Bottom].z = matrix[3].z + matrix[1].z;
+	planes[Bottom].w = matrix[3].w + matrix[1].w;
 	// Near clipping plane
-	planes[Near].x = projMatrix[3].x + projMatrix[2].x;
-	planes[Near].y = projMatrix[3].y + projMatrix[2].y;
-	planes[Near].z = projMatrix[3].z + projMatrix[2].z;
-	planes[Near].w = projMatrix[3].w + projMatrix[2].w;
+	planes[Near].x = matrix[3].x + matrix[2].x;
+	planes[Near].y = matrix[3].y + matrix[2].y;
+	planes[Near].z = matrix[3].z + matrix[2].z;
+	planes[Near].w = matrix[3].w + matrix[2].w;
 	// Far clipping plane
-	planes[Far].x = projMatrix[3].x - projMatrix[2].x;
-	planes[Far].y = projMatrix[3].y - projMatrix[2].y;
-	planes[Far].z = projMatrix[3].z - projMatrix[2].z;
-	planes[Far].w = projMatrix[3].w - projMatrix[2].w;
+	planes[Far].x = matrix[3].x - matrix[2].x;
+	planes[Far].y = matrix[3].y - matrix[2].y;
+	planes[Far].z = matrix[3].z - matrix[2].z;
+	planes[Far].w = matrix[3].w - matrix[2].w;
 
 	//normalize plane
 	planes[Left] = glm::normalize(planes[Left]);
@@ -148,5 +167,3 @@ Camera::Frustum::Frustum(glm::mat4 projMatrix) {
 	planes[Near] = glm::normalize(planes[Near]);
 	planes[Far] = glm::normalize(planes[Far]);
 }
-
-Camera::Frustum::~Frustum() {}

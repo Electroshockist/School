@@ -8,7 +8,6 @@ void OctTree::addObjectToCell(OctNode * cell, GameObject * object) {
 		if(nodeBox.intersects(&object->getBoundingBox())) {
 			if(cell->isLeaf()) {
 				cell->addCollisionObject(object);
-				std::cout << "Added " << object->getTag() << " to cell:" << glm::to_string(nodeBox.max) << std::endl;
 			}
 			else {
 				for(size_t i = 0; i < 8; i++) {
@@ -37,7 +36,6 @@ void OctTree::prepareCollisionQuery(OctNode * cell, Ray ray) {
 OctTree::OctTree(float worldSize) {
 	root = new OctNode(glm::vec3(-(worldSize / 2.0f)), worldSize, nullptr);
 	root->Octify(3);
-	std::cout << "Oct children: " << root->getChildCount() << std::endl;
 }
 
 OctTree::~OctTree() {
@@ -97,9 +95,25 @@ OctNode::~OctNode() {
 
 //Homework
 void OctNode::Octify(int depth) {
-	if(depth > 0 && this) {
+	if(depth  > 0 && this) {
 		float half = size / 2.0f;
-		children[OCT_TLF] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half, octBounds->min.z + half), half, this);
+		children[OCT_TLF] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half,
+												  octBounds->min.z + half), half, this);
+		children[OCT_BLF] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half,
+												  octBounds->min.z + half), half, this);
+		children[OCT_BRF] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half,
+												  octBounds->min.z + half), half, this);
+		children[OCT_TRF] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half,
+												  octBounds->min.z + half), half, this);
+		children[OCT_TLR] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half,
+												  octBounds->min.z + half), half, this);
+		children[OCT_BLR] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half,
+												  octBounds->min.z + half), half, this);
+		children[OCT_BRR] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half,
+												  octBounds->min.z + half), half, this);
+		children[OCT_TRR] = new OctNode(glm::vec3(octBounds->min.x, octBounds->min.y + half,
+												  octBounds->min.z + half), half, this);
+
 		childNumber += 8;
 	}
 

@@ -68,7 +68,8 @@ void Model::loadModel() {
 	obj = nullptr;
 }
 
-glm::mat4 Model::getTransform(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) const {
+glm::mat4 Model::getTransform(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) {
+	this->position = position_;
 	glm::mat4 model;
 	model = glm::translate(model, position_);
 	model = glm::rotate(model, angle_, rotation_);

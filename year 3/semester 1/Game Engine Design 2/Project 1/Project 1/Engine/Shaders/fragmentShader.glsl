@@ -29,21 +29,20 @@ uniform Material material;
 uniform Light light;
 uniform vec3 cameraPos;
 
-void main ()
-{
-vec3 ambient = light.ambientValue * material.ambient * texture(material.diffuseMap, TexCoords).rgb * light.color;
+void main() {
+	vec3 ambient = light.ambientValue * material.ambient * texture(material.diffuseMap, TexCoords).rgb * light.color;
 
-vec3 norm = normalize(Normal);
-vec3 lightDir = normalize(light.lightPos - FragPosition);
-float diff = max(dot(norm, lightDir), 0.0f);
-vec3 diffuse = (diff * material.diffuse) * texture(material.diffuseMap, TexCoords).rgb * light.color;
+	vec3 norm = normalize(Normal);
+	vec3 lightDir = normalize(light.lightPos - FragPosition);
+	float diff = max(dot(norm, lightDir), 0.0f);
+	vec3 diffuse = (diff * material.diffuse) * texture(material.diffuseMap, TexCoords).rgb * light.color;
 
-vec3 viewDir = normalize(cameraPos - FragPosition);
-vec3 reflectDir = reflect(-lightDir, norm);
-float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
-vec3 specular = (spec * material.specular) * light.color;
+	vec3 viewDir = normalize(cameraPos - FragPosition);
+	vec3 reflectDir = reflect(-lightDir, norm);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
+	vec3 specular = (spec * material.specular) * light.color;
 
-vec3 result = ambient + diffuse + specular;
+	vec3 result = ambient + diffuse + specular;
 
-color = vec4(result, material.transparency);
+	color = vec4(result, material.transparency);
 }

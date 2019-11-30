@@ -15,7 +15,7 @@ LightSource::LightSource(glm::vec3 position_) :
 
 LightSource::LightSource(glm::vec3 position_, float diffuse_, float ambient_, glm::vec3 colour) {
 	position = position_;
-	colour = colour;
+	this->colour = colour;
 	diffuseValue = diffuse_;
 	ambientValue = ambient_;
 }
@@ -49,6 +49,6 @@ float LightSource::GetDiffuseValue() {
 	return diffuseValue;
 }
 
-glm::vec3 LightSource::GetColor() {
+glm::vec3 LightSource::GetColour() {
 	return colour;
 }
