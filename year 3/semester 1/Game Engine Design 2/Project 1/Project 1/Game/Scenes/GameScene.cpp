@@ -12,7 +12,7 @@ GameScene::~GameScene() {
 
 bool GameScene::OnCreate() {
 	Engine::getInstance()->setCamera(new Camera());
-	Engine::getInstance()->getCamera()->setPosition(glm::vec3(0.0f, 0.0f, 4.0f));
+	Engine::getInstance()->getCamera()->setPosition(glm::vec3(0.0f, 0.0f, 10.0f));
 	Engine::getInstance()->getCamera()->addLightSources(new LightSource(glm::vec3(5.0f, 10.0f, 5.0f), 1.0f, 0.5f, glm::vec3(1.0f, 1.0f, 1.0f)));
 
 	CollisionHandler::GetInstance()->OnCreate(100);
@@ -23,10 +23,10 @@ bool GameScene::OnCreate() {
 	SceneGraph::getInstance()->addModel(diceModel);
 	SceneGraph::getInstance()->addModel(appleModel);
 
-	SceneGraph::getInstance()->addGameObject(new GameObject(diceModel, glm::vec3(-3.0, -4.0, 5.0)));
+	SceneGraph::getInstance()->addGameObject(new GameObject(diceModel, glm::vec3(-3.0, -4.0, 0.0)));
 	SceneGraph::getInstance()->addGameObject(new GameObject(appleModel),"Apple");
 
-	SceneGraph::getInstance()->getGameObject("Apple")->setPosition(glm::vec3(1, -3.0, 3));
+	SceneGraph::getInstance()->getGameObject("Apple")->setPosition(glm::vec3(1, -3.0, 0));
 
 	return true;
 }
