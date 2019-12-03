@@ -118,39 +118,30 @@ bool Frustum::isInView(const glm::vec3& point) {
 	return sum == 6;
 }
 
-bool Frustum::isInView(const BoundingBox & boundingBox) {
-	auto GetVisibility = [](const glm::vec4& clip, const BoundingBox & boundingB) {
-		double x0 = boundingB.max.x * clip.x;
-		double x1 = boundingB.max.x * clip.x;
-		double y0 = boundingB.max.y * clip.y;
-		double y1 = boundingB.max.y * clip.y;
-		double z0 = boundingB.max.z * clip.z + clip.w;
-		double z1 = boundingB.max.z * clip.z + clip.w;
-		double p1 = x0 + y0 + z0;
-		double p2 = x1 + y0 + z0;
-		double p3 = x1 + y1 + z0;
-		double p4 = x0 + y1 + z0;
-		double p5 = x0 + y0 + z1;
-		double p6 = x1 + y0 + z1;
-		double p7 = x1 + y1 + z1;
-		double p8 = x0 + y1 + z1;
 
-		if(p1 <= 0 && p2 <= 0 && p3 <= 0 && p4 <= 0 && p5 <= 0 && p6 <= 0 && p7 <= 0 && p8 <= 0) {
-			return false;//in no planes
-		}
-		if(p1 > 0 && p2 > 0 && p3 > 0 && p4 > 0 && p5 > 0 && p6 > 0 && p7 > 0 && p8 > 0) {
-			return true;//in all planes
-		}
+//if any point of the bounding box is in view, do not cull
+bool Frustum::isInView(const BoundingBox & boundingBox, const glm::vec3& position) {
+	glm::vec3 min = boundingBox.min + position;
+	glm::vec3 max = boundingBox.max + position;
 
-		return true;//on plane;
+	if(isInView(min) || isInView(max)) {
+		return true;
+	}
+
+	glm::vec3 points[] = {
+		glm::vec3(max.x, min.y, min.z),
+		glm::vec3(max.x, max.y, min.z),
+		glm::vec3(min.x, max.y, min.z),
+		glm::vec3(min.x, min.y, max.z),
+		glm::vec3(min.x, max.y, max.z),
+		glm::vec3(max.x, min.y, max.z)
 	};
 
-	return
-		GetVisibility(planes[Left], boundingBox) &&
-		GetVisibility(planes[Right], boundingBox) &&
-		GetVisibility(planes[Top], boundingBox) &&
-		GetVisibility(planes[Bottom], boundingBox) &&
-		GetVisibility(planes[Near], boundingBox);
+	for(auto& point : points) {
+		if(isInView(point)) return true;
+	}
+
+	return false;
 }
 
 void Frustum::updateMatrix(glm::mat4 projMatrix, glm::mat4 viewMatrix) {

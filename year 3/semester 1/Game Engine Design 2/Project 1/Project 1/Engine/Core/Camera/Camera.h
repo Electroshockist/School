@@ -54,7 +54,7 @@ public:
 	};
 
 	bool isInView(const glm::vec3& point);
-	bool isInView(const BoundingBox& boundingbox);
+	bool isInView(const BoundingBox& boundingbox, const glm::vec3& position);
 };
 
 class Camera {

@@ -2,6 +2,7 @@
 #include "3D\Model.h"
 #include "3D\GameObject.h"
 #include "../Math/CollisionHandler.h"
+#include <iostream>
 
 std::unique_ptr<SceneGraph> SceneGraph::instance = nullptr;
 std::map<std::string, GameObject*> SceneGraph::sceneGameObjects = std::map<std::string, GameObject*>();
@@ -54,20 +55,24 @@ GameObject * SceneGraph::getGameObject(std::string name) {
 }
 
 void SceneGraph::Update(const float deltaTime) {
-	for (auto gameObject : sceneGameObjects) {
+	for(auto gameObject : sceneGameObjects) {
 		gameObject.second->Update(deltaTime);
 	}
 }
 
 void SceneGraph::Render(Camera * camera) {
+	int i = 0;
 	for(auto entry : sceneModels) {
 		glUseProgram(entry.first);
 		for(auto m : entry.second) {
-			if(camera->getFrustum().isInView(m->getBoundingBox())) {
+			if(camera->getFrustum().isInView(m->getBoundingBox(), m->getPosition())) {
 				m->render(camera);
+				i++;
 			}
 		}
 	}
+
+	std::cout << "Rendering: " << i << " models\n";
 }
 
 void SceneGraph::onDestroy() {
