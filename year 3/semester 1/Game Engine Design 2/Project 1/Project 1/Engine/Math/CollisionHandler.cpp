@@ -45,18 +45,8 @@ void CollisionHandler::Update(glm::vec2 mousePosition, int buttonType) {
 		}
 		prevCollisions.clear();
 	}
-
-	/*GameObject* hitResult = nullptr;
-	float shortestDist = FLT_MAX;
-
-	for(auto go : colliders) {
-		if(mouseRay.isColliding(&go->getBoundingBox())) {
-			if(mouseRay.intersectionDistance < shortestDist) {
-				hitResult = go;
-				shortestDist = mouseRay.intersectionDistance;
-			}
-		}
-	}
+	
+	GameObject* hitResult = octTree->getCollision(mouseRay);
 
 	if(hitResult) {
 		hitResult->setHit(true, buttonType);
@@ -72,7 +62,7 @@ void CollisionHandler::Update(glm::vec2 mousePosition, int buttonType) {
 
 	if(hitResult) {
 		prevCollisions.push_back(hitResult);
-	}*/
+	}
 }
 
 void CollisionHandler::OnDestroy() {

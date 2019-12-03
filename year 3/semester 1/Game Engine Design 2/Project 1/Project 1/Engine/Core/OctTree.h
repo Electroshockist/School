@@ -14,15 +14,22 @@ class OctNode {
 
 public:
 	static int childNumber;
-		enum OctChildren {
-		//top left front
+	enum OctChildren {
+		//min, min, min
 		OCT_TLF,
+		//half, min, min
 		OCT_BLF,
+		//half, half, min
 		OCT_BRF,
+		//min, half, min
 		OCT_TRF,
+		//min, min, half
 		OCT_TLR,
+		//half, min, half
 		OCT_BLR,
+		//half, half, half
 		OCT_BRR,
+		//min, half, half
 		OCT_TRR
 	};
 
