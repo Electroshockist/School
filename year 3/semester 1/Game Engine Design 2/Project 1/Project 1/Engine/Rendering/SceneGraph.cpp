@@ -61,18 +61,14 @@ void SceneGraph::Update(const float deltaTime) {
 }
 
 void SceneGraph::Render(Camera * camera) {
-	int i = 0;
 	for(auto entry : sceneModels) {
 		glUseProgram(entry.first);
 		for(auto m : entry.second) {
 			if(camera->getFrustum().isInView(m->getBoundingBox(), m->getPosition())) {
 				m->render(camera);
-				i++;
 			}
 		}
 	}
-
-	std::cout << "Rendering: " << i << " models\n";
 }
 
 void SceneGraph::onDestroy() {
