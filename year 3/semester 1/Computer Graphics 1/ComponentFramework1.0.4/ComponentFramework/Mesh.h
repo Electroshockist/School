@@ -22,7 +22,7 @@ public:
 protected:
 	GLuint vao, vbo;
 	Mesh(){ }
-	virtual void setupMesh();
+	void setupMesh();
 };
 
 #endif
