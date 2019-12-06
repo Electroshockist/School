@@ -68,31 +68,25 @@ bool Scene2::OnCreate() {
 	lightSource = Vec3(30.0, 0.0, 1.0);
 
 
-	fabric = new Fabric(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
+	//fabric = new Fabric(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
 
-	fabricTexturePtr = new Texture();
+	//fabricTexturePtr = new Texture();
 
-	if(fabric == nullptr || fabric->getShader() == nullptr || fabricTexturePtr == nullptr) {
-		Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
-		return false;
-	}
+	//if(fabric == nullptr || fabric->getShader() == nullptr || fabricTexturePtr == nullptr) {
+	//	Debug::FatalError("Couldn't create game object assets", __FILE__, __LINE__);
+	//	return false;
+	//}
 
-	if(fabricTexturePtr->LoadImage("moon.jpg") == false) {
-		Debug::FatalError("Couldn't load texture", __FILE__, __LINE__);
-		return false;
-	}
+	//if(fabricTexturePtr->LoadImage("moon.jpg") == false) {
+	//	Debug::FatalError("Couldn't load texture", __FILE__, __LINE__);
+	//	return false;
+	//}
 
-	fabricObject = new GameObject(fabric, fabric->getShader(), fabricTexturePtr);
-	fabricObject->setModelMatrix(MMath::translate(Vec3(5, 0, 0)));
-
-	GLuint program = fabric->getShader()->getProgram();
-	glUseProgram(program);
-
-	glUniform1f(fabric->getShader()->getUniformID("gravity"), 0.001f);
-
-	glUseProgram(0);
+	//fabricObject = new GameObject(fabric, fabric->getShader(), fabricTexturePtr);
+	//fabricObject->setModelMatrix(MMath::translate(Vec3(5, 0, 0)));
 
 	lightSource = Vec3(30.0, 0.0, 1.0);
+
 
 
 	return true;
@@ -171,20 +165,21 @@ void Scene2::Render() const {
 	earthGameObject->Render();
 	moonGameObject->Render();
 
-	//fabric
-	program = fabric->getShader()->getProgram();
-	glUseProgram(program);
-
-	/// These pass the matricies and the light position to the GPU
-	glUniformMatrix4fv(fabric->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
-	glUniformMatrix4fv(fabric->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
-	glUniformMatrix3fv(fabric->getShader()->getUniformID("cameraPos"), 1, GL_FALSE, camera->getPos());
-	glUniform1f(fabric->getShader()->getUniformID("time"), elapsedTime);
-	glUniform1f(fabric->getShader()->getUniformID("deltaTime"), deltaTime);
-
-	glUniform3fv(fabric->getShader()->getUniformID("lightPos"), GL_FALSE, glm::value_ptr(v));
-
-	fabricObject->Render();
-
-	glUseProgram(0);
+	//	//fabric
+	//	program = fabric->getShader()->getProgram();
+	//	glUseProgram(program);
+	//
+	//	/// These pass the matricies and the light position to the GPU
+	//	glUniformMatrix4fv(fabric->getShader()->getUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
+	//	glUniformMatrix4fv(fabric->getShader()->getUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
+	//	glUniformMatrix3fv(fabric->getShader()->getUniformID("cameraPos"), 1, GL_FALSE, camera->getPos());
+	//	glUniform1f(fabric->getShader()->getUniformID("time"), elapsedTime);
+	//	glUniform1f(fabric->getShader()->getUniformID("deltaTime"), deltaTime);
+	//	glUniform1f(fabric->getShader()->getUniformID("gravity"), -9.81f);
+	//
+	//	glUniform3fv(fabric->getShader()->getUniformID("lightPos"), GL_FALSE, glm::value_ptr(v));
+	//
+	//	fabricObject->Render();
+	//
+	//	glUseProgram(0);
 }

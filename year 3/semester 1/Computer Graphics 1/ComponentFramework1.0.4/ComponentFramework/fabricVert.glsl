@@ -4,7 +4,8 @@ layout (location = 1) in vec3 aNormal;
 layout (location = 2) in vec3 aTexCoord;
 layout (location = 3) in vec3 inVelocity;
 layout (location = 3) out vec3 outVelocity;
-layout (location = 4) in float inLocked;
+layout (location = 4) in int inLocked;
+//layout (location = ?) in 
 
 out vec3 Normal;
 out vec3 Position;
@@ -25,20 +26,29 @@ struct Particle{
 	Spring[8] springs;
 };
 
-vec3 tempPos = aPos;
-
-void calculateFabric(){
-	vec3 acceleration = vec3(0);
-	//if(inLocked <= 0){
-		acceleration.y = vec3(gravity * time).y;
-		outVelocity = inVelocity + (acceleration * deltaTime);
-		tempPos.y += vec3(inVelocity + (acceleration * pow(deltaTime, 2))/2).y;
-	//}
+float gravityPos;
+void calculateGravity(){
+		float gravityVel = (gravity * time);
+		gravityPos = (gravityVel * time);
 }
 
+// void calculatefabric(){
+	// vec3 acceleration = vec3(0);
+	// // if(inlocked <= 0){
+		 // outVelocity = inelocity + (acceleration * deltatime);
+		 // temppos.y += vec3(invelocity + (acceleration * pow(deltatime, 2))/2).y;
+	// //}
+// }
+
 void main() {
-	calculateFabric();
+	if (inLocked == 0){
+		//calculateFabric();
+		calculateGravity();
+	}
+	
+	vec3 tempPos = aPos;
+	tempPos.y = aPos.y + gravityPos;
 	Normal = mat3(transpose(inverse(modelMatrix))) * aNormal;
     Position = vec3(modelMatrix * vec4(tempPos, 1.0));
-    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(tempPos, 1.0);
+    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(tempPos,1.0);
 }
