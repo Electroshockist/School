@@ -131,7 +131,8 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="Fabric.cpp" />
+    <ClCompile Include="Fabric\Fabric.cpp" />
+    <ClCompile Include="Fabric\Particle.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameSceneManager.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -153,7 +154,10 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Debug.h" />
-    <ClInclude Include="Fabric.h" />
+    <ClInclude Include="ARenderable.h" />
+    <ClInclude Include="Fabric\Fabric.h" />
+    <ClInclude Include="Fabric\Particle.h" />
+    <ClInclude Include="Fabric\Spring.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameSceneManager.h" />
     <ClInclude Include="Matrix.h" />

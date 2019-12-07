@@ -9,7 +9,7 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "MMath.h"
-#include "Fabric.h"
+#include "Fabric/Fabric.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 

@@ -1,8 +1,6 @@
 #include "Fabric.h"
-#include "Shader.h"
+#include "../Shader.h"
 #include <algorithm>
-
-using namespace MATH;
 
 //Fabric::Fabric(GLenum drawmode_, std::vector<Vec3> &vertices, std::vector<Vec3> &normals_, std::vector<Vec2> &uvCoords_,std::vector<Vec3>* velocities, std::vector<GLubyte>* locks) {
 //	drawmode = drawmode_;
@@ -56,7 +54,7 @@ using namespace MATH;
 //#undef TEXCOORD_LENGTH
 //#undef LOCK_LENGTH
 //}
-//
+
 void Fabric::addVertexAttrib(const GLuint size, const void* data, const GLuint count, const GLuint type) {
 	glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
 	glEnableVertexAttribArray(id);
@@ -69,7 +67,7 @@ Shader * Fabric::getShader() const {
 	return shader;
 }
 
-void Fabric::setupMesh() {}
+void Fabric::setup() {}
 
 Fabric::Fabric(GLenum drawmode, std::vector<Vec3>& vertices, std::vector<Vec3>& normals, std::vector<Vec2>& texPos) {
 	for(size_t i = 0; i < vertices.size(); i++) {
@@ -80,7 +78,7 @@ Fabric::Fabric(GLenum drawmode, std::vector<Vec3>& vertices, std::vector<Vec3>& 
 	particle = Particle(t, 1.0f);
 
 	shader = new Shader("fabricVert.glsl", "fabricFrag.glsl");
-	//this->setupMesh();
+	this->setup();
 }
 
 Fabric::~Fabric() {
@@ -89,37 +87,9 @@ Fabric::~Fabric() {
 }
 
 void Fabric::update(const float deltaTime) {
+	particle.update(deltaTime);
+	std::cout << particles.size() << std::endl;
 	for(Particle& p : particles) {
 		p.update(deltaTime);
 	}
-}
-
-Particle::Particle(Vec3 & position, float mass) {
-	this->position = &position;
-	this->mass = mass;
-}
-
-inline void Particle::update(const float deltaTime) {
-	*position += velocity * deltaTime + (acceleration * deltaTime * deltaTime) / 2;
-	velocity += acceleration * deltaTime;
-}
-
-void Particle::connectTo(Particle * particle) {
-	for(Spring s : particle->attachedSprings) {
-		for(Particle* p : s.connectedParticles) {
-			if(p == particle) {
-				std::cout << "These particles have already been connected" << std::endl;
-				return;
-			}
-		}
-	}
-	Spring spring = Spring(1, this, particle);
-	attachedSprings.push_back(spring);
-	particle->attachedSprings.push_back(spring);
-}
-
-Spring::Spring(float strength, Particle * p1, Particle * p2) {
-	this->strength = strength;
-	connectedParticles[0] = p1;
-	connectedParticles[1] = p2;
 }

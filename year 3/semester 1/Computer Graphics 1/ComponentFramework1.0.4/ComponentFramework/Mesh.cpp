@@ -6,7 +6,7 @@ Mesh::Mesh(GLenum drawmode_, std::vector<Vec3> &verticies_, std::vector<Vec3> &n
 	this->vertices = verticies_;
 	this->normals = normals_;
 	this->uvCoords = uvCoords_;
-	this->setupMesh();
+	this->setup();
 }
 
 Mesh::~Mesh(){
@@ -15,7 +15,7 @@ Mesh::~Mesh(){
 	
 }
 
-void Mesh::setupMesh() {
+void Mesh::setup() {
 #define VERTEX_LENGTH 	(vertices.size() * (sizeof(Vec3)))
 #define NORMAL_LENGTH 	(normals.size() * (sizeof(Vec3)))
 #define TEXCOORD_LENGTH (uvCoords.size() * (sizeof(Vec2)))
@@ -49,11 +49,4 @@ void Mesh::setupMesh() {
 #undef VERTEX_LENGTH
 #undef NORMAL_LENGTH
 #undef TEXCOORD_LENGTH
-}
-
-
-void Mesh::Render() const {
-	glBindVertexArray(vao);
-	glDrawArrays(drawmode, 0, vertices.size());
-	glBindVertexArray(0); // Disable the VAO
 }
