@@ -1,0 +1,25 @@
+.buttons-container{
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.quicktool-button{
+	width: 64px;
+	height: 64px;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.quicktool-button-icon{
+	height: 54px;
+	width: 54px;
+	opacity: 0.8;
+}
+
+.quicktool-butto-icon:hover{
+	opacity:1
+}
+
+.quicktool-button:active > .quicktool-button-icon{
+	opacity: 0.6;
+}
