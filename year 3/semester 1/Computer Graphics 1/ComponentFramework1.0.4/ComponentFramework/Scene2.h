@@ -4,7 +4,6 @@
 #include "Vector.h"
 
 GLuint CreateNoise3D();
-//void SetNoiseFrequency(int frequency);
 
 using namespace MATH;
 
@@ -20,19 +19,11 @@ class Fabric;
 
 class Scene2 : public Scene {
 	Camera *camera;
-	GameObject *earthGameObject, *moonGameObject, *fabricObject;
-	Vec3 lightSource;
-
-	Mesh *earthMeshPtr;
-	Shader *earthShaderPtr;
-	Texture *earthTexturePtr;
-
-	Mesh *moonMeshPtr;
-	Shader *moonShaderPtr;
-	Texture *moonTexturePtr;
+	GameObject *fabricObject;
 
 	Fabric *fabric;
 	Texture *fabricTexturePtr;
+	Mesh *fabricMeshPtr;
 	
 	float camZ = 10.0f;
 	float elapsedTime = 0;

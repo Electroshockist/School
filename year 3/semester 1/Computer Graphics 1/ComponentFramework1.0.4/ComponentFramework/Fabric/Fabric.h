@@ -8,10 +8,10 @@
 class Shader;
 class Fabric : public ARenderable{
 public:
-	Particle particle;
-
 	std::vector<Particle> particles;
 	Fabric() {}
+
+	Fabric(GLuint size, GLuint divisions);
 
 	Fabric(GLenum drawmode, std::vector<Vec3>&, std::vector<Vec3>&, std::vector<Vec2>&);
 
@@ -22,12 +22,16 @@ public:
 	Shader* getShader() const;
 
 private:
+	void instantiate(std::vector<Vec3>&);
 	virtual void setup() override;
 
 	Shader* shader;
 
 	GLuint offset = 0;
 	GLuint id = 0;
+
+	std::vector<Vec3> velocities;
+	std::vector<GLubyte> locks;
 
 	void addVertexAttrib(const GLuint size, const void* data, const GLuint count, const GLuint type);
 

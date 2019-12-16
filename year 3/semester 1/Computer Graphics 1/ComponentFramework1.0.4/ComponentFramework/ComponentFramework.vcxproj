@@ -133,6 +133,7 @@
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Fabric\Fabric.cpp" />
     <ClCompile Include="Fabric\Particle.cpp" />
+    <ClCompile Include="Fabric\Spring.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameSceneManager.cpp" />
     <ClCompile Include="Main.cpp" />

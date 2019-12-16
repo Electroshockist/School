@@ -10,6 +10,7 @@ Vec3 VMath::normalize(const Vec3 &a) {
 #ifdef _DEBUG  /// If in debug mode let's worry about divide by zero or nearly zero!!! 
 	if (magnitude < VERY_SMALL) {
 		std::string errorMsg("Divide by nearly zero! ");
+		return Vec3(0);
 		throw errorMsg;
 	}
 #endif

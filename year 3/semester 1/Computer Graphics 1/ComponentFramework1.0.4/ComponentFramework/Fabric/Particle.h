@@ -5,15 +5,18 @@
 #include "../Vector.h"
 
 #include <vector>
+#include <memory>
+
+#define GRAVITY -9.81f
 
 using namespace MATH;
 struct Particle {
-	Vec3* position;
+	Vec3* position, oldPos;
 	Vec3 velocity, acceleration;
 	float mass;
 	bool isLocked = false;
-
-	std::vector<Spring> attachedSprings;
+	
+	std::vector<Spring*> attachedSprings;
 
 	Particle() {}
 
@@ -26,6 +29,14 @@ struct Particle {
 	}
 
 	void connectTo(Particle* particle);
+
+	bool operator == (Particle const &p) {
+		return position == p.position;
+	}
+
+	bool operator != (Particle const &p) {
+		return position != p.position;
+	}
 };
 
 #endif // !PARTICLE_H
