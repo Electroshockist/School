@@ -6,7 +6,7 @@
 #include <glew.h>
 
 class Shader;
-class Fabric : public ARenderable{
+class Fabric : public ARenderable {
 public:
 	std::vector<Particle> particles;
 	Fabric() {}
@@ -22,8 +22,10 @@ public:
 	Shader* getShader() const;
 
 private:
-	void instantiate(std::vector<Vec3>&);
+	void instantiate();
 	virtual void setup() override;
+
+	void loadVertexAttribs();
 
 	Shader* shader;
 

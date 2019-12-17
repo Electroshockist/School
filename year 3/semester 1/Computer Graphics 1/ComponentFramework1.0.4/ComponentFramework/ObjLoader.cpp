@@ -9,6 +9,7 @@ using namespace MATH;
 std::vector<Vec3> ObjLoader::normals;
 std::vector<Vec3> ObjLoader::vertices;
 std::vector<Vec2> ObjLoader::uvCoords;
+std::vector<Face> ObjLoader::faces;
 
 bool ObjLoader::loadOBJ(const char * path) {
 	printf("Loading OBJ file %s...\n", path);
@@ -59,6 +60,22 @@ bool ObjLoader::loadOBJ(const char * path) {
 				printf("Error: Can't read the file - this is a dumb reader");
 				return false;
 			}
+
+			Face f;
+			f.vertexIndices[0] = vertexIndices[0];
+			f.vertexIndices[1] = vertexIndices[1];
+			f.vertexIndices[2] = vertexIndices[2];
+
+			f.uvCoordIndices[0] = uvIndices[0];
+			f.uvCoordIndices[1] = uvIndices[1];
+			f.uvCoordIndices[2] = uvIndices[2];
+
+			f.normalIndices[0] = normalIndices[0];
+			f.normalIndices[1] = normalIndices[1];
+			f.normalIndices[2] = normalIndices[2];
+
+			faces.push_back(f);
+
 			vertexIndices.push_back(vertexIndex[0]);
 			vertexIndices.push_back(vertexIndex[1]);
 			vertexIndices.push_back(vertexIndex[2]);

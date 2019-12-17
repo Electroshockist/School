@@ -21,7 +21,7 @@ bool Scene2::OnCreate() {
 	camera = new Camera();
 	CreateNoise3D();
 
-	if(ObjLoader::loadOBJ("sphere.obj") == false) {
+	if(ObjLoader::loadOBJ("Dice.obj") == false) {
 		return false;
 	}
 
@@ -38,6 +38,8 @@ bool Scene2::OnCreate() {
 	}
 
 	fabricObject = new GameObject(fabric, fabric->getShader(), fabricTexturePtr);
+
+	fabric->vertices[1] = Vec3(2, 0, 2);
 
 	return true;
 }

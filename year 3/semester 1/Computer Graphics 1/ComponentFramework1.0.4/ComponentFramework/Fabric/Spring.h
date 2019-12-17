@@ -5,13 +5,17 @@
 
 struct Particle;
 struct Spring {
-	Particle* connectedParticles[2];
 	float strength;
-
-	float distance, restDistance;
 
 	Spring() {}
 	Spring(float strength, Particle* p1, Particle* p2);
 
+	MATH::Vec3 getDistance();
+
+	bool doesParticleExist(const Particle& particle);
+
+private:
+	Particle* connectedParticles[2];
+	MATH::Vec3 restPos;
 };
 #endif // !SPRING_H
