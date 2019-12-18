@@ -25,7 +25,7 @@ bool Scene2::OnCreate() {
 		return false;
 	}
 
-	fabric = new Fabric(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords);
+	fabric = new Fabric(GL_TRIANGLES, ObjLoader::vertices, ObjLoader::normals, ObjLoader::uvCoords, ObjLoader::faces);
 	fabricTexturePtr = new Texture();
 	if(fabricTexturePtr->LoadImage("moon.jpg") == false) {
 		Debug::FatalError("Couldn't load texture", __FILE__, __LINE__);
@@ -39,7 +39,7 @@ bool Scene2::OnCreate() {
 
 	fabricObject = new GameObject(fabric, fabric->getShader(), fabricTexturePtr);
 
-	fabric->vertices[1] = Vec3(2, 0, 2);
+	fabric->vertices[1] = Vec3(2, 2, 2);
 
 	return true;
 }

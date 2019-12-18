@@ -160,7 +160,7 @@ namespace  MATH {
 		}
 
 		inline void print() { 
-			printf("%1.8f %1.8f %1.8f\n", x,y,z);		  
+			printf("%1.8f %1.8f %1.8f", x,y,z);		  
 		}
 
 		///

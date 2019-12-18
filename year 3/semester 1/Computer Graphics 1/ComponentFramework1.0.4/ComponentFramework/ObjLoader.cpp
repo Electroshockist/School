@@ -16,6 +16,7 @@ bool ObjLoader::loadOBJ(const char * path) {
 	normals.clear();
 	vertices.clear();
 	uvCoords.clear();
+	faces.clear();
 	std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
 	std::vector<Vec3> temp_vertices;
 	std::vector<Vec2> temp_uvs;
@@ -24,55 +25,55 @@ bool ObjLoader::loadOBJ(const char * path) {
 
 	FILE * file;
 	fopen_s(&file, path, "r");
-	if (file == nullptr) {
-		printf("Can't open your file %s \n",path);
+	if(file == nullptr) {
+		printf("Can't open your file %s \n", path);
 		return false;
 	}
 
-	while (true) {
+	while(true) {
 		char lineHeader[128];
 		/// read the first word of the line
 		int res = fscanf_s(file, "%s", lineHeader, sizeof(lineHeader));
-		if (res == EOF) {
+		if(res == EOF) {
 			break; /// End Of File
 		}
-		if (strcmp(lineHeader, "v") == 0) {
+		if(strcmp(lineHeader, "v") == 0) {
 			Vec3 vertex;
 			fscanf_s(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
 			temp_vertices.push_back(vertex);
 		}
-		else if (strcmp(lineHeader, "vt") == 0) {
+		else if(strcmp(lineHeader, "vt") == 0) {
 			Vec2 uv;
 			fscanf_s(file, "%f %f\n", &uv.x, &uv.y);
 			uv.y = -uv.y; /// Grr 
 			temp_uvs.push_back(uv);
 		}
-		else if (strcmp(lineHeader, "vn") == 0) {
+		else if(strcmp(lineHeader, "vn") == 0) {
 			Vec3 normal;
 			fscanf_s(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
 			temp_normals.push_back(normal);
 		}
-		else if (strcmp(lineHeader, "f") == 0) {
+		else if(strcmp(lineHeader, "f") == 0) {
 			std::string vertex1, vertex2, vertex3;
 			unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
 			int matches = fscanf_s(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
-			if (matches != 9) {
+			if(matches != 9) {
 				printf("Error: Can't read the file - this is a dumb reader");
 				return false;
 			}
 
 			Face f;
-			f.vertexIndices[0] = vertexIndices[0];
-			f.vertexIndices[1] = vertexIndices[1];
-			f.vertexIndices[2] = vertexIndices[2];
+			f.vertexIndices[0] = vertexIndex[0] - 1;
+			f.vertexIndices[1] = vertexIndex[1] - 1;
+			f.vertexIndices[2] = vertexIndex[2] - 1;
 
-			f.uvCoordIndices[0] = uvIndices[0];
-			f.uvCoordIndices[1] = uvIndices[1];
-			f.uvCoordIndices[2] = uvIndices[2];
+			f.uvCoordIndices[0] = uvIndex[0] - 1;
+			f.uvCoordIndices[1] = uvIndex[1] - 1;
+			f.uvCoordIndices[2] = uvIndex[2] - 1;
 
-			f.normalIndices[0] = normalIndices[0];
-			f.normalIndices[1] = normalIndices[1];
-			f.normalIndices[2] = normalIndices[2];
+			f.normalIndices[0] = normalIndex[0] - 1;
+			f.normalIndices[1] = normalIndex[1] - 1;
+			f.normalIndices[2] = normalIndex[2] - 1;
 
 			faces.push_back(f);
 
@@ -95,7 +96,7 @@ bool ObjLoader::loadOBJ(const char * path) {
 	}
 
 	/// For each vertex of each triangle
-	for (unsigned int i = 0; i<vertexIndices.size(); i++) {
+	for(unsigned int i = 0; i < vertexIndices.size(); i++) {
 
 		// Get the indices of its attributes
 		unsigned int vertexIndex = vertexIndices[i];

@@ -30,14 +30,6 @@ struct Particle {
 	}
 
 	void connectTo(Particle* particle);
-
-	bool operator == (Particle const &p) {
-		return position == p.position;
-	}
-
-	bool operator != (Particle const &p) {
-		return position != p.position;
-	}
 };
 
 #endif // !PARTICLE_H

@@ -9,7 +9,7 @@ Particle::Particle(Vec3 * position, float mass) : velocity(Vec3()) {
 }
 
 void Particle::update(const float deltaTime) {
-
+	//std::cout << attachedSprings.size();
 	for(Spring* spring : attachedSprings) {
 		if(!isLocked) {
 			acceleration = (spring->strength * spring->getDistance()) / mass;
@@ -23,7 +23,7 @@ void Particle::update(const float deltaTime) {
 void Particle::connectTo(Particle * particle) {
 	//check if the particle has already been connected
 	for(Spring* spring : attachedSprings) {
-		if(spring->doesParticleExist(*particle)) {
+		if(spring->doesParticleExist(particle)) {
 			std::cout << "These particles have already been connected" << std::endl;
 			return;
 		}

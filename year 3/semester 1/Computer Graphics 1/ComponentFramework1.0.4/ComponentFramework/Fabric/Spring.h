@@ -12,7 +12,7 @@ struct Spring {
 
 	MATH::Vec3 getDistance();
 
-	bool doesParticleExist(const Particle& particle);
+	bool doesParticleExist(const Particle* particle);
 
 private:
 	Particle* connectedParticles[2];

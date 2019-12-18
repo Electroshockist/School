@@ -15,8 +15,6 @@ MATH::Vec3 Spring::getDistance() {
 	return (*connectedParticles[0]->position - *connectedParticles[1]->position) - restPos;
 }
 
-
-
-bool Spring::doesParticleExist(const Particle& particle) {
-	return *connectedParticles[0] == particle || *connectedParticles[1] == particle;
+bool Spring::doesParticleExist(const Particle* particle) {
+	return connectedParticles[0] == particle || connectedParticles[1] == particle;
 }

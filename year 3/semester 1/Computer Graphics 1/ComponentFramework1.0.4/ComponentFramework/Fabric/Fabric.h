@@ -2,6 +2,7 @@
 #define FABRIC_H
 
 #include "../ARenderable.h"
+#include "../Face.h"
 #include "Particle.h"
 #include <glew.h>
 
@@ -13,7 +14,7 @@ public:
 
 	Fabric(GLuint size, GLuint divisions);
 
-	Fabric(GLenum drawmode, std::vector<Vec3>&, std::vector<Vec3>&, std::vector<Vec2>&);
+	Fabric(GLenum drawmode, std::vector<Vec3>&, std::vector<Vec3>&, std::vector<Vec2>&,std::vector<Face>&);
 
 	~Fabric();
 
@@ -22,7 +23,7 @@ public:
 	Shader* getShader() const;
 
 private:
-	void instantiate();
+	void setupSprings(std::vector<Face>&);
 	virtual void setup() override;
 
 	void loadVertexAttribs();
@@ -36,6 +37,8 @@ private:
 	std::vector<GLubyte> locks;
 
 	void addVertexAttrib(const GLuint size, const void* data, const GLuint count, const GLuint type);
+
+	void connectFace(Face& f);
 
 };
 

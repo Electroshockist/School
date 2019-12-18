@@ -44,13 +44,23 @@ using namespace MATH;
 //	}
 //}
 
-Fabric::Fabric(GLenum drawmode, std::vector<Vec3>& verticies, std::vector<Vec3>& normals, std::vector<Vec2>& uvCoords) {
+Fabric::Fabric(GLenum drawmode, std::vector<Vec3>& vertices, std::vector<Vec3>& normals, std::vector<Vec2>& uvCoords, std::vector<Face>& faces) {
 	this->drawmode = drawmode;
-	this->vertices = verticies;
+	this->vertices = vertices;
 	this->normals = normals;
 	this->uvCoords = uvCoords;
 
-	instantiate();
+	this->velocities = std::vector<Vec3>();
+	this->locks = std::vector<GLubyte>();
+
+	for(size_t i = 0; i < vertices.size(); i++) {
+		particles.push_back(Particle(&vertices[i], 1.0f));
+		velocities.push_back(Vec3());
+		locks.push_back(false);
+	}
+
+	setupSprings(faces);
+	this->setup();
 }
 
 Fabric::~Fabric() {
@@ -58,27 +68,15 @@ Fabric::~Fabric() {
 	shader = nullptr;
 }
 
-void Fabric::instantiate() {
-
-	this->velocities = std::vector<Vec3>();
-	this->locks = std::vector<GLubyte>();
-
-	Particle *prevParticle = nullptr;
-	for(size_t i = 0; i < vertices.size(); i++) {
-		Particle* p = new Particle(&this->vertices[i], 1.0f);
-		if(prevParticle != nullptr) {
-			p->connectTo(prevParticle);
-		}
-		particles.push_back(*p);
-		prevParticle = p;
-
-		velocities.push_back(Vec3());
-		locks.push_back(false);
+void Fabric::setupSprings(std::vector<Face>& faces) {
+	for(size_t i = 0; i < faces.size(); i++) {
+		std::cout << "Face " << i + 1 << std::endl;
+		connectFace(faces[i]);
 	}
+
 	particles[0].isLocked = true;
 
 	shader = new Shader("textureVert.glsl", "textureFrag.glsl");
-	this->setup();
 }
 
 void Fabric::setup() {
@@ -139,7 +137,24 @@ void Fabric::addVertexAttrib(const GLuint size, const void* data, const GLuint c
 	id++;
 }
 
-Shader * Fabric::getShader() const {
+void Fabric::connectFace(Face& f) {
+	for(size_t i = 0; i < 2; i++) {
+		std::cout << "\tConnected [" << f.vertexIndices[i] + 1 << "]: ";
+		particles.at(f.vertexIndices[i]).position->print();
+		std::cout << " to\n";
+
+		for(size_t j = i + 1; j < 3; j++) {
+			std::cout << "\t\t  [" << f.vertexIndices[j] + 1 << "]: ";
+			particles.at(f.vertexIndices[j]).position->print();
+			std::cout << "\n";
+
+			Spring* spring = new Spring(1, &particles.at(f.vertexIndices[i]), &particles.at(f.vertexIndices[j]));
+		}
+		std::cout << "\n";
+	}
+}
+
+Shader* Fabric::getShader() const {
 	return shader;
 }
 
@@ -149,3 +164,5 @@ void Fabric::update(const float deltaTime) {
 	}
 	loadVertexAttribs();
 }
+
+
