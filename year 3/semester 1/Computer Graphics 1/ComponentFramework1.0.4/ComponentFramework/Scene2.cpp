@@ -39,7 +39,7 @@ bool Scene2::OnCreate() {
 
 	fabricObject = new GameObject(fabric, fabric->getShader(), fabricTexturePtr);
 
-	fabric->vertices[1] = Vec3(2, 2, 2);
+	fabric->particles[1].position = new Vec3(2, 2, 2);
 
 	return true;
 }

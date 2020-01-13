@@ -163,6 +163,17 @@ void Fabric::update(const float deltaTime) {
 		p.update(deltaTime);
 	}
 	loadVertexAttribs();
+	std::cout << "pos1: ";
+	particles[1].attachedSprings[0]->connectedParticles[0]->position->print();
+	std::cout << std::endl << "pos2: ";
+	particles[1].attachedSprings[0]->connectedParticles[1]->position->print();
+	std::cout << std::endl << "restpos: ";
+	particles[1].attachedSprings[0]->restPos.print();
+	std::cout << std::endl;
+
+	Vec3 v = *particles[1].attachedSprings[0]->connectedParticles[0]->position - *particles[1].attachedSprings[0]->connectedParticles[1]->position;
+	v.print();
+	std::cout << std::endl << std::endl;
 }
 
 

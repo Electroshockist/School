@@ -14,7 +14,7 @@ struct Spring {
 
 	bool doesParticleExist(const Particle* particle);
 
-private:
+//private:
 	Particle* connectedParticles[2];
 	MATH::Vec3 restPos;
 };
