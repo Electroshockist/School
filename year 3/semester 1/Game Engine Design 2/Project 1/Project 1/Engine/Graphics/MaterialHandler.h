@@ -5,6 +5,7 @@
 #include <map>
 #include <glm\glm.hpp>
 #include <glew.h>
+#include <string>
 
 struct Material {
 	GLuint diffuseMap;

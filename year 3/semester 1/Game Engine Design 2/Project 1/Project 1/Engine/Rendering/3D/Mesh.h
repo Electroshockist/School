@@ -25,7 +25,6 @@ struct SubMesh {
 class Mesh {
 	void GenerateBuffers();
 	GLuint VAO, VBO;
-	std::vector<Vertex> vertexList;
 	GLuint shaderProgram;
 	GLuint modelLoc, viewLoc, projLoc;
 	GLuint viewPositionLoc, lightPosLoc, lightAmbientLoc, lightDiffuseLoc, lightColourLoc;

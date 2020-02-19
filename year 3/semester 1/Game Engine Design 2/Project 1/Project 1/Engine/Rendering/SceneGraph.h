@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <glew.h>
+#include <string>
 
 class Model;
 class GameObject;

@@ -54,6 +54,7 @@ int main(){
 
 	std::string s;
 	do{
+		s = getInput(&exit);
 		if(!s.empty()){
 			int sendOK = sendto(sckt, s.c_str(), s.size() + 1, 0, (sockaddr *)&server, sizeof(server));
 			if(sendOK == SOCKET_ERROR){
@@ -61,7 +62,6 @@ int main(){
 				return -1;
 			}
 		}
-		s = getInput(&exit);
 	} while(!exit);
 
 	closesocket(sckt);
