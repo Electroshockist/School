@@ -31,14 +31,12 @@ class Mesh {
 	GLuint diffuseMapLoc, shineLoc, transparencyLoc, ambientLoc, diffuseLoc, specLoc;
 	SubMesh subMesh;
 
-
 public:
 	Mesh(SubMesh submesh, GLuint shaderProgram);
 	~Mesh();
 
 	void Render(Camera* camera, std::vector<glm::mat4> &instance);
 	void OnDestroy();
-
 };
 
 #endif // !MESH_H
