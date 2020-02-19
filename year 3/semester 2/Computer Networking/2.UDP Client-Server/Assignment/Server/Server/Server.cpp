@@ -1,7 +1,25 @@
 #include <iostream>
 #include <WS2tcpip.h>
+#include <algorithm>
 
 #pragma comment (lib,  "ws2_32.lib")
+
+#define EXITSYMBOL "exit"
+const std::string WHITESPACE = " \n\r\t\f\v";
+
+bool charsEqual(const char *one, const char *two){
+	std::string a(one), b(two);
+
+	return a == b;
+}
+
+//credit to: https://www.techiedelight.com/trim-string-cpp-remove-leading-trailing-spaces/
+std::string cleanString(std::string string){
+	size_t start = string.find_first_not_of(WHITESPACE);
+	size_t end = string.find_last_not_of(WHITESPACE);
+
+	return (start == std::string::npos || end == std::string::npos) ? "" : string.substr(start, end);
+}
 
 int main(){
 	WSAData data;
@@ -36,7 +54,7 @@ int main(){
 
 		int bytesIn = recvfrom(sckt, buf, 1024, 0, (sockaddr *)&client, &clientLength);
 		if(bytesIn == SOCKET_ERROR){
-			std::cout << "Error recieving from the client " << WSAGetLastError() << std::endl;
+			std::cout << "Error receiving from the client " << WSAGetLastError() << std::endl;
 			continue;
 		}
 		char clientIP[256];
@@ -44,6 +62,11 @@ int main(){
 		ZeroMemory(clientIP, 256);
 
 		inet_ntop(AF_INET, &client.sin_addr, clientIP, 256);
+
+		std::cout << EXITSYMBOL <<  "==" << cleanString(std::string(buf)).c_str() << ": " << (charsEqual(cleanString(std::string(buf)).c_str(), EXITSYMBOL) ? "true" : "false") << std::endl;
+		if(charsEqual(cleanString(std::string(buf)).c_str(), EXITSYMBOL)){
+			break;
+		}
 
 		// Display the message / who sent it
 		std::cout << "Message recv from " << clientIP << " : " << buf << std::endl;

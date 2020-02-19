@@ -1,35 +1,42 @@
+#include <vector>
 #include <string>
 #include <iostream>
 #include <WS2tcpip.h>
 
 #pragma comment (lib,  "ws2_32.lib")
 
-bool charsNotEqual(const char *one, const char *two){
+#define EXITSYMBOL "exit"
+#define SENDSYMBOL "send"
+
+const std::string WHITESPACE = " \n\r\t\f\v";
+
+bool charsEqual(const char *one, const char *two){
 	std::string a(one), b(two);
 
-	return a != b;
+	return a == b;
+}
+//credit to: https://www.techiedelight.com/trim-string-cpp-remove-leading-trailing-spaces/
+std::string cleanString(std::string string){
+	size_t start = string.find_first_not_of(WHITESPACE);
+	size_t end = string.find_last_not_of(WHITESPACE);
+
+	return (start == std::string::npos || end == std::string::npos) ? "" : string.substr(start, end);
 }
 
-
-std::string getInput(bool *doExit){
-	std::string cattedInput = "";
+std::vector<std::string> getInput(bool *doExit){
+	std::vector<std::string> inputVector;
 	std::string input;
 	do{
-		cattedInput.append(input.c_str());
-		if(!input.empty()){
-			cattedInput.append("\n");
+		input.clear();
+		std::getline(std::cin, input);
+		if(!charsEqual(input.c_str(), SENDSYMBOL) || !input.empty()){
+			inputVector.push_back(input.c_str());
 		}
 
-		input.clear();
-		//cin is after concatinating the input, because we do not want to send the words "send" or "exit", as they are commands
-		std::getline(std::cin, input);
+	} while(charsEqual(input.c_str(), EXITSYMBOL) && charsEqual(input.c_str(), SENDSYMBOL));
 
-		//std::cout << "input: \"" << input << "\" == \"exit\": " << (charsNotEqual(input.c_str(), "exit") ? "true" : "false") << std::endl;
-
-	} while(charsNotEqual(input.c_str(), "exit") && charsNotEqual(input.c_str(), "send"));
-
-	*doExit = !charsNotEqual(input.c_str(), "exit");
-	return cattedInput;
+	*doExit = charsEqual(input.c_str(), EXITSYMBOL);
+	return inputVector;
 }
 
 int main(){
@@ -52,7 +59,7 @@ int main(){
 	server.sin_port = htons(54000);
 	inet_pton(AF_INET, "127.0.0.1", &server.sin_addr);
 
-	std::string s;
+	std::vector<std::string> s;
 	do{
 		s = getInput(&exit);
 		if(!s.empty()){
