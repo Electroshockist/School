@@ -23,8 +23,8 @@ std::string cleanString(std::string string){
 
 std::string parseString(std::string string){
 	size_t place = string.find_first_of("|", 0);
-	std::string s = string.substr(0, place);
-	std::cout << s << std::endl;
+	std::string s = string.substr(0, place).append("|");;
+	std::cout << s.c_str() << std::endl;
 	return s;
 }
 
