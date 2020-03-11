@@ -4,7 +4,7 @@ int main(){
 	Network n = Network();
 
 	n.Connect();
-	n.Recieve();
+	n.Send();
 
 	
 

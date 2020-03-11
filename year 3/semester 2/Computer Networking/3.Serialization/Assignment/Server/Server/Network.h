@@ -10,8 +10,6 @@
 #include <iostream>
 #include <string>
 
-#include "IData.h"
-
 #pragma comment(lib, "Ws2_32.lib")
 
 #define DEFAULT_PORT "27015"
@@ -19,15 +17,23 @@ class Network{
 	WSADATA wsaData;
 	int iResult, iSendResult;
 
-	SOCKET ListenSocket = INVALID_SOCKET;
 	SOCKET ClientSocket = INVALID_SOCKET;
+	SOCKET ConnectSocket = INVALID_SOCKET;
 
-	struct addrinfo *result = NULL;
-	struct addrinfo hints;
+	struct addrinfo *result = NULL,
+		*ptr = NULL,
+		hints;
+
+	int ConnectToSend();
+	int ConnectToRecieve();
 
 public:
 	int Connect();
 
-	int Send(IData data);
+	//template<typename T>
+	//int Send(T data);
+
+	template<typename T>
+	int Recieve(T* data);
 };
 

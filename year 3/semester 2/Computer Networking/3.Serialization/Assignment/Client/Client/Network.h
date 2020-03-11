@@ -9,8 +9,6 @@
 #include <iostream>
 #include <string>
 
-#include "Sample.h"
-
 #pragma comment(lib, "Ws2_32.lib")
 
 #define DEFAULT_PORT "27015"
@@ -20,13 +18,16 @@ class Network{
 	struct addrinfo *result = NULL,
 		*ptr = NULL,
 		hints;
-	char recvbuf[sizeof(Sample)];
 	int iResult;
 
 public:
 
 	int Connect();
 
-	int Recieve();
+	template<typename T>
+	int Send(T data);
+
+	template<typename T>
+	int Recieve(T* data);
 };
 

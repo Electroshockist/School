@@ -3,9 +3,7 @@
 #ifndef SAMPLE_H
 #define SAMPLE_H
 
-#include "IData.h"
-
-class Sample : public IData{
+class Sample {
 public:
 	int A, B;
 
