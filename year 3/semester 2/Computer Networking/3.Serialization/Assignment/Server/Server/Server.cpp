@@ -7,7 +7,9 @@ int main(){
 	s.A = 32;
 	s.B = 24;
 
-	n.Connect();
+	if(n.Connect() != EXIT_SUCCESS){
+		return EXIT_FAILURE;
+	}
 	n.Send(s);
 
 	return 0;
