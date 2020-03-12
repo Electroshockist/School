@@ -97,84 +97,66 @@ int Network::Connect(){
 	return EXIT_SUCCESS;
 }
 
-//template<typename T>
-//int Network::Send(T data){
-//	//char recvbuf[sizeof(T)];
-//	////message
-//	//T msg;
-//	//char *tmp = reinterpret_cast<char *>(&msg);
-//
-//	//iResult = send(ConnectSocket, tmp, sizeof(T), 0);
-//	//if(iResult == SOCKET_ERROR){
-//	//	printf("send failed with result: %d\n", WSAGetLastError());
-//	//	closesocket(ConnectSocket);
-//	//	WSACleanup();
-//	//	return 1;
-//	//}
-//
-//	//printf("Bytes sent: %d\n", iResult);
-//
-//	//iResult = shutdown(ConnectSocket, SD_SEND);
-//	//if(iResult == SOCKET_ERROR){
-//	//	printf("shutdown failed with result: %d\n", WSAGetLastError());
-//	//	closesocket(ConnectSocket);
-//	//	WSACleanup();
-//	//	return 1;
-//	//}
-//
-//	////do{
-//	////	iResult = recv(ConnectSocket, recvbuf, sizeof(Sample), 0);
-//	////	if(iResult > 0){
-//	////		printf("Bytes recieved: %d\n", iResult);
-//
-//	////		Sample *response = reinterpret_cast<Sample *>(recvbuf);
-//	////		msg = Sample(*response);
-//
-//	////		std::cout << "A: " << std::to_string(msg.A) << std::endl;
-//	////		std::cout << "B: " << std::to_string(msg.B) << std::endl;
-//	////	} else if(iResult == 0){
-//	////		printf("Connection closing...");
-//	////	} else{
-//	////		printf("Recieve failed with error: %d\n", WSAGetLastError());
-//	////	}
-//	////} while(iResult > 0);
-//
-//	//// cleanup
-//	//closesocket(ConnectSocket);
-//	//WSACleanup();
-//	return 0;
-//}
+int Network::Send(Sample data){
+	char recvbuf[sizeof(Sample)];
+	//message
+	char *tmp = reinterpret_cast<char *>(&data);
 
-template<typename T>
-int Network::Recieve(T* data){
-	char recvbuf[sizeof(T)];
+	iResult = send(ConnectSocket, tmp, sizeof(Sample), 0);
+	if(iResult == SOCKET_ERROR){
+		printf("send failed with result: %d\n", WSAGetLastError());
+		closesocket(ConnectSocket);
+		WSACleanup();
+		return 1;
+	}
 
-	do{
-		iResult = recv(ClientSocket, recvbuf, sizeof(data), 0);
-		if(iResult > 0){
-			printf("Bytes recieved: %d\n", iResult);
+	printf("Bytes sent: %d\n", iResult);
 
-			T *msg = reinterpret_cast<T *>(recvbuf);
+	iResult = shutdown(ConnectSocket, SD_SEND);
+	if(iResult == SOCKET_ERROR){
+		printf("shutdown failed with result: %d\n", WSAGetLastError());
+		closesocket(ConnectSocket);
+		WSACleanup();
+		return 1;
+	}
 
-			iSendResult = send(ClientSocket, recvbuf, sizeof(T), 0);
-			if(iSendResult == SOCKET_ERROR){
-				printf("send failed with result: %d\n", iSendResult);
-				closesocket(ClientSocket);
-				WSACleanup();
-				return 1;
-			}
+	// cleanup
+	closesocket(ConnectSocket);
+	WSACleanup();
+	return 0;
+}
 
-			printf("Bytes sent: %d\n", iSendResult);
-		} else if(iResult == 0){
-			printf("Connection closing...");
-		} else{
-			printf("recieve failed with error: %d\n", WSAGetLastError());
+int Network::Recieve(Sample &data){
+	char recvbuf[sizeof(Sample)];
+
+	iResult = recv(ClientSocket, recvbuf, sizeof(data), 0);
+	if(iResult > 0){
+		printf("Bytes recieved: %d\n", iResult);
+
+		Sample *msg = reinterpret_cast<Sample *>(recvbuf);
+
+		iSendResult = send(ClientSocket, recvbuf, sizeof(Sample), 0);
+		if(iSendResult == SOCKET_ERROR){
+			printf("send failed with result: %d\n", iSendResult);
 			closesocket(ClientSocket);
 			WSACleanup();
 			return 1;
 		}
-	} while(iResult > 0);
 
+		printf("Bytes sent: %d\n", iSendResult);
+	} else if(iResult == 0){
+		printf("Connection closing...");
+	} else{
+		printf("recieve failed with error: %d\n", WSAGetLastError());
+		closesocket(ClientSocket);
+		WSACleanup();
+		return 1;
+	}
+
+	return 0;
+}
+
+int Network::Shutdown(){
 	iResult = shutdown(ClientSocket, SD_SEND);
 	if(iResult == SOCKET_ERROR){
 		printf("failed to shutdown with with error: %d\n", WSAGetLastError());

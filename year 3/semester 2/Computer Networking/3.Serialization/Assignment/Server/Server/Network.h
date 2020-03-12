@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 
+#include "Sample.h"
+
 #pragma comment(lib, "Ws2_32.lib")
 
 #define DEFAULT_PORT "27015"
@@ -30,10 +32,14 @@ class Network{
 public:
 	int Connect();
 
-	//template<typename T>
-	//int Send(T data);
+	int Send(const Sample data);
 
-	template<typename T>
-	int Recieve(T* data);
+	int Recieve(Sample& data);
+
+	int Shutdown();
+
+	~Network(){
+		Shutdown();
+	}
 };
 

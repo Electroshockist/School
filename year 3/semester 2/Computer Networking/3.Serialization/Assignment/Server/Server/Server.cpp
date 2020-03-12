@@ -10,8 +10,9 @@ int main(){
 	if(n.Connect() != EXIT_SUCCESS){
 		return EXIT_FAILURE;
 	}
-	Sample *s = new Sample();
-	n.Recieve<Sample*>(s);
+	if(n.Recieve(s) != EXIT_SUCCESS){
+		return EXIT_FAILURE;
+	}
 	//n.Send<Sample>(s);
 
 	return 0;
